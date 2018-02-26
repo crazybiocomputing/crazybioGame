@@ -1,0 +1,149 @@
+html,body {
+    height:100%;
+}
+
+body {
+    color: #000000;
+    padding: 0px;
+    margin: 0px;
+    font-family: arial, Helvetica, 'Bitstream Vera Sans', 'Luxi Sans', Verdana, Sans-Serif;
+}
+
+
+#nav {
+/*position: absolute;
+top: 67px;*/
+margin-left: 24px;
+font-size: 0.9em;
+border-bottom: 1px dashed #9e0a0d;
+}
+
+#nav h3 {
+display: none;
+}
+
+#nav ul {
+margin: 0px;
+padding: 0px;
+text-align: left;
+}
+
+#nav li {
+display: inline;
+list-style: none;
+}
+
+#nav li a {
+padding: 0em;
+padding-left: 14px;
+padding-right: 10px;
+color: #9d9d9d;
+text-decoration: none;
+}
+
+#nav li a:hover {
+color: #1111ff;
+background: url(../img/original/fond_menu_anime.gif) no-repeat left center;
+}
+
+#text {
+min-height: 300px;
+padding: 15px;
+padding-top: 20px;
+padding-left: 30px;
+padding-right: 160px;
+font-size: 0.8em;
+color: #2f2f2f;
+}
+
+#text h2  span{
+margin-left: -30px;
+padding-left: 140px;
+padding-right: 5px;
+border-top: 1px solid #9e0a0d;
+}
+
+#text pre {
+font-size: 1.2em;
+}
+.pre .str { color: #080; }
+
+#contenu p {
+text-indent: 25px;
+}
+
+
+header {
+	width: 1000px;
+	height: 49px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0;
+	/*background: url(images/img02.jpg) repeat-x left bottom;*/
+	background-color:black;
+}
+
+header ul {
+        margin:0;
+	padding: 0px 0px 0px 4px;
+	list-style: none;
+	line-height: normal;
+}
+
+header li {
+	float: left;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+header a {
+	display: block;
+	height: 33px;
+	margin-right: 1px;
+	padding: 16px 25px 0px 25px;
+	text-decoration: none;
+	text-transform: uppercase;
+	text-shadow: #8A5608 -1px 1px 1px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	color: #FFFFFF;
+	border: none;
+}
+
+header .current_page_item a {
+}
+
+header a:hover {
+	text-decoration: none;
+}
+
+#page {
+	width: 1000px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+#content {
+	width: 700px;
+	padding: 30px 150px 30px 150px;
+
+}
+
+.crop img {
+	position: relative;
+	left: 0px;
+	top: -250px;
+}
+
+.crop p {
+position: relative;
+width: 700px;
+height: 350px;
+overflow: hidden;
+}
+
+.dragclass{
+position : relative;
+cursor : move;
+}
