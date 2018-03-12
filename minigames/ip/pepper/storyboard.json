@@ -70,7 +70,7 @@
 {
   "id": 12,
   "class": "item",
-  "display": "hidden",
+  "status": 0,
   "geometry": [],
   "description": "A paper..",
   "graphics": {
@@ -102,9 +102,10 @@
 {
   "id": 34,
   "class": "lock",
-  "type": "4digit",
+  "type": "4-digit",
   "description": "A Safe..", 
-  "code": 1203
+  "code": 1203,
+  "output": "Goooooddddd!!!"
 },
   
 
