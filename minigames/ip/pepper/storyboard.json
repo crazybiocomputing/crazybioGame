@@ -1,7 +1,29 @@
 [
 {
-"ID": 1,
-"type": "item",
-"description": "A book.."
-}
+  "id": 0,
+  "comment": "@author Jean-Christophe Taveau",
+},
+{
+  "id": 1,
+  "class": "scene",
+  "file": "assets/background.png"
+  "description": "A locked room.."
+},
+{
+  "id": 2,
+  "class": "machine",
+  "type": "download",
+  "props": "visible",
+  "geometry": [],
+  "file": "assets/pepper.png"
+  "description": "A white frame.."
+},
+{
+  "id": 5,
+  "class": "machine",
+  "type": "download",
+  "file": "assets/salt.png"
+  "description": "A black frame.."
+},
+  
 ]
