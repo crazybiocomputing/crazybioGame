@@ -7,7 +7,8 @@
   "id": 1,
   "class": "scene",
   "file": "assets/background.png",
-  "description": "A locked room.."
+  "description": "A locked room..",
+  "children": [2,5,7,11,14]
 },
 {
   "id": 2,
@@ -35,6 +36,7 @@
   "class": "scene",
   "geometry": [],
   "description": "A table..",
+  "children": [12,19],
   "graphics": {
      "path": "assets/table.png"
   }
@@ -60,6 +62,7 @@
   "class": "item",
   "geometry": [],
   "description": "A paper..",
+  "new_nodes": [12],
   "graphics": {
     "path": "assets/histogram.png"
   }
@@ -67,6 +70,7 @@
 {
   "id": 12,
   "class": "item",
+  "display": "hidden",
   "geometry": [],
   "description": "A paper..",
   "graphics": {
@@ -81,6 +85,12 @@
   "graphics": {
     "path": "assets/locked_box.png"
   }
+},
+{
+  "id": 19,
+  "class": "target",
+  "geometry": [],
+  "description": "Ads... Nothing interesting..."
 },
 {
   "id": 24,
