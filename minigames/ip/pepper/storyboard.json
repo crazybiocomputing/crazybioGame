@@ -36,10 +36,9 @@
   "geometry": [],
   "description": "A table..",
   "graphics": {
-     "path": "assets/table.png",
+     "path": "assets/table.png"
+  }
 },
-
-
 {
   "id": 8,
   "class": "scene",
@@ -54,22 +53,50 @@
   "description": "A key..",
   "graphics": {
     "path": "assets/key.png"
+  }
 },
 {
   "id": 11,
+  "class": "item",
+  "geometry": [],
+  "description": "A paper..",
+  "graphics": {
+    "path": "assets/histogram.png"
+  }
+},
+{
+  "id": 12,
+  "class": "item",
+  "geometry": [],
+  "description": "A paper..",
+  "graphics": {
+    "path": "assets/bc.png"
+  }
+},
+{
+  "id": 14,
   "class": "target",
   "geometry": [],
   "description": "A Locked Box..",
   "graphics": {
     "path": "assets/locked_box.png"
+  }
 },
 {
-  "id": 21,
-  "class": "item",
-  "file": "assets/key.png",
+  "id": 24,
+  "class": "scene",
   "geometry": [],
-  "description": "A key.."
-}
+  "description": "A unlocked cabinet..", 
+  "children": [34]
+},
+{
+  "id": 34,
+  "class": "lock",
+  "type": "4digit",
+  "description": "A Safe..", 
+  "code": 1203
+},
+  
 
   
 ]
