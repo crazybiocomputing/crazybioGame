@@ -25,7 +25,7 @@
   "description": "A black frame..",
   "new_nodes": [11,21,35,42,67],
   "graphics"   : {
-      "path     : "assets/black_frame.png",
+      "path"     : "assets/black_frame.png",
       "position"  : [126,142],
       "display": "visible"  
   }
