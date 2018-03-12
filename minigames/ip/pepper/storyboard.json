@@ -6,7 +6,7 @@
 {
   "id": 1,
   "class": "scene",
-  "file": "assets/background.png"
+  "file": "assets/background.png",
   "description": "A locked room.."
 },
 {
@@ -15,15 +15,29 @@
   "type": "download",
   "props": "visible",
   "geometry": [],
-  "file": "assets/pepper.png"
+  "file": "assets/pepper.png",
   "description": "A white frame.."
 },
 {
   "id": 5,
   "class": "machine",
   "type": "download",
-  "file": "assets/salt.png"
+  "file": "assets/salt.png",
   "description": "A black frame.."
 },
+{
+  "id": 7,
+  "class": "scene",
+  "file": "assets/table.png",
+  "geometry": [],
+  "description": "A table.."
+},
+{
+  "id": 7,
+  "class": "scene",
+  "file": "assets/drawer.png",
+  "geometry": [],
+  "description": "A paper.."
+}
   
 ]
