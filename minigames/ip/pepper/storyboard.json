@@ -13,8 +13,7 @@
   "id": 2,
   "class": "machine",
   "type": "download",
-  "props": "visible",
-  "geometry": [],
+  "area": ["R",100,200,300,400],
   "file": "assets/pepper.png",
   "description": "A white frame.."
 },
@@ -22,22 +21,55 @@
   "id": 5,
   "class": "machine",
   "type": "download",
-  "file": "assets/salt.png",
-  "description": "A black frame.."
+  "output": "assets/salt.png",
+  "description": "A black frame..",
+  "new_nodes": [11,21,35,42,67],
+  "graphics"   : {
+      "path     : "assets/black_frame.png",
+      "position"  : [126,142],
+      "display": "visible"  
+  }
 },
 {
   "id": 7,
   "class": "scene",
-  "file": "assets/table.png",
   "geometry": [],
-  "description": "A table.."
+  "description": "A table..",
+  "graphics": {
+     "path": "assets/table.png",
 },
+
+
 {
-  "id": 7,
+  "id": 8,
   "class": "scene",
   "file": "assets/drawer.png",
   "geometry": [],
   "description": "A paper.."
+},
+{
+  "id": 10,
+  "class": "item",
+  "geometry": [],
+  "description": "A key..",
+  "graphics": {
+    "path": "assets/key.png"
+},
+{
+  "id": 11,
+  "class": "target",
+  "geometry": [],
+  "description": "A Locked Box..",
+  "graphics": {
+    "path": "assets/locked_box.png"
+},
+{
+  "id": 21,
+  "class": "item",
+  "file": "assets/key.png",
+  "geometry": [],
+  "description": "A key.."
 }
+
   
 ]
