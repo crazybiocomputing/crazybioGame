@@ -6,7 +6,9 @@
 {
   "id": 1,
   "class": "scene",
-  "file": "assets/background.png",
+  "graphics": {
+  "path": "assets/background.png"
+  },
   "description": "A locked room..",
   "children": [2,5,7,11,14]
 },
@@ -14,9 +16,15 @@
   "id": 2,
   "class": "machine",
   "type": "download",
+  "description": "A white frame..",
   "area": ["R",100,200,300,400],
-  "file": "assets/pepper.png",
-  "description": "A white frame.."
+  "params": {
+    "file": "assets/pepper.png",
+    "text": [
+      "<p>With your camera, you take a picture of the frame.</p>",
+      "<p>Download this snapshot and process it via your favorite Image Processing Software</p>"
+      ]
+  }
 },
 {
   "id": 5,
