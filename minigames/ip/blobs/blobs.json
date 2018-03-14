@@ -1,0 +1,74 @@
+[
+
+{
+"id" : 1,
+"class" : "scene",
+"graphics" : {"path" : --},
+"description" : "A room with a computer and a bin...",
+"children" : [4,2]
+},
+
+{
+"id" : 2,
+"class" : "item",
+"graphics" : {"path" : --},
+"description" : "A bin on the office...",
+"children" : [3]
+},
+
+{
+"id" : 3,
+"class" : "item",
+"graphics" : {"path" : --},
+"description" : "A mysterious piece of paper"
+},
+
+{
+"id" : 4,
+"class" : "item",
+"graphics" : {"path" : --},
+"description" : "A nice computer...",
+"children" : [5,6,8,9]
+},
+
+{
+"id" : 5,
+"class" : "item",
+"graphics" : {"path" : --},
+"description" : "ImageJ",
+"children" : [7]
+},
+
+{
+"id" : 6,
+"class" : "item",
+"graphics" : {"path" : --},
+"description" : "Image BLOBS",
+},
+
+{
+"id" : 7,
+"class" : "item",
+"graphics" : {"path" : --},
+"description" : "Icon of Color Picker",
+},
+
+{
+"id" : 8,
+"class" : "item",
+"graphics" : {"path" : --},
+"description" : "Color Picker",
+},
+
+{
+"id" : 9,
+"class" : "machine",
+"type" : "input",
+"graphics" : {"path" : --},
+"description" : "Foreground Color",
+"code1" : 197,
+"code2" : 105,
+"code3" : 184,
+},
+
+]
