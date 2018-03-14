@@ -3,27 +3,19 @@
   "id": 1,
 	"class": "scene",
   "graphics": {
-  "path": "assets/dialog.png"
+  "path": "assets/biologist_closeview.png"
   },
 	"params": {
   "text": [
-    "<p>I tried to get all the protein sequences of hemoglobin of rabbit in the CrazyBioLab search engine... but I don't know how to fill in this form below. Could you help me?</p>",
+    "<p.round>I tried to get all the protein sequences of hemoglobin of rabbit in the CrazyBioLab search engine... but I don't know how to fill in this form below. Could you help me?</p>",
     ]
   }
   "description": "A woman talking"
 },
 
-{
-  "id": 2,
-  "class": "scene",
-  "graphics": {
-  "path": "assets/head.png"
-  },
-  "description": "A woman talking"
-},
 
 {
-  "id": 3,
+  "id": 2,
   "class": "machine",
   "type": "inputdd",
   "description": "input and drop-down menus",
@@ -31,9 +23,52 @@
   "params": {
     "text": [
       "<p>CrazyBioLab Search Engine</p>",
-      "<p>Choose a Databank:</p> ddm",
-			"ddm ddm input"
-			"ddm ddm input"
+      "<p>Choose a Databank: <select>
+  		<option>-----</option>
+  		<option value="books">Books</option>
+  		<option value="mesh">MeSH</option>
+  		<option value="pubmed">PubMed</option>
+	    	<option value="pubmedcentral">PubMed Central</option>
+  		<option value="assembly">Assembly</option>
+  		<option value="genome">Genome</option>
+  		<option value="nucleotide">Nucleotide</option>
+	    	<option value="taxonomy">Taxonomy</option>
+  		<option value="est">EST</option>
+  		<option value="gene">Gene</option>
+  		<option value="protein">Protein</option>
+	    	<option value="structure">Structure</option>
+  		<option value="pubchem">PubChem Compound</option>
+            </select></p>",
+      "<p>AND
+	   <select>
+  		<option value="all">All Fields</option>
+  		<option value="authors">Author</option>
+  		<option value="genename">Gene Name</option>
+  		<option value="journal">Journal</option>
+  		<option value="keyword">Keyword</option>
+  		<option value="modificationdate">Modification Date</option>
+  		<option value="organism">Organism</option>
+  		<option value="primaryaccession">Primary Accession</option>
+  		<option value="properties">Properties</option>
+  		<option value="proteinname">Protein Name</option>
+  		<option value="publicationdate">Publication Date</option>
+            </select>
+	    <input type="text" name="answer1"></p>",
+	"<p>AND
+	    <select>
+	    	<option value="all">All Fields</option>
+  		<option value="authors">Author</option>
+  		<option value="genename">Gene Name</option>
+  		<option value="journal">Journal</option>
+  		<option value="keyword">Keyword</option>
+  		<option value="modificationdate">Modification Date</option>
+  		<option value="organism">Organism</option>
+  		<option value="primaryaccession">Primary Accession</option>
+  		<option value="properties">Properties</option>
+  		<option value="proteinname">Protein Name</option>
+  		<option value="publicationdate">Publication Date</option>
+            </select>
+	    <input type="text" name="answer2"></p>"
       ]
   }
 }
