@@ -1,0 +1,41 @@
+[
+{
+  "id": 1,
+	"class": "scene",
+  "graphics": {
+  "path": "assets/dialog.png"
+  },
+	"params": {
+  "text": [
+    "<p>I tried to get all the protein sequences of hemoglobin of rabbit in the CrazyBioLab search engine... but I don't know how to fill in this form below. Could you help me?</p>",
+    ]
+  }
+  "description": "A woman talking"
+},
+
+{
+  "id": 2,
+  "class": "scene",
+  "graphics": {
+  "path": "assets/head.png"
+  },
+  "description": "A woman talking"
+},
+
+{
+  "id": 3,
+  "class": "machine",
+  "type": "inputdd",
+  "description": "input and drop-down menus",
+  "area": [],
+  "params": {
+    "text": [
+      "<p>CrazyBioLab Search Engine</p>",
+      "<p>Choose a Databank:</p> ddm",
+			"ddm ddm input"
+			"ddm ddm input"
+      ]
+  }
+}
+  
+]
