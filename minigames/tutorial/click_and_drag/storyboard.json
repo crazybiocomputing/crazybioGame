@@ -1,0 +1,103 @@
+[
+  {
+    "children": [
+      {
+        "click": ["R",0,0,335,195], 
+        "id": 2
+      }, 
+      {
+        "click": ["R",335,0,355,195], 
+        "id": 3
+      }, 
+      {
+        "click": [
+          "C", 
+          215, 
+          460, 
+          65
+        ], 
+        "id": 4
+      }, 
+      {
+        "click": [
+          "R", 
+          90, 
+          100, 
+          90, 
+          120
+        ], 
+        "id": 6
+      }
+    ], 
+    "class": "scene", 
+    "description": "A poster...", 
+    "graphics": {
+      "path": "assets/background.png"
+    }, 
+    "id": 1
+  }, 
+  {
+    "class": "machine.tile", 
+    "description": "Some text", 
+    "graphics": {
+      "path": "assets/congratulations_0.jpg", 
+      "position": [
+        0, 
+        0
+      ]
+    }, 
+    "id": 2
+  }, 
+  {
+    "class": "machine.tile", 
+    "description": "Yet another text", 
+    "graphics": {
+      "path": "assets/congratulations_1.jpg", 
+      "position": [
+        335, 
+        0
+      ]
+    }, 
+    "id": 3
+  }, 
+  {
+    "class": "tile", 
+    "description": "Click and Drag somewhere... as suggested in the URL.", 
+    "id": 4, 
+    "new_nodes": [
+      {
+        "click": [
+          "C", 
+          215, 
+          460, 
+          65
+        ], 
+        "id": 5
+      }
+    ]
+  }, 
+  {
+    "class": "target", 
+    "content": [
+      "<p>There is two hidden top panels that you can drag to unveil a secret code.</p>", 
+      "<br />", 
+      "<p>And now, you can see the hidden sentence 'The answer is allright.php'</p>.",
+      "<p>Click on the 'lock' icon to enter the secret code.</p>"
+    ], 
+    "del_nodes": [
+      4
+    ], 
+    "description": "You did not find ?", 
+    "graphics": {
+      "path": "assets/hiddenPanel1and2.jpg"
+    }, 
+    "id": 5
+  }, 
+  {
+    "class": "lock.textfield", 
+    "description": "Unlock the game", 
+    "exit": "allright.php", 
+    "id": 6
+  }
+]
+

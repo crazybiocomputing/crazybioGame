@@ -1,8 +1,16 @@
+<!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="../../../dist/crazybiogames.min.js"></script>
 </head>
 <body>
-<p>CRAZYBIOCOMPUTING: MINI-GAME NOT FOUND</p>
+<header></header>
+<div id="game"></div>
+<script type="text/javascript">
+  let game = newGame(storyboard.json);
+  let exit = game.run();
+  game.getManager().next(exit);
+</script>
 </body>
 </html>
 
