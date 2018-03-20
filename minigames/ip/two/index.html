@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<head>
+<script type="text/javascript" src="path/where/is/crazyBioGame/dist/crazybiogame.min.js"></script>
+<script type="text/javascript" src="storyboard.json"></script>
+</head>
+<body>
+<div id="game">
+<header></header>
+<footer></footer>
+</div>
+
+<script type="text/javascript">
+
+  /*
+  je ne sais pas trop si ce que j'ai fait fonctionne
+  ou va nous aider mais peut-etre qu'on peut essayer de
+  creer un squelette avec ces fonctions de façon à
+  appeler les fonctions qui se repetent
+  pour chaque jeu et donc les centraliser
+  (dans un autre fichier js?)
+
+  axes a (re)voir :
+    - a la place du path de l'image dans le src, essayer
+    d'extraire directement le path du graphics du fichier json
+    pour charger les images
+    - trouver une fonction pour le password
+    - integrer un CSS
+    - voir si on peut s'appuyer sur ces fonctions pour commencer
+    le moteur
+    - integrer un fichier levels
+  */
+
+
+  let json = JSON.parse(storyboard); // parse le json
+  let download = json.download; // variable qui contient la machine download (je l'utilise pas finalement)
+  let lock = json.lock; // variable qui contient la machine lock (pareil)
+
+  let scene = new Image(); // creation de l'image background
+  scene.src = "crazybioGame/minigames/ip/two/assets/background.png";
+
+  let download = new Image(); // creation de l'image download
+  download.src = "crazybioGame/minigames/ip/two/assets/download.png";
+
+  let lock = new Image(); // creation de l'image lock
+  lock.src = "crazybioGame/minigames/ip/two/assets/lock.png";
+
+
+  function load_image(){ //fonction qui charge les images
+    scene.onload = function (){
+      alert("Scene is loaded");
+    }
+    download.onload = function (){
+      alert("Download is loaded");
+    }
+    lock.onload = function (){
+      alert("Lock is loaded");
+    }
+  }
+
+  download.onclick = function (){ // telechargement des images au click
+    let url1="crazybioGame/minigames/ip/two/assets/A.png";
+    let url2="crazybioGame/minigames/ip/two/assets/B.png";
+    window.open(url1, "Download");
+    window.open (url2, "Download");
+  }
+
+  load_image();
+
+  let game = XzyBio.newGame('storyboard.json');
+  game.run();
+
+</script>
+
+</body>
+</html>
