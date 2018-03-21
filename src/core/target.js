@@ -23,10 +23,19 @@
  */
 
 
-
 'use strict';
 
-
-const target = (props) {
-
+/**
+ * Create a new target
+ *
+ *
+ */
+ 
+const target = (props) => {
+  let element = document.createElement('div');
+  element.id = props.id;
+  
+  // TODO
+  
+  return element;
 };

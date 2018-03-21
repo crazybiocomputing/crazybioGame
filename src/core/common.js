@@ -26,16 +26,27 @@
 'use strict';
 
 /**
- * Create a new item
+ * Common stuff for the engine
  *
  *
  */
  
-const item = (obj) => {
-  let element = document.createElement('div');
-  element.id = obj.id;
-  
-  // TODO
-  
-  return element;
-};
+const categories = [
+  {type: "item", code: 1},
+  {type: "machine", code: 2},
+  {type: "machine.download", code: 4},
+  {type: "machine.form", code: 8},
+  {type: "machine.lockDigit[1]", code: 16},
+  {type: "machine.lockDigit[2]", code: 32},
+  {type: "machine.lockDigit[3]", code: 64},
+  {type: "machine.lockDigit[4]", code: 128},
+  {type: "machine.lockDigit[5]", code: 256},
+  {type: "machine.lockDigit[6]", code: 512},
+  {type: "scene", code: 20},
+  {type: "sprite", code: 25},
+  {type: "target", code: 30}
+
+];
+
+
+

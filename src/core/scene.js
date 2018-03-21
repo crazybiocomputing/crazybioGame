@@ -25,17 +25,18 @@
 
 'use strict';
 
+
 /**
- * Create a new item
+ * Create a new scene
  *
- *
+ * @author TODO
  */
- 
-const item = (obj) => {
+const scene = (props) => {
   let element = document.createElement('div');
-  element.id = obj.id;
+  element.id = props.id;
   
   // TODO
   
   return element;
 };
+

@@ -26,14 +26,14 @@
 'use strict';
 
 /**
- * Create a new item
+ * Create a new target
  *
  *
  */
  
-const item = (obj) => {
+const sprite = (props) => {
   let element = document.createElement('div');
-  element.id = obj.id;
+  element.id = props.id;
   
   // TODO
   

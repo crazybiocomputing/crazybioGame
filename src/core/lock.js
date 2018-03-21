@@ -23,27 +23,33 @@
  */
 
 
-
 'use strict';
 
 /**
  * Lock displayed as a Text Field
  */
-const textfield = (props) => {
+const locktext = (props) => {
+
+};
+
+/**
+ * Lock displayed as a Numerical Field
+ */
+const locknumeric = (props) => {
 
 };
 
 /**
  * Lock displayed as a n-Digit Lock
  */
-const digitlock = (nDigit,props) => {
+const lockdigit = (nDigits,props) => {
 
 };
 
 /**
  * Lock displayed as a keypad
  */
-const keypad = (props) => {
+const lockkeypad = (props) => {
 
 };
 

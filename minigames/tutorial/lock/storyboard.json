@@ -1,0 +1,66 @@
+[
+  {
+    "children": [
+      {
+        "click": [
+          "C", 
+          140, 
+          130, 
+          80
+        ], 
+        "id": 2
+      }, 
+      {
+        "click": [
+          "C", 
+          500, 
+          130, 
+          80
+        ], 
+        "id": 3
+      }
+    ], 
+    "class": "scene", 
+    "description": "A scene", 
+    "id": 1, 
+    "layout": {
+      "graphics": {
+        "path": "assets/background.png"
+      }
+    }
+  }, 
+  {
+    "class": "machine.download", 
+    "description": "Download Machine", 
+    "id": 2, 
+    "layout": {
+      "content": [
+        "<p>Click on the icon below to download the image... </p>", 
+        "<p>...and display it in ImageJ.</p>"
+      ], 
+      "title": "Download..."
+    }, 
+    "params": {
+      "file": "assets/secret.tif"
+    }
+  }, 
+  {
+    "class": "machine.lockDigit[4]", 
+    "description": "Exit lock", 
+    "id": 3, 
+    "layout": {
+      "content": [
+        "<p>Type the code... to exit</p>"
+      ], 
+      "title": "A Safe..."
+    }, 
+    "params": {
+      "exit": 1243, 
+      "message": [
+        "<p>Congratulations!!, you win. Click on the button to go to the next game.</p>"
+      ], 
+      "theme": "metal"
+    }
+  }
+]
+

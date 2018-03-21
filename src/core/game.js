@@ -31,6 +31,50 @@
  *
  */
 
-function newGame(storyboard) {
+const newGame = (filename) => {
 
+  /*
+   * Parse storyboard and create various HTML5 Element
+   */
+  const parseGraph = (storyboard) => {
+    let graph = storyboard;
+    let game = {name: 'A game'};
+
+    let root = document.getElementById('game');
+    for (let node of graph) {
+      //TODO
+
+      console.log(node);
+    }
+  };
+  
+  /*
+   * Get JSON
+   */
+  const getJSON = (url) => {
+    return new Promise( (resolve, reject) => {
+      // https://developer.mozilla.org/fr/docs/Learn/JavaScript/Objects/JSON
+      let request = new XMLHttpRequest();
+      request.open('GET', filename);
+      request.responseType = 'json';
+      request.onload = function() {
+        let status = request.status;
+        if (status === 200) {
+          resolve(request.response);
+        }
+        else {
+          // ERROR
+          reject(status);
+        }
+      };
+      request.send();
+    });
+  };
+  
+  // Main
+  getJSON(filename)
+    .then( 
+      (data) => parseGraph(data), 
+      (status) => alert(`Something went wrong - ${status}`) 
+    );
 }
