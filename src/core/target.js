@@ -23,14 +23,10 @@
  */
 
 
+
 'use strict';
 
-/**
- * Create a new game from a JSON storyboard
- *
- *
- */
 
-function newGame(storyboard) {
+const target = (props) {
 
-}
+};

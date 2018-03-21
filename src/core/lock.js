@@ -23,14 +23,30 @@
  */
 
 
+
 'use strict';
 
 /**
- * Create a new game from a JSON storyboard
- *
- *
+ * Lock displayed as a Text Field
  */
+const textfield = (props) => {
 
-function newGame(storyboard) {
+};
 
-}
+/**
+ * Lock displayed as a n-Digit Lock
+ */
+const digitlock = (nDigit,props) => {
+
+};
+
+/**
+ * Lock displayed as a keypad
+ */
+const keypad = (props) => {
+
+};
+
+
+
+
