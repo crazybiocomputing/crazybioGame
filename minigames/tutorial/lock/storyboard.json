@@ -1,5 +1,20 @@
 [
   {
+    "class": "machine.download", 
+    "description": "Download Machine", 
+    "id": 2, 
+    "layout": {
+      "content": [
+        "<p>Click on the icon below to download the image... </p>", 
+        "<p>...and display it in ImageJ.</p>"
+      ], 
+      "title": "Download..."
+    }, 
+    "params": {
+      "file": "assets/secret.tif"
+    }
+  }, 
+  {
     "children": [
       {
         "click": [
@@ -27,21 +42,6 @@
       "graphics": {
         "path": "assets/background.png"
       }
-    }
-  }, 
-  {
-    "class": "machine.download", 
-    "description": "Download Machine", 
-    "id": 2, 
-    "layout": {
-      "content": [
-        "<p>Click on the icon below to download the image... </p>", 
-        "<p>...and display it in ImageJ.</p>"
-      ], 
-      "title": "Download..."
-    }, 
-    "params": {
-      "file": "assets/secret.tif"
     }
   }, 
   {
