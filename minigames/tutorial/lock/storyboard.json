@@ -23,7 +23,7 @@
     "class": "scene", 
     "description": "A scene", 
     "id": 1, 
-    "layout": {
+    "display": {
       "graphics": {
         "path": "assets/background.png"
       }
