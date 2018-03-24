@@ -29,14 +29,41 @@
 /**
  * Create a new scene
  *
- * @author TODO
+ * @author GONCALVES FRASCO Charlotte
  */
 const scene = (props) => {
-  let element = document.createElement('div');
+  let element = document.createElement('div'); //<div id = "game"> ??
   element.id = props.id;
-  
-  // TODO
-  
+
+  let elementF = document.createElement('figure');
+  elementF.id = props['id'];
+  let elementS = document.createElement('svg');
+  elementS.textContent = 'class="map" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1080" preserveAspectRatio="xMinYMin meet"';
+  let elementI = document.createElement('image');
+  elementI.textContent = 'xlink:href=' + props['display'['graphics'['path']]];
+  elementS.appendChild(elementI);
+
+  let children = props['children']
+
+  for (let i=1; i< children.length; i++){
+    let elementG = document.createElement('g');
+    elementG.textContent = 'class="hover_group" opacity="0"';
+
+    let elementA = createElement('a');
+    //a[i].id = props['children'['id[i]']];
+    elementA.textContent = 'id="' + props['children'['id[i]']];
+
+    let elementC = createElement('circle');
+    elementC.textContent = 'cx =\"' + props['children'['click'][1]] + '\" cy =\"' + props['children'['click'][2]] + '\" r=\"' + props['children'['click'][3]] + '\" 'opacity="0.3" fill="#FFFFFF"'';
+
+    elementA.appendChild(elementC);
+    elementG.appendChild(elementA);
+    elementS.appendChild(elementG);
+  }
+
+  elementF.appendChild(elementS);
+  element.appendChild(elementF);
+
   return element;
 };
 
