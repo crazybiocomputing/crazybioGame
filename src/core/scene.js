@@ -74,7 +74,7 @@ console.log(props);
 
   //let children = props['children']
 
-  for (let child of children){
+  for (let child of props.children){
     let elementG = document.createElement('g');
     elementG.textContent = 'class="hover_group" opacity="0"';
 
