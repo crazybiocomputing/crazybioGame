@@ -30,11 +30,12 @@
  *
  *
  */
+
 const download = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
 
-  graph = JSON.parse(storyboard.js);
+  graph = JSON.parse(storyboard.json);
 
   let img = document.createElement('img');
   let machine = graph[0];
@@ -42,7 +43,6 @@ const download = (props) => {
   img.id = "machine";
   img.src = machine.params{file};
   
-
   return element;
 };
 
@@ -51,6 +51,7 @@ const download = (props) => {
  *
  *
  */
+
 const form = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
