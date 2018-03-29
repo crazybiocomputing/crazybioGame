@@ -34,13 +34,23 @@ const download = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
   
-  // TODO
+  // ONGOING
+
+  let machine_download = document.createElement('div');
+
   
   return element;
 };
 
+  const download = document.getElementById("fileRequest");
+  download.addEventListener('click', request);
+
+function request() {
+    window.location = 'file_path';
+}
+
 /**
- * Create a new `download` form
+ * Create a new `form` machine
  *
  *
  */
@@ -48,7 +58,9 @@ const form = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
   
-  // TODO
+  // ONGOING
+
+  let machine_form = document.creatElement('div');
   
   return element;
 };
