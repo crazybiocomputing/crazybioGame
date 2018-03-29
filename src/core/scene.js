@@ -66,8 +66,11 @@ const createScene = (props) => {
 console.log(props);
   let element = document.createElement('figure');
   element.id = props.id;
-  let elementS = document.createElement('svg');
-  elementS.textContent = 'class="map" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1080" preserveAspectRatio="xMinYMin meet"';
+  let elementS = document.createElementNS('http://www.w3.org/2000/svg','svg');
+  elementS.width = 1920;
+  elementS.height = 1080;
+  elementS.style.class = 'map';
+  elementS.textContent = 'class="map" version="1.1" xmlns= xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1Ratio="xMinYMin meet"';
   let elementI = document.createElement('image');
   elementI.textContent = `xlink:href="${props.display.graphics.path}"`;
   elementS.appendChild(elementI);
