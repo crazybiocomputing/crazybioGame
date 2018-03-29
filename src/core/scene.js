@@ -83,7 +83,7 @@ const createScene = (props) => {
     elementA.textContent = `id="${props.children.id[i]}"`;
 
     let elementC = createElement('circle');
-    elementC.textContent = 'cx =\"' + props.children.click[1] + '\" cy =\"' + props.children.click[2] + '\" r=\"' + props.children.click[3] + '\" 'opacity="0.3" fill="#FFFFFF"'';
+    elementC.textContent = `cx ="${props.children.click[1]}" cy = "${props.children.click[2]}" r= "${props.children.click[3]}" opacity="0.3" fill="#FFFFFF"`;
 
     elementA.appendChild(elementC);
     elementG.appendChild(elementA);
