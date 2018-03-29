@@ -87,7 +87,10 @@ console.log(props);
     elementA.textContent = `id="${child.id}"`;
 
     let elementC = document.createElement('circle');
-    elementC.textContent = `cx ="${child.click[1]}" cy = "${child.click[2]}" r= "${child.click[3]}" opacity="0.3" fill="#FFFFFF"`;
+    elementC.setAttributeNS(null,'cx',child.click[1]);
+    elementC.setAttributeNS(null,'cy',child.click[2]);
+    elementC.setAttributeNS(null,'r',child.click[3]);
+  // }" opacity="0.3" fill="#FFFFFF"`;
 
     elementA.appendChild(elementC);
     elementG.appendChild(elementA);
@@ -95,6 +98,7 @@ console.log(props);
   }
 
   element.appendChild(elementS);
+  console.log(element);
   
   return element;
 };
