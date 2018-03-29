@@ -63,7 +63,7 @@ const scene = (props) => {
 const createScene = (props) => {
   //let element = document.createElement('div'); // <div id = "scene">
   //element.id = props.id;
-
+console.log(props);
   let elementF = document.createElement('figure');
   elementF.id = props.id;
   let elementS = document.createElement('svg');
