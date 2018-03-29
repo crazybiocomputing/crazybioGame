@@ -81,15 +81,17 @@ console.log(props);
   //let children = props['children']
 
   for (let child of props.children){
-    let elementG = document.createElement('g');
+    let elementG = document.createElementNS(NS,'g');
     elementG.setAttributeNS(null, 'class', 'hover_group');
     elementG.setAttributeNS(null, 'opacity', '0');
 
-    let elementA = document.createElement('a');
+    let elementA = document.createElementNS(NS,'a');
+    elementA.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', 'javascript:void(0)';
+
     elementA.setAttributeNS(null, 'id', child.id);
     //elementA.textContent = `id="${child.id}"`;
 
-    let elementC = document.createElement('circle');
+    let elementC = document.createElementNS(NS,'circle');
     elementC.setAttributeNS(null,'cx',child.click[1]);
     elementC.setAttributeNS(null,'cy',child.click[2]);
     elementC.setAttributeNS(null,'r',child.click[3]);
