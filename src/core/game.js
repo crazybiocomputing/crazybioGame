@@ -45,6 +45,7 @@ const newGame = (filename) => {
       //TODO
       if (node.class === 'scene') {
         createScene(node);
+        root.appendChild(createScene);
       }
       console.log(node);
     }
