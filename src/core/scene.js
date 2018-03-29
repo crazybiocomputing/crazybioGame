@@ -78,11 +78,11 @@ const createScene = (props) => {
     let elementG = document.createElement('g');
     elementG.textContent = 'class="hover_group" opacity="0"';
 
-    let elementA = createElement('a');
+    let elementA = document.createElement('a');
     //a[i].id = props['children'['id[i]']];
     elementA.textContent = `id="${props.children.id[i]}"`;
 
-    let elementC = createElement('circle');
+    let elementC = document.createElement('circle');
     elementC.textContent = `cx ="${props.children.click[1]}" cy = "${props.children.click[2]}" r= "${props.children.click[3]}" opacity="0.3" fill="#FFFFFF"`;
 
     elementA.appendChild(elementC);
