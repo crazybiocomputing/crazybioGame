@@ -44,7 +44,6 @@ const newGame = (filename) => {
     for (let node of graph) {
       //TODO
       if (node.class === 'scene') {
-        createScene(node);
         root.appendChild(createScene);
       }
       console.log(node);
