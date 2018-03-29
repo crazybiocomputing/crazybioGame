@@ -44,7 +44,7 @@ const newGame = (filename) => {
     for (let node of graph) {
       //TODO
       if (node.class === 'scene') {
-        scene(node);
+        createScene(node);
       }
       console.log(node);
     }
