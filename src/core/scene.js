@@ -38,13 +38,13 @@ const scene = (props) => {
 
   document.addEventListener("DOMContentLoaded", function(event) { 
     let scene = document.createElement('div');
-    element.id = graph[1].class; // id = "scene"
+    scene.id = graph[1].class; // id = "scene"
 
     let machine_download = document.createElement('div');
-    element.id = graph[0].class; // id = "machine.download"
+    machine_download.id = graph[0].class; // id = "machine.download"
 
     let machine_lockdigit = document.createElement('div');
-    element.id = graph[2].class // id = "machine.lockDigit[4]"
+    machine_lockdigit.id = graph[2].class // id = "machine.lockDigit[4]"
 
     let init = document.getElementById('game');
 
