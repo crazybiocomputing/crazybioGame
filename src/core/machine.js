@@ -33,35 +33,33 @@
 const download = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
-  
-  // ONGOING
 
-  let machine_download = document.createElement('div');
+  graph = JSON.parse(storyboard.js);
 
+  let img = document.createElement('img');
+  let machine = graph[0];
+
+  img.id = "machine";
+  img.src = machine.params{file};
   
+
   return element;
 };
 
-  const download = document.getElementById("fileRequest");
-  download.addEventListener('click', request);
-
-function request() {
-    window.location = 'file_path';
-}
-
 /**
- * Create a new `form` machine
+ * Create a new `download` form
  *
  *
  */
 const form = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
-  
-  // ONGOING
 
-  let machine_form = document.creatElement('div');
-  
+  function download(url){
+    window.location.href = url;
+  }
+
+  document.getElemenById("machine").addEventListener("click",download(img.src));
+
   return element;
 };
-
