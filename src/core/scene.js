@@ -72,6 +72,9 @@ console.log(props);
   elementS.style.class = 'map';
   // elementS.textContent = 'class="map" version="1.1" xmlns= xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1Ratio="xMinYMin meet"';
   let elementI = document.createElementNS(NS,'image');
+  elementI.setAttributeNS(null,'width',800);
+  elementI.setAttributeNS(null,'width',432);
+  
   elementI.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', props.display.graphics.path);
   elementS.appendChild(elementI);
 
