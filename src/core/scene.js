@@ -69,7 +69,7 @@ console.log(props);
   const NS = 'http://www.w3.org/2000/svg';
   let elementS = document.createElementNS(NS,'svg');
   elementS.setAttributeNS(null, 'viewBox','0 0 1920 1080');
-  elementS.style.class = 'map';
+  elementS.setAttributeNS(null, 'class', 'map');
   // elementS.textContent = 'class="map" version="1.1" xmlns= xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1Ratio="xMinYMin meet"';
   let elementI = document.createElementNS(NS,'image');
   elementI.setAttributeNS(null,'width',800);
