@@ -61,7 +61,7 @@ const scene = (props) => {
  * @author GONCALVES FRASCO Charlotte
  */
 const scene = (props) => {
-  let element = document.createElement('div'); //<div id = "game"> ??
+  let element = document.createElement('div'); // <div id = "scene">
   element.id = props.id;
 
   let elementF = document.createElement('figure');
