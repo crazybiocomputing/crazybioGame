@@ -86,7 +86,7 @@ console.log(props);
     elementG.setAttributeNS(null, 'opacity', '0');
 
     let elementA = document.createElementNS(NS,'a');
-    elementA.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', 'javascript:void(0)';
+    elementA.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', 'javascript:void(0)');
 
     elementA.setAttributeNS(null, 'id', child.id);
     //elementA.textContent = `id="${child.id}"`;
