@@ -86,15 +86,15 @@ console.log(props);
     elementG.setAttributeNS(null, 'opacity', '0');
 
     let elementA = document.createElement('a');
-    //a[i].id = props['children'['id[i]']];
-    elementA.textContent = `id="${child.id}"`;
+    elementA.setAttributeNS(null, 'id', child.id);
+    //elementA.textContent = `id="${child.id}"`;
 
     let elementC = document.createElement('circle');
     elementC.setAttributeNS(null,'cx',child.click[1]);
     elementC.setAttributeNS(null,'cy',child.click[2]);
     elementC.setAttributeNS(null,'r',child.click[3]);
     elementC.setAttributeNS(null,'opacity', '0.3');
-    element.setAttributesNS(null, 'fill', '#FFFFFF');
+    elementC.setAttributeNS(null, 'fill', '#FFFFFF');
 
     elementA.appendChild(elementC);
     elementG.appendChild(elementA);
