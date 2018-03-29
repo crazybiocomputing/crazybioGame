@@ -45,7 +45,7 @@
     }
   }, 
   {
-    "class": "machine.lockDigit[4]", 
+    "class": "machine.lockNumerical", 
     "description": "Exit lock", 
     "id": 3, 
     "layout": {
