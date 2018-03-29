@@ -31,7 +31,7 @@
  *
  */
  
-const sprite = (props) => {
+const createSprite = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
   

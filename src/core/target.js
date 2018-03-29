@@ -31,7 +31,7 @@
  *
  */
  
-const target = (props) => {
+const createTarget = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
   

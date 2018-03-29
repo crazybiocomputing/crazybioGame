@@ -25,42 +25,75 @@
 
 'use strict';
 
+  
+/**
+ * Create a new generic machine
+ *
+ *
+ */
+
+const createMachine = (props) => {
+  let element = document.createElement('div');
+  element.id = props.id;
+  element.className = "machine";
+  
+  return element;
+};
+
 /**
  * Create a new `download` machine
  *
  *
  */
 
-const download = (props) => {
+const createMachineDownload = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
-
-  graph = JSON.parse(storyboard.json);
-
-  let img = document.createElement('img');
-  let machine = graph[0];
-
-  img.id = "machine";
-  img.src = machine.params{file};
+  element.className = "machDownload";
   
   return element;
 };
 
-/**
- * Create a new `form` machine
- *
- *
- */
 
-const form = (props) => {
+/**
+ * Create a new `form` machine using a `GapFill` mode
+ *
+ * @author TODO
+ */
+const createForm = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
-
+  element.className = "form";
+  
   function download(url){
     window.location.href = url;
   }
 
-  document.getElemenById("machine").addEventListener("click",download(img.src));
+  document.getElementById("machine").addEventListener("click",download(img.src));
 
   return element;
 };
+
+/**
+ * Create a new `form` machine using a `Drag and Drop` mode
+ *
+ * @author TODO
+ */
+const createFormDragDrop = (props) => {
+  let element = document.createElement('div');
+
+  return element;
+};
+
+/**
+ * Create a new `form` machine using a `Drop-down` mode
+ *
+ * @author TODO
+ */
+const createFormDropDown = (props) => {
+  let element = document.createElement('div');
+
+  return element;
+};
+
+

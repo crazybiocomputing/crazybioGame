@@ -25,32 +25,57 @@
 
 'use strict';
 
+
 /**
  * Lock displayed as a Text Field
  */
-const locktext = (props) => {
-
+const createLockText = (props) => {
+  let element = document.createElement('div');
+  element.id = props.id;
+  element.className = "lockText";
+  
+  // TODO
+  
+  return element;
 };
 
 /**
  * Lock displayed as a Numerical Field
  */
-const locknumeric = (props) => {
-
+const createLockNumerical = (props) => {
+  let element = document.createElement('div');
+  element.id = props.id;
+  element.className = "lockNumerical";
+  
+  // TODO
+  
+  return element;
 };
 
 /**
  * Lock displayed as a n-Digit Lock
  */
-const lockdigit = (nDigits,props) => {
-
+const createLockDigit = (nDigits) => (props) => {
+  let element = document.createElement('div');
+  element.id = props.id;
+  element.className = "lockDigit";
+  
+  // TODO
+  
+  return element;
 };
 
 /**
  * Lock displayed as a keypad
  */
-const lockkeypad = (props) => {
-
+const createLockKeypad = (props) => {
+  let element = document.createElement('div');
+  element.id = props.id;
+  element.className = "lockKeypad";
+  
+  // TODO
+  
+  return element;
 };
 
 

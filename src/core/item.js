@@ -31,7 +31,7 @@
  *
  */
  
-const item = (obj) => {
+const createItem = (obj) => {
   let element = document.createElement('div');
   element.id = obj.id;
   
