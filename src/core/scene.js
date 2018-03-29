@@ -60,30 +60,30 @@ const scene = (props) => {
  *
  * @author GONCALVES FRASCO Charlotte
  */
-const scene = (props) => {
+const createScene = (props) => {
   let element = document.createElement('div'); // <div id = "scene">
   element.id = props.id;
 
   let elementF = document.createElement('figure');
-  elementF.id = props['id'];
+  elementF.id = props.id;
   let elementS = document.createElement('svg');
   elementS.textContent = 'class="map" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1080" preserveAspectRatio="xMinYMin meet"';
   let elementI = document.createElement('image');
-  elementI.textContent = 'xlink:href=' + props['display'['graphics'['path']]];
+  elementI.textContent = 'xlink:href=' + props.display.graphics.path;
   elementS.appendChild(elementI);
 
   let children = props['children']
 
-  for (let i=1; i< children.length; i++){
+  for (let i=0; i< children.length; i++){
     let elementG = document.createElement('g');
     elementG.textContent = 'class="hover_group" opacity="0"';
 
     let elementA = createElement('a');
     //a[i].id = props['children'['id[i]']];
-    elementA.textContent = 'id="' + props['children'['id[i]']];
+    elementA.textContent = 'id="' + props.children.id[i];
 
     let elementC = createElement('circle');
-    elementC.textContent = 'cx =\"' + props['children'['click'][1]] + '\" cy =\"' + props['children'['click'][2]] + '\" r=\"' + props['children'['click'][3]] + '\" 'opacity="0.3" fill="#FFFFFF"'';
+    elementC.textContent = 'cx =\"' + props.children.click[1] + '\" cy =\"' + props.children.click[2] + '\" r=\"' + props.children.click[3] + '\" 'opacity="0.3" fill="#FFFFFF"'';
 
     elementA.appendChild(elementC);
     elementG.appendChild(elementA);
