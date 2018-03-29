@@ -82,7 +82,8 @@ console.log(props);
 
   for (let child of props.children){
     let elementG = document.createElement('g');
-    elementG.textContent = 'class="hover_group" opacity="0"';
+    elementG.setAttributeNS(null, 'class', 'hover_group');
+    elementG.setAttributeNS(null, 'opacity', '0');
 
     let elementA = document.createElement('a');
     //a[i].id = props['children'['id[i]']];
@@ -92,7 +93,8 @@ console.log(props);
     elementC.setAttributeNS(null,'cx',child.click[1]);
     elementC.setAttributeNS(null,'cy',child.click[2]);
     elementC.setAttributeNS(null,'r',child.click[3]);
-  // }" opacity="0.3" fill="#FFFFFF"`;
+    elementC.setAttributeNS(null,'opacity', '0.3');
+    element.setAttributesNS(null, 'fill', '#FFFFFF');
 
     elementA.appendChild(elementC);
     elementG.appendChild(elementA);
