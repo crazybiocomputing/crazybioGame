@@ -32,10 +32,11 @@ Hans
 // graph est le le parse du fichier storyboard.json dans ce code 
 /** ATTENTION : ce code rajoute bien les div dans le html MAIS uniquement hors de la constante scene. De plus, 
 la la fonction parse n'étant pas terminée, on ne peut pas voir si les div prennent les bons id. 
-*/
+
 
 const scene = (props) => {
 
+ 
   document.addEventListener("DOMContentLoaded", function(event) { 
     let scene = document.createElement('div');
     scene.id = graph[1].class; // id = "scene"
@@ -54,6 +55,8 @@ const scene = (props) => {
 
   })
 }
+*/
+
 
 /**
  * Create a new scene
@@ -61,9 +64,18 @@ const scene = (props) => {
  * @author GONCALVES FRASCO Charlotte
  */
 const createScene = (props) => {
-  //let element = document.createElement('div'); // <div id = "scene">
-  //element.id = props.id;
-console.log(props);
+  
+  const createCircle = (cx,cy,radius) => {
+  }
+  
+  const createRectangle = (x,y,w,h) => {
+  }
+  
+  const createPolygon = (path) => {
+  }
+  
+  console.log(props);
+  
   let element = document.createElement('figure');
   element.id = props.id;
   const NS = 'http://www.w3.org/2000/svg';
