@@ -72,18 +72,18 @@ console.log(props);
   elementI.textContent = `xlink:href="${props.display.graphics.path}"`;
   elementS.appendChild(elementI);
 
-  let children = props['children']
+  //let children = props['children']
 
-  for (let i=0; i< children.length; i++){
+  for (let child of children){
     let elementG = document.createElement('g');
     elementG.textContent = 'class="hover_group" opacity="0"';
 
     let elementA = document.createElement('a');
     //a[i].id = props['children'['id[i]']];
-    elementA.textContent = `id="${props.children.id[i]}"`;
+    elementA.textContent = `id="${child.id}"`;
 
     let elementC = document.createElement('circle');
-    elementC.textContent = `cx ="${props.children.click[1]}" cy = "${props.children.click[2]}" r= "${props.children.click[3]}" opacity="0.3" fill="#FFFFFF"`;
+    elementC.textContent = `cx ="${child.click[1]}" cy = "${child.click[2]}" r= "${child.click[3]}" opacity="0.3" fill="#FFFFFF"`;
 
     elementA.appendChild(elementC);
     elementG.appendChild(elementA);
