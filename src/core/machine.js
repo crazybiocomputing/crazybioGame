@@ -47,7 +47,7 @@ const download = (props) => {
 };
 
 /**
- * Create a new `download` form
+ * Create a new `form` machine
  *
  *
  */
