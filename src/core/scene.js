@@ -25,38 +25,6 @@
 
 'use strict';
 
-/**
-Hans
-*/
-
-// graph est le le parse du fichier storyboard.json dans ce code 
-/** ATTENTION : ce code rajoute bien les div dans le html MAIS uniquement hors de la constante scene. De plus, 
-la la fonction parse n'étant pas terminée, on ne peut pas voir si les div prennent les bons id. 
-
-
-const scene = (props) => {
-
- 
-  document.addEventListener("DOMContentLoaded", function(event) { 
-    let scene = document.createElement('div');
-    scene.id = graph[1].class; // id = "scene"
-
-    let machine_download = document.createElement('div');
-    machine_download.id = graph[0].class; // id = "machine.download"
-
-    let machine_lockdigit = document.createElement('div');
-    machine_lockdigit.id = graph[2].class // id = "machine.lockDigit[4]"
-
-    let init = document.getElementById('game');
-
-    document.body.insertBefore(scene,init);
-    document.body.insertBefore(machine_download,init);
-    document.body.insertBefore(machine_lockdigit,init);
-
-  })
-}
-*/
-
 
 /**
  * Create a new scene
