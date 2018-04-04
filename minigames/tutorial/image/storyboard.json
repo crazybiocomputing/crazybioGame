@@ -1,0 +1,147 @@
+[
+  {
+    "id": 0, 
+    "author": "Jean-Christophe Taveau", 
+    "description": "Example of user interaction"
+  },
+  {
+    "id": 1, 
+    "class": "scene", 
+    "description": "A desktop", 
+    "display": {
+      "graphics": {
+        "path": "assets/background.png",
+        "width": 717,
+        "height": 544
+      }
+    },
+    "children": [10,11,12,13,14,110,111,112,113,114]
+  }, 
+  {
+    "id": 10,
+    "class": "target", 
+    "description": "Button 1", 
+    "display": {
+      "graphics": {
+        "path": "assets/button02.png",
+        "position": [520,514],
+        "width": 124
+      }
+    },
+    "new_nodes": [110]
+  }, 
+  {
+    "id": 11,
+    "class": "target", 
+    "description": "Button 2",  
+    "display": {
+      "graphics": {
+        "position": [154,515],
+        "path": "assets/button90.png",
+        "width": 124
+      }
+    } 
+  }, 
+  {
+    "id": 12,
+    "class": "target", 
+    "description": "Button 3",  
+    "display": {
+      "graphics": {
+        "position": [276,514],
+        "path": "assets/button70.png",
+        "width": 124
+      }
+    } 
+  }, 
+  {
+    "id": 13,
+    "class": "target", 
+    "description": "Button 4",  
+    "display": {
+      "graphics": {
+        "position": [398,514],
+        "path": "assets/button54.png",
+        "width": 124
+      }
+    } 
+  }, 
+  {
+    "id": 14,
+    "class": "target", 
+    "description": "Button 5",  
+    "display": {
+      "graphics": {
+        "position": [30,514],
+        "path": "assets/button20.png",
+        "width": 124
+      }
+    }
+  },
+  {
+    "id": 110,
+    "class": "sprite", 
+    "description": "Piece 1",  
+    "display": {
+      "visibility": false,
+      "graphics": {
+        "position": [151,42],
+        "path": "assets/plasma0234_ij.png"
+      }
+    },
+    "features": [
+      {"move": true}
+    ],
+    "del_nodes": [10]
+  }, 
+  {
+    "id": 111,
+    "class": "sprite", 
+    "description": "Piece 2",  
+    "display": {
+      "visibility": false,
+      "graphics": {
+        "position": [402,65],
+        "path": "assets/plasma9009_ij.png"
+      }
+    } 
+  }, 
+  {
+    "id": 112,
+    "class": "sprite", 
+    "description": "Piece 3",  
+    "display": {
+      "visibility": false,
+      "graphics": {
+        "position": [350,195],
+        "path": "assets/plasma7043_ij.png"
+      }
+    } 
+  }, 
+  {
+    "id": 113,
+    "class": "sprite", 
+    "description": "Piece 4",  
+    "display": {
+      "visibility": false,
+      "graphics": {
+        "position": [11,26],
+        "path": "assets/plasma5492_ij.png"
+      }
+    } 
+  }, 
+  {
+    "id": 114,
+    "class": "sprite", 
+    "description": "Piece 5",  
+    "display": {
+      "visibility": false,
+      "graphics": {
+        "position": [51,148],
+        "path": "assets/plasma2078_ij.png"
+      }
+    }
+  }
+
+]
+
