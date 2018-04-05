@@ -25,40 +25,55 @@
 
 'use strict';
 
-
 /**
  * Create a new scene
  *
  * @author GONCALVES FRASCO Charlotte
  */
 const createScene = (props) => {
-  
+
   const createCircle = (cx,cy,radius) => {
+    let elementC = document.createElementNS(NS,'circle');
+    elementC.setAttributeNS(null,'cx',cx);
+    elementC.setAttributeNS(null,'cy',cy);
+    elementC.setAttributeNS(null,'r',radius);
+    elementC.setAttributeNS(null,'opacity', '0.3');
+    elementC.setAttributeNS(null, 'fill', '#FFFFFF');
+    return elementC;
   }
-  
+
   const createRectangle = (x,y,w,h) => {
+    let elementC = document.createElementNS(NS,'rect');
+    elementC.setAttributeNS(null,'x',x);
+    elementC.setAttributeNS(null,'y',y);
+    elementC.setAttributeNS(null,'w',w);
+    elementC.setAttributeNS(null,'h',h);
+    elementC.setAttributeNS(null,'opacity', '0.3');
+    elementC.setAttributeNS(null, 'fill', '#FFFFFF');
+    return elementC;
   }
-  
+
   const createPolygon = (path) => {
+    let elementC = document.createElementNS(NS,'path');
+    elementC.setAttributeNS(null,'d',path);
+    return elementC;
   }
-  
+
   console.log(props);
-  
+
   let element = document.createElement('figure');
   element.id = props.id;
   const NS = 'http://www.w3.org/2000/svg';
   let elementS = document.createElementNS(NS,'svg');
   elementS.setAttributeNS(null, 'viewBox','0 0 1920 1080');
   elementS.setAttributeNS(null, 'class', 'map');
-  // elementS.textContent = 'class="map" version="1.1" xmlns= xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1Ratio="xMinYMin meet"';
   let elementI = document.createElementNS(NS,'image');
   elementI.setAttributeNS(null,'width',800);
   elementI.setAttributeNS(null,'height',432);
-  
+
   elementI.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', props.display.graphics.path);
   elementS.appendChild(elementI);
 
-  //let children = props['children']
 
   for (let child of props.children){
     let elementG = document.createElementNS(NS,'g');
@@ -69,14 +84,18 @@ const createScene = (props) => {
     elementA.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', 'javascript:void(0)');
 
     elementA.setAttributeNS(null, 'id', child.id);
-    //elementA.textContent = `id="${child.id}"`;
+    let elementC;
+    if (child.click[0] == 'C'){
+      elementC = createCircle(child.click[1],child.click[2],child.click[3]);
+    }
 
-    let elementC = document.createElementNS(NS,'circle');
-    elementC.setAttributeNS(null,'cx',child.click[1]);
-    elementC.setAttributeNS(null,'cy',child.click[2]);
-    elementC.setAttributeNS(null,'r',child.click[3]);
-    elementC.setAttributeNS(null,'opacity', '0.3');
-    elementC.setAttributeNS(null, 'fill', '#FFFFFF');
+    else if (child.click[0] == 'R'){
+      elementC = createRectangle(child.click[1],child.click[2],child.click[3],child.click[4]);
+    }
+
+    else if (child.click[0] == 'P'){
+      elementC = createPolygon(child.click[1]);
+    }
 
     elementA.appendChild(elementC);
     elementG.appendChild(elementA);
@@ -85,7 +104,6 @@ const createScene = (props) => {
 
   element.appendChild(elementS);
   console.log(element);
-  
+
   return element;
 };
-
