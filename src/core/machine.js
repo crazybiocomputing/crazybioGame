@@ -51,7 +51,27 @@ const createMachineDownload = (props) => {
   element.id = props.id;
   element.className = "machDownload";
   
+  function download(url){
+  window.location.href = url;
+  }
+
+  //document.getElementById("circle").addEventListener("click",download("assets/secret.tif"));
+
+  let circle = document.getElementsByClassName("hover_group");
+  console.log(circle);
+
+  /**
+  let array = [];
+  [].push.apply(array, HTMLCollection);
+  console.log(array);
+  */
+
+  for (let item of circle) {
+  item.addEventListener('click', download("assets/secret.tif"));
+  }
+  
   return element;
+  
 };
 
 
