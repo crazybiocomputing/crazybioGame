@@ -32,7 +32,10 @@
  */
 const createScene = (props) => {
 
-  const createCircle = (cx,cy,radius) => {
+  const createCircle = (area) => {
+    let cx = area[1];
+    let cy = area[2];
+     let radius = area[3];
     let elementC = document.createElementNS(NS,'circle');
     elementC.setAttributeNS(null,'cx',cx+radius);
     elementC.setAttributeNS(null,'cy',cy+radius);
@@ -105,13 +108,11 @@ const createScene = (props) => {
     console.log(child);
     
     if (child.display.click[0] === 'C'){
-      elementC = createCircle(child.display.click[1],child.display.click[2],child.display.click[3]);
+      elementC = createCircle(child.display.click);
     }
-
     else if (child.features.click[0] === 'R'){
       elementC = createRectangle(child.features.click[1],child.features.click[2],child.features.click[3],child.features.click[4]);
     }
-
     else if (child.features.click[0] === 'P'){
       elementC = createPolygon(child.display.click[1,path.slice(1,path.length)]);
     }
