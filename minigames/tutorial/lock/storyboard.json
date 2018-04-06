@@ -1,22 +1,20 @@
 [
   {
+    "id": 2, 
     "class": "machine.download", 
     "description": "Download Machine", 
-    "id": 2, 
-    "parent": 1,
     "display": {
       "click": ["C", 140, 130, 80]
     }, 
     "features": {
       "file": "assets/secret.tif",
       "popup": {
-        "onclick": {
-          "content": [
-            "<p>Click on the icon below to download the image... </p>", 
-            "<p>...and display it in ImageJ.</p>"
-          ], 
-          "title": "Download..."
-        }
+        "event": "onclick",
+        "content": [
+          "<p>Click on the icon below to download the image... </p>", 
+          "<p>...and display it in ImageJ.</p>"
+        ], 
+        "title": "Download..."
       }
     }
   }, 
@@ -40,13 +38,15 @@
     "display": {
       "click": ["C", 500, 130, 80]
     }, 
-    "layout": {
-      "content": [
-        "<p>Type the code... to exit</p>"
-      ], 
-      "title": "A Safe..."
-    }, 
     "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p>Type the code... to exit</p>"
+        ], 
+        "title": "A Safe..."
+      }
+    }, 
       "exit": 1243, 
       "message": [
         "<p>Congratulations!!, you win. Click on the button to go to the next game.</p>"
