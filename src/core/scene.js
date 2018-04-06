@@ -1,4 +1,4 @@
-/*
+area/*
  *  crazybioGame: CrazyBioComputing Game Engine
  *  Copyright (C) 2015-2018  Jean-Christophe Taveau.
  *
@@ -108,7 +108,9 @@ const createScene = (props) => {
     elementA.setAttributeNS(null, 'id', child.id);
     let elementC;
     console.log(child);
-    
+    elementC = geometries[child.display.click[0].toUpperCase());
+      
+                          /*
     if (child.display.click[0] === 'C'){
       elementC = createCircle(child.display.click);
     }
@@ -118,7 +120,7 @@ const createScene = (props) => {
     else if (child.features.click[0] === 'P'){
       elementC = createPolygon(child.display.click[1,path.slice(1,path.length)]);
     }
-
+*/
     elementA.appendChild(elementC);
     elementG.appendChild(elementA);
     elementS.appendChild(elementG);
