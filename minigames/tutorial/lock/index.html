@@ -25,7 +25,7 @@
 <footer></footer>
 </div>
 <script type="text/javascript">
-  let game = newGame('./storyboard.json');
+  newGame('./storyboard.json').then( (game) => console.log(game) );
   // game.run();
 </script>
 </body>
