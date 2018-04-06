@@ -46,24 +46,36 @@ const createScene = (props) => {
   
   let element = document.createElement('figure');
   element.id = props.id;
+  element.className = 'scene';
+  /* Add background image
+  let img = document.createElement('img');
+  img.src = props.display.graphics.path;
+  element.appendChild(img);
+  */
+ 
   const NS = 'http://www.w3.org/2000/svg';
   let elementS = document.createElementNS(NS,'svg');
-  elementS.setAttributeNS(null, 'viewBox','0 0 1920 1080');
+  // TODO BUG
+  elementS.setAttributeNS(null, 'viewBox',`0 0 ${props.display.graphics.width} ${props.display.graphics.height}`);
   elementS.setAttributeNS(null, 'class', 'map');
+  elementS.setAttributeNS(null,'width','100%');
+  elementS.setAttributeNS(null,'height','100%');
+  elementS.setAttributeNS(null,'preserveAspectRatio','xMinYMin meet');
   // elementS.textContent = 'class="map" version="1.1" xmlns= xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1Ratio="xMinYMin meet"';
   let elementI = document.createElementNS(NS,'image');
-  elementI.setAttributeNS(null,'width',800);
-  elementI.setAttributeNS(null,'height',432);
+  elementI.setAttributeNS(null,'width','100%');
+  elementI.setAttributeNS(null,'height','100%');
   
   elementI.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', props.display.graphics.path);
   elementS.appendChild(elementI);
 
-  //let children = props['children']
 
-  for (let child of props.children){
+  // Define clickable areas if any
+  for (let child of props.childNodes){
     let elementG = document.createElementNS(NS,'g');
     elementG.setAttributeNS(null, 'class', 'hover_group');
     elementG.setAttributeNS(null, 'opacity', '0');
+
 
     let elementA = document.createElementNS(NS,'a');
     elementA.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', 'javascript:void(0)');
@@ -72,9 +84,9 @@ const createScene = (props) => {
     //elementA.textContent = `id="${child.id}"`;
 
     let elementC = document.createElementNS(NS,'circle');
-    elementC.setAttributeNS(null,'cx',child.click[1]);
-    elementC.setAttributeNS(null,'cy',child.click[2]);
-    elementC.setAttributeNS(null,'r',child.click[3]);
+    elementC.setAttributeNS(null,'cx',child.features.click[1] + child.features.click[3]);
+    elementC.setAttributeNS(null,'cy',child.features.click[2] + child.features.click[3]);
+    elementC.setAttributeNS(null,'r',child.features.click[3]);
     elementC.setAttributeNS(null,'opacity', '0.3');
     elementC.setAttributeNS(null, 'fill', '#FFFFFF');
 
@@ -82,6 +94,7 @@ const createScene = (props) => {
     elementG.appendChild(elementA);
     elementS.appendChild(elementG);
   }
+
 
   element.appendChild(elementS);
   console.log(element);
