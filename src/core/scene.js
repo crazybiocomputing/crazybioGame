@@ -108,9 +108,9 @@ const createScene = (props) => {
     elementA.setAttributeNS(null, 'id', child.id);
     let elementC;
     console.log(child);
-    elementC = geometries[child.display.click[0].toUpperCase());
+    elementC = geometries[child.display.click[0].toUpperCase()](child.display.click);
       
-                          /*
+    /*
     if (child.display.click[0] === 'C'){
       elementC = createCircle(child.display.click);
     }
