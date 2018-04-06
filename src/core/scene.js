@@ -55,7 +55,7 @@ const createScene = (props) => {
 
   const createPolygon = (path) => {
     let elementC = document.createElementNS(NS,'polygon');
-    elementC.setAttributeNS(null,'points',path);
+    elementC.setAttributeNS(null,'points',path.slice(1,path.length));
     return elementC;
   }
 
