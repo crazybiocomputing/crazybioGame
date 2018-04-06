@@ -79,6 +79,7 @@ const createScene = (props) => {
     let elementG = document.createElementNS(NS,'g');
     elementG.setAttributeNS(null, 'class', 'hover_group');
     elementG.setAttributeNS(null, 'opacity', '0');
+    elementG.setAttributeNS(null, 'id', 'circle');
 
     let elementA = document.createElementNS(NS,'a');
     elementA.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', 'javascript:void(0)');
