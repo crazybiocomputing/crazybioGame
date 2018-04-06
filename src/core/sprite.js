@@ -26,16 +26,23 @@
 'use strict';
 
 /**
- * Create a new target
+ * Create a new generic sprite
  *
- *
+ * @author Jean-Christophe Taveau
  */
- 
 const createSprite = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
-  
+  element.className = 'sprite';
+  element.style.display = (props.display !== "undefined" && props.display.visibility) ? "inline-block" : "none";
   // TODO
+  let img = document.createElement('img');
+  img.src = props.display.graphics.path;
+  img.src = props.display.graphics.path;
+  element.style.left = `${props.display.graphics.position[0] || 0}px`;
+  element.style.top = `${props.display.graphics.position[1] || 0}px`;
+  element.appendChild(img);
+  
   
   return element;
 };

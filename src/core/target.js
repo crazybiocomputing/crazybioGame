@@ -31,9 +31,27 @@
  *
  */
  
-const createTarget = (props) => {
+const createTarget = (node) => {
   let element = document.createElement('div');
-  element.id = props.id;
+  element.id = node.id;
+  element.className = 'target';
+  // TODO
+  if (node.display !== "undefined") {
+    if (node.display.path !== "undefined") {
+      let img = document.createElement('img');
+      img.src = node.display.graphics.path;
+      console.log(node.display.graphics.position);
+      element.appendChild(img);
+    }
+    element.style.display = (node.display.visibility) ? "inline-block" : "none";
+    // TODO need parent dimension
+    let parentWidth = node.display.parentWidth;
+    let parentHeight = node.display.parentHeight;
+    element.style.left = `${node.display.graphics.position[0]/parentWidth * 100 || 0}%`;
+    element.style.top = `${node.display.graphics.position[1]/parentHeight * 100 || 0}%`;
+    element.style.maxWidth = `${node.display.graphics.width/parentWidth * 100 || 0}%`;
+  }
+
   
   // TODO
   

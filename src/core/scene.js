@@ -34,8 +34,8 @@ const createScene = (props) => {
 
   const createCircle = (cx,cy,radius) => {
     let elementC = document.createElementNS(NS,'circle');
-    elementC.setAttributeNS(null,'cx',cx);
-    elementC.setAttributeNS(null,'cy',cy);
+    elementC.setAttributeNS(null,'cx',cx+radius);
+    elementC.setAttributeNS(null,'cy',cy+radius);
     elementC.setAttributeNS(null,'r',radius);
     elementC.setAttributeNS(null,'opacity', '0.3');
     elementC.setAttributeNS(null, 'fill', '#FFFFFF');
@@ -102,23 +102,24 @@ const createScene = (props) => {
 
     elementA.setAttributeNS(null, 'id', child.id);
     let elementC;
-    if (child.click[0] == 'C'){
-      elementC = createCircle(child.click[1],child.click[2],child.click[3]);
+    console.log(child);
+    
+    if (child.display.click[0] === 'C'){
+      elementC = createCircle(child.display.click[1],child.display.click[2],child.display.click[3]);
     }
 
-    else if (child.click[0] == 'R'){
-      elementC = createRectangle(child.click[1],child.click[2],child.click[3],child.click[4]);
+    else if (child.features.click[0] === 'R'){
+      elementC = createRectangle(child.features.click[1],child.features.click[2],child.features.click[3],child.features.click[4]);
     }
 
-    else if (child.click[0] == 'P'){
-      elementC = createPolygon(child.click[1]);
+    else if (child.features.click[0] === 'P'){
+      elementC = createPolygon(child.features.click[1]);
     }
 
     elementA.appendChild(elementC);
     elementG.appendChild(elementA);
     elementS.appendChild(elementG);
   }
-
 
   element.appendChild(elementS);
   console.log(element);

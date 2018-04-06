@@ -64,12 +64,12 @@ const createMachineDownload = (props) => {
   let array = [];
   [].push.apply(array, HTMLCollection);
   console.log(array);
-  */
+
 
   for (let item of circle) {
   item.addEventListener('click', download("assets/secret.tif"));
   }
-  
+    */
   return element;
   
 };
@@ -89,7 +89,7 @@ const createForm = (props) => {
     window.location.href = url;
   }
 
-  document.getElementById("machine").addEventListener("click",download(img.src));
+  // document.getElementById("machine").addEventListener("click",download(img.src));
 
   return element;
 };
@@ -115,9 +115,6 @@ const createFormDropDown = (props) => {
 
   return element;
 };
-
-
-
 
 
 

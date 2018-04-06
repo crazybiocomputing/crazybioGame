@@ -60,22 +60,72 @@ const newGame = (filename) => {
    * Parse storyboard and create various HTML5 Elements
    */
   const parseGraph = (storyboard) => {
-    let graph = storyboard;
-    let game = {name: 'A game'};
+  
+    // Preprocess storyboard
+    const preprocess = (storyboard) => {
+      return storyboard.map( (node, index, arr) => {
+        // Collect the clickable areas of each child
+        if (node.class === 'scene') {
+          node.childNodes = []
+          node.children.forEach( (childID) => {
+            let child = arr.filter( (n) => childID === n.id )[0];
+            // Add default properties
+            child.parent = node.id;
+            child.display = (child.display === undefined) ? {display: {visibility: false}} : child.display;
+            child.display.parentWidth = node.display.graphics.width;
+            child.display.parentHeight = node.display.graphics.height;
+            child.display.visibility = (child.display.visibility === undefined) ? true : child.display.visibility;
+            child.features = (child.features === undefined) ? [{click: ['C',0,0,-1]}] : child.features;
+            child.display.click = (child.display.click === undefined) ? ['C',0,0,-1] : child.display.click;
+            /*if (child.features !== undefined && child.features['click'] !== undefined) {
+              node.childNodes.push(child);
+            }
+            else if (child.class === 'target') {
+              // If no click features and is `target` then add rectangular area
+              // TODO
+              child.click = ['C',0,0,0];
+            }
+            */
+            node.childNodes.push(child);
+          })
+        }
+        return node;
+      });
+    };
 
-    let root = document.getElementById('game');
     
-    // First step: create all the HTML and/or SVG elements
-    graph.forEach( node => {
-      let func = creators[node.class];
-      if (func !== undefined) {
-        root.appendChild(func(node));
+    let game = {name: 'A game'};
+    game.graph = storyboard;
+
+    // Step #1- Preprocess 
+    let graph = preprocess(storyboard);
+
+    // Step #2- Create HTML5 and/or SVG Elements
+    let root = document.getElementById('game');
+    graph.filter( (node) => node.class === 'scene').forEach( scene => {
+      console.log(scene.id);
+      if (scene.id === 1) {
+        root.style.maxWidth = `${scene.display.graphics.width}px`;
       }
-      console.log(node);
+      let func = creators[scene.class];
+      if (func !== undefined) {
+        let htmlscene = func(scene);
+        root.appendChild(htmlscene);
+        scene.childNodes.forEach( (node) => {
+          console.log(node);
+          let func = creators[node.class];
+          if (func !== undefined) {
+            htmlscene.appendChild(func(node));
+          }
+        });
+// HACK        console.log(`Append child ${node.class}: ${JSON.stringify(node)}`);
+      }
     });
     
-    // Second step: Add the events to link the scene(s) to the children/object(s)
+    // Step #3: Add the events to link the scene(s) to the children/object(s)
     // TODO
+    
+    return game;
   };
   
   /*
@@ -84,8 +134,7 @@ const newGame = (filename) => {
   const getJSON = (url) => {
     return fetch(url, {
       method: 'GET',
-      headers: new Headers(),
-      responseType: 'json',
+      headers: new Headers({'Content-Type': 'application/json'}),
       mode: 'cors',
       cache: 'default' 
       }
@@ -120,6 +169,6 @@ const newGame = (filename) => {
   };
   
   // Main
-  getJSON(filename)
+  return getJSON(filename)
     .then( (data) => parseGraph(data) );
 }

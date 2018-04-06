@@ -26,27 +26,64 @@
 'use strict';
 
 /**
- * Common stuff for the engine
+ * Common code for the engine
  *
  *
  */
  
-const categories = [
-  {type: "item", code: 1},
-  {type: "machine", code: 2},
-  {type: "machine.download", code: 4},
-  {type: "machine.form", code: 8},
-  {type: "machine.lockDigit[1]", code: 16},
-  {type: "machine.lockDigit[2]", code: 32},
-  {type: "machine.lockDigit[3]", code: 64},
-  {type: "machine.lockDigit[4]", code: 128},
-  {type: "machine.lockDigit[5]", code: 256},
-  {type: "machine.lockDigit[6]", code: 512},
-  {type: "scene", code: 20},
-  {type: "sprite", code: 25},
-  {type: "target", code: 30}
-
-];
+const categories = {
+  "scene": {
+    type: "scene", 
+    code: 1
+  },
+  "item": {
+    type: "item", 
+    code: 2
+  },
+  "machine": {
+    type: "machine", 
+    code: 4
+  },
+  "machine.download": {
+    type: "machine.download", 
+    code: 8
+  },
+  "machine.lockKeypad": {
+    type: "machine.lockKeypad", 
+    code: 16
+  },
+  "machine.lockDigit[1]": {
+    type: "machine.lockDigit[1]", 
+    code: 32
+  },
+  "machine.lockDigit[2]": {
+    type: "machine.lockDigit[2]", 
+    code: 33
+  },
+  "machine.lockDigit[3]": {type: "machine.lockDigit[3]", code: 34},
+  "machine.lockDigit[4]": {type: "machine.lockDigit[4]", code: 35},
+  "machine.lockDigit[5]": {type: "machine.lockDigit[5]", code: 36},
+  "machine.lockDigit[6]": {type: "machine.lockDigit[6]", code: 37},
+  "machine.lockDigit[7]": {type: "machine.lockDigit[7]", code: 38},
+  "machine.lockDigit[8]": {type: "machine.lockDigit[8]", code: 39},
+  "machine.lockDigit[9]": {type: "machine.lockDigit[9]", code: 40},
+  "machine.lockText": {
+    type: "machine.lockText", 
+    code: 64
+  },
+  "machine.lockNumerical": {
+    type: "machine.lockNumerical", 
+    code: 128
+  },
+  "machine.form": {
+    type: "machine.form", 
+    code: 256
+  },
+  "machine.formDragDrop": {type: "machine.formDragDrop", code: 257},
+  "machine.formDropDown": {type: "machine.formDropDown", code: 258},
+  "target": {type: "target", code: 512},
+  "sprite": {type: "sprite", code: 1024}
+};
 
 
 
