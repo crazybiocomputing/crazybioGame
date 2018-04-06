@@ -28,7 +28,9 @@
         "width": 124
       }
     },
-    "new_nodes": [110]
+    "features": {
+      "onclick": { "new_nodes": [110]}
+    }
   }, 
   {
     "id": 11,
