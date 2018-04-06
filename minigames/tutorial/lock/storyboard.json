@@ -6,15 +6,18 @@
     "display": {
       "click": ["C", 140, 130, 80]
     },
-    "layout": {
-      "content": [
-        "<p>Click on the icon below to download the image... </p>", 
-        "<p>...and display it in ImageJ.</p>"
-      ], 
-      "title": "Download..."
-    }, 
+    
     "features": {
-      "file": "assets/secret.tif"
+      "file": "assets/secret.tif",
+      "onclick": {
+        "popup": {
+          "content": [
+            "<p>Click on the icon below to download the image... </p>", 
+            "<p>...and display it in ImageJ.</p>"
+          ], 
+          "title": "Download..."
+        }
+      }
     }
   }, 
   {
