@@ -35,35 +35,37 @@ const createScene = (props) => {
   const createCircle = (area) => {
     let cx = area[1];
     let cy = area[2];
-     let radius = area[3];
-    let elementC = document.createElementNS(NS,'circle');
-    elementC.setAttributeNS(null,'cx',cx+radius);
-    elementC.setAttributeNS(null,'cy',cy+radius);
-    elementC.setAttributeNS(null,'r',radius);
-    elementC.setAttributeNS(null,'opacity', '0.3');
-    elementC.setAttributeNS(null, 'fill', '#FFFFFF');
-    return elementC;
+    let radius = area[3];
+    let shape = document.createElementNS(NS,'circle');
+    shape.setAttributeNS(null,'cx',cx+radius);
+    shape.setAttributeNS(null,'cy',cy+radius);
+    shape.setAttributeNS(null,'r',radius);
+    shape.setAttributeNS(null,'opacity', '0.3');
+    shape.setAttributeNS(null, 'fill', '#FFFFFF');
+    return shape;
   }
 
   const createRectangle = (x,y,w,h) => {
-    let elementC = document.createElementNS(NS,'rect');
-    elementC.setAttributeNS(null,'x',x);
-    elementC.setAttributeNS(null,'y',y);
-    elementC.setAttributeNS(null,'w',w);
-    elementC.setAttributeNS(null,'h',h);
-    elementC.setAttributeNS(null,'opacity', '0.3');
-    elementC.setAttributeNS(null, 'fill', '#FFFFFF');
-    return elementC;
+    let shape = document.createElementNS(NS,'rect');
+    shape.setAttributeNS(null,'x',x);
+    shape.setAttributeNS(null,'y',y);
+    shape.setAttributeNS(null,'w',w);
+    shape.setAttributeNS(null,'h',h);
+    shape.setAttributeNS(null,'opacity', '0.3');
+    shape.setAttributeNS(null, 'fill', '#FFFFFF');
+    return shape;
   }
 
   const createPolygon = (path) => {
-    let elementC = document.createElementNS(NS,'polygon');
-    elementC.setAttributeNS(null,'points',path);
-    return elementC;
+    let shape = document.createElementNS(NS,'polygon');
+    shape.setAttributeNS(null,'points',path);
+    return shape;
   }
 
   const geometries = {'C': createCircle, 'R': createRectangle, 'P': createPolygon};
-  
+
+  const NS = 'http://www.w3.org/2000/svg';
+
   console.log(props);
 
   let element = document.createElement('figure');
@@ -74,22 +76,18 @@ const createScene = (props) => {
   img.src = props.display.graphics.path;
   element.appendChild(img);
   */
- 
-  const NS = 'http://www.w3.org/2000/svg';
+
   let elementS = document.createElementNS(NS,'svg');
   // TODO BUG
   elementS.setAttributeNS(null, 'viewBox',`0 0 ${props.display.graphics.width} ${props.display.graphics.height}`);
   elementS.setAttributeNS(null, 'class', 'map');
-
   elementS.setAttributeNS(null,'width','100%');
   elementS.setAttributeNS(null,'height','100%');
   elementS.setAttributeNS(null,'preserveAspectRatio','xMinYMin meet');
-  // elementS.textContent = 'class="map" version="1.1" xmlns= xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1Ratio="xMinYMin meet"';
+
   let elementI = document.createElementNS(NS,'image');
   elementI.setAttributeNS(null,'width','100%');
   elementI.setAttributeNS(null,'height','100%');
-  
-
   elementI.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', props.display.graphics.path);
   elementS.appendChild(elementI);
 
@@ -104,24 +102,13 @@ const createScene = (props) => {
 
     let elementA = document.createElementNS(NS,'a');
     elementA.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', 'javascript:void(0)');
-
     elementA.setAttributeNS(null, 'id', child.id);
-    let elementC;
+
+    let shape;
     console.log(child);
-    elementC = geometries[child.display.click[0].toUpperCase()](child.display.click);
-      
-    /*
-    if (child.display.click[0] === 'C'){
-      elementC = createCircle(child.display.click);
-    }
-    else if (child.features.click[0] === 'R'){
-      elementC = createRectangle(child.features.click[1],child.features.click[2],child.features.click[3],child.features.click[4]);
-    }
-    else if (child.features.click[0] === 'P'){
-      elementC = createPolygon(child.display.click[1,path.slice(1,path.length)]);
-    }
-*/
-    elementA.appendChild(elementC);
+    shape = geometries[child.display.click[0].toUpperCase()](child.display.click);
+
+    elementA.appendChild(shape);
     elementG.appendChild(elementA);
     elementS.appendChild(elementG);
   }
