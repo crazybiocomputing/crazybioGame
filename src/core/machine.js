@@ -117,3 +117,29 @@ const createFormDropDown = (props) => {
 };
 
 
+
+
+
+
+
+/**
+ * Create a new `lock` machine using a `Numpad` mode
+ *
+ * @author TODO
+ */
+const createLockNumpad = (props) => {
+  let element = document.createElement('div');
+
+  return element;
+};
+
+/**
+ * Create a new `lock` machine using a `??` mode
+ *
+ * @author TODO
+ */
+const createLock?? = (props) => {
+  let element = document.createElement('div');
+
+  return element;
+};
