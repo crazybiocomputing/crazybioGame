@@ -62,6 +62,8 @@ const createScene = (props) => {
     return elementC;
   }
 
+  const geometries = {'C': createCircle, 'R': createRectangle, 'P': createPolygon};
+  
   console.log(props);
 
   let element = document.createElement('figure');
