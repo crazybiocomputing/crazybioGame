@@ -29,7 +29,11 @@
       }
     },
     "features": {
+<<<<<<< HEAD
       "onclick": {"new_nodes": [110]}
+=======
+      "onclick": { "new_nodes": [110]}
+>>>>>>> 7c2a2060c95a26510cc1d38f06f94526c5006353
     }
   }, 
   {
