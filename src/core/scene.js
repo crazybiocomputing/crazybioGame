@@ -1,4 +1,4 @@
-area/*
+/*
  *  crazybioGame: CrazyBioComputing Game Engine
  *  Copyright (C) 2015-2018  Jean-Christophe Taveau.
  *
