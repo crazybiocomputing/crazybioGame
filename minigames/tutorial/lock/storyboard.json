@@ -5,8 +5,7 @@
     "id": 2, 
     "display": {
       "click": ["C", 140, 130, 80]
-    },
-    
+    }, 
     "features": {
       "file": "assets/secret.tif",
       "onclick": {
