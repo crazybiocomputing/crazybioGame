@@ -138,7 +138,7 @@ const createLockNumpad = (props) => {
  *
  * @author TODO
  */
-const createLock?? = (props) => {
+const createLock = (props) => {
   let element = document.createElement('div');
 
   return element;
