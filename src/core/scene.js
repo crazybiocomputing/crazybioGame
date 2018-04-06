@@ -55,7 +55,7 @@ const createScene = (props) => {
 
   const createPolygon = (path) => {
     let elementC = document.createElementNS(NS,'polygon');
-    elementC.setAttributeNS(null,'points',path.slice(1,path.length));
+    elementC.setAttributeNS(null,'points',path);
     return elementC;
   }
 
@@ -113,7 +113,7 @@ const createScene = (props) => {
     }
 
     else if (child.features.click[0] === 'P'){
-      elementC = createPolygon(child.features.click[1]);
+      elementC = createPolygon(child.display.click[1,path.slice(1,path.length)]);
     }
 
     elementA.appendChild(elementC);
