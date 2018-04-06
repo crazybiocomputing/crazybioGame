@@ -2,7 +2,7 @@
   {
     "id": 0, 
     "author": "Jean-Christophe Taveau", 
-    "description": "Example of user interaction"
+    "description": "Tutorial - Example of user interaction with `targets`"
   },
   {
     "id": 1, 
@@ -28,7 +28,9 @@
         "width": 124
       }
     },
-    "new_nodes": [110]
+    "features": {
+      "onclick": {"new_nodes": [110]}
+    }
   }, 
   {
     "id": 11,
@@ -40,7 +42,10 @@
         "path": "assets/button90.png",
         "width": 124
       }
-    } 
+    },
+    "features": {
+      "onclick": {"new_nodes": [111]}
+    }
   }, 
   {
     "id": 12,
@@ -52,7 +57,10 @@
         "path": "assets/button70.png",
         "width": 124
       }
-    } 
+    },
+    "features": {
+      "onclick": {"new_nodes": [112]}
+    }
   }, 
   {
     "id": 13,
@@ -64,7 +72,10 @@
         "path": "assets/button54.png",
         "width": 124
       }
-    } 
+    },
+    "features": {
+      "onclick": {"new_nodes": [113]}
+    }
   }, 
   {
     "id": 14,
@@ -76,6 +87,9 @@
         "path": "assets/button20.png",
         "width": 124
       }
+    },
+    "features": {
+      "onclick": {"new_nodes": [114]}
     }
   },
   {
