@@ -9,8 +9,8 @@
     }, 
     "features": {
       "file": "assets/secret.tif",
-      "onclick": {
-        "popup": {
+      "popup": {
+        "onclick": {
           "content": [
             "<p>Click on the icon below to download the image... </p>", 
             "<p>...and display it in ImageJ.</p>"
