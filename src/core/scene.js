@@ -71,11 +71,6 @@ const createScene = (props) => {
   let element = document.createElement('figure');
   element.id = props.id;
   element.className = 'scene';
-  /* Add background image
-  let img = document.createElement('img');
-  img.src = props.display.graphics.path;
-  element.appendChild(img);
-  */
 
   let elementS = document.createElementNS(NS,'svg');
   // TODO BUG
