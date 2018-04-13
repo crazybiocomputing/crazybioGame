@@ -35,7 +35,7 @@
 
 const createPopUp = (props) => {
   let modal = document.createElement('div');
-  modal.id = prop.id;
+  modal.id = props.id;
   modal.className = 'modal';
   //modal.setAttributeNS(null, 'id', props.id);
   //modal.setAttributeNS(null,'class','modal');
