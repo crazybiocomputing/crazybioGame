@@ -57,13 +57,17 @@ const createPopUp = (props) => {
   let modalFooter = document.createElement('div');
   modalFooter.className = 'modal-footer';
   modalContent.appendChild(modalFooter);
-
-  let span = document.createElement('span');
-  span.className = 'close';
-  //span.setAttributeNS(null, 'style', 'display : none');
-  span.innerHTML = '<i class="far fa-window-close fa-2x"></i>';
   
-  modalFooter.appendChild(span);
+  // TODO For each button, add it
+  // Example:
+  // <span class="grab"><i class="far fa-hand-paper fa-2x"></i></span>
+  // <span class="close"><i class="far fa-window-close fa-2x"></i></span>
+  let link = document.createElement('a');
+  link.className = 'close';
+  link.href = 'javascript:void()';
+  link.innerHTML = '<i class="far fa-window-close fa-2x"></i>';
+  modalFooter.appendChild(link);
+
   modal.appendChild(modalContent);
  
  let root = document.getElementById('game');

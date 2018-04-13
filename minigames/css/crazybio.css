@@ -95,8 +95,15 @@ figure .map {
   padding: 2px 16px;
   background-color: rgba(0,0,30,0.8);
   color: white;
+  text-align: right;
 }
 
+.modal-footer a {
+  margin: 0 10px;
+  text-decoration: none;
+  padding: 0;
+  color: white;
+}
 /* Modal Content */
 .modal-content {
   position: relative;
