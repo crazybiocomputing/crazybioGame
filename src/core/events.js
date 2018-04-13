@@ -34,45 +34,47 @@
  const NS = 'http://www.w3.org/2000/svg';
 
 const createPopUp = (props) => {
-  let modal = createElement('div');
-  modal.setAttributeNS(null, 'id', props.id);
-  modal.setAttributeNS(null,'class','modal');
-  modal.setAttributeNS(null,'style', 'display : block');
+  let modal = document.createElement('div');
+  modal.id = prop.id;
+  modal.className = 'modal';
+  //modal.setAttributeNS(null, 'id', props.id);
+  //modal.setAttributeNS(null,'class','modal');
+  //modal.setAttributeNS(null,'style', 'display : block');
 
-  let modalContent = createElement('div');
-  modalContent.setAttributeNS(null, 'class','modal-content');
+  let modalContent = document.createElement('div');
+  modalContent.className = 'modal-content';
+  //modalContent.setAttributeNS(null, 'class','modal-content');
 
-  let modalHeader = createElement('div');
-  modalHeader.setAttributeNS(null, 'class','modal-header');
+  let modalHeader = document.createElement('div');
+  modalHeader.className = 'modal-header';
 
-  let span = createElement('span');
-  span.setAttributeNS(null, 'class', 'close');
-  span.setAttributeNS(null, 'style', 'display : none');
+  let span = document.createElement('span');
+  span.className = 'close';
+  //span.setAttributeNS(null, 'class', 'close');
+  //span.setAttributeNS(null, 'style', 'display : none');
   span.textContent('X');
 
-  let textHeader = createElement('h2');
+  let textHeader = document.createElement('h2');
   textHeader.textContent(props.features.popup.title);
 
   modalHeader.appendChild(span);
   modalHeader.appendChild(textHeader);
   modalContent.appendChild(modalHeader);
 
-  let modalBody = createElement('div');
-  modalBody.setAttributeNS(null, 'class', 'modal-body');
+  let modalBody = document.createElement('div');
+  modalBody.className = 'modal-body';
+ 
+  //modalBody.setAttributeNS(null, 'class', 'modal-body');
   modal.textContent(props.features.popup.content);
 
   modalContent.appendchild(modalBody);
 
-  let modalFooter = createElement('div');
-  modalFooter.setAttributeNS(null, 'class', 'modal-footer');
+  let modalFooter = document.createElement('div');
+  modalFooter.className = 'modal-footer';
   modalContent.appendChild(modalFooter);
 
   modal.appendChild(modalContent);
-
-  const popup = (node) => {
-    let root = document.getElementById('modal');
-    // TODO
-
-    return root;
-  }
+ 
+ let root = document.getElementById('game');
+ modal.appendChild('root');
 }
