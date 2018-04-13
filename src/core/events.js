@@ -56,7 +56,7 @@ const createPopUp = (props) => {
 
   let modalBody = document.createElement('div');
   modalBody.className = 'modal-body';
-  modalBody.textContent = props.features.popup.content;
+  modalBody.innerHTML = props.features.popup.content;
 
   modalContent.appendChild(modalBody);
 
