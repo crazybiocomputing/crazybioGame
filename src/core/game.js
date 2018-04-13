@@ -47,7 +47,8 @@ const creators = {
   "machine.lockNumerical":  createLockNumerical,
   "scene": createScene,
   "sprite": createSprite,
-  "target": createTarget
+  "target": createTarget,
+  "event": createPopUp
 };
 
 /**
