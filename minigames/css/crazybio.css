@@ -78,6 +78,10 @@ figure .map {
   **/
 }
 
+.modal-content {
+  background-color: '#aaa';
+}
+
 .modal-header {
   position: absolute;
   background: rgba(255,220,0,1.0);
