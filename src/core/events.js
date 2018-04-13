@@ -58,7 +58,7 @@ const createPopUp = (props) => {
   modalBody.className = 'modal-body';
   modalBody.textContent = props.features.popup.content;
 
-  modalContent.appendchild(modalBody);
+  modalContent.appendChild(modalBody);
 
   let modalFooter = document.createElement('div');
   modalFooter.className = 'modal-footer';
