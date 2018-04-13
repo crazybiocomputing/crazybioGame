@@ -50,7 +50,7 @@ const createPopUp = (props) => {
   let textHeader = document.createElement('h2');
   textHeader.textContent = props.features.popup.title;
 
-  modalHeader.appendChild(span);
+ 
   modalHeader.appendChild(textHeader);
   modalContent.appendChild(modalHeader);
 
@@ -64,6 +64,7 @@ const createPopUp = (props) => {
   modalFooter.className = 'modal-footer';
   modalContent.appendChild(modalFooter);
 
+  modalFooter.appendChild(span);
   modal.appendChild(modalContent);
  
  let root = document.getElementById('game');
