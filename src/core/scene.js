@@ -97,7 +97,7 @@ const createScene = (props) => {
 
     let elementA = document.createElementNS(NS,'a');
     elementA.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', 'javascript:void(0)');
-    elementA.setAttributeNS(null, 'id',`svg_${chil.id}`);
+    elementA.setAttributeNS(null, 'id',`svg_${child.id}`);
 
     let shape;
     console.log(child);
