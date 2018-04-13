@@ -70,6 +70,11 @@ const createMachineDownload = (props) => {
   item.addEventListener('click', download("assets/secret.tif"));
   }
     */
+  
+  let ddl = document.getElementById(`svg_${child.id}`);
+  ddl.addEventListener("click", download (ddl.file));
+  
+  
   return element;
   
 };
