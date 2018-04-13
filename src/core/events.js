@@ -52,7 +52,7 @@ const createPopUp = (props) => {
 
   modalHeader.appendChild(span);
   modalHeader.appendChild(textHeader);
-  modal.appendChild(modalHeader);
+  modalContent.appendChild(modalHeader);
 
   let modalBody = document.createElement('div');
   modalBody.className = 'modal-body';
