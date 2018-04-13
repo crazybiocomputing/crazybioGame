@@ -28,34 +28,27 @@
 /**
  * Create a popup
  *
- * @author TODO
+ * @author GONCALVES FRASCO Charlotte
  */
-
- const NS = 'http://www.w3.org/2000/svg';
 
 const createPopUp = (props) => {
   let modal = document.createElement('div');
   modal.id = props.id;
   modal.className = 'modal';
-  //modal.setAttributeNS(null, 'id', props.id);
-  //modal.setAttributeNS(null,'class','modal');
-  //modal.setAttributeNS(null,'style', 'display : block');
 
   let modalContent = document.createElement('div');
   modalContent.className = 'modal-content';
-  //modalContent.setAttributeNS(null, 'class','modal-content');
 
   let modalHeader = document.createElement('div');
   modalHeader.className = 'modal-header';
 
   let span = document.createElement('span');
   span.className = 'close';
-  //span.setAttributeNS(null, 'class', 'close');
   //span.setAttributeNS(null, 'style', 'display : none');
-  span.textContent('X');
+  span.textContent = 'X';
 
   let textHeader = document.createElement('h2');
-  textHeader.textContent(props.features.popup.title);
+  textHeader.textContent = props.features.popup.title;
 
   modalHeader.appendChild(span);
   modalHeader.appendChild(textHeader);
@@ -63,9 +56,7 @@ const createPopUp = (props) => {
 
   let modalBody = document.createElement('div');
   modalBody.className = 'modal-body';
- 
-  //modalBody.setAttributeNS(null, 'class', 'modal-body');
-  modal.textContent(props.features.popup.content);
+  modalBody.textContent = props.features.popup.content;
 
   modalContent.appendchild(modalBody);
 
