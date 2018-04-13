@@ -31,9 +31,48 @@
  * @author TODO
  */
 
-const popup = (node) => {
-  let root = document.getElementById('popup');
-  // TODO
-  
-  return root;
+ const NS = 'http://www.w3.org/2000/svg';
+
+const createPopUp = (props) => {
+  let modal = createElement('div');
+  modal.setAttributeNS(null, 'id', props.id);
+  modal.setAttributeNS(null,'class','modal');
+  modal.setAttributeNS(null,'style', 'display : block');
+
+  let modalContent = createElement('div');
+  modalContent.setAttributeNS(null, 'class','modal-content');
+
+  let modalHeader = createElement('div');
+  modalHeader.setAttributeNS(null, 'class','modal-header');
+
+  let span = createElement('span');
+  span.setAttributeNS(null, 'class', 'close');
+  span.setAttributeNS(null, 'style', 'display : none');
+  span.textContent('X');
+
+  let textHeader = createElement('h2');
+  textHeader.textContent(props.features.popup.title);
+
+  modalHeader.appendChild(span);
+  modalHeader.appendChild(textHeader);
+  modalContent.appendChild(modalHeader);
+
+  let modalBody = createElement('div');
+  modalBody.setAttributeNS(null, 'class', 'modal-body');
+  modal.textContent(props.features.popup.content);
+
+  modalContent.appendchild(modalBody);
+
+  let modalFooter = createElement('div');
+  modalFooter.setAttributeNS(null, 'class', 'modal-footer');
+  modalContent.appendChild(modalFooter);
+
+  modal.appendChild(modalContent);
+
+  const popup = (node) => {
+    let root = document.getElementById('modal');
+    // TODO
+
+    return root;
+  }
 }
