@@ -71,8 +71,8 @@ const createMachineDownload = (props) => {
   }
     */
   
-  let ddl = document.getElementById(`svg_${child.id}`);
-  ddl.addEventListener("click", download (ddl.file));
+  let ddl = document.getElementById(`svg_${props.id}`);
+  ddl.addEventListener("click", createPopUp (props));
   
   
   return element;
