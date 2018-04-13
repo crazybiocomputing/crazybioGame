@@ -28,42 +28,41 @@
 /**
  * Create a popup
  *
- * @author GONCALVES FRASCO Charlotte
+ * @author Charlotte GONCALVES FRASCO 
  */
-
 const createPopUp = (props) => {
   let modal = document.createElement('div');
   modal.id = 'modal';
   modal.className = 'modal';
 
+  // modal-content
   let modalContent = document.createElement('div');
   modalContent.className = 'modal-content';
 
+  // modal-header
   let modalHeader = document.createElement('div');
   modalHeader.className = 'modal-header';
+  modalHeader.textContent = props.features.popup.title;
 
-  let span = document.createElement('span');
-  span.className = 'close';
-  //span.setAttributeNS(null, 'style', 'display : none');
-  span.textContent = 'X';
-
-  let textHeader = document.createElement('h2');
-  textHeader.textContent = props.features.popup.title;
-
- 
-  modalHeader.appendChild(textHeader);
   modalContent.appendChild(modalHeader);
 
+  // modal-body
   let modalBody = document.createElement('div');
   modalBody.className = 'modal-body';
   modalBody.innerHTML = props.features.popup.content;
 
   modalContent.appendChild(modalBody);
 
+  // modal-footer
   let modalFooter = document.createElement('div');
   modalFooter.className = 'modal-footer';
   modalContent.appendChild(modalFooter);
 
+  let span = document.createElement('span');
+  span.className = 'close';
+  //span.setAttributeNS(null, 'style', 'display : none');
+  span.innerHTML = '<i class="far fa-window-close fa-2x"></i>';
+  
   modalFooter.appendChild(span);
   modal.appendChild(modalContent);
  
