@@ -67,5 +67,5 @@ const createPopUp = (props) => {
   modal.appendChild(modalContent);
  
  let root = document.getElementById('game');
- modal.appendChild('root');
+ root.appendChild(modal);
 }
