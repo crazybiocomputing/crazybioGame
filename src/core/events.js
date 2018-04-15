@@ -64,7 +64,6 @@ const createPopUp = (props) => {
   // <span class="grab"><i class="far fa-hand-paper fa-2x"></i></span>
   // <span class="close"><i class="far fa-window-close fa-2x"></i></span>
   let link = document.createElement('a');
-  link.id = 'closeB';
   link.className = 'close';
   link.href = 'javascript:void()';
   link.innerHTML = '<i class="far fa-window-close fa-2x"></i>';
