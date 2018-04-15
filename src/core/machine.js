@@ -83,6 +83,10 @@ const createMachineDownload = (props) => {
     modalE.style.display = "block";
   }
   
+  closeB.onclick = function() {
+    modal.style.display = "none";
+}
+  
   
   return element;
   
