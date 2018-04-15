@@ -70,6 +70,7 @@ figure .map {
 
 /* Modal */
 .modal {
+  display : none;
   position: relative;
   color: black;
   top: 70px;
