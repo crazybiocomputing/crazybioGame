@@ -34,6 +34,7 @@ const createPopUp = (props) => {
   let modal = document.createElement('div');
   modal.id = 'modal';
   modal.className = 'modal';
+  modal.display = 'none';
 
   // modal-content
   let modalContent = document.createElement('div');
