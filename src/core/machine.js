@@ -76,14 +76,8 @@ const createMachineDownload = (props) => {
     }
   } 
   
-  let modalFooter = document.getElementsByClassName('modal-footer');
   
-  let dldButton = document.createElement('a');
-  dldButton.className = 'download-button';
-  dldButton.href = 'javascript:void()';
-  dldButton.innerHTML = '<i class="fas fa-download"></i>';
-  modalFooter.appendChild(dldButton);
-  
+  let dldButton = getElementsByClassName('download-button');  
   let dldImage = document.createElement('a');
   dldImage.href = (`${props.features.file}`);
   dldImage.download = 'imageName';
