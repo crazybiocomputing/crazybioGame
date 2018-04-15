@@ -71,12 +71,8 @@ const createMachineDownload = (props) => {
   }
     */
   createPopUp(props);
-  
   let modalE = document.getElementById('modal');
-  
-  let button = document.getElementById(`svg_${props.id}`);
-  //button.addEventListener("click", createPopUp (props));
-  
+  let button = document.getElementById(`svg_${props.id}`);  
   let closeB = document.getElementsByClassName('close')[0];
   
   button.onclick = function() {
@@ -85,7 +81,13 @@ const createMachineDownload = (props) => {
   
   closeB.onclick = function() {
     modal.style.display = "none";
-}
+  }
+  
+  window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+  } 
   
   
   return element;
