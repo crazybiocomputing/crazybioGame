@@ -63,11 +63,13 @@ const createPopUp = (props) => {
   // Example:
   // <span class="grab"><i class="far fa-hand-paper fa-2x"></i></span>
   
+  /*
   let dldButton = document.createElement('a');
   dldButton.className = 'download-button';
   dldButton.href = 'javascript:void()';
   dldButton.innerHTML = '<i class="fas fa-download"></i>';
   modalFooter.appendChild(dldButton);
+  */
 
   modal.appendChild(modalContent);
   
