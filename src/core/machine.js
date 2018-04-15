@@ -70,6 +70,7 @@ const createMachineDownload = (props) => {
   item.addEventListener('click', download("assets/secret.tif"));
   }
     */
+  createPopUp(props);
   
   let modalE = document.getElementById('modal');
   
