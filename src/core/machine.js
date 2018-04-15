@@ -74,7 +74,7 @@ const createMachineDownload = (props) => {
   let modalE = document.getElementById('modal');
   
   let button = document.getElementById(`svg_${props.id}`);
-  button.addEventListener("click", createPopUp (props));
+  //button.addEventListener("click", createPopUp (props));
   
   let closeB = document.getElementsByClassName('close')[0];
   
