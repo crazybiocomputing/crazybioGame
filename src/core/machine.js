@@ -51,32 +51,19 @@ const createMachineDownload = (props) => {
   element.id = props.id;
   element.className = "machDownload";
   
+  /*
   function download(url){
   window.location.href = url;
   }
+  */
 
-  //document.getElementById("circle").addEventListener("click",download("assets/secret.tif"));
-
-  let circle = document.getElementsByClassName("hover_group");
-  console.log(circle);
-
-  /**
-  let array = [];
-  [].push.apply(array, HTMLCollection);
-  console.log(array);
-
-
-  for (let item of circle) {
-  item.addEventListener('click', download("assets/secret.tif"));
-  }
-    */
   createPopUp(props);
-  let modalE = document.getElementById('modal');
+  let modal = document.getElementById('modal');
   let button = document.getElementById(`svg_${props.id}`);  
   let closeB = document.getElementsByClassName('close')[0];
   
   button.onclick = function() {
-    modalE.style.display = "block";
+    modal.style.display = "block";
   }
   
   closeB.onclick = function() {
@@ -88,6 +75,8 @@ const createMachineDownload = (props) => {
         modal.style.display = "none";
     }
   } 
+  
+  let dldButton = document.getElementsByClassName('download-button');
   
   
   return element;
