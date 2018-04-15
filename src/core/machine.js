@@ -77,7 +77,7 @@ const createMachineDownload = (props) => {
   } 
   
   
-  let dldButton = getElementsByClassName('download-button');  
+  let dldButton = document.getElementsByClassName('download-button');  
   let dldImage = document.createElement('a');
   dldImage.href = (`${props.features.file}`);
   dldImage.download = 'imageName';
