@@ -81,6 +81,7 @@ const createMachineDownload = (props) => {
   dldImage.href = (`${props.features.file}`);
   dldImage.download = 'imageName';
   
+  dldButton.appendChild(dldImage);
   
   return element;
   
