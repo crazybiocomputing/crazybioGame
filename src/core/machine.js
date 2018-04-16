@@ -28,7 +28,7 @@
   
 /**
  * Create a new generic machine
- *
+ * @author Hans SCHRIEKE and Charlotte GONCALVES FRASCO
  *
  */
 
@@ -51,11 +51,6 @@ const createMachineDownload = (props) => {
   element.id = props.id;
   element.className = "machDownload";
   
-  /*
-  function download(url){
-  window.location.href = url;
-  }
-  */
 
   createPopUp(props);
   let modal = document.getElementById('modal');
@@ -77,12 +72,15 @@ const createMachineDownload = (props) => {
   } 
   
   
-  let dldButton = document.getElementsByClassName('download-button');  
+  let dldButton = document.getElementsByClassName('download-button')[0];
+  dldButton.href = (`${props.features.file}`);
+
+  /*
   let dldImage = document.createElement('a');
   dldImage.href = (`${props.features.file}`);
   dldImage.download = 'imageName';
-  
   dldButton.appendChild(dldImage);
+  */
   
   return element;
   
