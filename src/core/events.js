@@ -66,7 +66,7 @@ const createPopUp = (props) => {
   
   let dldButton = document.createElement('a');
   dldButton.className = 'download-button';
-  dldButton.href = 'javascript:void()';
+  dldButton.href = 'javascript:void(0)';
   dldButton.innerHTML = '<i class="fas fa-download"></i>';
   modalFooter.appendChild(dldButton);
   
@@ -75,7 +75,7 @@ const createPopUp = (props) => {
   
   let link = document.createElement('a');
   link.className = 'close';
-  link.href = 'javascript:void()';
+  link.href = 'javascript:void(0)';
   link.innerHTML = '<i class="far fa-window-close fa-2x"></i>';
   modalFooter.appendChild(link);
   
