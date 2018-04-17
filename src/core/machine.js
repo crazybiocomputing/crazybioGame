@@ -28,7 +28,7 @@
   
 /**
  * Create a new generic machine
- * @author Hans SCHRIEKE and Charlotte GONCALVES FRASCO
+ * @author Hans SCHRIEKE
  *
  */
 
@@ -42,7 +42,7 @@ const createMachine = (props) => {
 
 /**
  * Create a new `download` machine
- *
+ * @author Hans SCHRIEKE and Charlotte GONCALVES FRASCO
  *
  */
 
