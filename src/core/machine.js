@@ -51,7 +51,6 @@ const createMachineDownload = (props) => {
   element.id = props.id;
   element.className = "machDownload";
   
-
   createPopUp(props);
   let modal = document.getElementById('modal');
   let button = document.getElementById(`svg_${props.id}`);  
@@ -71,16 +70,8 @@ const createMachineDownload = (props) => {
     }
   } 
   
-  
   let dldButton = document.getElementsByClassName('download-button')[0];
   dldButton.href = (`${props.features.file}`);
-
-  /*
-  let dldImage = document.createElement('a');
-  dldImage.href = (`${props.features.file}`);
-  dldImage.download = 'imageName';
-  dldButton.appendChild(dldImage);
-  */
   
   return element;
   
