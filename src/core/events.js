@@ -67,7 +67,7 @@ const createPopUp = (props) => {
   let dldButton = document.createElement('a');
   dldButton.className = 'download-button';
   dldButton.href = 'javascript:void(0)';
-  dldButton.innerHTML = '<i class="fas fa-download"></i>';
+  dldButton.innerHTML = '<i class="fas fa-download fa-2x"></i>';
   modalFooter.appendChild(dldButton);
   
 
