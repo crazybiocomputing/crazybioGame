@@ -63,12 +63,13 @@ const createPopUp = (props) => {
   // Example:
   // <span class="grab"><i class="far fa-hand-paper fa-2x"></i></span>
   
-  
-  let dldButton = document.createElement('a');
-  dldButton.className = 'download-button';
-  dldButton.href = 'javascript:void(0)';
-  dldButton.innerHTML = '<i class="fas fa-download fa-2x"></i>';
-  modalFooter.appendChild(dldButton);
+  if (props.class === "machine.download"){
+    let dldButton = document.createElement('a');
+    dldButton.className = 'download-button';
+    dldButton.href = 'javascript:void(0)';
+    dldButton.innerHTML = '<i class="fas fa-download fa-2x"></i>';
+    modalFooter.appendChild(dldButton);
+  }
   
 
   modal.appendChild(modalContent);
