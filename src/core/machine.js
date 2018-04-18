@@ -28,7 +28,7 @@
   
 /**
  * Create a new generic machine
- *
+ * @author Hans SCHRIEKE
  *
  */
 
@@ -42,7 +42,7 @@ const createMachine = (props) => {
 
 /**
  * Create a new `download` machine
- *
+ * @author Hans SCHRIEKE and Charlotte GONCALVES FRASCO
  *
  */
 
@@ -51,29 +51,27 @@ const createMachineDownload = (props) => {
   element.id = props.id;
   element.className = "machDownload";
   
-  function download(url){
-  window.location.href = url;
-  }
-
-  //document.getElementById("circle").addEventListener("click",download("assets/secret.tif"));
-
-  let circle = document.getElementsByClassName("hover_group");
-  console.log(circle);
-
-  /**
-  let array = [];
-  [].push.apply(array, HTMLCollection);
-  console.log(array);
-
-
-  for (let item of circle) {
-  item.addEventListener('click', download("assets/secret.tif"));
-  }
-    */
+  createPopUp(props);
+  let modal = document.getElementById('modal');
+  let button = document.getElementById(`svg_${props.id}`);  
+  let closeB = document.getElementsByClassName('close')[0];
   
-  let ddl = document.getElementById(`svg_${props.id}`);
-  ddl.addEventListener("click", createPopUp (props));
+  button.onclick = function() {
+    modal.style.display = "block";
+  }
   
+  closeB.onclick = function() {
+    modal.style.display = "none";
+  }
+  
+  window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+  } 
+  
+  let dldButton = document.getElementsByClassName('download-button')[0];
+  dldButton.href = (`${props.features.file}`);
   
   return element;
   

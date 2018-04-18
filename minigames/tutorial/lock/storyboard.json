@@ -11,8 +11,7 @@
       "popup": {
         "event": "onclick",
         "content": [
-          "<p>Click on the icon below to download the image... </p>", 
-          "<p>...and display it in ImageJ.</p>"
+          "<p>Click on the icon below to download the image... <br /> ...and display it in ImageJ.</p>"
         ], 
         "title": "Download..."
       }

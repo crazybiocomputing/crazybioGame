@@ -34,6 +34,7 @@ const createPopUp = (props) => {
   let modal = document.createElement('div');
   modal.id = 'modal';
   modal.className = 'modal';
+  //modal.style.display = "none";
 
   // modal-content
   let modalContent = document.createElement('div');
@@ -61,14 +62,25 @@ const createPopUp = (props) => {
   // TODO For each button, add it
   // Example:
   // <span class="grab"><i class="far fa-hand-paper fa-2x"></i></span>
-  // <span class="close"><i class="far fa-window-close fa-2x"></i></span>
-  let link = document.createElement('a');
-  link.className = 'close';
-  link.href = 'javascript:void()';
-  link.innerHTML = '<i class="far fa-window-close fa-2x"></i>';
-  modalFooter.appendChild(link);
+  
+  if (props.class === "machine.download"){
+    let dldButton = document.createElement('a');
+    dldButton.className = 'download-button';
+    dldButton.href = 'javascript:void(0)';
+    dldButton.innerHTML = '<i class="fas fa-download fa-2x"></i>';
+    modalFooter.appendChild(dldButton);
+  }
+  
 
   modal.appendChild(modalContent);
+  
+  let link = document.createElement('a');
+  link.className = 'close';
+  link.href = 'javascript:void(0)';
+  link.innerHTML = '<i class="far fa-window-close fa-2x"></i>';
+  modalFooter.appendChild(link);
+  
+
  
  let root = document.getElementById('game');
  root.appendChild(modal);
