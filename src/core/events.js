@@ -59,7 +59,7 @@ const createPopUp = (props) => {
   modalFooter.className = 'modal-footer';
   modalContent.appendChild(modalFooter);
   
-  // TODO For each button, add it
+  // TODO For each button, add it :
   // Example:
   // <span class="grab"><i class="far fa-hand-paper fa-2x"></i></span>
   
