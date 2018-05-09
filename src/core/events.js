@@ -30,9 +30,9 @@
  *
  * @author Charlotte GONCALVES FRASCO 
  */
-const createPopUp = (props) => {
+const createPopUp = (props,name) => {
   let modal = document.createElement('div');
-  modal.id = 'modal';
+  modal.id = name;
   modal.className = 'modal';
   //modal.style.display = "none";
 
