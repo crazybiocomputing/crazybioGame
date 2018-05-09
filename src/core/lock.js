@@ -41,6 +41,7 @@ const createLockText = (props) => {
 
 /**
  * Lock displayed as a Numerical Field
+  * @author SCHRIEKE Hans
  */
 const createLockNumerical = (props) => {
   let element = document.createElement('div');
