@@ -51,10 +51,10 @@ const createMachineDownload = (props) => {
   element.id = props.id;
   element.className = "machDownload";
   
-  createPopUp(props);
-  let modal = document.getElementById('modal');
-  let button = document.getElementById(`svg_${props.id}`);  
-  let closeB = document.getElementsByClassName('close')[0];
+  createPopUp(props,"ddl");
+  let modal = document.getElementById("ddl");
+  let button = document.getElementById(`svg_${props.id}`);
+  let closeB = document.getElementsByClassName('close'+"ddl")[0];
   
   button.onclick = function() {
     modal.style.display = "block";
