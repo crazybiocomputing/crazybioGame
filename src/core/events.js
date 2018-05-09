@@ -71,6 +71,17 @@ const createPopUp = (props) => {
     modalFooter.appendChild(dldButton);
   }
   
+   if (props.class === "machine.lockNumerical"){
+    let imglockNum = document.createElement('img');
+    imglockNum.className = 'lock-image';
+    imglockNum.src =  props.features.file;
+    modalBody.appendChild(imglockNum);
+    let lockNum = document.createElement('a');
+    lockNum.className = 'lockNum-button';
+    lockNum.href = 'javascript:void(0)';
+    lockNum.innerHTML = '<i class="fas fa-unlock-alt"></i>';
+    modalFooter.appendChild(lockNum);
+   }
 
   modal.appendChild(modalContent);
   
