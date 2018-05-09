@@ -41,14 +41,34 @@ const createLockText = (props) => {
 
 /**
  * Lock displayed as a Numerical Field
+  * @author SCHRIEKE Hans
  */
 const createLockNumerical = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
   element.className = "lockNumerical";
   
-  // TODO
-  
+  createPopUp(props,"lockNum");
+  let modal = document.getElementById('lockNum');
+  let button = document.getElementById(`svg_${props.id}`);
+  let closeB = document.getElementsByClassName('close'+"lockNum")[0];
+
+  button.onclick = function() {
+    modal.style.display = "block";
+
+  }
+  closeB.onclick = function() {
+    modal.style.display = "none";
+  }
+  window.onclick = function(event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+  }
+
+  let lockNum = document.getElementsByClassName('lockNum-button')[0];
+  //lockNum.href = (`${props.features.file}`);
+
   return element;
 };
 

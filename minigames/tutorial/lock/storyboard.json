@@ -38,6 +38,7 @@
       "click": ["C", 500, 130, 80]
     }, 
     "features": {
+      "file" : "assets/metal_machinedigit.png",
       "popup": {
         "event": "onclick",
         "content": [

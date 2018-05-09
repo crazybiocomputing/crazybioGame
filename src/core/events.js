@@ -30,9 +30,9 @@
  *
  * @author Charlotte GONCALVES FRASCO 
  */
-const createPopUp = (props) => {
+const createPopUp = (props,name) => {
   let modal = document.createElement('div');
-  modal.id = 'modal';
+  modal.id = name;
   modal.className = 'modal';
   //modal.style.display = "none";
 
@@ -59,7 +59,7 @@ const createPopUp = (props) => {
   modalFooter.className = 'modal-footer';
   modalContent.appendChild(modalFooter);
   
-  // TODO For each button, add it
+  // TODO For each button, add it :
   // Example:
   // <span class="grab"><i class="far fa-hand-paper fa-2x"></i></span>
   
@@ -71,11 +71,22 @@ const createPopUp = (props) => {
     modalFooter.appendChild(dldButton);
   }
   
+   if (props.class === "machine.lockNumerical"){
+    let imglockNum = document.createElement('img');
+    imglockNum.className = 'lock-image';
+    imglockNum.src =  props.features.file;
+    modalBody.appendChild(imglockNum);
+    let lockNum = document.createElement('a');
+    lockNum.className = 'lockNum-button';
+    lockNum.href = 'javascript:void(0)';
+    lockNum.innerHTML = '<i class="fas fa-unlock-alt"></i>';
+    modalFooter.appendChild(lockNum);
+   }
 
   modal.appendChild(modalContent);
   
   let link = document.createElement('a');
-  link.className = 'close';
+  link.className = 'close'+ name;
   link.href = 'javascript:void(0)';
   link.innerHTML = '<i class="far fa-window-close fa-2x"></i>';
   modalFooter.appendChild(link);
