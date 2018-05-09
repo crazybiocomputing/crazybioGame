@@ -86,7 +86,7 @@ const createPopUp = (props,name) => {
   modal.appendChild(modalContent);
   
   let link = document.createElement('a');
-  link.className = 'close';
+  link.className = 'close'+ name;
   link.href = 'javascript:void(0)';
   link.innerHTML = '<i class="far fa-window-close fa-2x"></i>';
   modalFooter.appendChild(link);
