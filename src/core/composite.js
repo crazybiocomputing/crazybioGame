@@ -26,10 +26,37 @@
 'use strict';
 
 /**
+ * Create a new scene
+ *
+ * @author Jean-Christophe Taveau
+ */
+class Composite {
+
+  static create(props) {
+    return Node.create(props.id,props.class,props.description)
+      .append('div')
+      .display(props.display)
+      .children(props.childNodes) // Pre-calculated in `preprocess` of game.js
+      .forEachChild(this.appendChild);
+  }
+  
+
+  appendChild(child) {
+    console.log(child);
+    if (func !== undefined) {
+      this.element.appendChild(child);
+      if (child.class === 'composite' || child.class === 'scene' || child.class === 'scene.closeup') {
+        child.forEachChild(child.appendChild);
+      }
+    }
+  }
+}
+
+/**
  * Create a new target
  *
  *
- */
+
  
 const createTarget = (node) => {
   let element = document.createElement('div');
@@ -57,3 +84,4 @@ const createTarget = (node) => {
   
   return element;
 };
+ */
