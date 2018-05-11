@@ -87,14 +87,28 @@ const createLockDigit = (nDigits) => (props) => {
 
 /**
  * Lock displayed as a keypad
+ * @author P. Wintringer
  */
 const createLockKeypad = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
   element.className = "lockKeypad";
-  
-  // TODO
-  
+  //let evt = document.createEvent("MouseEvents");
+  //evt.initMouseEvent("click");
+  let form = document.createElement('form');
+  let table = document.createElement('table');
+  let button1 = ;
+  let button2 = ;
+  let button3 = ;
+  let button4 = ;
+  let button5 = ;
+  let button6 = ;
+  let button7 = ;
+  let button8 = ;
+  let button9 = ;
+  let buttonC = ;
+  let button0 = ;
+  let buttonV = ;
   return element;
 };
 
