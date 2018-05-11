@@ -25,7 +25,7 @@
 
 'use strict';
 
-  
+
 /**
  * Create a new generic machine
  * @author Hans SCHRIEKE
@@ -36,7 +36,7 @@ const createMachine = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
   element.className = "machine";
-  
+
   return element;
 };
 
@@ -50,31 +50,31 @@ const createMachineDownload = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
   element.className = "machDownload";
-  
+
   createPopUp(props,"ddl");
   let modal = document.getElementById("ddl");
   let button = document.getElementById(`svg_${props.id}`);
   let closeB = document.getElementsByClassName('close'+"ddl")[0];
-  
+
   button.onclick = function() {
     modal.style.display = "block";
   }
-  
+
   closeB.onclick = function() {
     modal.style.display = "none";
   }
-  
+
   window.onclick = function(event) {
-    if (event.target === modal) {
+    if (event.target == modal) {
         modal.style.display = "none";
     }
-  } 
-  
+  }
+
   let dldButton = document.getElementsByClassName('download-button')[0];
   dldButton.href = (`${props.features.file}`);
-  
+
   return element;
-  
+
 };
 
 
@@ -87,7 +87,7 @@ const createForm = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
   element.className = "form";
-  
+
   function download(url){
     window.location.href = url;
   }
@@ -114,6 +114,31 @@ const createFormDragDrop = (props) => {
  * @author TODO
  */
 const createFormDropDown = (props) => {
+  let element = document.createElement('div');
+
+  return element;
+};
+
+
+
+
+/**
+ * Create a new `lock` machine using a `Numpad` mode
+ *
+ * @author TODO
+ */
+const createLockNumpad = (props) => {
+  let element = document.createElement('div');
+
+  return element;
+};
+
+/**
+ * Create a new `lock` machine using a `??` mode
+ *
+ * @author TODO
+ */
+const createLock = (props) => {
   let element = document.createElement('div');
 
   return element;
