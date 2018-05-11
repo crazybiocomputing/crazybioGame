@@ -117,3 +117,91 @@ const createLockKeypad = (props) => {
 
   return element;
 };
+
+/**
+ * Lock displayed as a keypad
+ * @author P. Wintringer
+ */
+const createLockKeypad = (props) => {
+  let form = document.createElement('form');
+  let element = document.createElement('div');
+  element.id = props.id;
+  element.className = "lockKeypad";
+  //let evt = document.createEvent("MouseEvents");
+  //evt.initMouseEvent("click");
+  let text = document.getElementById("textfield");
+  let table = document.createElement('table');
+  let button1 = document.createElement('input')
+  button1.setAttribute('type','button');
+  button1.setAttribute('value',1);
+  button1.onClick = AddValueToTextField(value);
+  table.appendChild(button1);
+  let button2 = document.createElement('input');
+  button2.setAttribute('type','button');
+  button2.setAttribute('value',2);
+  button2.onClick = AddValueToTextField(value);
+  table.appendChild(button2);
+  let button3 = document.createElement('input');
+  button3.setAttribute('type','button');
+  button3.setAttribute('value',3);
+  button3.onClick = AddValueToTextField(value);
+  table.appendChild(button3);
+  let button4 = document.createElement('input');
+  button4.setAttribute('type','button');
+  button4.setAttribute('value',4);
+  button4.onClick = AddValueToTextField(value);
+  table.appendChild(button4);
+  let button5 = document.createElement('input');
+  button5.setAttribute('type','button');
+  button5.setAttribute('value',5);
+  button5.onClick = AddValueToTextField(value);
+  table.appendChild(button5);
+  let button6 = document.createElement('input');
+  button6.setAttribute('type','button');
+  button6.setAttribute('value',6);
+  button6.onClick = AddValueToTextField(value);
+  table.appendChild(button6);
+  let button7 = document.createElement('input');
+  button7.setAttribute('type','button');
+  button7.setAttribute('value',7);
+  button7.onClick = AddValueToTextField(value);
+  table.appendChild(button7);
+  let button8 = document.createElement('input');
+  button8.setAttribute('type','button');
+  button8.setAttribute('value',8);
+  button8.onClick = AddValueToTextField(value);
+  table.appendChild(button8);
+  let button9 = document.createElement('input');
+  button9.setAttribute('type','button');
+  button9.setAttribute('value',9);
+  button9.onClick = AddValueToTextField(value);
+  table.appendChild(button9);
+  let buttonC = document.createElement('input');
+  buttonC.setAttribute('type','button');
+  buttonC.setAttribute('value','C');
+  buttonC.onClick = SupprValueInTextField();
+  table.appendChild(buttonC);
+  let button0 = document.createElement('input');
+  button0.setAttribute('type','button');
+  button0.setAttribute('value', 0);
+  button0.onClick = AddValueToTextField(value);
+  table.appendChild(button0);
+  let buttonV = document.createElement('input');
+  buttonV.setAttribute('type','button');
+  buttonV.setAttribute('value','V');
+  buttonV.onClick = Submit();
+  table.appendChild(buttonV);
+
+  function AddValueToTextField(val)
+    {document.getElementByID(text).value += val;}
+
+  function SupprValueInTextField()
+    {document.getElementByID(text).value -= 1;}
+
+  function SupprValueInTextField()
+    {;}
+
+  return element;
+};
+
+
