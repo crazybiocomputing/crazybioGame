@@ -175,7 +175,7 @@ const createLockNumpad = (props) => {
   function SupprValueInTextField()
     {document.getElementByID(text).value -= 1;}
 
-  function SupprValueInTextField()
+  function Submit()
     {;}
   
   return element;
