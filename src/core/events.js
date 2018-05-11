@@ -104,7 +104,7 @@ const createPopUp = (props,name) => {
 
     // setup the holder
     let holder = "";
-    let answer = `${props.features.exit}`;
+    let answer = `${props.exit}`;
     if (isNaN(answer) === true){
       holder = 'Saisir des chiffres';
     }
