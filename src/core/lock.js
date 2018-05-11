@@ -121,7 +121,7 @@ const createLockKeypad = (props) => {
 /**
  * Lock displayed as a keypad
  * @author P. Wintringer
- */
+ *
 const createLockKeypad = (props) => {
   let form = document.createElement('form');
   let element = document.createElement('div');
@@ -204,4 +204,5 @@ const createLockKeypad = (props) => {
   return element;
 };
 
+*/
 
