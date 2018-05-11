@@ -28,9 +28,13 @@
 /**
  * Create a popup
  *
- * @author Charlotte GONCALVES FRASCO 
+ * @author Charlotte GONCALVES FRASCO and Hans SCHRIEKE
  */
+
+
 const createPopUp = (props,name) => {
+
+
   let modal = document.createElement('div');
   modal.id = name;
   modal.className = 'modal';
@@ -58,11 +62,11 @@ const createPopUp = (props,name) => {
   let modalFooter = document.createElement('div');
   modalFooter.className = 'modal-footer';
   modalContent.appendChild(modalFooter);
-  
+
   // TODO For each button, add it :
   // Example:
   // <span class="grab"><i class="far fa-hand-paper fa-2x"></i></span>
-  
+
   if (props.class === "machine.download"){
     let dldButton = document.createElement('a');
     dldButton.className = 'download-button';
@@ -70,8 +74,9 @@ const createPopUp = (props,name) => {
     dldButton.innerHTML = '<i class="fas fa-download fa-2x"></i>';
     modalFooter.appendChild(dldButton);
   }
-  
-   if (props.class === "machine.lockNumerical"){
+
+
+  else if (props.class === "machine.lockNumerical"){
     let imglockNum = document.createElement('img');
     imglockNum.className = 'lock-image';
     imglockNum.src =  props.features.file;
@@ -81,18 +86,69 @@ const createPopUp = (props,name) => {
     lockNum.href = 'javascript:void(0)';
     lockNum.innerHTML = '<i class="fas fa-unlock-alt"></i>';
     modalFooter.appendChild(lockNum);
-   }
+
+  }
+
+  else if (props.class === "machine.lockText"){
+    // create the input
+    let form = document.createElement('form');
+    let submit = document.createElement('submit');
+    let div = document.createElement('div');
+    let input = document.createElement('input');
+    input.id = 'lock-input';
+    input.type = 'text';
+
+    div.appendChild(input);
+    div.appendChild(submit);
+    form.appendChild(div);
+
+    // setup the holder
+    let holder = "";
+    let answer = `${props.features.exit}`;
+    if (Number.isNaN(answer) === false){
+      holder = 'Saisis des chiffres';
+    }
+    else {
+      holder = 'Saisis des lettres';
+    }
+    input.placeholder = holder;
+
+    let submitbutton = document.createElement('button');
+    submitbutton.id = 'button';
+    submitbutton.textContent = "OK";
+    submitbutton.type = "submit";
+
+    submitbutton.onclick = function(){
+      let val = document.getElementById('lock-input').value;
+      if (val === `${props.exit}`){
+        alert(`${props.message}`);
+      }
+      else {
+        alert("Try again");
+      }
+    }
+
+    modalBody.appendChild(form);
+    submit.appendChild(submitbutton);
+
+    let lockText = document.createElement('a');
+    lockText.className = 'lockText-button';
+    lockText.href = 'javascript:void(0)';
+    modalFooter.appendChild(lockText);
+
+
+}
 
   modal.appendChild(modalContent);
-  
+
   let link = document.createElement('a');
   link.className = 'close'+ name;
   link.href = 'javascript:void(0)';
   link.innerHTML = '<i class="far fa-window-close fa-2x"></i>';
   modalFooter.appendChild(link);
-  
 
- 
+
+
  let root = document.getElementById('game');
  root.appendChild(modal);
 }
