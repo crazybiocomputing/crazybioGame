@@ -84,6 +84,9 @@ const createMachineDownload = (props) => {
  * @author P. Wintringer
  *
 const createForm = (props) => {
+  let element = document.createElement('div');
+  element.id = props.id;
+  element.className = "formgapfill";
   let myForm = document.createElement('form');
   myForm.method = "post";
   myForm.onsubmit = return validateForm();
@@ -91,9 +94,6 @@ const createForm = (props) => {
   field.setAttribute('type',"text");
   let buttonS = document.createElement('input');
   buttonS.setAttribute('type',"submit");
-  let element = document.createElement('div');
-  element.id = props.id;
-  element.className = "form";
   
 function validateForm() {
     let var x = document.forms["myForm"].value;
@@ -120,6 +120,8 @@ function validateForm() {
  *
 const createFormDragDrop = (props) => {
   let element = document.createElement('div');
+  element.id = props.id;
+  element.className = "formDnd";
   
   let tile = document.getElementByClassName('sprite'); // sprite as tiles
   let dropfield = document.createElement('div'); // tiles can only be dropped in fields
@@ -165,6 +167,8 @@ const createFormDragDrop = (props) => {
  */
 const createFormDropDown = (props) => {
   let element = document.createElement('div');
+  element.id = props.id;
+  element.className = "formDropdown";
 
   return element;
 };
