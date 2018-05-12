@@ -163,12 +163,40 @@ const createFormDragDrop = (props) => {
 /**
  * Create a new `form` machine using a `Drop-down` mode
  *
- * @author TODO
- */
+ * @author P. Wintringer
+ *
 const createFormDropDown = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
   element.className = "formDropdown";
+  let dropdown = element.createElement('button'); //creation of the drop down menu
+  dropdown.id = ddm;
+  dropdown.className = dropbtn;
+  dropdown.onClick = unroll();
+  
+  let content = element.createElement('div');
+  content.className = ddmcontent;
+  //add line to fetch content of ddm
+  content.display = block; //hidden unless clicked
+  
+  function unroll(){
+    document.getElementById("ddm").classList.toggle("show");
+  }
+  
+  window.onclick = function(event) { //
+  if (!event.target.matches('.dropbtn')) {
+    let dropdowns = document.getElementsByClassName("ddmcontent");
+    let i;
+    for (i = 0; i < dropdowns.length; i++) {
+      let openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
 
   return element;
 };
+
+*/
