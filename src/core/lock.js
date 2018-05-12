@@ -120,7 +120,7 @@ const createLockKeypad = (props) => {
 };
 
 /**
- * Lock displayed as a keypad
+ * Lock displayed as a numpad
  * @author P. Wintringer
  *
 
