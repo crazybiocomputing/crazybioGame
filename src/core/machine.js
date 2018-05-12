@@ -81,21 +81,37 @@ const createMachineDownload = (props) => {
 /**
  * Create a new `form` machine using a `GapFill` mode
  *
- * @author TODO
- */
+ * @author P. Wintringer
+ *
 const createForm = (props) => {
+  let myForm = document.createElement('form');
+  myForm.method = "post";
+  myForm.onsubmit = return validateForm();
+  let field = document.createElement('input');
+  field.setAttribute('type',"text");
+  let buttonS = document.createElement('input');
+  buttonS.setAttribute('type',"submit");
   let element = document.createElement('div');
   element.id = props.id;
   element.className = "form";
+  
+function validateForm() {
+    let var x = document.forms["myForm"].value;
+    if (x == "") {
+        alert("All fields must be input.");
+        return false;
+    }
+ }
 
-  function download(url){
-    window.location.href = url;
-  }
-
-  // document.getElementById("machine").addEventListener("click",download(img.src));
+  //function download(url){
+  //  window.location.href = url;
+  //}
+  //document.getElementById("machine").addEventListener("click",download(img.src));
 
   return element;
 };
+
+*/
 
 /**
  * Create a new `form` machine using a `Drag and Drop` mode
@@ -114,31 +130,6 @@ const createFormDragDrop = (props) => {
  * @author TODO
  */
 const createFormDropDown = (props) => {
-  let element = document.createElement('div');
-
-  return element;
-};
-
-
-
-
-/**
- * Create a new `lock` machine using a `Numpad` mode
- *
- * @author TODO
- */
-const createLockNumpad = (props) => {
-  let element = document.createElement('div');
-
-  return element;
-};
-
-/**
- * Create a new `lock` machine using a `??` mode
- *
- * @author TODO
- */
-const createLock = (props) => {
   let element = document.createElement('div');
 
   return element;
