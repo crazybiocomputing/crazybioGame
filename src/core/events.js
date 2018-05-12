@@ -106,10 +106,10 @@ const createPopUp = (props,name) => {
     let holder = "";
     let answer = `${props.exit}`;
     if (!isNaN(answer) === true){
-      holder = 'Saisir des chiffres';
+      holder = 'Input numbers';
     }
     else {
-      holder = 'Saisir des lettres';
+      holder = 'Input letters';
     }
     input.placeholder = holder;
 
