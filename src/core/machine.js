@@ -116,13 +116,47 @@ function validateForm() {
 /**
  * Create a new `form` machine using a `Drag and Drop` mode
  *
- * @author TODO
- */
+ * @author P.Wintringer
+ *
 const createFormDragDrop = (props) => {
   let element = document.createElement('div');
-
+  
+  let tile = document.getElementByClassName('sprite'); // sprite as tiles
+  let dropfield = document.createElement('div'); // tiles can only be dropped in fields
+  dropfield.setAttribute('class','field');
+  tile.setAttribute('draggable', true);
+  tile.addEventListener('dragstart',drag_start);
+  tile.addEventListener('dragend',drag_end);
+  let const fields = document.getElementByClassName('field');
+  for (let const fieldelem of fields){
+    field.addEventListener('dragover',drag_over);
+    field.addEventListener('drop',drop);
+  }
+  
+  function drag_start(){
+    this.className += " held";
+    setTimeout(()=>this.className="invisible", 0);
+  }
+  
+  function drag_end() {
+    this.className -= " held";
+    //this.className = 'sprite'; //if line above doesn't work
+  }
+  
+  function drop(){
+    this.className = "field"
+    this.append(tile);
+  }
+  
+  function drag_over(event) {
+    event.preventDefault();
+    return false;
+  } 
+  
   return element;
 };
+
+*/
 
 /**
  * Create a new `form` machine using a `Drop-down` mode
