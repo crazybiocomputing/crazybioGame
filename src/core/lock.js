@@ -30,6 +30,7 @@
  * Lock displayed as a Text Field
  * @author Hans SCHRIEKE
  */
+
 const createLockText = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
@@ -59,8 +60,8 @@ const createLockText = (props) => {
 
 /**
  * Lock displayed as a Numerical Field
+ * @author 
  */
-
 
 const createLockNumerical = (props) => {
   let element = document.createElement('div');
@@ -121,12 +122,13 @@ const createLockKeypad = (props) => {
 /**
  * Lock displayed as a keypad
  * @author P. Wintringer
- *
-const createLockKeypad = (props) => {
+ */
+
+const createLockNumpad = (props) => {
   let form = document.createElement('form');
   let element = document.createElement('div');
   element.id = props.id;
-  element.className = "lockKeypad";
+  element.className = "lockNumpad";
   //let evt = document.createEvent("MouseEvents");
   //evt.initMouseEvent("click");
   let text = document.getElementById("textfield");
@@ -187,9 +189,8 @@ const createLockKeypad = (props) => {
   button0.onClick = AddValueToTextField(value);
   table.appendChild(button0);
   let buttonV = document.createElement('input');
-  buttonV.setAttribute('type','button');
   buttonV.setAttribute('value','V');
-  buttonV.onClick = Submit();
+  buttonV.type = "submit";
   table.appendChild(buttonV);
 
   function AddValueToTextField(val)
@@ -198,11 +199,6 @@ const createLockKeypad = (props) => {
   function SupprValueInTextField()
     {document.getElementByID(text).value -= 1;}
 
-  function SupprValueInTextField()
-    {;}
-
   return element;
 };
-
-*/
 
