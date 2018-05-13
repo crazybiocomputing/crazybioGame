@@ -89,6 +89,19 @@ const createForm = (props) => {
   element.className = "formgapfill";
   
   createPopUp(props,"gapfill");
+  let modal = document.getElementById("gapfill");
+  let closeB = document.getElementsByClassName('close'+"gapfill")[0];
+  button.onclick = function() {
+    modal.style.display = "block";
+  }
+  closeB.onclick = function() {
+    modal.style.display = "none";
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+  }
   
   /*let myForm = document.createElement('form');
   myForm.method = "post";
@@ -126,6 +139,19 @@ const createFormDragDrop = (props) => {
   element.className = "formDnd";
   
   createPopUp(props,"fdnd");
+  let modal = document.getElementById("gapfill");
+  let closeB = document.getElementsByClassName('close'+"gapfill")[0];
+  button.onclick = function() {
+    modal.style.display = "block";
+  }
+  closeB.onclick = function() {
+    modal.style.display = "none";
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+  }
   
   /*let tile = document.getElementByClassName('sprite'); // sprite as tiles
   let dropfield = document.createElement('div'); // tiles can only be dropped in fields
@@ -174,6 +200,19 @@ const createFormDropDown = (props) => {
   element.className = "formDropdown";
   
   createPopUp(props,"dropdown");
+  let modal = document.getElementById("gapfill");
+  let closeB = document.getElementsByClassName('close'+"gapfill")[0];
+  button.onclick = function() {
+    modal.style.display = "block";
+  }
+  closeB.onclick = function() {
+    modal.style.display = "none";
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+  }
   
   /*let dropdown = element.createElement('button'); //creation of the drop down menu
   dropdown.id = ddm;
