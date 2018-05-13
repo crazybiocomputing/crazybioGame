@@ -23,7 +23,7 @@
       "popup": {
         "event": "onclick",
         "content": [
-          "<p>What do I put here ?</p>"
+          "<p>Bla blablah blah</p> <p id = f1></p> <p>bla blah</p> <p id = f2></p> <p></p>"
         ],
         "title": "GapFill Form Machine"
       }
