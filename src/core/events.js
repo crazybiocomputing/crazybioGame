@@ -77,6 +77,7 @@ const createPopUp = (props,name) => {
   
   else if (props.class === "machine.form"){
     //to debug
+    /*
     let myForm = document.createElement('form');
     myForm.onsubmit = validateForm();
     myForm.method = "post";
@@ -113,6 +114,7 @@ const createPopUp = (props,name) => {
     }
 
     modalBody.appendChild(myForm);
+    */
   }
   
   else if (props.class === "machine.formDragDrop"){
