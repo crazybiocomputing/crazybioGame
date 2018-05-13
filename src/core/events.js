@@ -28,7 +28,7 @@
 /**
  * Create a popup
  *
- * @author Charlotte GONCALVES FRASCO and Hans SCHRIEKE
+ * @author Charlotte GONCALVES FRASCO and Hans SCHRIEKE and P WINTRINGER
  */
 
 
@@ -76,44 +76,51 @@ const createPopUp = (props,name) => {
   }
   
   else if (props.class === "machine.form"){
+    //to debug
     let myForm = document.createElement('form');
+    myForm.onsubmit = validateForm();
     myForm.method = "post";
-    let field = document.createElement('input');
-    field.setAttribute('type',"text");
-    let field2 = document.createElement('input');
-    field2.setAttribute('type',"text");
+    let field = document.getElementsById("f1");
+    field.type = "text";
+    let field2 = document.getElementsById("f2");
+    field2.type = "text";
     let buttonS = document.createElement('button');
     buttonS.textContent = 'OK';
-    buttonS.setAttribute('type',"submit");
-    buttonS.onClick = validateForm();
-    
+    buttonS.type = "submit";
+
     myForm.appendChild(field);
     myForm.appendChild(field2);
     myForm.appendChild(buttonS);
-    
+
+    let holder = "...";
     let answer = `${props.exit}`;
-  
+    field.placeholder = holder;
+    field2.placeholder = holder;
+
     function validateForm() {
-      let x = document.forms["myForm"].value;
-      if (x == "") {
-          alert("All fields must be input.");
+      let x = document.forms["myForm"]["field"].value;
+      let y =  document.forms["myForm"]["field2"].value;
+      if (x == "" || y == "") {
+          alert("All fields must be filled out.");
           return false;
       }
-      if (val === answer){
+      if (x === answer && y === answer){
         alert(`${props.message}`);
       }
       else {
         alert("Try again");
-      } 
+      }
     }
- 
-    modalBody.appendChild(form);
+
+    modalBody.appendChild(myForm);
   }
   
   else if (props.class === "machine.formDragDrop"){
+    //prototype in machine.JS to c/p and modify
   }
   
   else if (props.class === "machine.formDropDown"){
+    //prototype in machine.JS to c/p and modify
   }
 
 
