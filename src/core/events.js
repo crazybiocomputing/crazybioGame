@@ -74,6 +74,47 @@ const createPopUp = (props,name) => {
     dldButton.innerHTML = '<i class="fas fa-download fa-2x"></i>';
     modalFooter.appendChild(dldButton);
   }
+  
+  else if (props.class === "machine.form"){
+    let myForm = document.createElement('form');
+    myForm.method = "post";
+    let field = document.createElement('input');
+    field.setAttribute('type',"text");
+    let field2 = document.createElement('input');
+    field2.setAttribute('type',"text");
+    let buttonS = document.createElement('button');
+    buttonS.textContent = 'OK';
+    buttonS.setAttribute('type',"submit");
+    buttonS.onClick = validateForm();
+    
+    myForm.appendChild(field);
+    myForm.appendChild(field2);
+    myForm.appendChild(buttonS);
+    
+    let answer = `${props.exit}`;
+  
+    function validateForm() {
+      let x = document.forms["myForm"].value;
+      if (x == "") {
+          alert("All fields must be input.");
+          return false;
+      }
+      if (val === answer){
+        alert(`${props.message}`);
+      }
+      else {
+        alert("Try again");
+      } 
+    }
+ 
+    modalBody.appendChild(form);
+  }
+  
+  else if (props.class === "machine.formDragDrop"){
+  }
+  
+  else if (props.class === "machine.formDropDown"){
+  }
 
 
   else if (props.class === "machine.lockNumerical"){
