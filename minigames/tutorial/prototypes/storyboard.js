@@ -17,10 +17,9 @@
     "class": "machine.form.gapfill",
     "description": "GapFill Form Machine",
     "display": {
-      "click": ["C", 140, 130, 80]
+      "click": ["R", 140, 130, 80]
     },
     "features": {
-      "file": "assets/secret.tif",
       "popup": {
         "event": "onclick",
         "content": [
@@ -35,7 +34,7 @@
     "class": "machine.form.dragndrop",
     "description": "DragnDrop Form Machine",
     "display": {
-      "click": ["C", 140, 130, 80]
+      "click": ["R", 140, 130, 80]
     },
     "features": {
       "popup": {
@@ -52,7 +51,7 @@
     "class": "machine.form.dropdown",
     "description": "DropDown Form Machine",
     "display": {
-      "click": ["C", 140, 130, 80]
+      "click": ["R", 140, 130, 80]
     },
     "features": {
       "popup": {
@@ -69,7 +68,7 @@
     "class": "machine.lockNumPad",
     "description": "Exit lock",
     "display": {
-      "click": ["C", 500, 130, 80]
+      "click": ["R", 500, 130, 80]
     },
     "features": {
       "area" : ["R", 2 , 250, 30, 50],
