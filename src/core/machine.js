@@ -82,12 +82,15 @@ const createMachineDownload = (props) => {
  * Create a new `form` machine using a `GapFill` mode
  *
  * @author P. Wintringer
- *
+ */
 const createForm = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
   element.className = "formgapfill";
-  let myForm = document.createElement('form');
+  
+  createPopUp(props,"ddl");
+  
+  /*let myForm = document.createElement('form');
   myForm.method = "post";
   myForm.onsubmit = return validateForm();
   let field = document.createElement('input');
@@ -101,7 +104,7 @@ function validateForm() {
         alert("All fields must be input.");
         return false;
     }
- }
+ }*/
 
   //function download(url){
   //  window.location.href = url;
@@ -111,19 +114,20 @@ function validateForm() {
   return element;
 };
 
-*/
 
 /**
  * Create a new `form` machine using a `Drag and Drop` mode
  *
  * @author P.Wintringer
- *
+ */
 const createFormDragDrop = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
   element.className = "formDnd";
   
-  let tile = document.getElementByClassName('sprite'); // sprite as tiles
+  createPopUp(props,"ddl");
+  
+  /*let tile = document.getElementByClassName('sprite'); // sprite as tiles
   let dropfield = document.createElement('div'); // tiles can only be dropped in fields
   dropfield.setAttribute('class','field');
   tile.setAttribute('draggable', true);
@@ -153,23 +157,25 @@ const createFormDragDrop = (props) => {
   function drag_over(event) {
     event.preventDefault();
     return false;
-  } 
+  } */
   
   return element;
 };
 
-*/
 
 /**
  * Create a new `form` machine using a `Drop-down` mode
  *
  * @author P. Wintringer
- *
+ */
 const createFormDropDown = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
   element.className = "formDropdown";
-  let dropdown = element.createElement('button'); //creation of the drop down menu
+  
+  createPopUp(props,"ddl");
+  
+  /*let dropdown = element.createElement('button'); //creation of the drop down menu
   dropdown.id = ddm;
   dropdown.className = dropbtn;
   dropdown.onClick = unroll();
@@ -193,10 +199,9 @@ const createFormDropDown = (props) => {
         openDropdown.classList.remove('show');
       }
     }
-  }
+  }*/
 }
 
   return element;
 };
 
-*/
