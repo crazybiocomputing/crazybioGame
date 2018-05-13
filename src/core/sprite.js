@@ -30,7 +30,7 @@
  *
  * @author Jean-Christophe Taveau
  */
-const createSprite = (props) => {
+/*const createSprite = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
   element.className = 'sprite';
@@ -44,5 +44,39 @@ const createSprite = (props) => {
   element.appendChild(img);
   
   
+  return element;
+};*/
+
+
+/**
+ * Create a new generic sprite
+ *
+ * @author Jean-Christophe Taveau, GONCALVES FRASCO Charlotte, SCHRIEKE Hans
+ */
+const createSprite = (props) => {
+  let position = document.createElement('div');
+  position.className = "position";
+  position.style = "position:relative;top=-480px;left:-344px";
+  let element = document.createElement('div');
+  //element.draggable ="true";
+  element.id = props.id;
+  element.className = 'sprite';
+  element.style.display = (props.display !== "undefined" && props.display.visibility) ? "inline-block" : "none";
+  //element.style = "height: 1px; width: 1px; top: 35px; left: 755px; background-color: rgb(255, 0, 0); color: rgb(255, 255, 255); z-index: 509"
+  // TODO
+  let img = document.createElement('img');
+  img.src = props.display.graphics.path;
+  img.src = props.display.graphics.path;
+  element.style.left = `${props.display.graphics.position[0] || 0}px`;
+  element.style.top = `${props.display.graphics.position[1] || 0}px`;
+  //element.ondragstart="event.dataTransfer.setData('image/plain', 'Ce texte peut être glissé')";
+  element.appendChild(img);
+  position.appendChild(element);
+  let pos = document.createElement('div');
+  pos.style = "position:relative;top=-480px;left:-344px";
+  let sprite = document.getElementsByClassName('position');
+  sprite.addEventListener("drag",function(event){
+  },true);
+
   return element;
 };
