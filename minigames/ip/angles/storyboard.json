@@ -1,0 +1,78 @@
+[
+  {
+    "id": 2,
+    "class": "machine.download",
+    "description": "Download Machine",
+    "display": {
+      "click": ["C", 140, 130, 80]
+    },
+    "features": {
+      "file": "assets/boussole.png",
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p>Click on the icon below to download the image... <br /> ...and display it in ImageJ.</p>"
+        ],
+        "title": "Download..."
+      }
+    }
+  },
+  {
+    "id": 1,
+    "class": "scene",
+    "description": "A scene",
+    "display": {
+      "graphics": {
+        "path": "assets/background.png",
+        "width": 800,
+        "height": 432
+      }
+    },
+    "children": [2,4]
+  },
+  {
+    "id": 3,
+    "class": "machine.lockNumerical",
+    "description": "Exit lock",
+    "display": {
+      "click": ["C", 500, 130, 80]
+    },
+    "features": {
+      "file" : "assets/metal_machinedigit.png",
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p>Type the code... to exit</p>"
+        ],
+        "title": "A Safe..."
+      }
+    },
+      "exit": 1243,
+      "message": [
+        "<p>Congratulations!!, you win. Click on the button to go to the next game.</p>"
+      ],
+      "theme": "metal"
+    },
+    {
+      "id": 4,
+      "class": "machine.lockText",
+      "description": "Exit lock",
+      "display": {
+        "click": ["C", 500, 130, 80]
+      },
+      "features": {
+        "popup": {
+          "event": "onclick",
+          "content": [
+            "<p>Type the code... to exit</p>"
+          ],
+          "title": "A Safe..."
+        }
+      },
+      "exit": "maman",
+      "message": [
+        "Congratulations!!, you win. Click on the button to go to the next game."
+      ],
+      "theme": "metal"
+    }
+]
