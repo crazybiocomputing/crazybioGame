@@ -14,7 +14,7 @@
   },
   {
     "id": 2,
-    "class": "machine.formgapfill",
+    "class": "machine.form",
     "description": "GapFill Form Machine",
     "display": {
       "click": ["R", 35,44,232,72]
@@ -31,7 +31,7 @@
   },
   {
     "id": 3,
-    "class": "machine.formdragndrop",
+    "class": "machine.formDragDrop",
     "description": "DragnDrop Form Machine",
     "display": {
       "click": ["R", 282,44,232,72]
@@ -48,7 +48,7 @@
   },
   {
     "id": 4,
-    "class": "machine.formdropdown",
+    "class": "machine.formDropDown",
     "description": "DropDown Form Machine",
     "display": {
       "click": ["R", 529,44,232,72]
