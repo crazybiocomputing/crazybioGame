@@ -27,7 +27,8 @@
         ],
         "title": "GapFill Form Machine"
       }
-    }
+    },
+    "exit": "test"
   },
   {
     "id": 3,
