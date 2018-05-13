@@ -139,8 +139,8 @@ const createFormDragDrop = (props) => {
   element.className = "formDnd";
   
   createPopUp(props,"fdnd");
-  let modal = document.getElementById("gapfill");
-  let closeB = document.getElementsByClassName('close'+"gapfill")[0];
+  let modal = document.getElementById("fdnd");
+  let closeB = document.getElementsByClassName('close'+"fdnd")[0];
   button.onclick = function() {
     modal.style.display = "block";
   }
@@ -200,8 +200,8 @@ const createFormDropDown = (props) => {
   element.className = "formDropdown";
   
   createPopUp(props,"dropdown");
-  let modal = document.getElementById("gapfill");
-  let closeB = document.getElementsByClassName('close'+"gapfill")[0];
+  let modal = document.getElementById("dropdown");
+  let closeB = document.getElementsByClassName('close'+"dropdown")[0];
   button.onclick = function() {
     modal.style.display = "block";
   }
