@@ -5,7 +5,7 @@
     "description": "A scene",
     "display": {
       "graphics": {
-        "path": "assets/background.png",
+        "path": "asset/background.png",
         "width": 800,
         "height": 432
       }
@@ -14,10 +14,10 @@
   },
   {
     "id": 2,
-    "class": "machine.form.gapfill",
+    "class": "machine.formgapfill",
     "description": "GapFill Form Machine",
     "display": {
-      "click": ["R", 140, 130, 80]
+      "click": ["R", 35,44,232,72]
     },
     "features": {
       "popup": {
@@ -31,10 +31,10 @@
   },
   {
     "id": 3,
-    "class": "machine.form.dragndrop",
+    "class": "machine.formdragndrop",
     "description": "DragnDrop Form Machine",
     "display": {
-      "click": ["R", 140, 130, 80]
+      "click": ["R", 282,44,232,72]
     },
     "features": {
       "popup": {
@@ -48,10 +48,10 @@
   },
   {
     "id": 4,
-    "class": "machine.form.dropdown",
+    "class": "machine.formdropdown",
     "description": "DropDown Form Machine",
     "display": {
-      "click": ["R", 140, 130, 80]
+      "click": ["R", 529,44,232,72]
     },
     "features": {
       "popup": {
@@ -68,7 +68,7 @@
     "class": "machine.lockNumPad",
     "description": "Exit lock",
     "display": {
-      "click": ["R", 500, 130, 80]
+      "click": ["R", 437,308,232,72]
     },
     "features": {
       "area" : ["R", 2 , 250, 30, 50],
