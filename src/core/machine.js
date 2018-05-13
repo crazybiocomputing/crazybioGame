@@ -88,7 +88,7 @@ const createForm = (props) => {
   element.id = props.id;
   element.className = "formgapfill";
   
-  createPopUp(props,"ddl");
+  createPopUp(props,"gapfill");
   
   /*let myForm = document.createElement('form');
   myForm.method = "post";
@@ -125,7 +125,7 @@ const createFormDragDrop = (props) => {
   element.id = props.id;
   element.className = "formDnd";
   
-  createPopUp(props,"ddl");
+  createPopUp(props,"fdnd");
   
   /*let tile = document.getElementByClassName('sprite'); // sprite as tiles
   let dropfield = document.createElement('div'); // tiles can only be dropped in fields
@@ -173,7 +173,7 @@ const createFormDropDown = (props) => {
   element.id = props.id;
   element.className = "formDropdown";
   
-  createPopUp(props,"ddl");
+  createPopUp(props,"dropdown");
   
   /*let dropdown = element.createElement('button'); //creation of the drop down menu
   dropdown.id = ddm;
