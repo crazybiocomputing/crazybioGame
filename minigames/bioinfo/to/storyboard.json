@@ -1,0 +1,38 @@
+[
+    {
+    "id": 1,
+    "class": "scene",
+    "description": "A scene",
+    "display": {
+      "graphics": {
+        "path": "assets/background.png",
+        "width": 901,
+        "height": 200
+      }
+    },
+    "children": [42]
+  },
+
+    {
+      "id": 42,
+      "class": "machine.lockText",
+      "description": "Exit lock",
+      "display": {
+        "click": ["C", 743, 94, 45]
+      },
+      "features": {
+        "popup": {
+          "event": "onclick",
+          "content": [
+            "<p>What could the password be... ?</p>"
+          ],
+          "title": "A locked safe"
+        }
+      },
+      "exit": "here",
+      "message": [
+        "Congratulations!! Click on the button to go to the next game."
+      ],
+      "theme": "metal"
+    }
+]
