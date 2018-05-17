@@ -13,7 +13,7 @@
     "children": [66, 42]
   },
 
-        {
+    {
       "id": 66,
       "class": "machine.display",
       "description": "post-it note",
@@ -26,20 +26,15 @@
           "content": [
             "<p>Looks like a reminder...</p>"
           ],
-          "title": "A post-it note"
-            "graphics": {
+          "title": "A post-it note",
+          "graphics": {
                 "path": "assets/post-it.png",
                 "width": 236,
                 "height": 190
-            }
+          }
         }
-      },
-      "exit": "here",
-      "message": [
-        "Congratulations!! Click on the button to go to the next game."
-      ],
-      "theme": "metal"
-    }
+      }
+    },
     
     {
       "id": 42,
