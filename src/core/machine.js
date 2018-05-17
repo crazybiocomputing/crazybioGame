@@ -41,6 +41,39 @@ const createMachine = (props) => {
 };
 
 /**
+ * Create a new `display` machine
+ * @author P. Wintringer
+ *
+ */
+
+const createMachineDisplay = (props) => {
+  let element = document.createElement('div');
+  element.id = props.id;
+  element.className = "machDisplay";
+
+  createPopUp(props,"dp");
+  let modal = document.getElementById("dp");
+  let closeB = document.getElementsByClassName('close'+"ddl")[0];
+
+  button.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  closeB.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+  }
+
+  return element;
+
+};
+
+/**
  * Create a new `download` machine
  * @author Hans SCHRIEKE and Charlotte GONCALVES FRASCO
  *
