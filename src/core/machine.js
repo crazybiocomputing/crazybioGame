@@ -53,12 +53,7 @@ const createMachineDisplay = (props) => {
 
   createPopUp(props,"dp");
   let modal = document.getElementById("dp");
-  let button = document.getElementById(`svg_${props.id}`);
   let closeB = document.getElementsByClassName('close'+"dp")[0];
-
-  button.onclick = function() {
-    modal.style.display = "block";
-  }
 
   closeB.onclick = function() {
     modal.style.display = "none";
