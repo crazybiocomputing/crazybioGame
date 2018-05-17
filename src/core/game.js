@@ -29,6 +29,7 @@
 const creators = {
   "item": createItem,
   "machine": createMachine,
+  "machine.display": createMachineDisplay,
   "machine.download": createMachineDownload,
   "machine.form": createForm,
   "machine.formDragDrop": createFormDragDrop,
