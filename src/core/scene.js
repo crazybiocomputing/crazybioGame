@@ -45,7 +45,11 @@ const createScene = (props) => {
     return shape;
   }
 
-  const createRectangle = (x,y,w,h) => {
+  const createRectangle = (area) => {
+    let x = area[1];
+    let y = area[2];
+    let w = area[3];
+    let h = area[4];
     let shape = document.createElementNS(NS,'rect');
     shape.setAttributeNS(null,'x',x);
     shape.setAttributeNS(null,'y',y);
@@ -58,7 +62,7 @@ const createScene = (props) => {
 
   const createPolygon = (path) => {
     let shape = document.createElementNS(NS,'polygon');
-    shape.setAttributeNS(null,'points',path);
+    shape.setAttributeNS(null,'points',path); //path must be format "x,y x2,y2 x3,y3 xn,yn"
     return shape;
   }
 
