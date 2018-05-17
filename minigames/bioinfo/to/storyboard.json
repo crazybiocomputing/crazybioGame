@@ -6,8 +6,8 @@
     "display": {
       "graphics": {
         "path": "assets/background.png",
-        "width": 901,
-        "height": 200
+        "width": 900,
+        "height": 330
       }
     },
     "children": [42]
@@ -18,7 +18,7 @@
       "class": "machine.lockText",
       "description": "Exit lock",
       "display": {
-        "click": ["C", 743, 94, 45]
+        "click": ["C", 670, 127, 60]
       },
       "features": {
         "popup": {
