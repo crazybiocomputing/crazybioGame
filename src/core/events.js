@@ -75,6 +75,9 @@ const createPopUp = (props,name) => {
     modalFooter.appendChild(dldButton);
   }
   
+  else if (props.class === "machine.display"){
+  }
+  
   else if (props.class === "machine.form"){
     //to debug
     /*
