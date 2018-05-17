@@ -76,6 +76,10 @@ const createPopUp = (props,name) => {
   }
   
   else if (props.class === "machine.display"){
+    let img = document.createElement('img');
+    img.className = 'image';
+    img.src = props.features.popup.graphics.path;
+    modalBody.appendChild(img);
   }
   
   else if (props.class === "machine.form"){
