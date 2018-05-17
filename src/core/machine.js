@@ -46,7 +46,7 @@ const createMachine = (props) => {
  *
  */
 
-createMachineDisplay = (props) => {
+const createMachineDisplay = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
   element.className = "machDisplay";
