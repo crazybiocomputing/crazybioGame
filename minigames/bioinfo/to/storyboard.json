@@ -7,7 +7,7 @@
       "graphics": {
         "path": "assets/background.png",
         "width": 900,
-        "height": 330
+        "height": 500
       }
     },
     "children": [42]
@@ -18,15 +18,15 @@
       "class": "machine.lockText",
       "description": "Exit lock",
       "display": {
-        "click": ["C", 670, 127, 60]
+        "click": ["C", 592, 170, 100]
       },
       "features": {
         "popup": {
           "event": "onclick",
           "content": [
-            "<p>What could the password be... ?</p>"
+            "<p>What could the password be ? There must be a clue around here...</p>"
           ],
-          "title": "A locked safe"
+          "title": "A locked computer"
         }
       },
       "exit": "here",
