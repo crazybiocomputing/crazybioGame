@@ -53,8 +53,8 @@ const createScene = (props) => {
     let shape = document.createElementNS(NS,'rect');
     shape.setAttributeNS(null,'x',x);
     shape.setAttributeNS(null,'y',y);
-    shape.setAttributeNS(null,'w',w);
-    shape.setAttributeNS(null,'h',h);
+    shape.setAttributeNS(null,'width',w);
+    shape.setAttributeNS(null,'height',h);
     shape.setAttributeNS(null,'opacity', '0.3');
     shape.setAttributeNS(null, 'fill', '#FFFFFF');
     return shape;
@@ -62,7 +62,10 @@ const createScene = (props) => {
 
   const createPolygon = (path) => {
     let shape = document.createElementNS(NS,'polygon');
-    shape.setAttributeNS(null,'points',path); //path must be format "x,y x2,y2 x3,y3 xn,yn"
+    shape.setAttributeNS(null,'points', path); //path must be format "x,y x2,y2 x3,y3 xn,yn"
+    //TO DEBUG : path not taken
+    shape.setAttributeNS(null,'opacity', '1');
+    shape.setAttributeNS(null, 'fill', 'green'); //green for debug only
     return shape;
   }
 
