@@ -18,7 +18,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 20, 28, 49]
+      "click": ["C", 20, 28, 51]
     },
     "features": {
       "popup": {
@@ -36,7 +36,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 148, 28, 49]
+      "click": ["C", 148, 28, 51]
     },
     "features": {
       "popup": {
@@ -54,7 +54,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 276, 28, 49]
+      "click": ["C", 276, 28, 51]
     },
     "features": {
       "popup": {
@@ -72,7 +72,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 404, 28, 49]
+      "click": ["C", 404, 28, 51]
     },
     "features": {
       "popup": {
@@ -90,7 +90,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 532, 28, 49]
+      "click": ["C", 532, 28, 51]
     },
     "features": {
       "popup": {
@@ -108,7 +108,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 20, 150, 49]
+      "click": ["C", 20, 150, 51]
     },
     "features": {
       "popup": {
@@ -126,7 +126,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 148, 150, 49]
+      "click": ["C", 148, 150, 51]
     },
     "features": {
       "popup": {
@@ -144,7 +144,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 276, 150, 49]
+      "click": ["C", 276, 150, 51]
     },
     "features": {
       "popup": {
@@ -162,7 +162,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 404, 150, 49]
+      "click": ["C", 404, 150, 51]
     },
     "features": {
       "popup": {
@@ -180,7 +180,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 532, 150, 49]
+      "click": ["C", 532, 150, 51]
     },
     "features": {
       "popup": {
@@ -198,7 +198,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 20, 272, 49]
+      "click": ["C", 20, 272, 51]
     },
     "features": {
       "popup": {
@@ -216,7 +216,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 148, 272, 49]
+      "click": ["C", 148, 272, 51]
     },
     "features": {
       "popup": {
@@ -234,7 +234,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 276, 272, 49]
+      "click": ["C", 276, 272, 51]
     },
     "features": {
       "popup": {
@@ -252,7 +252,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 404, 272, 49]
+      "click": ["C", 404, 272, 51]
     },
     "features": {
       "popup": {
@@ -270,7 +270,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 532, 272, 49]
+      "click": ["C", 532, 272, 51]
     },
     "features": {
       "popup": {
@@ -288,7 +288,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 20, 394, 49]
+      "click": ["C", 20, 394, 51]
     },
     "features": {
       "popup": {
@@ -306,7 +306,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 148, 394, 49]
+      "click": ["C", 148, 394, 51]
     },
     "features": {
       "popup": {
@@ -324,7 +324,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 276, 394, 49]
+      "click": ["C", 276, 394, 51]
     },
     "features": {
       "popup": {
@@ -342,7 +342,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 404, 394, 49]
+      "click": ["C", 404, 394, 51]
     },
     "features": {
       "popup": {
@@ -360,7 +360,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 532, 394, 49]
+      "click": ["C", 532, 394, 51]
     },
     "features": {
       "popup": {
@@ -378,7 +378,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 20, 516, 49]
+      "click": ["C", 20, 516, 51]
     },
     "features": {
       "popup": {
@@ -396,7 +396,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 148, 516, 49]
+      "click": ["C", 148, 516, 51]
     },
     "features": {
       "popup": {
@@ -414,7 +414,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 276, 516, 49]
+      "click": ["C", 276, 516, 51]
     },
     "features": {
       "popup": {
@@ -432,7 +432,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 404, 516, 49]
+      "click": ["C", 404, 516, 51]
     },
     "features": {
       "popup": {
@@ -450,7 +450,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 532, 516, 49]
+      "click": ["C", 532, 516, 51]
     },
     "features": {
       "popup": {
