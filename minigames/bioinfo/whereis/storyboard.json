@@ -468,7 +468,7 @@
     "class": "machine.display",
     "description": "Display Machine",
     "display": {
-      "click": ["C", 659, 225, 40]
+      "click": ["C", 659, 225, 42]
     },
     "features": {
       "popup": {
@@ -486,7 +486,7 @@
       "class": "machine.lockText",
       "description": "Exit lock",
       "display": {
-        "click": ["C", 659, 348, 40]
+        "click": ["C", 659, 348, 42]
       },
       "features": {
         "popup": {
