@@ -26,6 +26,52 @@
 'use strict';
 
 /**
+ * Factory of action(s)
+ *
+ * @author Jean-Christophe Taveau
+ */
+const triggerAction = (event,node) => {
+  console.log(event);
+  console.log(node.target.then);
+  switch(node.target.if) {
+  case 'click': 
+    if (node.target.then.new_nodes !== undefined) {
+      showNodes(node.target.then.new_nodes);
+    }
+    if (node.target.then.del_nodes !== undefined) {
+      hideNodes(node.target.then.del_nodes);
+    }
+    
+  }
+}
+
+/**
+ * Display/Show objects in the scene
+ *
+ * @param {array} nodelist - List of Objects
+ * @author Jean-Christophe Taveau
+ */
+const showNodes = (nodelist) => {
+  nodelist.forEach( id => {
+    let node = CRAZYBIOGAME.graph.nodeList.filter( (n) => n.id === id)[0];
+    node.element.style.display = 'block';
+  });
+}
+
+/**
+ * Hide objects in the scene
+ *
+ * @param {array} nodelist - List of Objects
+ * @author Jean-Christophe Taveau
+ */
+const hideNodes = (nodelist) => {
+  nodelist.forEach( id => {
+    let node = CRAZYBIOGAME.graph.nodeList.filter( (n) => n.id === id)[0];
+    node.element.style.display = 'none';
+  })
+}
+
+/**
  * Create a popup
  *
  * @author Charlotte GONCALVES FRASCO 

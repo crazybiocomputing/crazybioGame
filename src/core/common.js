@@ -31,6 +31,11 @@
  *
  */
  
+/* Global Variable */
+let CRAZYBIOGAME = {
+  name: 'A crazyBioComputing Game'
+};
+
 const categories = {
   "scene": {
     type: "scene", 
@@ -84,6 +89,152 @@ const categories = {
   "target": {type: "target", code: 512},
   "sprite": {type: "sprite", code: 1024}
 };
+
+const NS = 'http://www.w3.org/2000/svg';
+    
+/**
+ * Create a SVG Layer for grabbing the event(s)
+ * 
+ * @author Charlotte GONCALVES FRASCO
+ */
+const createBasicSVG = (id,w,h) => {
+  // M a i n
+
+    
+    let svg = document.createElementNS(NS,'svg');
+    // TODO BUG
+    svg.setAttributeNS(null, 'viewBox',`0 0 ${w} ${h}`);
+    svg.setAttributeNS(null, 'class', 'map');
+    //svg.setAttributeNS(null,'width','100%');
+    //svg.setAttributeNS(null,'height','100%');
+    svg.setAttributeNS(null,'preserveAspectRatio','xMinYMin meet');
+    
+    return svg;
+}
+
+const appendImage = (image_path,id, svg) => {
+  let image = document.createElementNS(NS,'image');
+  image.setAttributeNS(null,'width','100%');
+  image.setAttributeNS(null,'height','100%');
+  image.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', image_path);
+  svg.appendChild(image);
+  return svg;
+};
+
+const appendSensitive = (geom, id, svg) => {
+
+  const createCircle = (cx,cy,radius) => {
+    let shape = document.createElementNS(NS,'circle');
+    shape.setAttributeNS(null,'cx',radius);
+    shape.setAttributeNS(null,'cy',radius);
+    shape.setAttributeNS(null,'r',radius);
+    shape.setAttributeNS(null,'opacity', '0.9');
+    shape.setAttributeNS(null, 'fill', '#F0F0F0');
+    return shape;
+  }
+
+  const createRectangle = (x,y,w,h) => {
+    let shape = document.createElementNS(NS,'rect');
+    shape.setAttributeNS(null,'x',0);
+    shape.setAttributeNS(null,'y',0);
+    shape.setAttributeNS(null,'width',w);
+    shape.setAttributeNS(null,'height',h);
+    shape.setAttributeNS(null,'opacity', '0.9');
+    shape.setAttributeNS(null, 'fill', '#F0F0F0');
+    return shape;
+  }
+
+  const createPolygon = (path) => {
+    let shape = document.createElementNS(NS,'polygon');
+    shape.setAttributeNS(null,'points',path);
+    return shape;
+  }
+  
+  const geometries = {'C': createCircle, 'R': createRectangle, 'P': createPolygon};
+  
+  // Define clickable areas if any
+  let group = document.createElementNS(NS,'g');
+  group.setAttributeNS(null, 'class', 'hover_group');
+  group.setAttributeNS(null, 'opacity', '0');
+  group.setAttributeNS(null, 'id', `area_${id}`);
+
+  let link = document.createElementNS(NS,'a');
+  link.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', 'javascript:void(0)');
+  link.setAttributeNS(null, 'id',`link_${id}`);
+  link.setAttributeNS(null, 'class', 'btn');
+  
+  let shape = geometries[geom.type](...geom.data);
+  shape.dataset.objectid = id;
+  link.appendChild(shape);
+
+  group.appendChild(link);
+  svg.appendChild(group);
+};
+
+
+const createSensitiveLayer = (id,w,h,geom) => {
+  const createCircle = (cx,cy,radius) => {
+    let shape = document.createElementNS(NS,'circle');
+    shape.setAttributeNS(null,'cx',radius);
+    shape.setAttributeNS(null,'cy',radius);
+    shape.setAttributeNS(null,'r',radius);
+    shape.setAttributeNS(null,'opacity', '0.9');
+    shape.setAttributeNS(null, 'fill', '#F0F0F0');
+    return shape;
+  }
+
+  const createRectangle = (x,y,w,h) => {
+    let shape = document.createElementNS(NS,'rect');
+    shape.setAttributeNS(null,'x',0);
+    shape.setAttributeNS(null,'y',0);
+    shape.setAttributeNS(null,'width',w);
+    shape.setAttributeNS(null,'height',h);
+    shape.setAttributeNS(null,'opacity', '0.9');
+    shape.setAttributeNS(null, 'fill', '#F0F0F0');
+    return shape;
+  }
+
+  const createPolygon = (path) => {
+    let shape = document.createElementNS(NS,'polygon');
+    shape.setAttributeNS(null,'points',path);
+    return shape;
+  }
+  
+  const geometries = {'C': createCircle, 'R': createRectangle, 'P': createPolygon};
+  
+  // M a i n
+  const NS = 'http://www.w3.org/2000/svg';
+  
+  let svg = document.createElementNS(NS,'svg');
+  // TODO BUG
+  svg.setAttributeNS(null, 'viewBox',`0 0 ${w} ${h}`);
+  svg.setAttributeNS(null, 'class', 'map');
+  //svg.setAttributeNS(null,'width','100%');
+  //svg.setAttributeNS(null,'height','100%');
+  svg.setAttributeNS(null,'preserveAspectRatio','xMinYMin meet');
+
+  // Define clickable areas if any
+  let group = document.createElementNS(NS,'g');
+  group.setAttributeNS(null, 'class', 'hover_group');
+  group.setAttributeNS(null, 'opacity', '0');
+  group.setAttributeNS(null, 'id', `area_${id}`);
+
+  let link = document.createElementNS(NS,'a');
+  link.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', 'javascript:void(0)');
+  link.setAttributeNS(null, 'id',`svg_${id}`);
+  link.setAttributeNS(null, 'class', 'btn');
+  
+  let shape = geometries[geom.type](...geom.data);
+  shape.dataset.objectid = id;
+  link.appendChild(shape);
+
+  group.appendChild(link);
+  svg.appendChild(group);
+
+  return svg;
+}
+
+
 
 
 

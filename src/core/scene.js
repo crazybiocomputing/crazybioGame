@@ -28,89 +28,126 @@
 /**
  * Create a new scene
  *
- * @author GONCALVES FRASCO Charlotte
+ * @author Jean-Christophe Taveau
+ */
+class Scene extends Composite {
+  
+  constructor(id,className,description) {
+    super(id,className,description);
+  };
+  
+  static create(props) {
+    return new Scene(props.id,props.class,props.description)
+      .append('section')
+      .display(props.display)
+      .children(props.children); // Pre-calculated in `preprocess` of game.js
+      // .forEachChild(this.appendChild);
+  }
+  
+  appendChild(node) {
+    console.log(node);
+    let func = creators[child.class];
+    if (func !== undefined) {
+      this.element.appendChild(func(node));
+    }
+  }
+  
+  /**
+   * Create a SVG Layer for grabbing the event(s)
+   * @ obsolete
+   * @author Charlotte GONCALVES FRASCO
+   */
+  addSensitiveLayer() {
+  
+    const createCircle = (cx,cy,radius) => {
+      let shape = document.createElementNS(NS,'circle');
+      shape.setAttributeNS(null,'cx',cx+radius);
+      shape.setAttributeNS(null,'cy',cy+radius);
+      shape.setAttributeNS(null,'r',radius);
+      shape.setAttributeNS(null,'opacity', '0.3');
+      shape.setAttributeNS(null, 'fill', '#FFFFFF');
+      return shape;
+    }
+
+    const createRectangle = (x,y,w,h) => {
+      let shape = document.createElementNS(NS,'rect');
+      shape.setAttributeNS(null,'x',x);
+      shape.setAttributeNS(null,'y',y);
+      shape.setAttributeNS(null,'width',w);
+      shape.setAttributeNS(null,'height',h);
+      shape.setAttributeNS(null,'opacity', '0.9');
+      shape.setAttributeNS(null, 'fill', '#F0F0F0');
+      return shape;
+    }
+
+    const createPolygon = (path) => {
+      let shape = document.createElementNS(NS,'polygon');
+      shape.setAttributeNS(null,'points',path);
+      return shape;
+    }
+    
+    const geometries = {'C': createCircle, 'R': createRectangle, 'P': createPolygon};
+    
+    // M a i n
+    const NS = 'http://www.w3.org/2000/svg';
+    
+    let div = document.createElement('div');
+    div.id = this.id;
+    div.className = 'touch_layer';
+    div.style.width = `${this.width}px`;
+    div.height = `${this.height}px`;
+    this.element.appendChild(div);
+    
+    let elementS = document.createElementNS(NS,'svg');
+    // TODO BUG
+    elementS.setAttributeNS(null, 'viewBox',`0 0 ${this.width} ${this.height}`);
+    elementS.setAttributeNS(null, 'class', 'map');
+    elementS.setAttributeNS(null,'width','100%');
+    elementS.setAttributeNS(null,'height','100%');
+    elementS.setAttributeNS(null,'preserveAspectRatio','xMinYMin meet');
+
+
+    // Define clickable areas if any
+    for (let child of this.childNodes){
+      let elementG = document.createElementNS(NS,'g');
+      elementG.setAttributeNS(null, 'class', 'hover_group');
+      elementG.setAttributeNS(null, 'opacity', '0');
+      elementG.setAttributeNS(null, 'id', `area_${child.id}`);
+
+      let elementA = document.createElementNS(NS,'a');
+      elementA.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', 'javascript:void(0)');
+      elementA.setAttributeNS(null, 'id',`svg_${child.id}`);
+      elementA.setAttributeNS(null, 'class', 'btn');
+
+      let shape;
+      console.log(child);
+      if (child.geometry !== undefined) {
+        shape = geometries[child.geometry.type](...child.geometry.data);
+        elementA.appendChild(shape);
+      }
+
+      elementG.appendChild(elementA);
+      elementS.appendChild(elementG);
+    }
+
+    div.appendChild(elementS);
+  }
+}
+
+
+/**
+ * Create a new scene
+ *
+ * @author Charlotte GONCALVES FRASCO
  */
 const createScene = (props) => {
 
-  const createCircle = (area) => {
-    let cx = area[1];
-    let cy = area[2];
-    let radius = area[3];
-    let shape = document.createElementNS(NS,'circle');
-    shape.setAttributeNS(null,'cx',cx+radius);
-    shape.setAttributeNS(null,'cy',cy+radius);
-    shape.setAttributeNS(null,'r',radius);
-    shape.setAttributeNS(null,'opacity', '0.3');
-    shape.setAttributeNS(null, 'fill', '#FFFFFF');
-    return shape;
-  }
+  let _scene = Scene.create(props);
 
-  const createRectangle = (x,y,w,h) => {
-    let shape = document.createElementNS(NS,'rect');
-    shape.setAttributeNS(null,'x',x);
-    shape.setAttributeNS(null,'y',y);
-    shape.setAttributeNS(null,'w',w);
-    shape.setAttributeNS(null,'h',h);
-    shape.setAttributeNS(null,'opacity', '0.3');
-    shape.setAttributeNS(null, 'fill', '#FFFFFF');
-    return shape;
-  }
+  _scene.childNodes = [];
 
-  const createPolygon = (path) => {
-    let shape = document.createElementNS(NS,'polygon');
-    shape.setAttributeNS(null,'points',path);
-    return shape;
-  }
+  console.log(_scene);
+  
 
-  const geometries = {'C': createCircle, 'R': createRectangle, 'P': createPolygon};
-
-  const NS = 'http://www.w3.org/2000/svg';
-
-  console.log(props);
-
-  let element = document.createElement('figure');
-  element.id = props.id;
-  element.className = 'scene';
-
-  let elementS = document.createElementNS(NS,'svg');
-  // TODO BUG
-  elementS.setAttributeNS(null, 'viewBox',`0 0 ${props.display.graphics.width} ${props.display.graphics.height}`);
-  elementS.setAttributeNS(null, 'class', 'map');
-  elementS.setAttributeNS(null,'width','100%');
-  elementS.setAttributeNS(null,'height','100%');
-  elementS.setAttributeNS(null,'preserveAspectRatio','xMinYMin meet');
-
-  let elementI = document.createElementNS(NS,'image');
-  elementI.setAttributeNS(null,'width','100%');
-  elementI.setAttributeNS(null,'height','100%');
-  elementI.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', props.display.graphics.path);
-  elementS.appendChild(elementI);
-
-
-  // Define clickable areas if any
-  for (let child of props.childNodes){
-    let elementG = document.createElementNS(NS,'g');
-    elementG.setAttributeNS(null, 'class', 'hover_group');
-    elementG.setAttributeNS(null, 'opacity', '0');
-    elementG.setAttributeNS(null, 'id', 'circle');
-
-
-    let elementA = document.createElementNS(NS,'a');
-    elementA.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', 'javascript:void(0)');
-    elementA.setAttributeNS(null, 'id',`svg_${child.id}`);
-    elementA.setAttributeNS(null, 'class', 'btn');
-
-    let shape;
-    console.log(child);
-    shape = geometries[child.display.click[0].toUpperCase()](child.display.click);
-
-    elementA.appendChild(shape);
-    elementG.appendChild(elementA);
-    elementS.appendChild(elementG);
-  }
-
-  element.appendChild(elementS);
-  console.log(element);
-
-  return element;
+  return _scene;
 };

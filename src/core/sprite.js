@@ -25,24 +25,31 @@
 
 'use strict';
 
+
 /**
- * Create a new generic sprite
+ * Create a new `sprite` node
  *
  * @author Jean-Christophe Taveau
  */
+class Sprite extends Node {
+ 
+  constructor (id,className,description) {
+    super(id,className,description);
+  }
+  
+  static create(props) {
+    return new Sprite(props.id,props.class,props.description,props.parent)
+      .append('figure')
+      .display(props.display)
+      .target(props.target)
+      .features(props.features);
+  }
+}
+ 
 const createSprite = (props) => {
-  let element = document.createElement('div');
-  element.id = props.id;
-  element.className = 'sprite';
-  element.style.display = (props.display !== "undefined" && props.display.visibility) ? "inline-block" : "none";
-  // TODO
-  let img = document.createElement('img');
-  img.src = props.display.graphics.path;
-  img.src = props.display.graphics.path;
-  element.style.left = `${props.display.graphics.position[0] || 0}px`;
-  element.style.top = `${props.display.graphics.position[1] || 0}px`;
-  element.appendChild(img);
-  
-  
-  return element;
+  let sprite = Sprite.create(props);
+  return sprite;
 };
+
+
+

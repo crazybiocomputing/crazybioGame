@@ -25,18 +25,27 @@
 
 'use strict';
 
+class Lock extends Node {
+
+  constructor (id,className,description) {
+    super(id,className,description);
+  }
+  
+  static create(props) {
+    return new Lock(props.id,props.class,props.description,props.parent)
+      .append('div')
+      .display(props.display)
+      .features(props.features);
+  }
+}
+
 
 /**
  * Lock displayed as a Text Field
  */
 const createLockText = (props) => {
-  let element = document.createElement('div');
-  element.id = props.id;
-  element.className = "lockText";
-  
-  // TODO
-  
-  return element;
+  let lock = Lock.create(props);
+  return lock;
 };
 
 /**

@@ -25,19 +25,29 @@
 
 'use strict';
 
+class Machine extends Node {
+
+  constructor (id,className,description) {
+    super(id,className,description);
+  }
   
+  static create(props) {
+    return new Machine(props.id,props.class,props.description,props.parent)
+      .append('div')
+      .display(props.display)
+      .features(props.features);
+  }
+}
+
+
 /**
  * Create a new generic machine
  * @author Hans SCHRIEKE
  *
  */
-
 const createMachine = (props) => {
-  let element = document.createElement('div');
-  element.id = props.id;
-  element.className = "machine";
-  
-  return element;
+  let machine = Machine.create(props);
+  return machine;
 };
 
 /**
@@ -45,11 +55,11 @@ const createMachine = (props) => {
  * @author Hans SCHRIEKE and Charlotte GONCALVES FRASCO
  *
  */
-
 const createMachineDownload = (props) => {
-  let element = document.createElement('div');
-  element.id = props.id;
-  element.className = "machDownload";
+  let machine = Machine.create(props);
+
+  let element = machine.element;
+  element.className = "machine download";
   
   createPopUp(props,"ddl");
   let modal = document.getElementById("ddl");
@@ -73,7 +83,7 @@ const createMachineDownload = (props) => {
   let dldButton = document.getElementsByClassName('download-button')[0];
   dldButton.href = (`${props.features.file}`);
   
-  return element;
+  return machine;
   
 };
 
@@ -120,26 +130,62 @@ const createFormDropDown = (props) => {
 };
 
 
-
-
 /**
- * Create a new `lock` machine using a `Numpad` mode
+ * Create a Tile machine
+ * @author Jean-Christophe Taveau
  *
- * @author TODO
  */
-const createLockNumpad = (props) => {
-  let element = document.createElement('div');
+const createMachineTile = (props) => {
+    
+  const dragstart = (event) => {
 
-  return element;
+    // centers the tile at (pageX, pageY) coordinates
+    const moveAt = (pageX, pageY) => {
+      // console.log(orgX,orgY,pageX,pageY,dx,dy,' = ',pageX - orgX + dx,pageY - orgY + dy);
+      dragged.style.left = pageX - orgX  + dx + 'px';
+      dragged.style.top = pageY - orgY + dy + 'px';
+    }
+
+    const drag_over = (event) => {
+      moveAt(event.pageX, event.pageY);
+      event.preventDefault();
+      return false;
+    }
+    
+    const drag_end = (event) => {
+      event.target.parentNode.style.zIndex = 1;
+      document.querySelector('main').removeEventListener('mousemove', drag_over,false);
+      dragged.removeEventListener('mouseup', drag_end,false);
+    }
+    
+    let dragged = event.target.parentNode;
+    
+    let orgX = event.pageX;
+    let orgY = event.pageY;
+    // TODO Must be improved - All the parents up to `game`
+    let dx = dragged.getBoundingClientRect().left - document.getElementById('game').getBoundingClientRect().left;
+    let dy = dragged.getBoundingClientRect().top - document.getElementById('game').getBoundingClientRect().top;
+    dragged.style.zIndex = 1000;
+
+    moveAt(event.pageX, event.pageY);
+
+    // Move the tile on mousemove
+    document.querySelector('main').addEventListener('mousemove', drag_over);
+
+    // Drop the tile, remove unneeded handlers
+    document.querySelector('main').addEventListener('mouseup', drag_end);
+
+  };
+
+  let machine = Machine.create(props);
+  machine.element.className = "machine tile";
+  machine.element.draggable = false;
+  machine.element.addEventListener('mousedown', dragstart,false); 
+  machine.element.addEventListener('dragstart', (e) => {e.preventDefault();return false},false); 
+  machine.element.addEventListener('dragover', (e) => {return false},false); 
+  machine.element.addEventListener('drop', (e) => false,false); 
+
+  return machine;
 };
 
-/**
- * Create a new `lock` machine using a `??` mode
- *
- * @author TODO
- */
-const createLock = (props) => {
-  let element = document.createElement('div');
 
-  return element;
-};

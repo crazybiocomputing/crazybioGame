@@ -30,11 +30,15 @@
  *
  * @author Jean-Christophe Taveau
  */
-class Composite {
+class Composite extends Node {
 
+  constructor(id,className,description) {
+    super(id,className,description);
+  };
+  
   static create(props) {
-    return Node.create(props.id,props.class,props.description)
-      .append('div')
+    return new Composite(props.id,props.class,props.description)
+      .append('article')
       .display(props.display)
       .children(props.childNodes) // Pre-calculated in `preprocess` of game.js
       .forEachChild(this.appendChild);
@@ -50,7 +54,17 @@ class Composite {
       }
     }
   }
+  
+  traverse(func) {
+    this.childNodes.forEach ( (child) => func(this,child));
+  }
 }
+
+
+const createComposite = (props) => {
+  let composite = Composite.create(props);
+  return composite.element;
+};
 
 /**
  * Create a new target

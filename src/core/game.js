@@ -27,12 +27,14 @@
 
 
 const creators = {
+  "composite": createComposite,
   "item": createItem,
   "machine": createMachine,
   "machine.download": createMachineDownload,
   "machine.form": createForm,
   "machine.formDragDrop": createFormDragDrop,
   "machine.formDropDown": createFormDropDown,
+  "machine.tile": createMachineTile,
   "machine.lockKeypad": createLockKeypad,
   "machine.lockDigit[1]": createLockDigit(1),
   "machine.lockDigit[2]": createLockDigit(2),
@@ -46,9 +48,7 @@ const creators = {
   "machine.lockText": createLockText,
   "machine.lockNumerical":  createLockNumerical,
   "scene": createScene,
-  "sprite": createSprite,
-  "target": createTarget,
-  "event": createPopUp
+  "sprite": createSprite
 };
 
 /**
@@ -62,71 +62,92 @@ const newGame = (filename) => {
    */
   const parseGraph = (storyboard) => {
   
+/*
+    const initChildNode = (parent,child) => {
+      let func = creators[child.class];
+      if (func !== undefined) {
+        let nodeGraph = func(child);
+        parent.appendChild(nodeGraph);
+      }
+      // Add default properties
+      child.parent = node.id;
+      child.display = (child.display === undefined) ? {display: {visibility: false}} : child.display;
+      child.display.parentWidth = node.display.graphics.width;
+      child.display.parentHeight = node.display.graphics.height;
+      child.display.visibility = (child.display.visibility === undefined) ? true : child.display.visibility;
+      child.features = (child.features === undefined) ? [{click: ['C',0,0,-1]}] : child.features;
+      child.display.click = (child.display.click === undefined) ? ['C',0,0,-1] : child.display.click;
+      if (child.class === 'composite') {
+        child.traverse(initChildNode);
+      }
+    };
+*/
+
     // Preprocess storyboard
     const preprocess = (storyboard) => {
-      return storyboard.map( (node, index, arr) => {
-        // Collect the clickable areas of each child
-        if (node.class === 'scene') {
-          node.childNodes = []
-          node.children.forEach( (childID) => {
-            let child = arr.filter( (n) => childID === n.id )[0];
-            // Add default properties
-            child.parent = node.id;
-            child.display = (child.display === undefined) ? {display: {visibility: false}} : child.display;
-            child.display.parentWidth = node.display.graphics.width;
-            child.display.parentHeight = node.display.graphics.height;
-            child.display.visibility = (child.display.visibility === undefined) ? true : child.display.visibility;
-            child.features = (child.features === undefined) ? [{click: ['C',0,0,-1]}] : child.features;
-            child.display.click = (child.display.click === undefined) ? ['C',0,0,-1] : child.display.click;
-            /*if (child.features !== undefined && child.features['click'] !== undefined) {
-              node.childNodes.push(child);
-            }
-            else if (child.class === 'target') {
-              // If no click features and is `target` then add rectangular area
-              // TODO
-              child.click = ['C',0,0,0];
-            }
-            */
-            node.childNodes.push(child);
-          })
+      let graph = new Graph();
+      graph.nodeList = storyboard.map( (obj, index, arr) => {
+        console.log(obj);
+        let func = creators[obj.class];
+        if (func !== undefined) {
+          return func(obj);
         }
-        return node;
+        return {};
       });
+      console.log('nodeList');
+      console.log(graph.nodeList);
+
+      graph.root = graph.nodeList.filter( (node) => node.className === 'scene' && node.id === 1)[0];
+      graph.traverseFrom(graph.root);
+      
+      return graph;
     };
 
+    const appendHTML = (node) => {
+      node.ancestor.getHTML().appendChild(node.getHTML());
+    }
     
-    let game = {name: 'A game'};
-    game.graph = storyboard;
+    /**** M  a  i  n ****/
 
+    // Step #0- Get Width and Height of game
+    let root_obj = storyboard.filter ( obj => obj.id === 1 && obj.class === 'scene')[0];
+    CRAZYBIOGAME.width = root_obj.display.graphics.width;
+    CRAZYBIOGAME.height = root_obj.display.graphics.height;
+     
     // Step #1- Preprocess 
-    let graph = preprocess(storyboard);
+    CRAZYBIOGAME.graph = preprocess(storyboard);
 
     // Step #2- Create HTML5 and/or SVG Elements
     let root = document.getElementById('game');
-    graph.filter( (node) => node.class === 'scene').forEach( scene => {
-      console.log(scene.id);
-      if (scene.id === 1) {
-        root.style.maxWidth = `${scene.display.graphics.width}px`;
-      }
-      let func = creators[scene.class];
-      if (func !== undefined) {
-        let htmlscene = func(scene);
-        root.appendChild(htmlscene);
-        scene.childNodes.forEach( (node) => {
-          console.log(node);
-          let func = creators[node.class];
-          if (func !== undefined) {
-            htmlscene.appendChild(func(node));
-          }
-        });
+
+    root.appendChild(CRAZYBIOGAME.graph.root.getHTML());
+    let scene_root = CRAZYBIOGAME.graph.root;
+    root.style.maxWidth = `${scene_root.getHTML().width}px`;
+    CRAZYBIOGAME.graph.traverse(scene_root,appendHTML);
+    /*
+    let func = creators[scene.class];
+    if (func !== undefined) {
+      let htmlscene = func(scene);
+      root.appendChild(htmlscene);
+      scene.forEachChild( (child) => {
+        scene.appenChild(child);
+      });
+      
+      childNodes.forEach( (node) => {
+        console.log(node);
+        let func = creators[node.class];
+        if (func !== undefined) {
+          console.log(func);
+          htmlscene.appendChild(func(node));
+        }
+      });
+    */
 // HACK        console.log(`Append child ${node.class}: ${JSON.stringify(node)}`);
-      }
-    });
     
     // Step #3: Add the events to link the scene(s) to the children/object(s)
     // TODO
     
-    return game;
+    // graph.root.addSensitiveLayer();
   };
   
   /*
@@ -148,7 +169,7 @@ const newGame = (filename) => {
   
   /*
    * Get JSON with XMLHttpRequest
-   */
+
   const getJSONviaXHR = (url) => {
     return new Promise( (resolve, reject) => {
       // https://developer.mozilla.org/fr/docs/Learn/JavaScript/Objects/JSON
@@ -168,7 +189,9 @@ const newGame = (filename) => {
       request.send();
     });
   };
-  
+   */
+   
+   
   // Main
   return getJSON(filename)
     .then( (data) => parseGraph(data) );
