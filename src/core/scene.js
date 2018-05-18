@@ -131,6 +131,7 @@ class Scene extends Composite {
     }
 
     div.appendChild(elementS);
+
   }
 }
 
@@ -148,6 +149,5 @@ const createScene = (props) => {
 
   console.log(_scene);
   
-
   return _scene;
 };

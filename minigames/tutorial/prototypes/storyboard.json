@@ -1,0 +1,89 @@
+[
+    {
+    "id": 1,
+    "class": "scene",
+    "description": "A scene",
+    "display": {
+      "graphics": {
+        "path": "asset/background.png",
+        "width": 800,
+        "height": 432
+      }
+    },
+    "children": [2,3,4,63]
+  },
+  {
+    "id": 2,
+    "class": "machine.form",
+    "description": "GapFill Form Machine",
+    "display": {
+      "click": ["R", 35,44,232,72]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p>Bla blablah blah</p> <p id = f1></p> <p>bla blah</p> <p id = f2></p> <p></p>"
+        ],
+        "title": "GapFill Form Machine"
+      }
+    }
+  },
+  {
+    "id": 3,
+    "class": "machine.formDragDrop",
+    "description": "DragnDrop Form Machine",
+    "display": {
+      "click": ["R", 282,44,232,72]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p>What do I put here ?</p>"
+        ],
+        "title": "Drag n' Drop Form Machine"
+      }
+    }
+  },
+  {
+    "id": 4,
+    "class": "machine.formDropDown",
+    "description": "DropDown Form Machine",
+    "display": {
+      "click": ["R", 529,44,232,72]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p>What do I put here ?</p>"
+        ],
+        "title": "DropDown Form Machine"
+      }
+    }
+  },
+    {
+    "id": 63,
+    "class": "machine.lockNumPad",
+    "description": "Exit lock",
+    "display": {
+      "click": ["R", 437,308,232,72]
+    },
+    "features": {
+      "area" : ["R", 2 , 250, 30, 50],
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p>Type the code... to exit</p>"
+        ],
+        "title": "A digital lock with a keypad..."
+      }
+    },
+            "exit": 1243,
+      "message": [
+        "Congratulations!! Click on the button to go to the next game."
+      ],
+      "theme": "metal"
+    }
+]

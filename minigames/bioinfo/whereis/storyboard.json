@@ -1,0 +1,506 @@
+[
+    {
+    "id": 1,
+    "class": "scene",
+    "description": "A scene",
+    "display": {
+      "graphics": {
+        "path": "assets/background.png",
+        "width": 770,
+        "height": 650
+      }
+    },
+    "children": [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,42,63]
+  },
+
+  {
+    "id": 2,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 20, 28, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p> loop_ <br/> _entity_poly.entity_id <br /> _entity_poly.type <br /> _entity_poly.nstd_linkage <br />_entity_poly.nstd_monomer <br /> _entity_poly.pdbx_seq_one_letter_code <br /> _entity_poly.pdbx_seq_one_letter_code_can <br /> _entity_poly.pdbx_strand_id <br />1 'alligator'        no no<br /> ;KDFLNPKYTLENFIVGEGNRLAYEVVKEALENLGSLYNPIFIYGSVGTGKTHLLQAAGNEAKKRGYRVIYSSADDFAQAM <br /> VEHLKKGTINEFRNMYKSVDLLLLDDVQFLSGKERTQIEFFHIFNTLYLLEKQIILASDRHPQKLDGVSDRLVSRFEGGI <br /> LVEIELDNKTRFKIIKEKLKEFNLELRKEVIDYLLENTKNVREIEGKIKLIKLKGFEGLERKERKERDKLMQIVEFVANY <br />#</p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+    {
+    "id": 3,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 148, 28, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p>>P1;buffalo <br /> 14-3-3 protein beta/alpha; <br /> MTMDKSELVQ KAKLAEQAER YDDMAAAMKA VTEQGHELSN EERNLLSVAY KNVVGARRSS <br /> WRVISSIEQK TERNEKKQQM GKEYREKIEA ELQDICNDVL QLLDKYLIPN ATQPESKVFY <br /> LKMKGDYFRY LSEVASGDNK QTTVSNSQQA YQEAFEISKK EMQPTHPIRL GLALNFSVFY<br /> YEILNSPEKA CSLAKTAFDE AIAELDTLNE ESYKDSTLIM QLLRDNLTLW TSENQGDEGD <br /> AGEGEN*<br /></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 4,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 276, 28, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p>DE   dragonfly<br />SQ   Sequence   246 AA;<br />     MTMDKSELVQ KAKLAEQAER YDDMAAAMKA VTEQGHELSN EERNLLSVAY KNVVGARRSS<br />     WRVISSIEQK TERNEKKQQM GKEYREKIEA ELQDICNDVL QLLDKYLIPN ATQPESKVFY<br />     LKMKGDYFRY LSEVASGDNK QTTVSNSQQA YQEAFEISKK EMQPTHPIRL GLALNFSVFY<br />     YEILNSPEKA CSLAKTAFDE AIAELDTLNE ESYKDSTLIM QLLRDNLTLW TSENQGDEGD<br />     AGEGEN<br />//</p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 5,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 404, 28, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p>>P1;TPIS1_LISIN<br />elephant;<br />MRKPIIAGNW KMNKTAAKAG QFAEDVKNNV PSSDAVESVV AAPALFLQEL VRLTEGTNLR<br />VAAQNCYFED EGAFTGEISP FALADLGVSY VIIGHSERRE YFHETDEDIN KKAHAIFKHG<br />MTPIICCGET LDQREAGQTD TWVRGQIRAA LAGLTEEQVI KSVIAYEPIW AIGTGKSSTS<br />ADANETCAVI RAEVADAVSQ KAADAVRIQY GGSVKPENIA DYLAESDIDG ALVGGASLEP<br />ASFLALLEAV K*</p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 6,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 532, 28, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p>DE   giraffe<br />XX<br />SQ   Sequence 368 BP;<br />AB000263  Length: 368  Check: 4514  ..<br />       1  acaagatgcc attgtccccc ggcctcctgc tgctgctgct ctccggggcc acggccaccg<br />      61  ctgccctgcc cctggagggt ggccccaccg gccgagacag cgagcatatg caggaagcgg<br />     121  caggaataag gaaaagcagc ctcctgactt tcctcgcttg gtggtttgag tggacctccc<br />     181  aggccagtgc cgggcccctc ataggagagg aagctcggga ggtggccagg cggcaggaag<br />     241  gcgcaccccc ccagcaatcc gcgcgccggg acagaatgcc ctgcaggaac ttcttctgga<br />     301  agaccttctc ctcctgcaaa taaaacctca cccatgaatg ctcacgcaag tttaattaca<br />     361  gacctgaa</p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 7,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 20, 150, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 8,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 148, 150, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 9,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 276, 150, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 10,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 404, 150, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 11,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 532, 150, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 12,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 20, 272, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 13,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 148, 272, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 14,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 276, 272, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 15,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 404, 272, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 16,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 532, 272, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 17,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 20, 394, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 18,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 148, 394, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 19,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 276, 394, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 20,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 404, 394, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 21,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 532, 394, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 22,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 20, 516, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 23,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 148, 516, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 24,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 276, 516, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 25,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 404, 516, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 26,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 532, 516, 51]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p></p>"
+        ],
+        "title": "DATA"
+      }
+    }
+  },
+
+  {
+    "id": 63,
+    "class": "machine.display",
+    "description": "Display Machine",
+    "display": {
+      "click": ["C", 659, 225, 42]
+    },
+    "features": {
+      "popup": {
+        "event": "onclick",
+        "content": [
+          "<p>fastanimal</p>"
+        ],
+        "title": "Is this a clue... ?"
+      }
+    }
+  },
+
+    {
+      "id": 42,
+      "class": "machine.lockText",
+      "description": "Exit lock",
+      "display": {
+        "click": ["C", 659, 348, 42]
+      },
+      "features": {
+        "popup": {
+          "event": "onclick",
+          "content": [
+            "<p>Type the code... to exit</p>"
+          ],
+          "title": "A Safe..."
+        }
+      },
+      "exit": "turtle",
+      "message": [
+        "Congratulations!! Click on the button to go to the next game."
+      ],
+      "theme": "metal"
+    }
+]

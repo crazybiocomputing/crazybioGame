@@ -1,0 +1,61 @@
+[
+    {
+    "id": 1,
+    "class": "scene",
+    "description": "A scene",
+    "display": {
+      "graphics": {
+        "path": "assets/background.png",
+        "width": 900,
+        "height": 500
+      }
+    },
+    "children": [66, 42]
+  },
+
+    {
+      "id": 66,
+      "class": "machine.display",
+      "description": "post-it note",
+      "display": {
+        "click": ["P", "409,400 454,410 425,433 380,423"]
+      },
+      "features": {
+        "popup": {
+          "event": "onclick",
+          "content": [
+            "<p>Looks like a reminder...</p>"
+          ],
+          "title": "A post-it note",
+          "graphics": {
+                "path": "assets/post-it.png",
+                "width": 236,
+                "height": 190
+          }
+        }
+      }
+    },
+    
+    {
+      "id": 42,
+      "class": "machine.lockText",
+      "description": "Exit lock",
+      "display": {
+        "click": ["P", "704,178 739,183 754,206 753,254 719,330 601,313 634,236 666,195"]
+      },
+      "features": {
+        "popup": {
+          "event": "onclick",
+          "content": [
+            "<p>What could the password be ? There must be a clue around here...</p>"
+          ],
+          "title": "A locked computer"
+        }
+      },
+      "exit": "here",
+      "message": [
+        "Congratulations!! Click on the button to go to the next game."
+      ],
+      "theme": "metal"
+    }
+]

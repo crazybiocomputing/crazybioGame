@@ -30,6 +30,7 @@ const creators = {
   "composite": createComposite,
   "item": createItem,
   "machine": createMachine,
+  "machine.display": createMachineDisplay,
   "machine.download": createMachineDownload,
   "machine.form": createForm,
   "machine.formDragDrop": createFormDragDrop,
@@ -49,6 +50,7 @@ const creators = {
   "machine.lockNumerical":  createLockNumerical,
   "scene": createScene,
   "sprite": createSprite
+
 };
 
 /**

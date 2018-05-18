@@ -4,21 +4,16 @@
     "class": "machine.download",
     "description": "Download Machine",
     "display": {
-      "shape": ["C", 140, 130, 80]
-    }, 
-    "target": {
-      "if": "click",
-      "then": {
-        "download": "assets/secret.tif"
-      }
+      "click": ["C", 140, 130, 80]
     },
     "features": {
-      "file": "assets/secret.tif",
+      "file": "assets/boussole.png",
       "popup": {
-        "title": "Download...",
+        "event": "onclick",
         "content": [
           "<p>Click on the icon below to download the image... <br /> ...and display it in ImageJ.</p>"
-        ]
+        ],
+        "title": "Download..."
       }
     }
   },
@@ -44,7 +39,6 @@
     },
     "features": {
       "file" : "assets/metal_machinedigit.png",
-      "area" : ["R", 2 , 250, 30, 50],
       "popup": {
         "event": "onclick",
         "content": [
@@ -75,7 +69,7 @@
           "title": "A Safe..."
         }
       },
-      "exit": 1243,
+      "exit": "crazybiogame",
       "message": [
         "Congratulations!!, you win. Click on the button to go to the next game."
       ],

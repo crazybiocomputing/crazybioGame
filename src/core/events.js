@@ -74,9 +74,13 @@ const hideNodes = (nodelist) => {
 /**
  * Create a popup
  *
- * @author Charlotte GONCALVES FRASCO 
+ * @author Charlotte GONCALVES FRASCO and Hans SCHRIEKE and P WINTRINGER
  */
+
+
 const createPopUp = (props,name) => {
+
+
   let modal = document.createElement('div');
   modal.id = name;
   modal.className = 'modal';
@@ -104,11 +108,11 @@ const createPopUp = (props,name) => {
   let modalFooter = document.createElement('div');
   modalFooter.className = 'modal-footer';
   modalContent.appendChild(modalFooter);
-  
+
   // TODO For each button, add it :
   // Example:
   // <span class="grab"><i class="far fa-hand-paper fa-2x"></i></span>
-  
+
   if (props.class === "machine.download"){
     let dldButton = document.createElement('a');
     dldButton.className = 'download-button';
@@ -117,7 +121,65 @@ const createPopUp = (props,name) => {
     modalFooter.appendChild(dldButton);
   }
   
-   if (props.class === "machine.lockNumerical"){
+  else if (props.class === "machine.display"){
+    let img = document.createElement('img');
+    img.className = 'image';
+    img.src = props.features.popup.graphics.path;
+    modalBody.appendChild(img);
+  }
+  
+  else if (props.class === "machine.form"){
+    //to debug
+    /*
+    let myForm = document.createElement('form');
+    myForm.onsubmit = validateForm();
+    myForm.method = "post";
+    let field = document.getElementsById("f1");
+    field.type = "text";
+    let field2 = document.getElementsById("f2");
+    field2.type = "text";
+    let buttonS = document.createElement('button');
+    buttonS.textContent = 'OK';
+    buttonS.type = "submit";
+
+    myForm.appendChild(field);
+    myForm.appendChild(field2);
+    myForm.appendChild(buttonS);
+
+    let holder = "...";
+    let answer = `${props.exit}`;
+    field.placeholder = holder;
+    field2.placeholder = holder;
+
+    function validateForm() {
+      let x = document.forms["myForm"]["field"].value;
+      let y =  document.forms["myForm"]["field2"].value;
+      if (x == "" || y == "") {
+          alert("All fields must be filled out.");
+          return false;
+      }
+      if (x === answer && y === answer){
+        alert(`${props.message}`);
+      }
+      else {
+        alert("Try again");
+      }
+    }
+
+    modalBody.appendChild(myForm);
+    */
+  }
+  
+  else if (props.class === "machine.formDragDrop"){
+    //prototype in machine.JS to c/p and modify
+  }
+  
+  else if (props.class === "machine.formDropDown"){
+    //prototype in machine.JS to c/p and modify
+  }
+
+
+  else if (props.class === "machine.lockNumerical"){
     let imglockNum = document.createElement('img');
     imglockNum.className = 'lock-image';
     imglockNum.src =  props.features.file;
@@ -127,18 +189,69 @@ const createPopUp = (props,name) => {
     lockNum.href = 'javascript:void(0)';
     lockNum.innerHTML = '<i class="fas fa-unlock-alt"></i>';
     modalFooter.appendChild(lockNum);
-   }
+
+  }
+
+  else if (props.class === "machine.lockText"){
+    // create the input
+    let form = document.createElement('form');
+    let submit = document.createElement('submit');
+    let div = document.createElement('div');
+    let input = document.createElement('input');
+    input.id = 'lock-input';
+    input.type = 'text';
+
+    div.appendChild(input);
+    div.appendChild(submit);
+    form.appendChild(div);
+
+    // setup the holder
+    let holder = "";
+    let answer = `${props.exit}`;
+    if (!isNaN(answer) === true){
+      holder = 'Input numbers';
+    }
+    else {
+      holder = 'Input letters';
+    }
+    input.placeholder = holder;
+
+    let submitbutton = document.createElement('button');
+    submitbutton.id = 'button';
+    submitbutton.textContent = "OK";
+    submitbutton.type = "submit";
+
+    submitbutton.onclick = function(){
+      let val = document.getElementById('lock-input').value;
+      if (val === `${props.exit}`){
+        alert(`${props.message}`);
+      }
+      else {
+        alert("Try again");
+      }
+    }
+
+    modalBody.appendChild(form);
+    submit.appendChild(submitbutton);
+
+    let lockText = document.createElement('a');
+    lockText.className = 'lockText-button';
+    lockText.href = 'javascript:void(0)';
+    modalFooter.appendChild(lockText);
+
+
+}
 
   modal.appendChild(modalContent);
-  
+
   let link = document.createElement('a');
   link.className = 'close'+ name;
   link.href = 'javascript:void(0)';
   link.innerHTML = '<i class="far fa-window-close fa-2x"></i>';
   modalFooter.appendChild(link);
-  
 
- 
+
+
  let root = document.getElementById('game');
  root.appendChild(modal);
 }
