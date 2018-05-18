@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<!-- ONLY for DEBUG -->
+
+<script type="text/javascript" src="../../../src/core/node.js"></script>
+<script type="text/javascript" src="../../../src/core/machine.js"></script>
+<script type="text/javascript" src="../../../src/core/lock.js"></script>
+<script type="text/javascript" src="../../../src/core/item.js"></script>
+<script type="text/javascript" src="../../../src/core/composite.js"></script>
+<script type="text/javascript" src="../../../src/core/sprite.js"></script>
+<script type="text/javascript" src="../../../src/core/scene.js"></script>
+<script type="text/javascript" src="../../../src/core/graph.js"></script>
+<script type="text/javascript" src="../../../src/core/game.js"></script>
+<script type="text/javascript" src="../../../src/core/events.js"></script>
+<script type="text/javascript" src="../../../src/core/common.js"></script>
+
+<!-- Correct way to call the game engine 
+<script type="text/javascript" src="../../../dist/crazybiogame.min.js"></script>
+-->
+
+<link rel="stylesheet" href="../../css/crazybio.css" />
+
+</head>
+<body>
+  <header>
+    <h1>A header</h1>
+  </header>
+  <main>
+    <div id="game"></div>
+    <div id="popup"></div>
+  </main>
+  <footer> 
+    <h2>>A footer</h2>
+  </footer>
+  <script type="text/javascript"> 
+    newGame('./storyboard.json'); 
+  </script>
+</body>
+</html>
+

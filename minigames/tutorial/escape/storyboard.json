@@ -1,0 +1,47 @@
+[
+  {
+    "id": 0, 
+    "author": "Jean-Christophe Taveau", 
+    "description": "Tutorial - Example of `machine.lock`"
+  },
+  {
+    "id": 1, 
+    "class": "scene", 
+    "description": "A desktop", 
+    "display": {
+      "graphics": {
+        "path": "assets/background.png",
+        "width": 1024,
+        "height": 599
+      }
+    },
+    "children": [2]
+  }, 
+  {
+    "id": 2, 
+    "class": "sprite", 
+    "description": "A lock symbol", 
+    "display": {
+      "graphics": {
+        "path": "../../assets/lock_symbol.png",
+        "position": [900,30],
+        "width": 100,
+        "height": 100,
+        "style": {"filter": "invert(100%)"}
+      },
+      "shape" : ["C", 900, 30, 50]
+    },
+    "target" : {
+      "if": "click",
+      "then": {
+        "new_nodes": [3]
+      }
+    }
+  }, 
+  {
+    "id": 3, 
+    "class": "machine.lockText", 
+    "description": "A text field"
+  }
+]
+
