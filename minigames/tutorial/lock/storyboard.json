@@ -4,16 +4,21 @@
     "class": "machine.download", 
     "description": "Download Machine", 
     "display": {
-      "click": ["C", 140, 130, 80]
+      "shape": ["C", 140, 130, 80]
     }, 
+    "target": {
+      "if": "click",
+      "then": {
+        "download": "assets/secret.tif"
+      }
+    },
     "features": {
       "file": "assets/secret.tif",
       "popup": {
-        "event": "onclick",
+        "title": "Download...",
         "content": [
           "<p>Click on the icon below to download the image... <br /> ...and display it in ImageJ.</p>"
-        ], 
-        "title": "Download..."
+        ]
       }
     }
   }, 
