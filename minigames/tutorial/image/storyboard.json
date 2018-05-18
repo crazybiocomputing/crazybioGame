@@ -2,7 +2,7 @@
   {
     "id": 0, 
     "author": "Jean-Christophe Taveau", 
-    "description": "Tutorial - Example of user interaction with `targets`"
+    "description": "Tutorial - Example of user interaction with `machine.tiles`"
   },
   {
     "id": 1, 
@@ -12,150 +12,218 @@
       "graphics": {
         "path": "assets/background.png",
         "width": 717,
-        "height": 544
+        "height": 540
       }
     },
-    "children": [10,11,12,13,14,110,111,112,113,114]
+    "children": [2,10,11,12,13,14]
+  }, 
+  {
+    "id": 2, 
+    "class": "sprite", 
+    "description": "A lock symbol", 
+    "display": {
+      "graphics": {
+        "path": "../../assets/lock_symbol.png",
+        "position": [300,260],
+        "width": 80,
+        "height": 80,
+        "style": {"filter": "invert(80%)"}
+      },
+      "shape" : ["C", 300, 260, 40]
+    },
+    "target" : {
+      "if": "click",
+      "then": {
+        "new_nodes": [3]
+      }
+    }
+  }, 
+  {
+    "id": 3, 
+    "class": "machine.lockText", 
+    "description": "A text field"
   }, 
   {
     "id": 10,
-    "class": "target", 
+    "class": "sprite", 
     "description": "Button 1", 
     "display": {
       "graphics": {
         "path": "assets/button02.png",
         "position": [520,514],
-        "width": 124
+        "width": 124,
+        "height": 25
       }
     },
-    "features": {
-      "onclick": {"new_nodes": [110]}
+    "target": {
+      "if": "click",
+      "then": {
+        "new_nodes": [110],
+        "del_nodes": [10]
+      }
     }
   }, 
   {
     "id": 11,
-    "class": "target", 
+    "class": "sprite", 
     "description": "Button 2",  
     "display": {
       "graphics": {
         "position": [154,515],
         "path": "assets/button90.png",
-        "width": 124
+        "width": 124,
+        "height": 25
       }
     },
-    "features": {
-      "onclick": {"new_nodes": [111]}
+    "target": {
+      "if": "click",
+      "then": {
+        "new_nodes": [111],
+        "del_nodes": [11]
+      }
     }
   }, 
   {
     "id": 12,
-    "class": "target", 
+    "class": "sprite", 
     "description": "Button 3",  
     "display": {
       "graphics": {
         "position": [276,514],
         "path": "assets/button70.png",
-        "width": 124
+        "width": 124,
+        "height": 25
       }
     },
-    "features": {
-      "onclick": {"new_nodes": [112]}
+    "target": {
+      "if": "click",
+      "then": {
+        "new_nodes": [112],
+        "del_nodes": [12]
+      }
     }
   }, 
   {
     "id": 13,
-    "class": "target", 
-    "description": "Button 4",  
+    "class": "sprite", 
+    "description": "Button 4",
     "display": {
       "graphics": {
         "position": [398,514],
         "path": "assets/button54.png",
-        "width": 124
+        "width": 124,
+        "height": 25
       }
     },
-    "features": {
-      "onclick": {"new_nodes": [113]}
+    "target": {
+      "if": "click",
+      "then": {
+        "new_nodes": [113],
+        "del_nodes": [13]
+      }
     }
   }, 
   {
     "id": 14,
-    "class": "target", 
-    "description": "Button 5",  
+    "class": "sprite", 
+    "description": "Button 5",
     "display": {
       "graphics": {
         "position": [30,514],
         "path": "assets/button20.png",
-        "width": 124
+        "width": 124,
+        "height": 25
       }
     },
-    "features": {
-      "onclick": {"new_nodes": [114]}
+    "target": {
+      "if": "click",
+      "then": {
+        "new_nodes": [114],
+        "del_nodes": [14]
+      }
     }
   },
   {
     "id": 110,
-    "class": "sprite", 
-    "description": "Piece 1",  
+    "class": "machine.tile", 
+    "description": "Piece 1",
     "display": {
-      "visibility": false,
       "graphics": {
+        "path": "assets/plasma0234_ij.png",
         "position": [151,42],
-        "path": "assets/plasma0234_ij.png"
+        "width": 280,
+        "height": 278,
+        "style": {
+          "display": "none"
+        }
       }
-    },
-    "features": [
-      {"move": true}
-    ],
-    "del_nodes": [10]
+    }
   }, 
   {
     "id": 111,
-    "class": "sprite", 
-    "description": "Piece 2",  
+    "class": "machine.tile",
+    "description": "Piece 2",
     "display": {
       "visibility": false,
       "graphics": {
         "position": [402,65],
-        "path": "assets/plasma9009_ij.png"
+        "path": "assets/plasma9009_ij.png",
+        "width": 110,
+        "height": 228,
+        "style": {
+          "display": "none"
+        }
       }
     } 
   }, 
   {
     "id": 112,
-    "class": "sprite", 
-    "description": "Piece 3",  
+    "class": "machine.tile",
+    "description": "Piece 3",
     "display": {
       "visibility": false,
       "graphics": {
         "position": [350,195],
-        "path": "assets/plasma7043_ij.png"
+        "path": "assets/plasma7043_ij.png",
+        "width": 280,
+        "height": 278,
+        "style": {
+          "display": "none"
+        }
       }
     } 
   }, 
   {
     "id": 113,
-    "class": "sprite", 
-    "description": "Piece 4",  
+    "class": "machine.tile",
+    "description": "Piece 4",
     "display": {
-      "visibility": false,
       "graphics": {
         "position": [11,26],
-        "path": "assets/plasma5492_ij.png"
+        "path": "assets/plasma5492_ij.png",
+        "width": 110,
+        "height": 348,
+        "style": {
+          "display": "none"
+        }
       }
     } 
   }, 
   {
     "id": 114,
-    "class": "sprite", 
-    "description": "Piece 5",  
+    "class": "machine.tile",
+    "description": "Piece 5",
     "display": {
-      "visibility": false,
       "graphics": {
         "position": [51,148],
-        "path": "assets/plasma2078_ij.png"
+        "path": "assets/plasma2078_ij.png",
+        "width": 550,
+        "height": 298,
+        "style": {
+          "display": "none"
+        }
       }
     }
   }
-
 ]
 

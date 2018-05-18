@@ -1,3 +1,8 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
 .hover_group:hover {
   opacity: 1;
 }
@@ -6,14 +11,17 @@
   position: relative;
   margin: 0px auto 0px auto;
   padding: 0;
-  max-width: 800px;
+  max-width: 717px;
+  height: auto;
 }
 
 img {
+  display: block;
   max-width: 100%;
   height: auto;
 }
-.target, .sprite {
+
+.target, .sprite, .machine {
   position: absolute;
   margin: 0;
   padding: 0;
@@ -32,18 +40,27 @@ figure {
   overflow: hidden;
 }
 
+/*
 figure image {
   display: block;
   margin-left:auto;
   width: 100%;
   height: 100%;
 }
+*/
 
 figure .map {
   display: inline-block;
+  position: absolute;
   top: 0;
   left: 0;
 }
+
+figure .map a {
+  color: white;
+}
+
+
 
 .hover_group:hover {
   opacity: 0.5;
