@@ -34,7 +34,7 @@ class Machine extends Node {
   
   static create(props) {
     return new Machine(props.id,props.class,props.description,props.parent)
-      .append('div')
+      .append('article')
       .display(props.display)
       .features(props.features);
   }
@@ -92,12 +92,13 @@ const createMachineDisplay = (props) => {
  */
 const createMachineDownload = (props) => {
 
-  let machine = Machine.create(props);
-
+  let machine = Machine.create(props).target(props.target);
+  
   let element = machine.element;
   element.className = "machine download";
   
-  createPopUp(props,"ddl");
+  displayPopup(props,"ddl");
+/*
   let modal = document.getElementById("ddl");
   let button = document.getElementById(`svg_${props.id}`);
   let closeB = document.getElementsByClassName('close'+"ddl")[0];
@@ -118,7 +119,7 @@ const createMachineDownload = (props) => {
 
   let dldButton = document.getElementsByClassName('download-button')[0];
   dldButton.href = (`${props.features.file}`);
-  
+*/
   return machine;
 };
 

@@ -89,9 +89,9 @@ class Node {
       return this;
     }
     
+    this.width = displayProps.width || displayProps.graphics.width;
+    this.height = displayProps.height || displayProps.graphics.height;
     if (displayProps.graphics !== undefined) {
-      this.width = displayProps.graphics.width;
-      this.height = displayProps.graphics.height;
       // Append the media
       // TODO
       // Check extension and create the appropriate HTML5 element
@@ -107,7 +107,7 @@ class Node {
       this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
       this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
       this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
-      this.element.style.height = `${this.height / CRAZYBIOGAME.height * 100}%`;
+      this.element.style.height = 'auto'; //'`${this.height / CRAZYBIOGAME.height * 100}%`;
       // this.element.style.height = `100%`;
       this.element.appendChild(img);
 
@@ -134,12 +134,18 @@ class Node {
     const doIt = (ev) => {
       console.log(`Click with ${ev.button} on object ${ev.target.dataset.objectid} and update display of ???`);
       let node = CRAZYBIOGAME.graph.nodeList.filter ( node => node.id === parseInt(ev.target.dataset.objectid) )[0];
+      // Trigger Action depending of Event in common.js
       triggerAction(ev,node);
     }
     
-    // Add the event to the parent scene
+    let indexSVG = this.element.children.length;
+    
+    if (targetProps === undefined) {
+      return this;
+    }
+    
+    // Add the event to the parent scene  
     // TODO
-    console.log(targetProps.then.new_nodes);
     this.target = targetProps;
     if (targetProps.if !== undefined) {
       this.geometry = (this.shape === undefined ) ? {type: 'R', data: []} : {type: this.shape[0], data: this.shape.slice(1)};
@@ -160,10 +166,10 @@ class Node {
     
     // Add event
     if (targetProps.if === 'click') {
-      // console.log(this.element.children[1].children[0].children[0]);
+      console.log(this.element);
       // TODO Tricky <svg> => <g> => <a>
       let action = func || doIt;
-      this.element.children[1].children[0].children[0].addEventListener('click', doIt,false);
+      this.element.children[indexSVG].children[0].children[0].addEventListener('click', doIt,false);
     }
     return this;
   }
@@ -175,6 +181,7 @@ class Node {
    */
   features(featuresProps) {
     // TODO
+    this.features = featuresProps;
     return this;
   }
 

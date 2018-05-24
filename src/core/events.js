@@ -41,7 +41,9 @@ const triggerAction = (event,node) => {
     if (node.target.then.del_nodes !== undefined) {
       hideNodes(node.target.then.del_nodes);
     }
-    
+    if (node.target.then.popup !== undefined) {
+      displayPopup(node.target.then.popup);
+    }
   }
 }
 
@@ -74,51 +76,61 @@ const hideNodes = (nodelist) => {
 /**
  * Create a popup
  *
- * @author Charlotte GONCALVES FRASCO and Hans SCHRIEKE and P WINTRINGER
+ * @author Charlotte GONCALVES FRASCO
+ * @author Hans SCHRIEKE
+ * @author Penelope WINTRINGER
+ * @author Jean-Christophe Taveau
  */
+const displayPopup = (props) => {
 
-
-const createPopUp = (props,name) => {
-
-
-  let modal = document.createElement('div');
-  modal.id = name;
-  modal.className = 'modal';
-  //modal.style.display = "none";
-
+  let modal = document.getElementById('popup');
+  // modal.style.display = 'block';
+  
   // modal-content
-  let modalContent = document.createElement('div');
+  let modalContent = document.querySelector('.modal-content') || document.createElement('div');
   modalContent.className = 'modal-content';
 
   // modal-header
-  let modalHeader = document.createElement('div');
+  let modalHeader = document.querySelector('.modal-header') || document.createElement('div');
   modalHeader.className = 'modal-header';
-  modalHeader.textContent = props.features.popup.title;
-
+  modalHeader.textContent = props.title;
   modalContent.appendChild(modalHeader);
 
   // modal-body
-  let modalBody = document.createElement('div');
+  let modalBody = document.querySelector('.modal-body') || document.createElement('div');
   modalBody.className = 'modal-body';
-  modalBody.innerHTML = props.features.popup.content;
-
+  while (modalBody.lastChild) {
+    modalBody.removeChild(modalBody.lastChild);
+  }
+  if (props.contentDOM === undefined) {
+    modalBody.innerHTML = props.content.join('');
+  }
+  else {
+    modalBody.appendChild(props.contentDOM);
+  }
   modalContent.appendChild(modalBody);
 
   // modal-footer
-  let modalFooter = document.createElement('div');
+  let modalFooter = document.querySelector('.modal-footer') || document.createElement('div');
   modalFooter.className = 'modal-footer';
+  modalFooter.innerHTML = `${props.footer} <i class="far fa-window-close"></i>`;
   modalContent.appendChild(modalFooter);
 
+
+  modal.appendChild(modalContent);
+  
+  
+/*
   // TODO For each button, add it :
   // Example:
   // <span class="grab"><i class="far fa-hand-paper fa-2x"></i></span>
 
   if (props.class === "machine.download"){
-    let dldButton = document.createElement('a');
-    dldButton.className = 'download-button';
-    dldButton.href = 'javascript:void(0)';
-    dldButton.innerHTML = '<i class="fas fa-download fa-2x"></i>';
-    modalFooter.appendChild(dldButton);
+    let dwnldButton = document.createElement('a');
+    dwnldButton.className = 'download-button';
+    dwnldButton.href = 'javascript:void(0)';
+    dwnldButton.innerHTML = '<i class="fas fa-download fa-2x"></i>';
+    modalFooter.appendChild(dwnldButton);
   }
   
   else if (props.class === "machine.display"){
@@ -130,7 +142,7 @@ const createPopUp = (props,name) => {
   
   else if (props.class === "machine.form"){
     //to debug
-    /*
+
     let myForm = document.createElement('form');
     myForm.onsubmit = validateForm();
     myForm.method = "post";
@@ -167,7 +179,7 @@ const createPopUp = (props,name) => {
     }
 
     modalBody.appendChild(myForm);
-    */
+
   }
   
   else if (props.class === "machine.formDragDrop"){
@@ -242,7 +254,7 @@ const createPopUp = (props,name) => {
 
 }
 
-  modal.appendChild(modalContent);
+
 
   let link = document.createElement('a');
   link.className = 'close'+ name;
@@ -254,4 +266,5 @@ const createPopUp = (props,name) => {
 
  let root = document.getElementById('game');
  root.appendChild(modal);
+ */
 }

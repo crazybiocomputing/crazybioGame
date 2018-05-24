@@ -25,7 +25,7 @@
 
 'use strict';
 
-class Lock extends Node {
+class Lock extends Machine {
 
   constructor (id,className,description) {
     super(id,className,description);
@@ -33,7 +33,7 @@ class Lock extends Node {
   
   static create(props) {
     return new Lock(props.id,props.class,props.description,props.parent)
-      .append('div')
+      .append('article')
       .display(props.display)
       .features(props.features);
   }
@@ -44,10 +44,56 @@ class Lock extends Node {
  * Lock displayed as a Text Field
  * @author Hans SCHRIEKE
  */
-
 const createLockText = (props) => {
 
   let lock = Lock.create(props);
+  lock.element.className = "machine locktext";
+
+  let targetProps = {}
+  targetProps.if = 'click',
+  targetProps.then = {};
+  targetProps.then['popup'] = {
+    title: 'Unlock the game...',
+    content: [''],
+    footer: 'Lock'
+  };
+  
+  // create the 'form'
+  let container = document.createElement('div');
+  container.id = 'lock-container';
+  let paragraph = document.createElement('p'); paragraph.appendChild(document.createTextNode('Type the code... to unlock the game'));
+  let input = document.createElement('input');
+  input.id = 'lock-input';
+  input.type = 'text';
+  input.placeholder = 'Type the code';
+
+  let submitbutton = document.createElement('button');
+  submitbutton.id = 'button';
+  submitbutton.textContent = "OK";
+  submitbutton.type = "submit";
+
+  submitbutton.onclick = () => {
+    let val = document.getElementById('lock-input').value;
+    console.log(val);
+    if (val === lock.features.exit) {
+      displayPopup( {
+        title: 'Congratulations!!',
+        content: [`<p>Click on this <a class="exit" href="${CRAZYBIOGAME.next_game}">button</a>to go to the next game...</p>`],
+        footer:  'You Win!!'
+      });
+    }
+    else {
+      alert("Wrong code. Try again");
+    }
+  }
+  
+  // Add all the elements
+  container.appendChild(paragraph);
+  container.appendChild(input);
+  container.appendChild(submitbutton);
+  targetProps.then.popup.contentDOM = container;
+  lock.target(targetProps);
+  
   return lock;
 /*
   let element = document.createElement('div');
@@ -81,11 +127,10 @@ const createLockText = (props) => {
  * Lock displayed as a Numerical Field
  * @author 
  */
-
 const createLockNumerical = (props) => {
   let element = document.createElement('div');
   element.id = props.id;
-  element.className = "lockNumerical";
+  element.className = "lock numerical";
 
   createPopUp(props,"lockNum");
   let modal = document.getElementById('lockNum');

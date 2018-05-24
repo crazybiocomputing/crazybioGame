@@ -175,8 +175,8 @@ const appendSensitive = (geom, id, svg) => {
 const createSensitiveLayer = (id,w,h,geom) => {
   const createCircle = (cx,cy,radius) => {
     let shape = document.createElementNS(NS,'circle');
-    shape.setAttributeNS(null,'cx',radius);
-    shape.setAttributeNS(null,'cy',radius);
+    shape.setAttributeNS(null,'cx',cx);
+    shape.setAttributeNS(null,'cy',cy);
     shape.setAttributeNS(null,'r',radius);
     shape.setAttributeNS(null,'opacity', '0.9');
     shape.setAttributeNS(null, 'fill', '#F0F0F0');
@@ -225,6 +225,7 @@ const createSensitiveLayer = (id,w,h,geom) => {
   link.setAttributeNS(null, 'class', 'btn');
   
   let shape = geometries[geom.type](...geom.data);
+
   shape.dataset.objectid = id;
   link.appendChild(shape);
 
@@ -235,6 +236,22 @@ const createSensitiveLayer = (id,w,h,geom) => {
 }
 
 
+const createHeader = () => {
+  let url = new URL(window.location.href);
+  let level = url.searchParams.get("level");
+  let game = url.searchParams.get("game");
+  let next_game = url.searchParams.get("next");
+  document.querySelector('#banner').innerHTML = `
+    <ul>
+    <li><a href="../index.html">[ H o m e ]</a></li>
+    <li><a href="help.html">[ H e l p ]</a></li>
+    <li><a href="history.html">&mdash; c&nbsp;&nbsp;r&nbsp;&nbsp;a&nbsp;&nbsp;z&nbsp;&nbsp;y&nbsp;&nbsp;b&nbsp;&nbsp;i&nbsp;&nbsp;o
+&nbsp;&nbsp;c&nbsp;&nbsp;o&nbsp;&nbsp;m&nbsp;&nbsp;p&nbsp;&nbsp;u&nbsp;&nbsp;t&nbsp;&nbsp;i&nbsp;&nbsp;n&nbsp;&nbsp;g  &mdash;</a></li>
+    <li><a href="#">[ L e v e l # ${level} &mdash; g a m e # ${game} ]</a></li>
+    </ul>`;
+    
+  CRAZYBIOGAME.next_game = `../${next_game}/index.html`;
+}
 
 
 

@@ -64,27 +64,6 @@ const newGame = (filename) => {
    */
   const parseGraph = (storyboard) => {
   
-/*
-    const initChildNode = (parent,child) => {
-      let func = creators[child.class];
-      if (func !== undefined) {
-        let nodeGraph = func(child);
-        parent.appendChild(nodeGraph);
-      }
-      // Add default properties
-      child.parent = node.id;
-      child.display = (child.display === undefined) ? {display: {visibility: false}} : child.display;
-      child.display.parentWidth = node.display.graphics.width;
-      child.display.parentHeight = node.display.graphics.height;
-      child.display.visibility = (child.display.visibility === undefined) ? true : child.display.visibility;
-      child.features = (child.features === undefined) ? [{click: ['C',0,0,-1]}] : child.features;
-      child.display.click = (child.display.click === undefined) ? ['C',0,0,-1] : child.display.click;
-      if (child.class === 'composite') {
-        child.traverse(initChildNode);
-      }
-    };
-*/
-
     // Preprocess storyboard
     const preprocess = (storyboard) => {
       let graph = new Graph();
@@ -121,35 +100,15 @@ const newGame = (filename) => {
 
     // Step #2- Create HTML5 and/or SVG Elements
     let root = document.getElementById('game');
-
     root.appendChild(CRAZYBIOGAME.graph.root.getHTML());
+    let popup = document.createElement('div');
+    popup.className = "modal";
+    popup.id = 'popup';
+    root.appendChild(popup);
+    
     let scene_root = CRAZYBIOGAME.graph.root;
-    root.style.maxWidth = `${scene_root.getHTML().width}px`;
+    root.style.maxWidth = `${CRAZYBIOGAME.width}px`;
     CRAZYBIOGAME.graph.traverse(scene_root,appendHTML);
-    /*
-    let func = creators[scene.class];
-    if (func !== undefined) {
-      let htmlscene = func(scene);
-      root.appendChild(htmlscene);
-      scene.forEachChild( (child) => {
-        scene.appenChild(child);
-      });
-      
-      childNodes.forEach( (node) => {
-        console.log(node);
-        let func = creators[node.class];
-        if (func !== undefined) {
-          console.log(func);
-          htmlscene.appendChild(func(node));
-        }
-      });
-    */
-// HACK        console.log(`Append child ${node.class}: ${JSON.stringify(node)}`);
-    
-    // Step #3: Add the events to link the scene(s) to the children/object(s)
-    // TODO
-    
-    // graph.root.addSensitiveLayer();
   };
   
   /*
@@ -195,6 +154,7 @@ const newGame = (filename) => {
    
    
   // Main
+  
   return getJSON(filename)
     .then( (data) => parseGraph(data) );
 }
