@@ -11,7 +11,6 @@ html {
   position: relative;
   margin: 0px auto 0px auto;
   padding: 0;
-  max-width: 717px;
   height: auto;
 }
 
@@ -32,7 +31,11 @@ img {
   color: #fff;
 }
 
-figure {
+.tile {
+cursor: pointer;
+}
+
+figure,article {
   position: absolute;
   width: 100%;
   padding: 0;
@@ -57,6 +60,17 @@ figure .map {
 }
 
 figure .map a {
+  color: white;
+}
+
+article .map {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+article .map a {
   color: white;
 }
 
@@ -86,12 +100,13 @@ figure .map a {
 }
 
 /* Modal */
-.modal {
-  display : none;
-  position: relative;
+#popup,.modal {
+  position: absolute;
   color: black;
   top: 70px;
+  width: 100%;
   font-family: 'Rock Salt', sans-serif;
+  z-index: 9999;
 }
 
 .modal-header {
@@ -134,6 +149,29 @@ figure .map a {
   animation-name: animatetop;
   animation-duration: 0.4s;
 }
+
+.modal-content input {
+  font-family: 'Lato', sans-serif;
+}
+
+.modal-content input[type=text] {
+  width: 60%;
+}
+
+.modal-content .exit {
+  color: black;
+  border: 2px solid black;
+  border-radius: 10px;
+  text-decoration: none;
+  margin: 10px;
+  padding: 5px;
+}
+
+.modal-content .exit:hover {
+  background-color: rgba(0,0,30,0.8);
+  color: white;
+}
+
 
 /* Add Animation */
 @keyframes animatetop {
