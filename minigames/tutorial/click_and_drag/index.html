@@ -1,35 +1,51 @@
 <!DOCTYPE html>
 <head>
 <meta charset="utf8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <!-- ONLY for DEBUG -->
-<script type="text/javascript" src="../../../src/core/common.js"></script>
+
+<script type="text/javascript" src="../../../src/core/node.js"></script>
 <script type="text/javascript" src="../../../src/core/machine.js"></script>
 <script type="text/javascript" src="../../../src/core/lock.js"></script>
 <script type="text/javascript" src="../../../src/core/item.js"></script>
+<script type="text/javascript" src="../../../src/core/composite.js"></script>
 <script type="text/javascript" src="../../../src/core/sprite.js"></script>
-<script type="text/javascript" src="../../../src/core/events.js"></script>
 <script type="text/javascript" src="../../../src/core/scene.js"></script>
+<script type="text/javascript" src="../../../src/core/graph.js"></script>
 <script type="text/javascript" src="../../../src/core/game.js"></script>
+<script type="text/javascript" src="../../../src/core/events.js"></script>
+<script type="text/javascript" src="../../../src/core/common.js"></script>
 
-<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
-
-
-<!-- Correct way to call the game engine
+<!-- Correct way to call the game engine 
 <script type="text/javascript" src="../../../dist/crazybiogame.min.js"></script>
 -->
 
+<script type="text/javascript" src="preprocess.js"></script>
+
+<link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
 <link rel="stylesheet" href="../../css/crazybio.css" />
+<link rel="stylesheet" href="../../css/style_crazy.css" />
 
 </head>
 <body>
-<div id="game">
-<header></header>
-<footer></footer>
-</div>
-<script type="text/javascript">
-  newGame('./storyboard.json').then( (game) => console.log(game) );
-  // game.run();
-</script>
+<header id="banner">
+</header>
+  <main>
+  <br>
+    <div id="game">
+    </div>
+  </main>
+  <footer> 
+    <h2>>A footer</h2>
+  </footer>
+  <script type="text/javascript"> 
+    createHeader();
+    preprocess();
+    newGame('./storyboard.json'); 
+  </script>
 </body>
 </html>
+

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<META NAME="Publisher" CONTENT="Jean-Christophe Taveau">
+	<META NAME="description" CONTENT="Mini-games by JC Taveau for ImageJ, the Gimp in the field of image processing and bioinformatics">
+	<META NAME="Indentifier-URL" CONTENT="www.u-bordeaux1.fr/crazybiocomputing"> 
+	<META NAME="KeyWords" CONTENT="image,ImageJ,gimp,image processing, bioinformatics, image analysis">
+	<META NAME="Robots" CONTENT="Index, NoFollow"> 
+	
+<title>CrazyBioComputing: Bioinformatics</title>
+<link href="../css/style_crazy.css" rel="stylesheet" type="text/css"> 
+<script Language="Javascript" src="./scripts/page.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+
+
+<style type="text/css">
+body {
+  width: 800px;
+  margin:auto;
+}
+
+
+p {
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+}
+
+#text {
+padding: 0px;
+margin:0px;
+}
+
+
+#text h2 {
+  margin:30px 0px 10px 0px;
+  padding:0px 0px 0px 10px;
+  border-top: 1px solid #9e0a0d;
+}
+#text h2 span{
+  margin: 0px;
+  padding:0px;
+  border:none;
+}
+
+
+	<!--
+input.btn {
+   color:#111;
+   font-family:'trebuchet ms',helvetica,sans-serif;
+   font-size:100%;
+   font-weight:bold;
+   background-color:#fff;
+   border:1px solid;
+   border-top-color:#696;
+   border-left-color:#696;
+   border-right-color:#363;
+   border-bottom-color:#363;}
+    //-->
+</style>
+
+</head>
+<body>
+
+<h1 style="font-family: 'Rock Salt', cursive;"> CrazyBioComputing - Tutorials</h1>
+
+<nav>
+<ul>
+<li style="font-family: 'Rock Salt', cursive;"><a href="../index.html">Home</a></li>
+<li style="font-family: 'Rock Salt', cursive;"><a href="../bioinfo/index.php">Bioinformatics</a></li>
+<li style="font-family: 'Rock Salt', cursive;"><a href="../gis/index.php">GIS</a></li>
+<li style="font-family: 'Rock Salt', cursive;"><a href="../ip/index.php">Image Processing</a></li>
+<!-- <li style="font-family: 'Rock Salt', cursive;"><a href="../crazydocs.html">Docs</a></li> -->
+<li style="font-family: 'Rock Salt', cursive;"><a href="http://crazybiocomputing.blogspot.com">Blog</a></li>
+<li style="font-family: 'Rock Salt', cursive;"><a href="../crazylinks.html">Links</a></li>
+<li style="font-family: 'Rock Salt', cursive;"><a href="../crazyplugs.html">ImageJ</a></li>
+</ul>
+</nav>
+
+<div id="text">
+<p>These are multimedia mini-exercises in the field of Bioinformatics </p>
+<p>Each level is composed of a maximum of 
+five enigmas (puzzle games) and the only goal is to reach the end of each mini-series. The various levels can be
+explored separately. However, the difficulty is increasing with the levels and a good knowledge of 
+Bioinformatics techniques is required for the latest. </p>
+<p> All the exercices can be solved with tools available through the web</p>
+<p> Last thing! You must have enabled cookies in your web browser to play with crazybiocomputing!</p>
+<p> Enjoy yourself!!</p>
+</div>
+
+
+<section id="levels">
+  <h2><span>Tutorial #0: Get started ... [updated Nov 2013]</span></h2>
+<table>
+  <tr>
+    <td>
+      <a href="tutorial/index.html?cat=tutorial&level=1&game=1&path=tutorial&next=click_and_drag" title="Explored and solved">
+        <img src="./tutorial/thumbnail.png" />
+      </a>
+    </td>
+    <td>
+      <a href="click_and_drag/index.html?cat=tutorial&level=1&game=2&path=click_and_drag&next=intro" title="Explored and solved">
+        <img src="./click_and_drag/thumbnail.png" />
+      </a>
+    </td>
+    <td>
+      <a href="intro/index.html?cat=tutorial&level=1&game=3&path=intro&next=image" title="Not explored">
+        <img src="../assets/thumbnail_unknown.png" title="Not explored"/>
+      </a>
+    </td>
+    <td>
+      <a href="image/index.html?cat=tutorial&level=1&game=4&path=image&next=lock" title="Not explored">
+        <img src="../assets/thumbnail_unknown.png" title="Not explored"/>
+      </a>
+    </td>
+    <td>
+      <a href="lock/index.html?cat=tutorial&level=1&game=5&path=lock&next=9999" title="Not explored">
+        <img src="../assets/thumbnail_unknown.png" title="Not explored"/>
+      </a>
+    </td>
+  </tr>
+</table>
+</section>
+
+<script type="text/javascript">
+  let gameMgr = new GameManager('levels.json');
+</script>
+</body>
+</html>
+
