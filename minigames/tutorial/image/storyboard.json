@@ -19,7 +19,7 @@
   }, 
   {
     "id": 2, 
-    "class": "sprite", 
+    "class": "machine.lockText", 
     "description": "A lock symbol", 
     "display": {
       "graphics": {
@@ -29,19 +29,11 @@
         "height": 80,
         "style": {"filter": "invert(80%)"}
       },
-      "shape" : ["C", 300, 260, 40]
+      "shape" : ["C", 40, 40, 40]
     },
-    "target" : {
-      "if": "click",
-      "then": {
-        "new_nodes": [3]
-      }
+    "features": {
+      "exit": "congratulations.html"
     }
-  }, 
-  {
-    "id": 3, 
-    "class": "machine.lockText", 
-    "description": "A text field"
   }, 
   {
     "id": 10,

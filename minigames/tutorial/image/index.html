@@ -20,21 +20,25 @@
 <script type="text/javascript" src="../../../dist/crazybiogame.min.js"></script>
 -->
 
+<script type="text/javascript" src="preprocess.js"></script>
+
 <link rel="stylesheet" href="../../css/crazybio.css" />
+<link rel="stylesheet" href="../../css/style_crazy.css" />
 
 </head>
 <body>
-  <header>
-    <h1>A header</h1>
-  </header>
+<header id="banner">
+</header>
   <main>
+  <br>
     <div id="game"></div>
-    <div id="popup"></div>
   </main>
   <footer> 
     <h2>>A footer</h2>
   </footer>
   <script type="text/javascript"> 
+    createHeader();
+    preprocess();
     newGame('./storyboard.json'); 
   </script>
 </body>
