@@ -109,8 +109,31 @@ article .map a {
   z-index: 9999;
 }
 
+.modal:target {
+    opacity:1;
+    pointer-events: auto;
+}
+.modal .close {
+    background-color: rgba(255,220,0,1.0);
+    font-family: 'Lato';
+    font-size: 2.5em;
+    padding: 8px;
+    color: #000;
+    line-height: 25px;
+    position: absolute;
+    right: -20px;
+    text-align: center;
+    top: -20px;
+    width: 26px;
+    text-decoration: none;
+    font-weight: bold;
+    border: solid 2px black;
+    box-shadow: 1px 1px 3px #000;
+}
+.modal .close:hover {
+    background: #ff8000;
+}
 .modal-header {
-  border: solid 2px;
   position: relative;
   top: -20px;
   left: -20px;
@@ -118,6 +141,8 @@ article .map a {
   padding: 2px 16px;
   background-color: rgba(255,220,0,1.0);
   color: black;
+  border: solid 2px;
+  box-shadow: 1px 1px 3px #000;
 }
 
 /* Modal Body */

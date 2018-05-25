@@ -42,7 +42,10 @@ class Lock extends Machine {
 
 /**
  * Lock displayed as a Text Field
+ *
+ * @author Charlotte GONCALVES FRASCO
  * @author Hans SCHRIEKE
+ * @author Jean-Christophe Taveau
  */
 const createLockText = (props) => {
 
@@ -58,7 +61,7 @@ const createLockText = (props) => {
     footer: 'Lock'
   };
   
-  // create the 'form'
+  // create the popup content + events
   let container = document.createElement('div');
   container.id = 'lock-container';
   let paragraph = document.createElement('p'); paragraph.appendChild(document.createTextNode('Type the code... to unlock the game'));
@@ -74,12 +77,15 @@ const createLockText = (props) => {
 
   submitbutton.onclick = () => {
     let val = document.getElementById('lock-input').value;
-    console.log(val);
-    if (val === lock.features.exit) {
+    console.log(val,lock.features.exit);
+    if (val === lock.features.exit.toString()) {
+      let html = (CRAZYBIOGAME.next_game !== '9999') ?
+        `<p>Click on this <a class="exit" href="../${CRAZYBIOGAME.next_game}">button</a>to go to the next game...</p>` :
+        `<p>End of this level !!! Return to <a class="exit" href="../index.html#level${CRAZYBIOGAME.level+1}">Home</a>...</p>`;
       displayPopup( {
-        title: 'Congratulations!!',
-        content: [`<p>Click on this <a class="exit" href="${CRAZYBIOGAME.next_game}">button</a>to go to the next game...</p>`],
-        footer:  'You Win!!'
+        title: 'Congratulations !!!',
+        content: [html],
+        footer:  'You Win !!&nbsp;&nbsp;'
       });
     }
     else {
@@ -128,10 +134,9 @@ const createLockText = (props) => {
  * @author 
  */
 const createLockNumerical = (props) => {
-  let element = document.createElement('div');
-  element.id = props.id;
-  element.className = "lock numerical";
-
+  return createLockText(props);
+  //element.className = "lock numerical";
+/*
   createPopUp(props,"lockNum");
   let modal = document.getElementById('lockNum');
   let button = document.getElementById(`svg_${props.id}`);
@@ -152,8 +157,7 @@ const createLockNumerical = (props) => {
 
   let lockNum = document.getElementsByClassName('lockNum-button')[0];
   //lockNum.href = (`${props.features.file}`);
-
-  return element;
+*/
 };
 
 

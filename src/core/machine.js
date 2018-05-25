@@ -32,13 +32,74 @@ class Machine extends Node {
     super(id,className,description);
   }
   
+  /**
+   * Static Constructor
+   *
+   */
   static create(props) {
     return new Machine(props.id,props.class,props.description,props.parent)
       .append('article')
       .display(props.display)
       .features(props.features);
   }
-}
+
+  /**
+   * Click and Drag Feature 
+   *
+   * @author Jean-Christophe Taveau
+   */
+  draggable() {
+    
+    const dragstart = (event) => {
+
+      // centers the tile at (pageX, pageY) coordinates
+      const moveAt = (pageX, pageY) => {
+        // console.log(orgX,orgY,pageX,pageY,dx,dy,' = ',pageX - orgX + dx,pageY - orgY + dy);
+        dragged.style.left = pageX - orgX  + dx + 'px';
+        dragged.style.top = pageY - orgY + dy + 'px';
+      }
+
+      const drag_over = (event) => {
+        moveAt(event.pageX, event.pageY);
+        event.preventDefault();
+        return false;
+      }
+      
+      const drag_end = (event) => {
+        event.target.parentNode.style.zIndex = 1;
+        document.querySelector('main').removeEventListener('mousemove', drag_over,false);
+        dragged.removeEventListener('mouseup', drag_end,false);
+      }
+      
+      // Main of `dragstart`
+      let dragged = event.target.parentNode;
+      
+      let orgX = event.pageX;
+      let orgY = event.pageY;
+      // TODO Must be improved - All the parents up to `game`
+      let dx = dragged.getBoundingClientRect().left - document.getElementById('game').getBoundingClientRect().left;
+      let dy = dragged.getBoundingClientRect().top - document.getElementById('game').getBoundingClientRect().top;
+      dragged.style.zIndex = 1000;
+
+      moveAt(event.pageX, event.pageY);
+
+      // Move the tile on mousemove
+      document.querySelector('main').addEventListener('mousemove', drag_over);
+
+      // Drop the tile, remove unneeded handlers
+      document.querySelector('main').addEventListener('mouseup', drag_end);
+
+    };
+
+    this.element.draggable = false;
+    this.element.addEventListener('mousedown', dragstart,false); 
+    this.element.addEventListener('dragstart', (e) => {e.preventDefault();return false},false); 
+    this.element.addEventListener('dragover', (e) => {return false},false); 
+    this.element.addEventListener('drop', (e) => false,false); 
+
+    return this;
+  }
+} // End of class Machine
 
 
 /**
@@ -85,19 +146,73 @@ const createMachineDisplay = (props) => {
 
 };
 
+ 
+ 
 /**
  * Create a new `download` machine
- * @author Hans SCHRIEKE and Charlotte GONCALVES FRASCO
+ *
+ * @author Hans SCHRIEKE 
+ * @author Charlotte GONCALVES FRASCO
  *
  */
 const createMachineDownload = (props) => {
 
-  let machine = Machine.create(props).target(props.target);
+  let machine = Machine.create(props);
   
   let element = machine.element;
   element.className = "machine download";
   
-  displayPopup(props,"ddl");
+  let targetProps = {}
+  targetProps.if = 'click',
+  targetProps.then = {};
+  targetProps.then['popup'] = {
+    title: 'Download...',
+    content: [''],
+    footer: 'Download'
+  };
+  
+  // create the 'form'
+  let container = document.createElement('div');
+  container.id = 'lock-container';
+  let paragraph = document.createElement('p'); 
+  paragraph.innerHTML = 'Click on the icon below to download the file and process it with your favorite scientific software...<br><center> <a class="button" href="javascript:void(0)"><i class="fas fa-download fa-3x"></i></a></center>';
+
+  /*
+  let dwnldButton = document.createElement('a');
+     dwnldButton.className = 'download-button';
+  dwnldButton.href = 'javascript:void(0)';
+    dwnldButton.innerHTML = '';
+    modalFooter.appendChild(dwnldButton);
+  let input = document.createElement('input');
+  input.id = 'lock-input';
+  input.type = 'text';
+  input.placeholder = 'Type the code';
+
+  let submitbutton = document.createElement('button');
+  submitbutton.id = 'button';
+  submitbutton.textContent = "OK";
+  submitbutton.type = "submit";
+
+  submitbutton.onclick = () => {
+    let val = document.getElementById('lock-input').value;
+    console.log(val);
+    if (val === lock.features.exit) {
+      displayPopup( {
+        title: 'Congratulations!!',
+        content: [`<p>Click on this <a class="exit" href="${CRAZYBIOGAME.next_game}">button</a>to go to the next game...</p>`],
+        footer:  'You Win!!'
+      });
+    }
+    else {
+      alert("Wrong code. Try again");
+    }
+  }
+  */
+  
+  // Add all the elements
+  container.appendChild(paragraph);
+  targetProps.then.popup.contentDOM = container;
+  machine.target(targetProps);
 /*
   let modal = document.getElementById("ddl");
   let button = document.getElementById(`svg_${props.id}`);
@@ -293,59 +408,13 @@ const createFormDropDown = (props) => {
 
 /**
  * Create a Tile machine
+ *
  * @author Jean-Christophe Taveau
  *
  */
 const createMachineTile = (props) => {
-    
-  const dragstart = (event) => {
-
-    // centers the tile at (pageX, pageY) coordinates
-    const moveAt = (pageX, pageY) => {
-      // console.log(orgX,orgY,pageX,pageY,dx,dy,' = ',pageX - orgX + dx,pageY - orgY + dy);
-      dragged.style.left = pageX - orgX  + dx + 'px';
-      dragged.style.top = pageY - orgY + dy + 'px';
-    }
-
-    const drag_over = (event) => {
-      moveAt(event.pageX, event.pageY);
-      event.preventDefault();
-      return false;
-    }
-    
-    const drag_end = (event) => {
-      event.target.parentNode.style.zIndex = 1;
-      document.querySelector('main').removeEventListener('mousemove', drag_over,false);
-      dragged.removeEventListener('mouseup', drag_end,false);
-    }
-    
-    let dragged = event.target.parentNode;
-    
-    let orgX = event.pageX;
-    let orgY = event.pageY;
-    // TODO Must be improved - All the parents up to `game`
-    let dx = dragged.getBoundingClientRect().left - document.getElementById('game').getBoundingClientRect().left;
-    let dy = dragged.getBoundingClientRect().top - document.getElementById('game').getBoundingClientRect().top;
-    dragged.style.zIndex = 1000;
-
-    moveAt(event.pageX, event.pageY);
-
-    // Move the tile on mousemove
-    document.querySelector('main').addEventListener('mousemove', drag_over);
-
-    // Drop the tile, remove unneeded handlers
-    document.querySelector('main').addEventListener('mouseup', drag_end);
-
-  };
-
-  let machine = Machine.create(props);
+  let machine = Machine.create(props).draggable();
   machine.element.className = "machine tile";
-  machine.element.draggable = false;
-  machine.element.addEventListener('mousedown', dragstart,false); 
-  machine.element.addEventListener('dragstart', (e) => {e.preventDefault();return false},false); 
-  machine.element.addEventListener('dragover', (e) => {return false},false); 
-  machine.element.addEventListener('drop', (e) => false,false); 
-
   return machine;
 };
 

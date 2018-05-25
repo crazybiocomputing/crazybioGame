@@ -1,54 +1,34 @@
 [
   {
-    "level": 0,
+    "level": 1,
     "title": "Get started ...",
     "history": "[updated May 2017]",
     "number": 4,
     "games": [
       {
         "id": 1,
-        "path": "tutorial/index.html",
-        "redirect": "tutorial/stunning.php",
-        "next_id": 3,
-        "current": "a",
-        "next": "b",
-        "index": 1
+        "path": "tutorial",
+        "next_id": 3
       },
       {
         "id": 3,
-        "path": "click_and_drag/index.html",
-        "redirect": "click_and_drag/allright.php",
-        "next_id": 8,
-        "current": "c",
-        "next": "d",
-        "index": 2
+        "path": "click_and_drag",
+        "next_id": 8
       },
       {
         "id": 8,
-        "path": "intro/index.html",
-        "redirect": "zero/zero.html",
-        "next_id": 34,
-        "current": "e",
-        "next": "f",
-        "index": 3
+        "path": "intro",
+        "next_id": 34
       },
       {
         "id": 34,
-        "path": "image/index.html",
-        "redirect": "image/congratulations.html",
-        "next_id": 35,
-        "current": "g",
-        "next" :"h",
-        "index": 4
+        "path": "image",
+        "next_id": 35
       },
       {
         "id": 35,
-        "path": "lock/index.html",
-        "redirect": "image/congratulations.html",
-        "next_id": 9999,
-        "current": "g",
-        "next" :"h",
-        "index": 4
+        "path": "lock",
+        "next_id": 9999
       }
     ]
   }

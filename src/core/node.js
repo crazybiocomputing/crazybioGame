@@ -89,36 +89,45 @@ class Node {
       return this;
     }
     
-    this.width = displayProps.width || displayProps.graphics.width;
-    this.height = displayProps.height || displayProps.graphics.height;
+    this.width = displayProps.width || 0;
+    this.height = displayProps.height || 0;
+    
     if (displayProps.graphics !== undefined) {
+      this.width = displayProps.graphics.width || this.width;
+      this.height = displayProps.graphics.height || this.height;
+      this.topleft = displayProps.graphics.position || [0,0];
       // Append the media
       // TODO
       // Check extension and create the appropriate HTML5 element
       let img = document.createElement('img');
       img.src = displayProps.graphics.path;
       img.addEventListener('dragstart', () => false,false); 
-      
-      // let scaleX = this.width / 1024;
-      // let scaleY = this.height / 771.2;
-      // let scaleY = this.height / document.getElementById('1').clientHeight;
-      // TODO HACK
-      this.topleft = displayProps.graphics.position || [0,0];
-      this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
-      this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
-      this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
-      this.element.style.height = 'auto'; //'`${this.height / CRAZYBIOGAME.height * 100}%`;
-      // this.element.style.height = `100%`;
       this.element.appendChild(img);
-
+      
       if (displayProps.graphics.style !== undefined) {
         for (let key in displayProps.graphics.style) {
           this.element.style[key] = displayProps.graphics.style[key];
         }
       }
     }
+    
+    // TODO HACK
     if (displayProps.shape !== undefined) {
-      this.shape = displayProps.shape;
+      this.width = displayProps.shape.width || this.width;
+      this.height = displayProps.shape.height || this.height;
+      this.topleft = displayProps.shape.position || this.topleft;
+    }
+    
+    // this.topleft = displayProps.graphics.position || displayProps.shape.position || [0,0];
+    this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
+    this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
+    this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
+    this.element.style.height = (displayProps.shape === undefined) ? 'auto' : `${this.height / CRAZYBIOGAME.height * 100}%`;
+    // this.element.style.height = `100%`;
+
+
+    if (displayProps.shape !== undefined) {
+      this.shape = displayProps.shape.data;
     }
 
     return this;

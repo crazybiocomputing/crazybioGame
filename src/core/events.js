@@ -84,17 +84,29 @@ const hideNodes = (nodelist) => {
 const displayPopup = (props) => {
 
   let modal = document.getElementById('popup');
-  // modal.style.display = 'block';
+  modal.style.display = 'block';
   
   // modal-content
   let modalContent = document.querySelector('.modal-content') || document.createElement('div');
   modalContent.className = 'modal-content';
+  
+  let closeButton = document.createElement('a')
+  closeButton.href="#close";
+  closeButton.title="Close";
+  closeButton.className ="close";
+  closeButton.textContent='×';
+  closeButton.addEventListener('click', (e) => {
+    modal.style.display = 'none';
+    e.stopPropagation();
+  }, false);
+  modalContent.appendChild(closeButton);
 
   // modal-header
   let modalHeader = document.querySelector('.modal-header') || document.createElement('div');
   modalHeader.className = 'modal-header';
   modalHeader.textContent = props.title;
   modalContent.appendChild(modalHeader);
+
 
   // modal-body
   let modalBody = document.querySelector('.modal-body') || document.createElement('div');
@@ -113,7 +125,7 @@ const displayPopup = (props) => {
   // modal-footer
   let modalFooter = document.querySelector('.modal-footer') || document.createElement('div');
   modalFooter.className = 'modal-footer';
-  modalFooter.innerHTML = `${props.footer} <i class="far fa-window-close"></i>`;
+  modalFooter.innerHTML = props.footer || '';
   modalContent.appendChild(modalFooter);
 
 
