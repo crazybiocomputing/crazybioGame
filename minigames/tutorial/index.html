@@ -10,7 +10,7 @@
 	
 <title>CrazyBioComputing: Bioinformatics</title>
 <link href="../css/style_crazy.css" rel="stylesheet" type="text/css"> 
-<script Language="Javascript" src="./scripts/page.js"></script>
+<script Language="Javascript" src="../../dist/crazybiogames.min.js"></script>
 <link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
 
@@ -95,27 +95,27 @@ Bioinformatics techniques is required for the latest. </p>
 <table>
   <tr>
     <td>
-      <a href="tutorial/index.html?cat=tutorial&level=1&game=1&path=tutorial&next=click_and_drag" title="Explored and solved">
+      <a href="tutorial/index.html?id=1&cat=tutorial&level=1&game=1&path=tutorial&next=click_and_drag" title="Explored and solved">
         <img src="./tutorial/thumbnail.png" />
       </a>
     </td>
     <td>
-      <a href="click_and_drag/index.html?cat=tutorial&level=1&game=2&path=click_and_drag&next=intro" title="Explored and solved">
+      <a href="click_and_drag/index.html?id=3&cat=tutorial&level=1&game=2&path=click_and_drag&next=intro" title="Explored and solved">
         <img src="./click_and_drag/thumbnail.png" />
       </a>
     </td>
     <td>
-      <a href="intro/index.html?cat=tutorial&level=1&game=3&path=intro&next=image" title="Not explored">
+      <a href="intro/index.html?id=8&cat=tutorial&level=1&game=3&path=intro&next=image" title="Not explored">
         <img src="../assets/thumbnail_unknown.png" title="Not explored"/>
       </a>
     </td>
     <td>
-      <a href="image/index.html?cat=tutorial&level=1&game=4&path=image&next=lock" title="Not explored">
+      <a href="image/index.html?id=34&cat=tutorial&level=1&game=4&path=image&next=lock" title="Not explored">
         <img src="../assets/thumbnail_unknown.png" title="Not explored"/>
       </a>
     </td>
     <td>
-      <a href="lock/index.html?cat=tutorial&level=1&game=5&path=lock&next=9999" title="Not explored">
+      <a href="lock/index.html?id=35&cat=tutorial&level=1&game=5&path=lock&next=9999" title="Not explored">
         <img src="../assets/thumbnail_unknown.png" title="Not explored"/>
       </a>
     </td>
@@ -124,7 +124,8 @@ Bioinformatics techniques is required for the latest. </p>
 </section>
 
 <script type="text/javascript">
-  let gameMgr = new GameManager('levels.json');
+  let gameMgr = new GameManager();
+  gameMgr.build('./levels.json');
 </script>
 </body>
 </html>
