@@ -162,10 +162,10 @@ const createMachineDownload = (props) => {
   let element = machine.element;
   element.className = "machine download";
   
-  let targetProps = {}
-  targetProps.if = 'click',
-  targetProps.then = {};
-  targetProps.then['popup'] = {
+  let actionProps = {}
+  actionProps.if = 'click',
+  actionProps.then = {};
+  actionProps.then['popup'] = {
     title: 'Download...',
     content: [''],
     footer: 'Download'
@@ -211,8 +211,8 @@ const createMachineDownload = (props) => {
   
   // Add all the elements
   container.appendChild(paragraph);
-  targetProps.then.popup.contentDOM = container;
-  machine.target(targetProps);
+  actionProps.then.popup.contentDOM = container;
+  machine.action(actionProps);
 /*
   let modal = document.getElementById("ddl");
   let button = document.getElementById(`svg_${props.id}`);

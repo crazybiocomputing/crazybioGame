@@ -54,7 +54,7 @@ class Scene extends Composite {
   
   /**
    * Create a SVG Layer for grabbing the event(s)
-   * @ obsolete
+   * @obsolete
    * @author Charlotte GONCALVES FRASCO
    */
   addSensitiveLayer() {

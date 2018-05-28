@@ -91,11 +91,12 @@ class Node {
     
     this.width = displayProps.width || 0;
     this.height = displayProps.height || 0;
-    
+    this.topleft = displayProps.position || [0,0];
+      
     if (displayProps.graphics !== undefined) {
-      this.width = displayProps.graphics.width || this.width;
-      this.height = displayProps.graphics.height || this.height;
-      this.topleft = displayProps.graphics.position || [0,0];
+      //this.width = displayProps.graphics.width || this.width;
+      //this.height = displayProps.graphics.height || this.height;
+      //this.topleft = displayProps.graphics.position || this.topleft;
       // Append the media
       // TODO
       // Check extension and create the appropriate HTML5 element
@@ -112,33 +113,34 @@ class Node {
     }
     
     // TODO HACK
-    if (displayProps.shape !== undefined) {
-      this.width = displayProps.shape.width || this.width;
-      this.height = displayProps.shape.height || this.height;
-      this.topleft = displayProps.shape.position || this.topleft;
+/*
+    if (displayProps.target !== undefined) {
+      this.width = displayProps.target.width || this.width;
+      this.height = displayProps.target.height || this.height;
     }
-    
-    // this.topleft = displayProps.graphics.position || displayProps.shape.position || [0,0];
+*/
+
+    // this.topleft = displayProps.graphics.position || displayProps.target.position || [0,0];
     this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
     this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
     this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
-    this.element.style.height = (displayProps.shape === undefined) ? 'auto' : `${this.height / CRAZYBIOGAME.height * 100}%`;
+    this.element.style.height = (displayProps.target === undefined) ? 'auto' : `${this.height / CRAZYBIOGAME.height * 100}%`;
     // this.element.style.height = `100%`;
 
 
-    if (displayProps.shape !== undefined) {
-      this.shape = displayProps.shape.data;
+    if (displayProps.target !== undefined) {
+      this.target = displayProps.target.data;
     }
 
     return this;
   }
 
   /**
-   * Create event/target features
+   * Create event features
    * 
    * @author Jean-Christophe Taveau
    */
-  target(targetProps, func) {
+  action(actionProps, func) {
   
     const doIt = (ev) => {
       console.log(`Click with ${ev.button} on object ${ev.target.dataset.objectid} and update display of ???`);
@@ -149,15 +151,15 @@ class Node {
     
     let indexSVG = this.element.children.length;
     
-    if (targetProps === undefined) {
+    if (actionProps === undefined) {
       return this;
     }
     
     // Add the event to the parent scene  
     // TODO
-    this.target = targetProps;
-    if (targetProps.if !== undefined) {
-      this.geometry = (this.shape === undefined ) ? {type: 'R', data: []} : {type: this.shape[0], data: this.shape.slice(1)};
+    this.actions = actionProps;
+    if (actionProps.if !== undefined) {
+      this.geometry = (this.target === undefined ) ? {type: 'R', data: []} : {type: this.target[0], data: this.target.slice(1)};
       if (this.geometry.data.length === 0) {
         switch (this.geometry.type) {
         case 'R' : 
@@ -169,12 +171,12 @@ class Node {
       }
     }
     this.element.appendChild(createSensitiveLayer(this.id, this.width, this.height, this.geometry));
-    if (targetProps.then.new_nodes !== undefined) {
+    if (actionProps.then.new_nodes !== undefined) {
       this.childNodes = [];
     }
     
     // Add event
-    if (targetProps.if === 'click') {
+    if (actionProps.if === 'click') {
       console.log(this.element);
       // TODO Tricky <svg> => <g> => <a>
       let action = func || doIt;
@@ -217,7 +219,7 @@ class Node {
   hasChildren() {
      
     return (this.childrenID === undefined && 
-      (this.target === undefined || this.target.then === undefined || this.target.then.new_nodes === undefined)) ? false : true;
+      (this.actions === undefined || this.actions.then === undefined || this.actions.then.new_nodes === undefined)) ? false : true;
   }
 
   /**

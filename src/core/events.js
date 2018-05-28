@@ -32,17 +32,17 @@
  */
 const triggerAction = (event,node) => {
   console.log(event);
-  console.log(node.target.then);
-  switch(node.target.if) {
+  console.log(node.actions.then);
+  switch(node.actions.if) {
   case 'click': 
-    if (node.target.then.new_nodes !== undefined) {
-      showNodes(node.target.then.new_nodes);
+    if (node.actions.then.new_nodes !== undefined) {
+      showNodes(node.actions.then.new_nodes);
     }
-    if (node.target.then.del_nodes !== undefined) {
-      hideNodes(node.target.then.del_nodes);
+    if (node.actions.then.del_nodes !== undefined) {
+      hideNodes(node.actions.then.del_nodes);
     }
-    if (node.target.then.popup !== undefined) {
-      displayPopup(node.target.then.popup);
+    if (node.actions.then.popup !== undefined) {
+      displayPopup(node.actions.then.popup);
     }
   }
 }

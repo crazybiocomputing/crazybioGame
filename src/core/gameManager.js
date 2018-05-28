@@ -26,8 +26,9 @@
 'use strict';
 
 class GameManager {
-  constructor() {
+  constructor(topic) {
     this.levels;
+    this.topic = topic;
   }
   
   build(url) {
@@ -43,6 +44,26 @@ class GameManager {
       this.levels = data;
       // Build the page web with links
       console.log(this.levels);
+      let section = document.getElementById('levels');
+      this.levels.forEach ( (level) => {
+        let title=document.createElement('h2');
+        title.innerHTML = `<span>${this.topic.charAt(0).toUpperCase() + this.topic.slice(1)} #${level.level} &mdash; ${level.title} ${level.history}</span>`;
+        let container = document.createElement('div');
+        container.appendChild(title);
+        let table = document.createElement('ul');
+        container.appendChild(table);
+        section.appendChild(container);
+        level.games.forEach( (game,index) => {
+          let item = document.createElement('li');
+          let link = document.createElement('a');
+          link.href = `${game.path}/index.html?id=${game.id}&cat=${this.topic}&level=${level.level}&game=${index+1}&path=${game.path}`;
+          let img = document.createElement('img');
+          img.src="../assets/thumbnail_unknown.png";
+          link.appendChild(img);
+          item.appendChild(link);
+          table.appendChild(item);
+        });
+      })
     })
     .catch ( error => {
       alert(`Something went wrong - ${error}`) 

@@ -52,10 +52,10 @@ const createLockText = (props) => {
   let lock = Lock.create(props);
   lock.element.className = "machine locktext";
 
-  let targetProps = {}
-  targetProps.if = 'click',
-  targetProps.then = {};
-  targetProps.then['popup'] = {
+  let actionProps = {}
+  actionProps.if = 'click',
+  actionProps.then = {};
+  actionProps.then['popup'] = {
     title: 'Unlock the game...',
     content: [''],
     footer: 'Lock'
@@ -97,8 +97,8 @@ const createLockText = (props) => {
   container.appendChild(paragraph);
   container.appendChild(input);
   container.appendChild(submitbutton);
-  targetProps.then.popup.contentDOM = container;
-  lock.target(targetProps);
+  actionProps.then.popup.contentDOM = container;
+  lock.action(actionProps);
   
   return lock;
 /*
@@ -191,7 +191,6 @@ const createLockKeypad = (props) => {
  * Lock displayed as a numpad
  * @author P. Wintringer
  *
-
 const createLockNumpad = (props) => {
   let form = document.createElement('form');
   let element = document.createElement('div');

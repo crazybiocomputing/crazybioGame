@@ -41,8 +41,7 @@ class Sprite extends Node {
     return new Sprite(props.id,props.class,props.description,props.parent)
       .append('figure')
       .display(props.display)
-      .target(props.target)
-      .features(props.features);
+      .action(props.action);
   }
 }
  

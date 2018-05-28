@@ -92,8 +92,8 @@ const newGame = (filename) => {
 
     // Step #0- Get Width and Height of game
     let root_obj = storyboard.filter ( obj => obj.id === 1 && obj.class === 'scene')[0];
-    CRAZYBIOGAME.width = root_obj.display.graphics.width;
-    CRAZYBIOGAME.height = root_obj.display.graphics.height;
+    CRAZYBIOGAME.width = root_obj.display.width;
+    CRAZYBIOGAME.height = root_obj.display.height;
      
     // Step #1- Preprocess 
     CRAZYBIOGAME.graph = preprocess(storyboard);

@@ -39,10 +39,10 @@ class Graph {
         children = a_node.childrenID;
         ancestor = a_node;
       }
-      else if (a_node.target.then.new_nodes !== undefined) {
-        children = a_node.target.then.new_nodes;
+      else if (a_node.actions.then.new_nodes !== undefined) {
+        children = a_node.actions.then.new_nodes;
         ancestor = a_node.ancestor;
-        console.log(`target.then... id ${a_node.id} ${a_node.ancestor.id}`);
+        console.log(`actions.then... id ${a_node.id} ${a_node.ancestor.id}`);
       }
     }
     else {
