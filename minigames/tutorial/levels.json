@@ -7,28 +7,23 @@
     "games": [
       {
         "id": 1,
-        "path": "tutorial",
-        "next_id": 3
+        "path": "tutorial"
       },
       {
         "id": 3,
-        "path": "click_and_drag",
-        "next_id": 8
+        "path": "click_and_drag"
       },
       {
         "id": 8,
-        "path": "intro",
-        "next_id": 34
+        "path": "intro"
       },
       {
         "id": 34,
-        "path": "image",
-        "next_id": 35
+        "path": "image"
       },
       {
         "id": 35,
-        "path": "lock",
-        "next_id": 9999
+        "path": "lock"
       }
     ]
   }

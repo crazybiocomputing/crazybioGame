@@ -17,7 +17,7 @@
 
 <style type="text/css">
 body {
-  width: 800px;
+  max-width: 1024px;
   margin:auto;
 }
 
@@ -33,17 +33,30 @@ margin:0px;
 }
 
 
-#text h2 {
+#levels h2 {
   margin:30px 0px 10px 0px;
   padding:0px 0px 0px 10px;
   border-top: 1px solid #9e0a0d;
 }
-#text h2 span{
+#levels h2 span{
   margin: 0px;
   padding:0px;
   border:none;
 }
 
+#levels ul {
+  padding:0;
+  margin:0;
+  list-style-type:none;
+}
+#levels li {
+  margin-left:4px;
+  float:left; /*pour IE*/
+}
+#levels ul li a {
+  display:block;
+  float:left;
+}
 
 	<!--
 input.btn {
@@ -79,7 +92,7 @@ input.btn {
 </nav>
 
 <div id="text">
-<p>These are multimedia mini-exercises in the field of Bioinformatics </p>
+<p>These are multimedia mini-exercises in the field of Biocomputing </p>
 <p>Each level is composed of a maximum of 
 five enigmas (puzzle games) and the only goal is to reach the end of each mini-series. The various levels can be
 explored separately. However, the difficulty is increasing with the levels and a good knowledge of 
@@ -91,40 +104,10 @@ Bioinformatics techniques is required for the latest. </p>
 
 
 <section id="levels">
-  <h2><span>Tutorial #0: Get started ... [updated Nov 2013]</span></h2>
-<table>
-  <tr>
-    <td>
-      <a href="tutorial/index.html?id=1&cat=tutorial&level=1&game=1&path=tutorial&next=click_and_drag" title="Explored and solved">
-        <img src="./tutorial/thumbnail.png" />
-      </a>
-    </td>
-    <td>
-      <a href="click_and_drag/index.html?id=3&cat=tutorial&level=1&game=2&path=click_and_drag&next=intro" title="Explored and solved">
-        <img src="./click_and_drag/thumbnail.png" />
-      </a>
-    </td>
-    <td>
-      <a href="intro/index.html?id=8&cat=tutorial&level=1&game=3&path=intro&next=image" title="Not explored">
-        <img src="../assets/thumbnail_unknown.png" title="Not explored"/>
-      </a>
-    </td>
-    <td>
-      <a href="image/index.html?id=34&cat=tutorial&level=1&game=4&path=image&next=lock" title="Not explored">
-        <img src="../assets/thumbnail_unknown.png" title="Not explored"/>
-      </a>
-    </td>
-    <td>
-      <a href="lock/index.html?id=35&cat=tutorial&level=1&game=5&path=lock&next=9999" title="Not explored">
-        <img src="../assets/thumbnail_unknown.png" title="Not explored"/>
-      </a>
-    </td>
-  </tr>
-</table>
 </section>
 
 <script type="text/javascript">
-  let gameMgr = new GameManager();
+  let gameMgr = new GameManager('tutorial');
   gameMgr.build('./levels.json');
 </script>
 </body>
