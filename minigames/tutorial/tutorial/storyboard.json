@@ -1,46 +1,116 @@
 [
   {
-    "id": 1,
-    "class":"scene",
-    "description": "A scene",
-    "children": [
-      {"id":2, "click": ["C",140,130,80]},
-      {"id":3, "click": ["C",500,130,80]},
-    ],
-    "layout": {
+    "id": 0, 
+    "author": "Jean-Christophe Taveau", 
+    "description": "Tutorial - How to play"
+  },
+  {
+    "id": 1, 
+    "class": "scene", 
+    "description": "A desktop", 
+    "display": {
+      "width": 800,
+      "height": 450,
       "graphics": {
-        "path": "assets/background.png"
+        "path": "../../assets/background_transparent.png"
       }
-
+    },
+    "children": [2]
+  }, 
+  {
+    "id": 2, 
+    "class": "sprite", 
+    "description": "Some Help", 
+    "display": {
+      "position": [300,225],
+      "width": 215,
+      "height": 74,
+      "graphics": {
+        "path": "./assets/help.jpg"
+      }
+    },
+    "action": {
+      "if": "click",
+      "then": {
+        "new_nodes": [22],
+        "del_nodes": [2],
+        "popup" : {
+          "title": "Help",
+          "content": [
+          "<p>The upper navigation bar is convenient for...</p>",
+          "<ul>",
+          "<li>",
+          "<span style=\"padding:10px;text-decoration: none;text-transform: uppercase;font-family: Arial, Helvetica, sans-serif;",
+          "font-size: 14px;font-weight: normal;color: #FFFFFF;background-color:black;\">",
+          "[ H O M E ]</span> &mdash; Return to Home Page</li>",
+          "<li>",
+          "<span style=\"padding:10px;text-decoration: none;text-transform: uppercase;font-family: Arial, Helvetica, sans-serif;",
+          "font-size: 14px;font-weight: normal;color: #FFFFFF;background-color:black;\">",
+          "[ L E V E L # 1 &mdash; G A M E # 1 ]</span> &mdash; ",
+          "Keep track of the last mini-game (level AND game) when finishing a session. There is no autosave feature.</span></li>",
+          "<li>",
+          "<span style=\"padding:10px;text-decoration: none;text-transform: uppercase;font-family: Arial, Helvetica, sans-serif;",
+          "font-size: 14px;font-weight: normal;color: #FFFFFF;background-color:black;\">",
+          "[ A r e &nbsp; y o u &nbsp; l o s t ? ]</span> &mdash; ",
+          "See <a href=\"http://crazybiocomputing.blogspot.fr/2013/03/crazybiocomputing-mini-games.html\">this introduction</a></span></li>",
+          "</ul>"],
+          "footer": "Need Help? "
+        }
+      }
     }
-
   },
   {
-    "id": 2,
-    "class":"machine.download",
-    "description": "Download Machine",
-    "layout": {
-      "title": "Download...",
-      "content": [
-        "<p>Click on the icon below to download the image... </p>",
-        "<p>...and display it in ImageJ.</p>"
-      ]
+    "id": 22, 
+    "class": "sprite", 
+    "description": "Another help", 
+    "display": {
+      "position": [300,225],
+      "width": 215,
+      "height": 74,
+      "graphics": {
+        "path": "./assets/help.jpg",
+        "style": {
+          "display": "none"
+        }
+      }
     },
-    "params" : {
-      "file": "assets/secret.tif"
+    "action": {
+      "if": "click",
+      "then": {
+        "popup" : {
+          "title": "Answer",
+          "content": [
+          "<p>To solve the mini-game, you must find out what to do on your own by looking for clues, making some computations, etc. ",
+          "The purpose is to get a <b>code</b>. </p>",
+          "<p>Once this is done, you have to enter this code &mdash; word(s), number(s),etc. &mdash; to unlock the game.</p>"],
+          "footer": "Need Help? "
+        },
+        "new_nodes": [44]
+      }
     }
-  },
+  }
+,
   {
-    "id": 3,
-    "class":"lock.digit[4]",
-    "description": "Exit lock",
-    "layout" : {
-      "title": "A Safe...",
-      "content" : ["<p>Congratulations!!, you win. Click on the button to go to the next game.</p>"]
+    "id": 44, 
+    "class": "machine.lockText", 
+    "description": "A lock symbol", 
+    "display": {
+      "position": [370,100],
+      "width": 70,
+      "height": 70,
+      "graphics": {
+        "path": "../../assets/lock_symbol.png",
+        "style": {
+          "display": "none"
+        }
+      },
+      "target": {
+        "data" : ["C",35,35,35]
+      }
     },
-    "params": {
-      "exit": 1243
+    "features": {
+      "exit": "help"
     }
-
   }
 ]
+
