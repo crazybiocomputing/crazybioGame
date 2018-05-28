@@ -4,10 +4,10 @@
     "class": "scene",
     "description": "A poster...",
     "display": {
+      "width": 690,
+      "height": 480,
       "graphics": {
-        "path": "assets/background.jpg",
-        "width": 690,
-        "height": 480
+        "path": "assets/background.jpg"
       }
     },
     "children":[2,4,20,21]
@@ -17,13 +17,13 @@
     "class": "machine.lockText", 
     "description": "A lock symbol", 
     "display": {
+      "position": [530,90],
+      "width": 60,
+      "height": 60,
       "graphics": {
-        "path": "../../assets/lock_symbol.png",
-        "position": [530,90],
-        "width": 60,
-        "height": 60
+        "path": "../../assets/lock_symbol.png"
       },
-      "shape" : {
+      "target" : {
         "data": ["C", 30,30, 30]
       }
     },
@@ -38,9 +38,9 @@
     "display": {
       "width": 335,
       "height": 195,
+        "position": [1, 0],
       "graphics": {
-        "path": "assets/congratulations_0.jpg",
-        "position": [1, 0]
+        "path": "assets/congratulations_0.jpg"
       }
     }
   },
@@ -51,9 +51,9 @@
     "display": {
       "width": 355,
       "height": 195,
+      "position": [336, 0],
       "graphics": {
-        "path": "assets/congratulations_1.jpg",
-        "position": [336, 0]
+        "path": "assets/congratulations_1.jpg"
       }
     }
   },
@@ -64,15 +64,15 @@
     "display":{
       "width": 100,
       "height": 100,
+      "position": [120,330],
       "graphics": {
-        "path": "../../assets/question.png",
-        "position": [120,330]
+        "path": "../../assets/question.png"
       },
-      "shape": {
+      "target": {
         "data": ["C",50,50, 50]
       }
     },
-    "target": {
+    "action": {
       "if": "click",
       "then": {
         "new_nodes": [5],
@@ -89,20 +89,20 @@
     "class": "sprite",
     "description": "Hint #2",
     "display":{
-      "shape": {
-        "data": ["C",50,50, 50]
-      },
       "width": 100,
       "height": 100,
+      "position": [520,330],
+      "target": {
+        "data": ["C",50,50, 50]
+      },
       "graphics": {
         "path": "../../assets/question.png",
-        "position": [520,330],
         "style": {
           "display": "none"
         }
       }
     },
-    "target": {
+    "action": {
       "if": "click",
       "then": {
         "popup": {

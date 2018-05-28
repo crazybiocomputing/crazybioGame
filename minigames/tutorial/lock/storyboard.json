@@ -1,84 +1,51 @@
 [
   {
-    "id": 2,
-    "class": "machine.download",
-    "description": "Download Machine",
-    "display": {
-      "shape": ["C", 140, 130, 80]
-    }, 
-    "target": {
-      "if": "click",
-      "then": {
-        "download": "assets/secret.tif"
-      }
-    },
-    "features": {
-      "file": "assets/secret.tif",
-      "popup": {
-        "title": "Download...",
-        "content": [
-          "<p>Click on the icon below to download the image... <br /> ...and display it in ImageJ.</p>"
-        ]
-      }
-    }
-  },
-  {
     "id": 1,
     "class": "scene",
     "description": "A scene",
     "display": {
+      "width": 800,
+      "height": 432,
       "graphics": {
-        "path": "assets/background.png",
-        "width": 800,
-        "height": 432
+        "path": "assets/background.png"
       }
     },
-    "children": [2,4]
+    "children": [2,3]
+  },
+  {
+    "id": 2,
+    "class": "machine.download",
+    "description": "Download Machine",
+    "display": {
+      "position": [140,130],
+      "width": 160,
+      "height": 160,
+      "target": {
+        "data": ["C", 80, 80, 80]
+      }
+    }, 
+    "features": {
+      "download": "assets/secret.tif"
+    }
   },
   {
     "id": 3,
     "class": "machine.lockNumerical",
     "description": "Exit lock",
     "display": {
-      "click": ["C", 500, 130, 80]
-    },
-    "features": {
-      "file" : "assets/metal_machinedigit.png",
-      "area" : ["R", 2 , 250, 30, 50],
-      "popup": {
-        "event": "onclick",
-        "content": [
-          "<p>Type the code... to exit</p>"
-        ],
-        "title": "A Safe..."
+      "position": [500,130],
+      "width": 160,
+      "height": 160,
+      "target": {
+        "data": ["C", 80, 80, 80]
       }
     },
+    "features": {
       "exit": 1243,
       "message": [
         "<p>Congratulations!!, you win. Click on the button to go to the next game.</p>"
       ],
       "theme": "metal"
-    },
-    {
-      "id": 4,
-      "class": "machine.lockText",
-      "description": "Exit lock",
-      "display": {
-        "click": ["C", 500, 130, 80]
-      },
-      "features": {
-        "popup": {
-          "event": "onclick",
-          "content": [
-            "<p>Type the code... to exit</p>"
-          ],
-          "title": "A Safe..."
-        }
-      },
-      "exit": 1243,
-      "message": [
-        "Congratulations!!, you win. Click on the button to go to the next game."
-      ],
-      "theme": "metal"
     }
+  }
 ]

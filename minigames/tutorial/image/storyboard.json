@@ -9,10 +9,10 @@
     "class": "scene", 
     "description": "A desktop", 
     "display": {
+      "width": 717,
+      "height": 540,
       "graphics": {
-        "path": "assets/background.png",
-        "width": 717,
-        "height": 540
+        "path": "assets/background.png"
       }
     },
     "children": [2,10,11,12,13,14]
@@ -22,14 +22,14 @@
     "class": "machine.lockText", 
     "description": "A lock symbol", 
     "display": {
+      "position": [300,260],
+      "width": 80,
+      "height": 80,
       "graphics": {
         "path": "../../assets/lock_symbol.png",
-        "position": [300,260],
-        "width": 80,
-        "height": 80,
         "style": {"filter": "invert(80%)"}
       },
-      "shape" : ["C", 40, 40, 40]
+      "target" : ["C", 40, 40, 40]
     },
     "features": {
       "exit": "congratulations.html"
@@ -40,14 +40,14 @@
     "class": "sprite", 
     "description": "Button 1", 
     "display": {
+      "position": [520,514],
+      "width": 124,
+      "height": 25,
       "graphics": {
-        "path": "assets/button02.png",
-        "position": [520,514],
-        "width": 124,
-        "height": 25
+        "path": "assets/button02.png"
       }
     },
-    "target": {
+    "action": {
       "if": "click",
       "then": {
         "new_nodes": [110],
@@ -60,14 +60,14 @@
     "class": "sprite", 
     "description": "Button 2",  
     "display": {
+      "width": 124,
+      "height": 25,
+      "position": [154,515],
       "graphics": {
-        "position": [154,515],
-        "path": "assets/button90.png",
-        "width": 124,
-        "height": 25
+        "path": "assets/button90.png"
       }
     },
-    "target": {
+    "action": {
       "if": "click",
       "then": {
         "new_nodes": [111],
@@ -80,14 +80,14 @@
     "class": "sprite", 
     "description": "Button 3",  
     "display": {
+      "width": 124,
+      "height": 25,
+      "position": [276,514],
       "graphics": {
-        "position": [276,514],
-        "path": "assets/button70.png",
-        "width": 124,
-        "height": 25
+        "path": "assets/button70.png"
       }
     },
-    "target": {
+    "action": {
       "if": "click",
       "then": {
         "new_nodes": [112],
@@ -100,14 +100,14 @@
     "class": "sprite", 
     "description": "Button 4",
     "display": {
+      "width": 124,
+      "height": 25,
+      "position": [398,514],
       "graphics": {
-        "position": [398,514],
-        "path": "assets/button54.png",
-        "width": 124,
-        "height": 25
+        "path": "assets/button54.png"
       }
     },
-    "target": {
+    "action": {
       "if": "click",
       "then": {
         "new_nodes": [113],
@@ -120,14 +120,14 @@
     "class": "sprite", 
     "description": "Button 5",
     "display": {
+      "width": 124,
+      "height": 25,
+      "position": [30,514],
       "graphics": {
-        "position": [30,514],
-        "path": "assets/button20.png",
-        "width": 124,
-        "height": 25
+        "path": "assets/button20.png"
       }
     },
-    "target": {
+    "action": {
       "if": "click",
       "then": {
         "new_nodes": [114],
@@ -140,11 +140,11 @@
     "class": "machine.tile", 
     "description": "Piece 1",
     "display": {
+      "position": [151,42],
+      "width": 280,
+      "height": 278,
       "graphics": {
         "path": "assets/plasma0234_ij.png",
-        "position": [151,42],
-        "width": 280,
-        "height": 278,
         "style": {
           "display": "none"
         }
@@ -156,12 +156,12 @@
     "class": "machine.tile",
     "description": "Piece 2",
     "display": {
+      "width": 110,
+      "height": 228,
+      "position": [402,65],
       "visibility": false,
       "graphics": {
-        "position": [402,65],
         "path": "assets/plasma9009_ij.png",
-        "width": 110,
-        "height": 228,
         "style": {
           "display": "none"
         }
@@ -173,12 +173,12 @@
     "class": "machine.tile",
     "description": "Piece 3",
     "display": {
+      "width": 280,
+      "height": 278,
+      "position": [350,195],
       "visibility": false,
       "graphics": {
-        "position": [350,195],
         "path": "assets/plasma7043_ij.png",
-        "width": 280,
-        "height": 278,
         "style": {
           "display": "none"
         }
@@ -190,11 +190,11 @@
     "class": "machine.tile",
     "description": "Piece 4",
     "display": {
+      "width": 110,
+      "height": 348,
+      "position": [11,26],
       "graphics": {
-        "position": [11,26],
         "path": "assets/plasma5492_ij.png",
-        "width": 110,
-        "height": 348,
         "style": {
           "display": "none"
         }
@@ -206,11 +206,11 @@
     "class": "machine.tile",
     "description": "Piece 5",
     "display": {
+      "width": 550,
+      "height": 298,
+      "position": [51,148],
       "graphics": {
-        "position": [51,148],
         "path": "assets/plasma2078_ij.png",
-        "width": 550,
-        "height": 298,
         "style": {
           "display": "none"
         }
