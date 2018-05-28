@@ -23,7 +23,9 @@
         "width": 60,
         "height": 60
       },
-      "shape" : ["C", 30,30, 30]
+      "shape" : {
+        "data": ["C", 30,30, 30]
+      }
     },
     "features": {
       "exit": "allright"
@@ -60,12 +62,14 @@
     "class": "sprite",
     "description": "Hint #1",
     "display":{
-      "shape": ["C",50,50, 50],
       "width": 100,
       "height": 100,
       "graphics": {
         "path": "../../assets/question.png",
         "position": [120,330]
+      },
+      "shape": {
+        "data": ["C",50,50, 50]
       }
     },
     "target": {
@@ -85,7 +89,9 @@
     "class": "sprite",
     "description": "Hint #2",
     "display":{
-      "shape": ["C",50,50, 50],
+      "shape": {
+        "data": ["C",50,50, 50]
+      },
       "width": 100,
       "height": 100,
       "graphics": {
@@ -103,8 +109,8 @@
           "title": "The solution ?",
         "content": [
           "<p>There are two hidden top panels that you can drag to unveil a secret code ",
-          "as shown below</p> <img src=\"assets/hiddenPanel1and2.jpg\"></img> <p>And now, you can see the hidden sentence. ",
-          "The answer is allright.<br> Click on the <b>lock</b> icon to enter the secret code.</p>"
+          "as shown below</p> <img src=\"assets/hiddenPanel1and2.jpg\"></img> <p>And now, you can see the hidden sentence... ",
+          "<br> Click on the <b>lock</b> icon to enter the secret code.</p>"
         ]
         }
       }
