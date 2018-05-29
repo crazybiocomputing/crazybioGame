@@ -166,7 +166,7 @@ const createMachineDownload = (props) => {
   actionProps.if = 'click',
   actionProps.then = {};
   actionProps.then['popup'] = {
-    title: 'Download...',
+    header: 'Download...',
     content: [''],
     footer: 'Download'
   };

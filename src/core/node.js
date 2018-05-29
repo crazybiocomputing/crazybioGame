@@ -93,6 +93,7 @@ class Node {
     this.height = displayProps.height || 0;
     this.topleft = displayProps.position || [0,0];
       
+    // Image
     if (displayProps.graphics !== undefined) {
       //this.width = displayProps.graphics.width || this.width;
       //this.height = displayProps.graphics.height || this.height;
@@ -111,23 +112,24 @@ class Node {
         }
       }
     }
-    
-    // TODO HACK
-/*
-    if (displayProps.target !== undefined) {
-      this.width = displayProps.target.width || this.width;
-      this.height = displayProps.target.height || this.height;
+    // Text
+    else if (displayProps.text !== undefined) {
+      this.element.innerHTML = displayProps.text.content.join('');
+      if (displayProps.text.style !== undefined) {
+        for (let key in displayProps.text.style) {
+          this.element.style[key] = displayProps.text.style[key];
+        }
+      }
     }
-*/
-
-    // this.topleft = displayProps.graphics.position || displayProps.target.position || [0,0];
+    console.log(this.width,this.height,this.topleft,CRAZYBIOGAME.width,CRAZYBIOGAME.height);
+    
     this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
     this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
     this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
     this.element.style.height = (displayProps.target === undefined) ? 'auto' : `${this.height / CRAZYBIOGAME.height * 100}%`;
     // this.element.style.height = `100%`;
 
-
+    // Target to event(s)
     if (displayProps.target !== undefined) {
       this.target = displayProps.target.data;
     }

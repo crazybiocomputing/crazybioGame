@@ -28,6 +28,7 @@
 
 const creators = {
   "composite": createComposite,
+  "deferred": createDeferred,
   "item": createItem,
   "machine": createMachine,
   "machine.display": createMachineDisplay,

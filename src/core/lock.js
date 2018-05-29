@@ -56,7 +56,7 @@ const createLockText = (props) => {
   actionProps.if = 'click',
   actionProps.then = {};
   actionProps.then['popup'] = {
-    title: 'Unlock the game...',
+    header: 'Unlock the game...',
     content: [''],
     footer: 'Lock'
   };
@@ -83,7 +83,7 @@ const createLockText = (props) => {
         `<p>Click on this <a class="exit" href="../${CRAZYBIOGAME.next_game}">button</a>to go to the next game...</p>` :
         `<p>End of this level !!! Return to <a class="exit" href="../index.html#level${CRAZYBIOGAME.level+1}">Home</a>...</p>`;
       displayPopup( {
-        title: 'Congratulations !!!',
+        header: 'Congratulations !!!',
         content: [html],
         footer:  'You Win !!&nbsp;&nbsp;'
       });

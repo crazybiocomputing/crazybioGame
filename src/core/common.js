@@ -33,7 +33,8 @@
  
 /* Global Variable */
 let CRAZYBIOGAME = {
-  name: 'A crazyBioComputing Game'
+  name: 'A crazyBioComputing Game',
+  deferred: {}
 };
 
 const categories = {

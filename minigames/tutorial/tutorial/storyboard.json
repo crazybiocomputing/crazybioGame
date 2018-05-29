@@ -25,8 +25,11 @@
       "position": [300,225],
       "width": 215,
       "height": 74,
-      "graphics": {
-        "path": "./assets/help.jpg"
+      "text": {
+        "content": ["<span>[ H E L P ]</span>"],
+        "style": {
+          "padding": "10px"
+        }
       }
     },
     "action": {
@@ -35,23 +38,17 @@
         "new_nodes": [22],
         "del_nodes": [2],
         "popup" : {
-          "title": "Help",
+          "header": "Help",
           "content": [
           "<p>The upper navigation bar is convenient for...</p>",
           "<ul>",
           "<li>",
-          "<span style=\"padding:10px;text-decoration: none;text-transform: uppercase;font-family: Arial, Helvetica, sans-serif;",
-          "font-size: 14px;font-weight: normal;color: #FFFFFF;background-color:black;\">",
-          "[ H O M E ]</span> &mdash; Return to Home Page</li>",
+          "<span style=\"font-size:18px\">[ H O M E ]</span> &mdash; Return to Home Page</li>",
           "<li>",
-          "<span style=\"padding:10px;text-decoration: none;text-transform: uppercase;font-family: Arial, Helvetica, sans-serif;",
-          "font-size: 14px;font-weight: normal;color: #FFFFFF;background-color:black;\">",
-          "[ L E V E L # 1 &mdash; G A M E # 1 ]</span> &mdash; ",
+          "<span style=\"font-size:18px\">[ L E V E L # 1 &mdash; G A M E # 1 ]</span> &mdash; ",
           "Keep track of the last mini-game (level AND game) when finishing a session. There is no autosave feature.</span></li>",
           "<li>",
-          "<span style=\"padding:10px;text-decoration: none;text-transform: uppercase;font-family: Arial, Helvetica, sans-serif;",
-          "font-size: 14px;font-weight: normal;color: #FFFFFF;background-color:black;\">",
-          "[ A r e &nbsp; y o u &nbsp; l o s t ? ]</span> &mdash; ",
+          "<span style=\"font-size:18px\">[ A R E &nbsp; Y O U &nbsp; L O S T ? ]</span> &mdash; ",
           "See <a href=\"http://crazybiocomputing.blogspot.fr/2013/03/crazybiocomputing-mini-games.html\">this introduction</a></span></li>",
           "</ul>"],
           "footer": "Need Help? "
@@ -67,10 +64,11 @@
       "position": [300,225],
       "width": 215,
       "height": 74,
-      "graphics": {
-        "path": "./assets/help.jpg",
+      "text": {
+        "content": ["<span>[ H E L P ]</span>"],
         "style": {
-          "display": "none"
+          "display": "none",
+          "padding": "10px"
         }
       }
     },
@@ -78,39 +76,27 @@
       "if": "click",
       "then": {
         "popup" : {
-          "title": "Answer",
+          "header": "Answer",
           "content": [
           "<p>To solve the mini-game, you must find out what to do on your own by looking for clues, making some computations, etc. ",
           "The purpose is to get a <b>code</b>. </p>",
           "<p>Once this is done, you have to enter this code &mdash; word(s), number(s),etc. &mdash; to unlock the game.</p>"],
           "footer": "Need Help? "
         },
-        "new_nodes": [44]
+        "new_nodes": [33,44],
+        "del_nodes": [22]
       }
     }
-  }
-,
+  },
+  {
+    "id": 33, 
+    "class": "deferred", 
+    "description": "unlock"
+  },
   {
     "id": 44, 
-    "class": "machine.lockText", 
-    "description": "A lock symbol", 
-    "display": {
-      "position": [370,100],
-      "width": 70,
-      "height": 70,
-      "graphics": {
-        "path": "../../assets/lock_symbol.png",
-        "style": {
-          "display": "none"
-        }
-      },
-      "target": {
-        "data" : ["C",35,35,35]
-      }
-    },
-    "features": {
-      "exit": "help"
-    }
+    "class": "deferred", 
+    "description": "lock"
   }
 ]
 

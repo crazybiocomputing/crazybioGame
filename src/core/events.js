@@ -104,7 +104,7 @@ const displayPopup = (props) => {
   // modal-header
   let modalHeader = document.querySelector('.modal-header') || document.createElement('div');
   modalHeader.className = 'modal-header';
-  modalHeader.textContent = props.title;
+  modalHeader.textContent = props.header;
   modalContent.appendChild(modalHeader);
 
 
