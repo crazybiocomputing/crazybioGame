@@ -21,7 +21,8 @@ let unlock = createSprite({
       ],
       style: {
         display: "none",
-        padding: "10px"
+        padding: "10px",
+        animation: "fadein 60s"
       }
     }
   }
