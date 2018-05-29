@@ -78,7 +78,7 @@
         "new_nodes": [5],
         "del_nodes": [4],
         "popup": {
-          "title": "Need some Help?",
+          "header": "Need some Help?",
           "content": ["<p>Click and Drag somewhere...</p>"]
         }
       }
@@ -106,7 +106,7 @@
       "if": "click",
       "then": {
         "popup": {
-          "title": "The solution ?",
+          "header": "The solution ?",
         "content": [
           "<p>There are two hidden top panels that you can drag to unveil a secret code ",
           "as shown below</p> <img src=\"assets/hiddenPanel1and2.jpg\"></img> <p>And now, you can see the hidden sentence... ",
