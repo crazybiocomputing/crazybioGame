@@ -171,6 +171,8 @@ class Node {
           this.geometry.data[3] = this.height;
         }
       }
+      // Update height
+      this.element.style.height = `${this.height / CRAZYBIOGAME.height * 100}%`;
     }
     this.element.appendChild(createSensitiveLayer(this.id, this.width, this.height, this.geometry));
     if (actionProps.then.new_nodes !== undefined) {

@@ -101,7 +101,7 @@ const displayPopup = (props) => {
   }, false);
   modalContent.appendChild(closeButton);
 
-  // modal-header
+  // modal-header ** MANDATORY **
   let modalHeader = document.querySelector('.modal-header') || document.createElement('div');
   modalHeader.className = 'modal-header';
   modalHeader.textContent = props.header;
@@ -115,18 +115,20 @@ const displayPopup = (props) => {
     modalBody.removeChild(modalBody.lastChild);
   }
   if (props.contentDOM === undefined) {
-    modalBody.innerHTML = props.content.join('');
+    modalBody.innerHTML = (props.content !== undefined) ? props.content.join('') : '';
   }
   else {
     modalBody.appendChild(props.contentDOM);
   }
   modalContent.appendChild(modalBody);
 
+
   // modal-footer
   let modalFooter = document.querySelector('.modal-footer') || document.createElement('div');
   modalFooter.className = 'modal-footer';
   modalFooter.innerHTML = props.footer || '';
   modalContent.appendChild(modalFooter);
+
 
 
   modal.appendChild(modalContent);

@@ -204,9 +204,38 @@ article .map a {
   to {top: 0; opacity: 1}
 }
 
-
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+@keyframes fadeinout {
+    from { opacity: 0; }
+    50%  { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Media queries */
+
+@media screen and (max-width: 640px) {
+  #banner {
+    max-width: 100%;
+    width: auto;
+    height: 20px;
+    background-color: red;
+  }
+  
+  #banner a {
+    font-size: 8px;
+  }
+  
+  #game {
+    max-width: 100%;
+  }
 }
 

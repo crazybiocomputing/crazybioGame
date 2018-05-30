@@ -3,7 +3,6 @@
     "level": 1,
     "title": "Get started ...",
     "history": "[updated May 2017]",
-    "number": 4,
     "games": [
       {
         "id": 1,
@@ -24,6 +23,48 @@
       {
         "id": 35,
         "path": "lock"
+      }
+    ]
+  },
+  {
+    "level": 2,
+    "title": "More ...",
+    "history": "[updated May 2017]",
+    "games": [
+      {
+        "id": 20,
+        "path": "escape"
+      },
+      {
+        "id": 23,
+        "path": "floor"
+      },
+      {
+        "id": 28,
+        "path": "dialog"
+      }
+    ]
+  },
+  {
+    "level": 3,
+    "title": "Peur sur la Bioinformatique!!",
+    "history": "[updated May 2017]",
+    "games": [
+      {
+        "id": 40,
+        "path": "crime"
+      },
+      {
+        "id": 41,
+        "path": "forensics"
+      },
+      {
+        "id": 42,
+        "path": "similar"
+      },
+      {
+        "id": 43,
+        "path": "mansion"
       }
     ]
   }
