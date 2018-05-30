@@ -1,7 +1,7 @@
 [
   {
     "level": 1,
-    "title": "Toolbar ... [ N E W   Feb 2013]",
+    "title": "Toolbar ...",
     "history": "[updated May 2017]",
     "games": [
       {
@@ -28,7 +28,7 @@
   },
   {
     "level": 2,
-    "title": "Colors ... [ U p d a t e d   Oct 2010]",
+    "title": "Colors ...",
     "history": "[updated May 2017]",
     "games": [
       {
@@ -55,7 +55,7 @@
   },
   {
     "level": 3,
-    "title": "Exploring ... [ U p d a t e d   Oct 2010]",
+    "title": "Exploring ...",
     "history": "[updated May 2017]",
     "games": [
       {
@@ -109,7 +109,7 @@
   },
   {
     "level": 5,
-    "title": "1 + 1 + 1 + 1 + . . . . + 1 = ???? [N E W : Sept 2012]",
+    "title": "1 + 1 + 1 + 1 + . . + 1 = ????",
     "history": "[updated May 2017]",
     "games": [
       {
@@ -132,7 +132,7 @@
   },
   {
     "level": 6,
-    "title": "AND, OR, XOR, + - * / ... [ U p d a t e d   Nov 2011]",
+    "title": "AND, OR, XOR, + - * / ...",
     "history": "[updated May 2017]",
     "games": [
       {
@@ -159,7 +159,7 @@
   },
   {
     "level": 7,
-    "title": "Morphology ... [ N E W   Feb 2013]",
+    "title": "Morphology ...",
     "history": "[updated May 2017]",
     "games": [
       {
@@ -178,7 +178,7 @@
   },
   {
     "level": 8,
-    "title": "Noise ... [ U p d a t e d March 2012]",
+    "title": "Noise ...",
     "history": "[updated May 2017]",
     "games": [
       {
@@ -205,7 +205,7 @@
   },
   {
     "level": 9,
-    "title": "Fourier Space: The twilight zone ... [ U p d a t e d March 2012]",
+    "title": "Fourier Space: The twilight zone ...",
     "history": "[updated May 2017]",
     "games": [
       {
@@ -404,7 +404,14 @@
       {
          "id": 669,
           "path": "salt"
-      },
+      }
+    ]
+  },
+  {
+    "level": 17,
+    "title": "Misc.",
+    "history": "[updated May 2017]",
+    "games": [
       {
          "id": 670,
           "path": "stars"
