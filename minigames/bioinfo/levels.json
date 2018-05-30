@@ -1,0 +1,452 @@
+[
+  {
+    "games": [
+      {
+        "id": 10, 
+        "path": "whereis"
+      }, 
+      {
+        "id": 11, 
+        "path": "format"
+      }, 
+      {
+        "id": 13, 
+        "path": "text"
+      }, 
+      {
+        "id": 15, 
+        "path": "to"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 1, 
+    "title": "Entry format -  ..."
+  }, 
+  {
+    "games": [
+      {
+        "id": 21, 
+        "path": "storage"
+      }, 
+      {
+        "id": 22, 
+        "path": "entrez"
+      }, 
+      {
+        "id": 24, 
+        "path": "data"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 2, 
+    "title": "Databases -  ..."
+  }, 
+  {
+    "games": [
+      {
+        "id": 2, 
+        "path": "organism"
+      }, 
+      {
+        "id": 34, 
+        "path": "locus"
+      }, 
+      {
+        "id": 37, 
+        "path": "pmid"
+      }, 
+      {
+        "id": 38, 
+        "path": "swiss"
+      }, 
+      {
+        "id": 39, 
+        "path": "source"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 3, 
+    "title": "Data mining -  ..."
+  }, 
+  {
+    "games": [
+      {
+        "id": 40, 
+        "path": "jump"
+      }, 
+      {
+        "id": 41, 
+        "path": "mouse"
+      }, 
+      {
+        "id": 42, 
+        "path": "cheese"
+      }, 
+      {
+        "id": 45, 
+        "path": "entry"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 4, 
+    "title": "Bread AND Cheese OR Dessert BUT NOT Ice cream  ..."
+  }, 
+  {
+    "games": [
+      {
+        "id": 51, 
+        "path": "date"
+      }, 
+      {
+        "id": 52, 
+        "path": "filter"
+      }, 
+      {
+        "id": 57, 
+        "path": "lost"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 5, 
+    "title": "Data mining: Experts only"
+  }, 
+  {
+    "games": [
+      {
+        "id": 61, 
+        "path": "rasmol"
+      }, 
+      {
+        "id": 62, 
+        "path": "animate"
+      }, 
+      {
+        "id": 64, 
+        "path": "atoms"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 6, 
+    "title": "3D Structure"
+  }, 
+  {
+    "games": [
+      {
+        "id": 72, 
+        "path": "crazylab"
+      }, 
+      {
+        "id": 75, 
+        "path": "computer"
+      }, 
+      {
+        "id": 77, 
+        "path": "install"
+      }, 
+      {
+        "id": 78, 
+        "path": "workflow"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 7, 
+    "title": "Bioinformatics Tools"
+  }, 
+  {
+    "games": [
+      {
+        "id": 83, 
+        "path": "length_of"
+      }, 
+      {
+        "id": 84, 
+        "path": "alpha"
+      }, 
+      {
+        "id": 85, 
+        "path": "aa"
+      }, 
+      {
+        "id": 87, 
+        "path": "translate"
+      }, 
+      {
+        "id": 89, 
+        "path": "clean"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 8, 
+    "title": "Using Tools"
+  }, 
+  {
+    "games": [
+      {
+        "id": 91, 
+        "path": "twofortwo"
+      }, 
+      {
+        "id": 92, 
+        "path": "howmany"
+      }, 
+      {
+        "id": 94, 
+        "path": "dottup"
+      }, 
+      {
+        "id": 95, 
+        "path": "plot"
+      }, 
+      {
+        "id": 98, 
+        "path": "latin"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 9, 
+    "title": "Dot plots"
+  }, 
+  {
+    "games": [
+      {
+        "id": 101, 
+        "path": "nucleic"
+      }, 
+      {
+        "id": 102, 
+        "path": "score"
+      }, 
+      {
+        "id": 104, 
+        "path": "global"
+      }, 
+      {
+        "id": 107, 
+        "path": "pair"
+      }, 
+      {
+        "id": 108, 
+        "path": "needleman"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 10, 
+    "title": "Alignements"
+  }, 
+  {
+    "games": [
+      {
+        "id": 110, 
+        "path": "sun"
+      }, 
+      {
+        "id": 111, 
+        "path": "acgt"
+      }, 
+      {
+        "id": 113, 
+        "path": "species"
+      }, 
+      {
+        "id": 115, 
+        "path": "blast"
+      }, 
+      {
+        "id": 116, 
+        "path": "homolog"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 11, 
+    "title": "Blaaaast"
+  }, 
+  {
+    "games": [
+      {
+        "id": 120, 
+        "path": "weight"
+      }, 
+      {
+        "id": 121, 
+        "path": "multi"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 12, 
+    "title": "Proteomics"
+  }, 
+  {
+    "games": [
+      {
+        "id": 130, 
+        "path": "newick"
+      }, 
+      {
+        "id": 131, 
+        "path": "kingdom"
+      }, 
+      {
+        "id": 133, 
+        "path": "ancestor"
+      }, 
+      {
+        "id": 135, 
+        "path": "crocodile"
+      }, 
+      {
+        "id": 138, 
+        "path": "simplify"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 13, 
+    "title": "Phylogeny ..."
+  }, 
+  {
+    "games": [
+      {
+        "id": 140, 
+        "path": "myo"
+      }, 
+      {
+        "id": 141, 
+        "path": "structure"
+      }, 
+      {
+        "id": 143, 
+        "path": "compare"
+      }, 
+      {
+        "id": 145, 
+        "path": "broken"
+      }, 
+      {
+        "id": 148, 
+        "path": "cross"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 14, 
+    "title": "Could you help me? ..."
+  }, 
+  {
+    "games": [
+      {
+        "id": 150, 
+        "path": "crime"
+      }, 
+      {
+        "id": 151, 
+        "path": "forensics"
+      }, 
+      {
+        "id": 154, 
+        "path": "mansion"
+      }, 
+      {
+        "id": 157, 
+        "path": "gender"
+      }, 
+      {
+        "id": 158, 
+        "path": "docks"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 15, 
+    "title": "Happy sunday for 'Dee And Hey' ..."
+  }, 
+  {
+    "games": [
+      {
+        "id": 160, 
+        "path": "reaction"
+      }, 
+      {
+        "id": 163, 
+        "path": "metabolism"
+      }, 
+      {
+        "id": 165, 
+        "path": "pig"
+      }, 
+      {
+        "id": 166, 
+        "path": "cofactor"
+      }, 
+      {
+        "id": 169, 
+        "path": "pig_in_3d"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 16, 
+    "title": "Project <i>'Notes'</i> ..."
+  }, 
+  {
+    "games": [
+      {
+        "id": 170, 
+        "path": "cluster"
+      }, 
+      {
+        "id": 171, 
+        "path": "multi"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 17, 
+    "title": "Multiple Alignment ..."
+  }, 
+  {
+    "games": [
+      {
+        "id": 180, 
+        "path": "assembly"
+      }, 
+      {
+        "id": 181, 
+        "path": "overlap"
+      }, 
+      {
+        "id": 183, 
+        "path": "exact"
+      }, 
+      {
+        "id": 187, 
+        "path": "final"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 18, 
+    "title": "Project ..."
+  }, 
+  {
+    "games": [
+      {
+        "id": 190, 
+        "path": "eyes"
+      }, 
+      {
+        "id": 191, 
+        "path": "opsin"
+      }, 
+      {
+        "id": 192, 
+        "path": "mining"
+      }, 
+      {
+        "id": 195, 
+        "path": "life"
+      }, 
+      {
+        "id": 197, 
+        "path": "howler"
+      }
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 19, 
+    "title": "Project <i>'In your eyes only'</i> ..."
+  }
+]
+

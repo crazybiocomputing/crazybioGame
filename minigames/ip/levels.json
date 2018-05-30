@@ -1,425 +1,426 @@
 [
   {
-    "level": 1,
-    "title": "Toolbar ...",
-    "history": "[updated May 2017]",
     "games": [
       {
-         "id": 41,
-          "path": "straight"
-      },
+        "id": 41, 
+        "path": "straight"
+      }, 
       {
-         "id": 43,
-          "path": "clock"
-      },
+        "id": 43, 
+        "path": "clock"
+      }, 
       {
-         "id": 47,
-          "path": "scribble"
-      },
+        "id": 47, 
+        "path": "scribble"
+      }, 
       {
-         "id": 48,
-          "path": "radius"
-      },
+        "id": 48, 
+        "path": "radius"
+      }, 
       {
-         "id": 50,
-          "path": "compass"
+        "id": 50, 
+        "path": "compass"
       }
-    ]
-  },
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 1, 
+    "title": "Toolbar ..."
+  }, 
   {
-    "level": 2,
-    "title": "Colors ...",
-    "history": "[updated May 2017]",
     "games": [
       {
-         "id": 100,
-          "path": "two"
-      },
+        "id": 100, 
+        "path": "two"
+      }, 
       {
-         "id": 112,
-          "path": "blobs"
-      },
+        "id": 112, 
+        "path": "blobs"
+      }, 
       {
-         "id": 123,
-          "path": "mono"
-      },
+        "id": 123, 
+        "path": "mono"
+      }, 
       {
-         "id": 135,
-          "path": "wall"
-      },
+        "id": 135, 
+        "path": "wall"
+      }, 
       {
-         "id": 139,
-          "path": "color"
+        "id": 139, 
+        "path": "color"
       }
-    ]
-  },
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 2, 
+    "title": "Colors ..."
+  }, 
   {
-    "level": 3,
-    "title": "Exploring ...",
-    "history": "[updated May 2017]",
     "games": [
       {
-         "id": 201,
-          "path": "analyze"
-      },
+        "id": 201, 
+        "path": "analyze"
+      }, 
       {
-         "id": 204,
-          "path": "glyphs"
-      },
+        "id": 204, 
+        "path": "glyphs"
+      }, 
       {
-         "id": 207,
-          "path": "hexa"
-      },
+        "id": 207, 
+        "path": "hexa"
+      }, 
       {
-         "id": 222,
-          "path": "spiral"
-      },
+        "id": 222, 
+        "path": "spiral"
+      }, 
       {
-         "id": 228,
-          "path": "pond"
+        "id": 228, 
+        "path": "pond"
       }
-    ]
-  },
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 3, 
+    "title": "Exploring ..."
+  }, 
   {
-    "level": 4,
-    "title": "One, two, three, four ...",
-    "history": "[updated May 2017]",
     "games": [
       {
-         "id": 250,
-          "path": "length"
-      },
+        "id": 250, 
+        "path": "length"
+      }, 
       {
-         "id": 257,
-          "path": "shapes"
-      },
+        "id": 257, 
+        "path": "shapes"
+      }, 
       {
-         "id": 261,
-          "path": "splat"
-      },
+        "id": 261, 
+        "path": "splat"
+      }, 
       {
-         "id": 263,
-          "path": "pearls"
-      },
+        "id": 263, 
+        "path": "pearls"
+      }, 
       {
-         "id": 264,
-          "path": "laby"
+        "id": 264, 
+        "path": "laby"
       }
-    ]
-  },
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 4, 
+    "title": "One, two, three, four ..."
+  }, 
   {
-    "level": 5,
-    "title": "1 + 1 + 1 + 1 + . . + 1 = ????",
-    "history": "[updated May 2017]",
     "games": [
       {
-         "id": 275,
-          "path": "flowers"
-      },
+        "id": 275, 
+        "path": "flowers"
+      }, 
       {
-         "id": 276,
-          "path": "tooth"
-      },
+        "id": 276, 
+        "path": "tooth"
+      }, 
       {
-         "id": 279,
-          "path": "polygon"
-      },
+        "id": 279, 
+        "path": "polygon"
+      }, 
       {
-         "id": 281,
-          "path": "ends"
+        "id": 281, 
+        "path": "ends"
       }
-    ]
-  },
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 5, 
+    "title": "1 + 1 + 1 + 1 + . . + 1 = ????"
+  }, 
   {
-    "level": 6,
-    "title": "AND, OR, XOR, + - * / ...",
-    "history": "[updated May 2017]",
     "games": [
       {
-         "id": 303,
-          "path": "zorro"
-      },
+        "id": 303, 
+        "path": "zorro"
+      }, 
       {
-         "id": 324,
-          "path": "grid"
-      },
+        "id": 324, 
+        "path": "grid"
+      }, 
       {
-         "id": 333,
-          "path": "typewriter"
-      },
+        "id": 333, 
+        "path": "typewriter"
+      }, 
       {
-         "id": 342,
-          "path": "grays"
-      },
+        "id": 342, 
+        "path": "grays"
+      }, 
       {
-         "id": 349,
-          "path": "lines"
+        "id": 349, 
+        "path": "lines"
       }
-    ]
-  },
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 6, 
+    "title": "AND, OR, XOR, + - * / ..."
+  }, 
   {
-    "level": 7,
-    "title": "Morphology ...",
-    "history": "[updated May 2017]",
     "games": [
       {
-         "id": 350,
-          "path": "cross"
-      },
+        "id": 350, 
+        "path": "cross"
+      }, 
       {
-         "id": 351,
-          "path": "autumn"
-      },
+        "id": 351, 
+        "path": "autumn"
+      }, 
       {
-         "id": 353,
-          "path": "bucolic"
+        "id": 353, 
+        "path": "bucolic"
       }
-    ]
-  },
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 7, 
+    "title": "Morphology ..."
+  }, 
   {
-    "level": 8,
-    "title": "Noise ...",
-    "history": "[updated May 2017]",
     "games": [
       {
-         "id": 361,
-          "path": "pepper"
-      },
+        "id": 361, 
+        "path": "pepper"
+      }, 
       {
-         "id": 362,
-          "path": "random"
-      },
+        "id": 362, 
+        "path": "random"
+      }, 
       {
-         "id": 364,
-          "path": "blink"
-      },
+        "id": 364, 
+        "path": "blink"
+      }, 
       {
-         "id": 365,
-          "path": "fog"
-      },
+        "id": 365, 
+        "path": "fog"
+      }, 
       {
-         "id": 369,
-          "path": "noise"
+        "id": 369, 
+        "path": "noise"
       }
-    ]
-  },
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 8, 
+    "title": "Noise ..."
+  }, 
   {
-    "level": 9,
-    "title": "Fourier Space: The twilight zone ...",
-    "history": "[updated May 2017]",
     "games": [
       {
-         "id": 370,
-          "path": "copper"
-      },
+        "id": 370, 
+        "path": "copper"
+      }, 
       {
-         "id": 375,
-          "path": "black"
-      },
+        "id": 375, 
+        "path": "black"
+      }, 
       {
-         "id": 377,
-          "path": "diamond"
-      },
+        "id": 377, 
+        "path": "diamond"
+      }, 
       {
-         "id": 380,
-          "path": "photo"
-      },
+        "id": 380, 
+        "path": "photo"
+      }, 
       {
-         "id": 383,
-          "path": "book"
+        "id": 383, 
+        "path": "book"
       }
-    ]
-  },
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 9, 
+    "title": "Fourier Space: The twilight zone ..."
+  }, 
   {
-    "level": 10,
-    "title": "Lizards ...In preparation.",
-    "history": "[updated May 2017]",
     "games": [
       {
-         "id": 400,
-          "path": "seeds"
-      },
+        "id": 400, 
+        "path": "seeds"
+      }, 
       {
-         "id": 403,
-          "path": "migration"
-      },
+        "id": 403, 
+        "path": "migration"
+      }, 
       {
-         "id": 410,
-          "path": "eggs"
-      },
+        "id": 410, 
+        "path": "eggs"
+      }, 
       {
-         "id": 411,
-          "path": "larvae"
-      },
+        "id": 411, 
+        "path": "larvae"
+      }, 
       {
-         "id": 425,
-          "path": "xrays"
+        "id": 425, 
+        "path": "xrays"
       }
-    ]
-  },
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 10, 
+    "title": "Lizards ...In preparation."
+  }, 
   {
-    "level": 11,
-    "title": "Import images, low level ...",
-    "history": "[updated May 2017]",
     "games": [
       {
-         "id": 504,
-          "path": "numeric"
-      },
+        "id": 504, 
+        "path": "numeric"
+      }, 
       {
-         "id": 507,
-          "path": "import"
-      },
+        "id": 507, 
+        "path": "import"
+      }, 
       {
-         "id": 510,
-          "path": "polaroid"
-      },
+        "id": 510, 
+        "path": "polaroid"
+      }, 
       {
-         "id": 513,
-          "path": "ordenador"
-      },
+        "id": 513, 
+        "path": "ordenador"
+      }, 
       {
-         "id": 519,
-          "path": "search"
+        "id": 519, 
+        "path": "search"
       }
-    ]
-  },
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 11, 
+    "title": "Import images, low level ..."
+  }, 
   {
-    "level": 12,
-    "title": "Import images, low level ... [ E X P E R T]",
-    "history": "[updated May 2017]",
     "games": [
       {
-         "id": 522,
-          "path": "carbon"
-      },
+        "id": 522, 
+        "path": "carbon"
+      }, 
       {
-         "id": 526,
-          "path": "good"
-      },
+        "id": 526, 
+        "path": "good"
+      }, 
       {
-         "id": 528,
-          "path": "tictactoe"
-      },
+        "id": 528, 
+        "path": "tictactoe"
+      }, 
       {
-         "id": 532,
-          "path": "trouble"
+        "id": 532, 
+        "path": "trouble"
       }
-    ]
-  },
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 12, 
+    "title": "Import images, low level ... [ E X P E R T]"
+  }, 
   {
-    "level": 13,
-    "title": "Vectors, Points, Overlays, ROI Manager ...",
-    "history": "[updated May 2017]",
     "games": [
       {
-         "id": 536,
-          "path": "pass"
-      },
+        "id": 536, 
+        "path": "pass"
+      }, 
       {
-         "id": 539,
-          "path": "draw"
-      },
+        "id": 539, 
+        "path": "draw"
+      }, 
       {
-         "id": 542,
-          "path": "marbles"
+        "id": 542, 
+        "path": "marbles"
       }
-    ]
-  },
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 13, 
+    "title": "Vectors, Points, Overlays, ROI Manager ..."
+  }, 
   {
-    "level": 14,
-    "title": "Scripting ...",
-    "history": "[updated May 2017]",
     "games": [
       {
-         "id": 560,
-          "path": "league"
-      },
+        "id": 560, 
+        "path": "league"
+      }, 
       {
-         "id": 561,
-          "path": "math"
-      },
+        "id": 561, 
+        "path": "math"
+      }, 
       {
-         "id": 563,
-          "path": "crypto"
-      },
+        "id": 563, 
+        "path": "crypto"
+      }, 
       {
-         "id": 571,
-          "path": "circles"
-      },
+        "id": 571, 
+        "path": "circles"
+      }, 
       {
-         "id": 573,
-          "path": "crypt"
+        "id": 573, 
+        "path": "crypt"
       }
-    ]
-  },
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 14, 
+    "title": "Scripting ..."
+  }, 
   {
-    "level": 15,
-    "title": "Segmentation ...",
-    "history": "[updated May 2017]",
     "games": [
       {
-         "id": 606,
-          "path": "dots"
-      },
+        "id": 606, 
+        "path": "dots"
+      }, 
       {
-         "id": 618,
-          "path": "vibration"
-      },
+        "id": 618, 
+        "path": "vibration"
+      }, 
       {
-         "id": 622,
-          "path": "mosaic"
-      },
+        "id": 622, 
+        "path": "mosaic"
+      }, 
       {
-         "id": 635,
-          "path": "soap"
-      },
+        "id": 635, 
+        "path": "soap"
+      }, 
       {
-         "id": 636,
-          "path": "wood"
+        "id": 636, 
+        "path": "wood"
       }
-    ]
-  },
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 15, 
+    "title": "Segmentation ..."
+  }, 
   {
-    "level": 16,
-    "title": "Segmentation ... [ E X P E R T]",
-    "history": "[updated May 2017]",
     "games": [
       {
-         "id": 639,
-          "path": "mosaic"
-      },
+        "id": 639, 
+        "path": "mosaic"
+      }, 
       {
-         "id": 641,
-          "path": "wood"
-      },
+        "id": 641, 
+        "path": "wood"
+      }, 
       {
-         "id": 652,
-          "path": "stack"
-      },
+        "id": 652, 
+        "path": "stack"
+      }, 
       {
-         "id": 666,
-          "path": "clouds"
-      },
+        "id": 666, 
+        "path": "clouds"
+      }, 
       {
-         "id": 669,
-          "path": "salt"
+        "id": 669, 
+        "path": "salt"
       }
-    ]
-  },
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 16, 
+    "title": "Segmentation ... [ E X P E R T]"
+  }, 
   {
-    "level": 17,
-    "title": "Misc.",
-    "history": "[updated May 2017]",
     "games": [
       {
-         "id": 670,
-          "path": "stars"
-      },
+        "id": 670, 
+        "path": "stars"
+      }, 
       {
-         "id": 672,
-          "path": "shuffling"
+        "id": 672, 
+        "path": "shuffling"
       }
-    ]
+    ], 
+    "history": "[updated May 2017]", 
+    "level": 17, 
+    "title": "Misc."
   }
 ]
+
