@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf8">
+<!-- ONLY for DEBUG -->
+<script type="text/javascript" src="../../../src/core/common.js"></script>
+<script type="text/javascript" src="../../../src/core/machine.js"></script>
+<script type="text/javascript" src="../../../src/core/lock.js"></script>
+<script type="text/javascript" src="../../../src/core/item.js"></script>
+<script type="text/javascript" src="../../../src/core/target.js"></script>
+<script type="text/javascript" src="../../../src/core/sprite.js"></script>
+<script type="text/javascript" src="../../../src/core/scene.js"></script>
+<script type="text/javascript" src="../../../src/core/game.js"></script>
+
+
+<!-- Correct way to call the game engine 
+<script type="text/javascript" src="../../../dist/crazybiogame.min.js"></script>
+-->
+
+<link rel="stylesheet" href="../../../css/crazybio.css" />
+
+</head>
+<body>
+<div id="game">
+<map name="primary">
+  <area shape="rect" coords="0,0,124,25" href="left.html" alt="Click to go Left">
+</map>
+<figure class="scene">
+<img src="./background.png"></img>
+<img usemap= "#primary" class="target hover_group" src="./button20.png" style="position:absolute;top:514px;left:30px;"></img>
+<a class="hover_group" href="#"><img class="target" src="./button90.png" style="position:absolute;top:515px;left:154px;"></img></a>
+<img class="target" src="./button70.png" style="position:absolute;top:514px;left:276px;"></img>
+<img class="target" src="./button54.png" style="position:absolute;top:514px;left:398px;"></img>
+<img class="target" src="./button02.png" style="position:absolute;top:514px;left:520px;"></img>
+</figure>
+
+
+</div>
+</html>

@@ -1,0 +1,94 @@
+RecName: Full=Amelogenin, X isoform; Flags: Precursor
+UniProtKB/Swiss-Prot: Q99217.1
+GenPeptGraphicsRelated Sequences Identical Proteins
+Next record
+>gi|1168430|sp|Q99217.1|AMELX_HUMAN RecName: Full=Amelogenin, X isoform; Flags: Precursor
+MGTWILFACLLGAAFAMPLPPHPGHPGYINFSYEVLTPLKWYQSIRPPYPSYGYEPMGGWLHHQIIPVLS
+QQHPPTHTLQPHHHIPVVPAQQPVIPQQPMMPVPGQHSMTPIQHHQPNLPPPAQQPYQPQPVQPQPHQPM
+QPQPPVHPMQPLPPQPPLPPMFPMQPLPPMLPDLTLEAWPSTDKTKREEVD
+
+
+
+2.
+RecName: Full=Amelogenin, Y isoform; Flags: Precursor
+UniProtKB/Swiss-Prot: Q99218.2
+GenPeptGraphicsRelated Sequences
+Previous recordNext record
+>gi|85681286|sp|Q99218.2|AMELY_HUMAN RecName: Full=Amelogenin, Y isoform; Flags: Precursor
+MGTWILFACLVGAAFAMPLPPHPGHPGYINFSYENSHSQAINVDRIALVLTPLKWYQSMIRPPYSSYGYE
+PMGGWLHHQIIPVVSQQHPLTHTLQSHHHIPVVPAQQPRVRQQALMPVPGQQSMTPTQHHQPNLPLPAQQ
+PFQPQPVQPQPHQPMQPQPPVQPMQPLLPQPPLPPMFPLRPLPPILPDLHLEAWPATDKTKQEEVD
+
+Gene AMELX
+Location : Xp22.31-p22.1
+Sequence : Chromosome: X; NC_000023.11 (11293413..11300761)See AMELX in Epigenomics, MapViewer
+
+Gene AMELY
+Location : Yp11.2
+Sequence : Chromosome: Y; NC_000024.10 (68659
+
+
+########################################
+# Program: needle
+# Rundate: Fri 14 Feb 2014 11:11:50
+# Commandline: needle
+#    -auto
+#    -stdout
+#    -asequence emboss_needle-I20140214-111148-0868-90881117-pg.asequence
+#    -bsequence emboss_needle-I20140214-111148-0868-90881117-pg.bsequence
+#    -datafile EBLOSUM62
+#    -gapopen 10.0
+#    -gapextend 0.5
+#    -endopen 10.0
+#    -endextend 0.5
+#    -aformat3 pair
+#    -sprotein1
+#    -sprotein2
+# Align_format: pair
+# Report_file: stdout
+########################################
+
+#=======================================
+#
+# Aligned_sequences: 2
+# 1: AMELY_HUMAN
+# 2: AMELX_HUMAN
+# Matrix: EBLOSUM62
+# Gap_penalty: 10.0
+# Extend_penalty: 0.5
+#
+# Length: 206
+# Identity:     169/206 (82.0%)
+# Similarity:   179/206 (86.9%)
+# Gaps:          15/206 ( 7.3%)
+# Score: 951.5
+# 
+#
+#=======================================
+
+AMELY_HUMAN        1 MGTWILFACLVGAAFAMPLPPHPGHPGYINFSYENSHSQAINVDRIALVL     50
+                     ||||||||||:|||||||||||||||||||||||              ||
+AMELX_HUMAN        1 MGTWILFACLLGAAFAMPLPPHPGHPGYINFSYE--------------VL     36
+
+AMELY_HUMAN       51 TPLKWYQSMIRPPYSSYGYEPMGGWLHHQIIPVVSQQHPLTHTLQSHHHI    100
+                     |||||||| |||||.||||||||||||||||||:|||||.|||||.||||
+AMELX_HUMAN       37 TPLKWYQS-IRPPYPSYGYEPMGGWLHHQIIPVLSQQHPPTHTLQPHHHI     85
+
+AMELY_HUMAN      101 PVVPAQQPRVRQQALMPVPGQQSMTPTQHHQPNLPLPAQQPFQPQPVQPQ    150
+                     ||||||||.:.||.:||||||.||||.||||||||.|||||:||||||||
+AMELX_HUMAN       86 PVVPAQQPVIPQQPMMPVPGQHSMTPIQHHQPNLPPPAQQPYQPQPVQPQ    135
+
+AMELY_HUMAN      151 PHQPMQPQPPVQPMQPLLPQPPLPPMFPLRPLPPILPDLHLEAWPATDKT    200
+                     |||||||||||.|||||.||||||||||::||||:||||.|||||:||||
+AMELX_HUMAN      136 PHQPMQPQPPVHPMQPLPPQPPLPPMFPMQPLPPMLPDLTLEAWPSTDKT    185
+
+AMELY_HUMAN      201 KQEEVD    206
+                     |:||||
+AMELX_HUMAN      186 KREEVD    191
+
+
+#---------------------------------------
+#---------------------------------------
+
+
+

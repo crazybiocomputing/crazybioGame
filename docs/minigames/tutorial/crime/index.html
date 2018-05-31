@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+<script type="text/javascript" src="../../../dist/crazybiogames.min.js"></script>
+
+<link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+<link rel="stylesheet" href="../../css/crazybio.css" />
+<link rel="stylesheet" href="../../css/style_crazy.css" />
+
+<style>
+#dialog, #player {
+  /*    height: 200px; */
+  padding: 5px 5px 5px 5px;
+  margin: auto;
+  background-color: rgba(180,180,180,0.95);
+  z-index: 2;
+  max-width: 60%;
+}
+
+.chat {
+  float:right;
+  width:70%;
+  border: 2px solid;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  font-family: 'Rock Salt', sans-serif;
+  font-size:0.9em;
+}
+.chat p {
+  padding: 0px;
+  margin: 0px;
+}
+#people {
+  float:right;
+  width: 150px;
+  margin: 0px;
+  padding: 0px;
+}
+
+#people > img {
+  width: 100%;
+}
+</style>
+</head>
+<body>
+  <header id="banner">
+  </header>
+  <main>
+    <br>
+
+    <div id="game">
+    </div>
+  </main>
+  <footer> 
+    <div id="dialog">
+      <div id="people">
+        <img src="assets/anna.svg"></img>
+      </div>
+      <div class="chat">
+        <p>Bonjour, je m'appelle Anna et je fais un stage dans le service de police scientifique du CTPD 
+        (CrazyTown Police Departement). Je dois travailler sur ma 1ère affaire: <b>Lord Black</b> a été 
+        assassiné dans la nuit... Je dois chercher des échantillons pour analyser les ADNs...</p>
+      </div>
+    </div>
+    <br>
+  </footer>
+  <script type="text/javascript"> 
+    CRAZYBIOGAME.init();
+    newGame('./storyboard.json'); 
+  </script>
+</body>
+</html>
+

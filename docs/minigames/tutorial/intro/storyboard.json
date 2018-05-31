@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "class": "scene",
+    "description": "A workspace...",
+    "display": {
+      "width": 616,
+      "height": 462,
+      "graphics": {
+        "path": "assets/background_test.jpg"
+      }
+    },
+    "children": [3]
+  },
+  {
+    "id": 3,
+    "class": "machine.tile",
+    "description": "firefox",
+    "display": {
+      "width": 400,
+      "height": 286,
+        "position": [30, 50],
+      "graphics": {
+        "path": "assets/firefox_mini.png"
+      }
+    }
+  }
+]

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+<script type="text/javascript" src="../../../dist/crazybiogames.min.js"></script>
+
+<link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+<link rel="stylesheet" href="../../css/crazybio.css" />
+<link rel="stylesheet" href="../../css/style_crazy.css" />
+
+<style>
+aside
+{
+    position: relative;
+    left: 101%;
+    width: 50px;
+    background-color: #706b64;
+    box-shadow: 10px 6px 5px #1c1a19;
+    border-radius: 10px;
+    padding: 5px;
+    color: white;
+    font-size: 0.9em;
+}
+
+#game section {
+  position: absolute;
+}
+</style>
+</head>
+<body>
+  <header id="banner">
+  </header>
+  <main>
+  <br>
+
+    <div id="game">
+      <aside>Inventory
+      <ul>
+      <li><a href="#"><img src = "../../assets/lock_symbol.png"></img></a></li>
+      <li><a href="#"><img src = "../../assets/lock_symbol.png"></img></a></li>
+      <li><a href="#"><img src = "../../assets/lock_symbol.png"></img></a></li>
+      </ul>
+      </aside>
+    </div>
+  </main>
+  <footer> 
+  </footer>
+  <script type="text/javascript"> 
+    CRAZYBIOGAME.init();
+    newGame('./storyboard.json'); 
+  </script>
+</body>
+</html>
+

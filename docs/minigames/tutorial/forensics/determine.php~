@@ -1,0 +1,185 @@
+<?php
+	require('../../phpCrazy/cookie_check_crazybio.inc.php');
+?>
+<?php
+	include('../../phpCrazy/header.inc.php');
+?>
+<link href='http://fonts.googleapis.com/css?family=Walter+Turncoat' rel='stylesheet' type='text/css'>
+
+<style>
+label {
+  font-family: monospace;
+  font-size:18px;
+  color:#646464;";
+}
+
+input {
+  font-size: 18px;
+}
+
+</style>
+
+
+<div id="page">
+<div id="content">
+ <p style="font-family: 'Walter Turncoat', cursive;font-size:30px">I&nbsp;n&nbsp;t&nbsp;r&nbsp;o&nbsp;d&nbsp;u&nbsp;c&nbsp;t&nbsp;i&nbsp;o&nbsp;n: Internship</p>
+<div id="myform" style="width:700px;margin:auto;font-size : 20px; font-family :  arial,sans serif;">
+
+<center>
+<?php
+
+if (isset($_POST['OK']) ) {
+  $id1=strtoupper($_POST['item1']);
+  $id2=strtoupper($_POST['item2']);
+  $id3=strtoupper($_POST['item3']);
+  $id4=strtoupper($_POST['item4']);
+  $id5=strtoupper($_POST['item5']);
+  $id6=strtoupper($_POST['item6']);
+  $id7=strtoupper($_POST['item7']);
+
+
+  $score=0;
+  if ($id1=='AMELX') {
+    $score =1;
+    echo '<p style="font-size : 40px;">&#x2605;';
+  }
+  else {
+    echo '<p style="font-size : 40px;">&#x2606;';
+    $id1='?';
+  }
+
+  if ($id2=='P22.31-P22.1') {
+    echo '&#x2605;';
+    $score +=2;
+  }
+  else {
+    echo '&#x2606;';
+    $id2='';
+  }
+
+  if ($id3=='AMELY') {
+    echo '&#x2605;';
+    $score +=4;
+  }
+  else {
+    echo '&#x2606;';
+    $id3='?';
+  }
+
+  if ($id4=='P11.2') {
+    $score +=8;
+    echo '&#x2605;';
+  }
+  else {
+    echo '&#x2606;';
+    $id4='';
+  }
+
+
+  if ($id5=='NSHSQAINVDRIAL') {
+    echo '&#x2605;';
+    $score +=8;
+  }
+  else {
+    echo '&#x2606;';
+    $id5='';
+  }
+
+  if ($id6=='21603') {
+    echo '&#x2605;';
+    $score +=16;
+  }
+  else {
+    echo '&#x2606;';
+    $id6='';
+  }
+
+  if ($id7=='23249') {
+    $score +=32;
+    echo '&#x2605;';
+  }
+  else {
+    echo '&#x2606;';
+    $id7='';
+  }
+
+
+  if ($sex=='male') {
+    echo '&#x2605;';
+    $score +=64;
+  }
+  else {
+    echo '&#x2606;';
+    $id8='';
+  }
+
+
+  if ($score==127)   
+    echo '<p><pre>
+> Sample 1
+AATCGGAGATGACCAAGTCTACAACGTATTAGTAACAGCCCACGCCTTCGTGATAATCTTCTTCATAGTT
+ATACCTATTATAATCGGCGGATTCGGAAATTGACTGGTCCCTCTAATGATTGGAGCACCCGACATAGCCT
+TCCCTCGTATAAATAACATAAGCTTCTGACTACTCCCTCCTTCCTTCCTACTCTTAATAGCATCCTCAAT
+
+> Sample 2
+CGGCAACCTAGCCCATGCAGGGGCATCCGTAGATTTAACTATTTTTTCACTACACCTGGCAGGTGTCTCC
+TCAATCTTAGGCGCTATTAATTTTATTACTACTATTATTAATATAAAACCCCCTGCTATATCCCAATACC
+AAACACCTCTATTCGTCTGATCGGTCTTAATCACTGCTGTATTGCTACTCCTATCACTGCCAGTTTTAGC
+
+> Sample 3
+TCCCCCTGATAATTGGGGCTCCTGACATAGCCTTCCCCCGAATAAATAATATGAGCTTCTGACTTCTCCC
+CCCTTCATTCCTTCTTCTACTAGCCTCCTCAATAGTAGAAGCTGGGGCGGGGACTGGCTGAACTGTTTAT
+CCACCTCTAGCCGGTAATCTTGCACATGCTGGAGCCTCAGTGGATCTTACTATTTTCTCCCTTCACTTAG
+
+> Sample 4
+TTCCACTGCTTGAAGTTATTGTTACGACCACGAAGAAACGACAAATCCCAACTACGGATATATAAGAGCC
+AAAACTGCTAAGGGCATTCCATCCAGCGTAAGCATCTGGATAATCTGGAATGCGACGTGGCATACCCGAA
+AGCCCTAAGAAATGCATAGGAAAGAAGGTCATATTAACCCCGAAAAAAGTGATCCAAAAATGGATTTGAC
+</pre><a title="Click on \'yes\'" style="text-decoration:none" href="skullbones.php">Yeeess!!!</a></p>';
+  else
+    echo '<p>W r o n g &nbsp; a n s w e r</p>' ;
+}
+else {
+  $id1='?'; $id2=''; $id3='';
+  $id4=''; $id5=''; $id6='';
+  $id7=''; 
+}
+
+?>
+</center>
+<img src="manor.png"></img>
+
+<MAP NAME="dialog">
+<AREA shape="rect" coords="102,45,326,81" HREF="dataseq.php" ALT="data" />
+</MAP>
+<br>
+<form action="dna.php" method="post">
+<h2>Where are the genes?</h2>
+<label>Gene Name:</label><input type="text" size=10 name="item1" value="<?php echo $id1; ?>"></input>
+<label>Location: X</label><input type="text" size=10 name="item2" value="<?php echo $id2; ?>"></input><br>
+<label>Gene Name:</label><input type="text" size=10 name="item3" value="<?php echo $id3; ?>"></input>
+<label>Location: Y</label><input type="text" size=10 name="item4" value="<?php echo $id4; ?>"></input>
+
+<h2>Difference between the products of genes?</h2>
+
+<label>Longest Difference of sequence:</label><input type="text" size=10 name="item5" value="<?php echo $id5; ?>"></input><br>
+<label>MW of protein 1:</label><input type="text" size=10 name="item6" value="<?php echo $id6; ?>"></input><br>
+<label>MW of protein 2:</label><input type="text" size=10 name="item7" value="<?php echo $id7; ?>"></input><br>
+
+<p>An electrophoresis was done and two bands was observed in the lane... Thus, the conclusion is:</p>
+<input type="radio" name="sex" value="unknown">Unknown<br>
+<input type="radio" name="sex" value="male">Male<br>
+<input type="radio" name="sex" value="female">Female<br>
+
+<input type="submit" name="OK" value="OK"></input>
+</form>
+
+</div>
+
+
+</div>
+</div>
+
+<?php
+	include('../../phpCrazy/footer.inc.php');
+?>

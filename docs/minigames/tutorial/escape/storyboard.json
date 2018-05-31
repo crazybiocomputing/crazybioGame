@@ -1,0 +1,72 @@
+[
+  {
+    "id": 0, 
+    "author": "Jean-Christophe Taveau", 
+    "description": "Tutorial - Example of `item`"
+  },
+  {
+    "id": 1, 
+    "class": "scene", 
+    "description": "A desktop", 
+    "display": {
+      "width": 800,
+      "height": 468,
+      "graphics": {
+        "path": "assets/background.png"
+      }
+    },
+    "children": [3,4,7]
+  },
+  {
+    "id": 3,
+    "class": "sprite",
+    "description": "Key",
+    "display": {
+      "width": 100,
+      "height": 100,
+      "position": [20,20],
+      "graphics" : {
+        "path": "../../assets/lock_symbol.png"
+      },
+      "target": {
+        "data": ["C", 50, 50, 50]
+      }
+    }
+  },
+  {
+    "id": 4,
+    "class": "sprite",
+    "description": "Lock",
+    "display": {
+      "width": 100,
+      "height": 100,
+      "position": [680,348],
+      "graphics" : {
+        "path": "../../assets/lock_symbol.png"
+      },
+      "target": {
+        "data": ["C", 50, 50, 50]
+      }
+    }
+  },
+  {
+    "id": 7,
+    "class": "machine.lockNumerical",
+    "description": "Exit lock",
+    "display": {
+      "width": 100,
+      "height": 100,
+      "position": [680,20],
+      "graphics" : {
+        "path": "../../assets/lock_symbol.png"
+      },
+      "target": {
+        "data": ["C", 50, 50, 50]
+      }
+    },
+    "features": {
+      "exit": 1249
+    }
+  }
+]
+

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"></meta>
+<link href='http://fonts.googleapis.com/css?family=Coda' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" href="../../js/font-awesome/css/font-awesome.min.css">
+
+<style type="text/css">
+
+body {
+  width: 1024px;
+  margin: 0 auto;
+}
+
+
+#content {
+  width: inherit;
+}
+
+#the_game {
+  position:relative;
+  width: inherit;
+  margin : 0px;
+  padding: 0px;
+  font-family: 'Coda', sans-serif;
+  font-size:16px;
+}
+
+
+#scene {
+  width: inherit;
+  height: inherit;
+  position: relative;
+  z-index: 1;
+  clear:both;
+}
+
+svg {
+  display: inline-block;
+  position: absolute;
+}
+
+#dialog {
+  position: relative;
+  float: right;
+  width: 80%;
+  top: -100%;
+  /*    height: 200px; */
+  padding: 5px 5px 5px 5px;
+  margin: 5px;
+  background-color: rgba(255,128,20,0.8);
+  z-index: 2;
+}
+.chat {
+  float:right;
+  width:70%;
+  border: 2px solid;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  font-family: 'Coda', sans-serif;
+  font-size:16px;
+}
+.chat p {
+  padding: 0px;
+  margin: 0px;
+}
+
+.the_button {
+  text-decoration: none;
+  padding: 0px 5px 2px;
+  border: 1px solid #DDD;
+  border-radius: 3px;
+  background-clip: padding-box;
+  background-color: #EEE;
+  font-family: 'Coda', sans-serif;
+  font-size: 16px;
+  color: #666;
+}
+
+.right_button {
+  float: right;
+  text-decoration: none;
+  padding: 0px 5px 2px;
+  border: 1px solid #DDD;
+  border-radius: 3px;
+  background-clip: padding-box;
+  background-color: #EEE;
+  font-family: 'Coda', sans-serif;
+  font-size: 16px;
+  color: #666;
+}
+
+.seq {
+  font-family:monospace;
+  font-size:20px;
+  line-height:40px;
+}
+
+.row {
+  margin:0px;
+  padding:0px;
+}
+
+.tag {
+  font-family:sans-serif;
+  font-size:16px;
+  font-weight:bold;
+  background-color:#000;
+  color:#fff;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  padding:4px;
+  text-align:center;
+  margin:auto;
+}
+
+.shifti {
+  width:40px;
+  line-height:20px;
+  border: 0px solid;
+  background-color: transparent;
+}
+
+#people {
+  float:right;
+  width: 20%;
+  margin: 0px;
+  padding: 0px;
+}
+
+#people > img {
+  width: 100%;
+}
+
+#read0,#read1,#read2,#read3,#read4 {
+ font-size:28px;
+ text-decoration: none;
+}
+
+#toolbar {
+  display:flex;
+  width: inherit;
+  position: absolute;
+  justify-content: flex-end;
+  align-items: flex-end;
+  /*
+  position: relative;
+  display:block;
+  vertical-align: bottom;
+  */
+  margin: 0px;
+  width: 100%;
+  bottom: 0px;
+  max-height: 15%;
+  background-color: rgba(57, 142, 142,0.5);
+  z-index: 2;
+}
+
+
+#toolbar  ul {
+  padding: 0px;
+  margin: 0px;
+  list-style-type: none;
+}
+#toolbar  li {
+ margin:0px 0px 0px 2px;
+ padding: 0px;
+ display:inline;
+ clear:both;
+ }
+
+#toolbar ul li a {
+  display:inline;
+  text-decoration:none;
+ }
+
+#inventory {
+  max-width: 80%
+}
+
+#inventory  ul  li a img:hover {
+  transform-origin: 0% 100%;
+  -webkit-transform: scale(4.0); // This is the enlarged size scale of the image.
+  -webkit-transition-duration: 500ms;
+  -webkit-transition-timing-function: ease-out;
+  padding-right: 20px;
+
+}
+
+.clue_item {
+  height: 60px;
+}
+
+</style>
+
+<script type="text/javascript" src="./story.js"></script>
+<script type="text/javascript" src="storyboard.js"></script>
+
+<script type="text/javascript">
+function doIt() {
+
+  // Init sessionStorage
+  sessionStorage.setItem("assembly2_max_comments",3);
+  sessionStorage.setItem("assembly2_tool" ,"Which EMBOSS tool?");
+  sessionStorage.setItem("assembly2_tool2","Which EMBOSS tool?");
+
+  initStory('S000');
+  updateDisplay('S000');
+
+}
+</script>
+
+</head>
+<body onload="doIt();">
+
+<div id="page">
+<div id="content">
+
+<div id="the_game">
+  <div id="scene" ></div>
+
+  <div id="dialog">
+    <div id="people"></div>
+    <div class="chat" id="chat"></div>
+  </div>
+
+  <div id="toolbar">
+      <div id="inventory">
+        <ul>
+          <li><a href="#"><img class="clue_item" src="sampleA.svg"></img></a></li>
+          <li><a href="#"><img class="clue_item" src="sampleA.svg"></img></i></a></li>
+          <li><a href="#"><img class="clue_item" src="sampleA.svg"></img></a></li>
+          <li><a href="#"><img class="clue_item" src="sampleA.svg"></img></a></li>
+          <li><a href="#"><img class="clue_item" src="sampleA.svg"></img></i></a></li>
+          <li><a href="#"><img class="clue_item" src="sampleA.svg"></img></a></li>
+          <li><a href="#"><img class="clue_item" src="sampleA.svg"></img></a></li>
+          <li><a href="#"><img class="clue_item" src="sampleA.svg"></img></i></a></li>
+          <li><a href="#"><img class="clue_item" src="sampleA.svg"></img></a></li>
+        </ul>
+      </div>
+      <div id="separator" style="flex: 1">&nbsp;</div>
+
+      <div id="system">
+        <a href="#"><img  style="height:60px;" src="help.svg"></img></a>
+        <a href="#"><img  style="height:60px;" src="crosshair.svg"></img></a>
+        <a href="#"><img  style="height:60px;" src="bulb.svg"></img></a>
+
+      </div>
+  </div>
+  <div id="log"></div>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>

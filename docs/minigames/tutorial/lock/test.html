@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<!-- ONLY for DEBUG -->
+
+<script type="text/javascript" src="../../../src/core/node.js"></script>
+<script type="text/javascript" src="../../../src/core/machine.js"></script>
+<script type="text/javascript" src="../../../src/core/lock.js"></script>
+<script type="text/javascript" src="../../../src/core/item.js"></script>
+<script type="text/javascript" src="../../../src/core/composite.js"></script>
+<script type="text/javascript" src="../../../src/core/sprite.js"></script>
+<script type="text/javascript" src="../../../src/core/scene.js"></script>
+<script type="text/javascript" src="../../../src/core/graph.js"></script>
+<script type="text/javascript" src="../../../src/core/game.js"></script>
+<script type="text/javascript" src="../../../src/core/events.js"></script>
+<script type="text/javascript" src="../../../src/core/common.js"></script>
+
+<!-- Correct way to call the game engine 
+<script type="text/javascript" src="../../../dist/crazybiogame.min.js"></script>
+-->
+
+<script type="text/javascript" src="preprocess.js"></script>
+
+<link href="http://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+<link rel="stylesheet" href="../../css/crazybio.css">
+<link rel="stylesheet" href="../../css/style_crazy.css">
+
+</head>
+<body>
+  <header id="banner">
+    <ul>
+    <li><a href="../index.html">[ H o m e ]</a></li>
+    <li><a href="help.html">[ H e l p ]</a></li>
+    <li><a href="history.html">— c&nbsp;&nbsp;r&nbsp;&nbsp;a&nbsp;&nbsp;z&nbsp;&nbsp;y&nbsp;&nbsp;b&nbsp;&nbsp;i&nbsp;&nbsp;o
+&nbsp;&nbsp;c&nbsp;&nbsp;o&nbsp;&nbsp;m&nbsp;&nbsp;p&nbsp;&nbsp;u&nbsp;&nbsp;t&nbsp;&nbsp;i&nbsp;&nbsp;n&nbsp;&nbsp;g  —</a></li>
+    <li><a href="#">[ L e v e l # 1 — g a m e # 5 ]</a></li>
+    </ul></header>
+  <main>
+  <br>
+    <div id="game" style="max-width: 800px;">
+      <section id="1" class="scene" style="left: 0%; top: 0%; width: 100%; height: auto;">
+        <img src="assets/background.png">
+        <article id="2" class="machine download">
+          <svg viewBox="0 0 160 160" class="map" preserveAspectRatio="xMinYMin meet">
+            <g class="hover_group" opacity="0" id="area_2">
+              <a xlink:href="javascript:void(0)" id="svg_2" class="btn">
+                <circle cx="140" cy="130" r="80" opacity="0.9" fill="#F0F0F0" data-objectid="2">
+                </circle>
+              </a>
+            </g>
+          </svg>
+        </article>
+        <article id="3" class="machine locktext">
+          <svg viewBox="0 0 160 160" class="map" preserveAspectRatio="xMinYMin meet">
+          <g class="hover_group" opacity="0" id="area_3">
+          <a xlink:href="javascript:void(0)" id="svg_3" class="btn">
+          <circle cx="500" cy="130" r="80" opacity="0.9" fill="#F0F0F0" data-objectid="3">
+          </circle>
+          </a>
+          </g>
+          </svg>
+        </article>
+      </section>
+      <div class="modal" id="popup">
+      </div>
+    </div>
+  </main>
+  <footer> 
+  </footer>
+
+</body></html>

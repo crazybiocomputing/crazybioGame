@@ -1,0 +1,127 @@
+Biological identifications through DNA barcodes.
+Paul D N Hebert, Alina Cywinska, Shelley L Ball, and Jeremy R deWaard
+Proc Biol Sci. Feb 7, 2003; 270(1512): 313–321.
+doi:  10.1098/rspb.2002.2218
+
+Approximately one-quarter of the COI sequences (172 out of
+655) used in this study were obtained from GenBank. The rest
+were obtained by preparing a 30 m l total DNA extract from small
+tissue samples using the Isoquick (Orca Research Inc,
+Bothell, WA, 1997) protocol. The primer pair LCO1490
+(59-GGTCAACAAATCATAAAGATATTGG-39) and HCO2198
+(59-TAAACTTCAGGGTGACCAAAAAATCA-39) was sub-
+sequently used to amplify a 658 bp fragment of the COI gene
+(Folmer et al. 1994). Each PCR contained 5 m l of 10 ́ PCR
+buffer, pH 8.3 (10 mM of Tris–HCl, pH 8.3; 1.5 mM of MgCl2;
+and 50 mM of KCl; 0.01% NP-40), 35 m l of distilled water,
+200 m M of each dNTP, 1 unit of Taq polymerase, 0.3 m M of
+each primer and 1–4 m l of DNA template. The PCR thermal
+regime consisted of one cycle of 1 min at 94 °C; five cycles of
+1 min at 94 °C, 1.5 min at 45 °C and 1.5 min at 72 °C; 35 cycles
+of 1 min at 94 °C, 1.5 min at 50 °C and 1 min at 72 °C and a
+final cycle of 5 min at 72 °C. Each PCR product was sub-
+sequently gel purified using the Qiaex II kit (Qiagen) and
+sequenced in one direction on an ABI 377 automated sequencer
+(Applied Biosystems) using the Big Dye v. 3 sequencing kit. All
+sequences obtained in this study have been submitted to Gen-
+Bank; their accession numbers are provided in Electronic
+Appendices A–C, available on The Royal Society’s Publications
+Web site.
+
+http://www.dnabarcoding101.org/planning_prep.html
+
+
+RecName: Full=Amelogenin, X isoform; Flags: Precursor
+UniProtKB/Swiss-Prot: Q99217.1
+GenPeptGraphicsRelated Sequences Identical Proteins
+Next record
+>gi|1168430|sp|Q99217.1|AMELX_HUMAN RecName: Full=Amelogenin, X isoform; Flags: Precursor
+MGTWILFACLLGAAFAMPLPPHPGHPGYINFSYEVLTPLKWYQSIRPPYPSYGYEPMGGWLHHQIIPVLS
+QQHPPTHTLQPHHHIPVVPAQQPVIPQQPMMPVPGQHSMTPIQHHQPNLPPPAQQPYQPQPVQPQPHQPM
+QPQPPVHPMQPLPPQPPLPPMFPMQPLPPMLPDLTLEAWPSTDKTKREEVD
+
+
+
+2.
+RecName: Full=Amelogenin, Y isoform; Flags: Precursor
+UniProtKB/Swiss-Prot: Q99218.2
+GenPeptGraphicsRelated Sequences
+Previous recordNext record
+>gi|85681286|sp|Q99218.2|AMELY_HUMAN RecName: Full=Amelogenin, Y isoform; Flags: Precursor
+MGTWILFACLVGAAFAMPLPPHPGHPGYINFSYENSHSQAINVDRIALVLTPLKWYQSMIRPPYSSYGYE
+PMGGWLHHQIIPVVSQQHPLTHTLQSHHHIPVVPAQQPRVRQQALMPVPGQQSMTPTQHHQPNLPLPAQQ
+PFQPQPVQPQPHQPMQPQPPVQPMQPLLPQPPLPPMFPLRPLPPILPDLHLEAWPATDKTKQEEVD
+
+Gene AMELX
+Location : Xp22.31-p22.1
+Sequence : Chromosome: X; NC_000023.11 (11293413..11300761)See AMELX in Epigenomics, MapViewer
+
+Gene AMELY
+Location : Yp11.2
+Sequence : Chromosome: Y; NC_000024.10 (68659
+
+
+########################################
+# Program: needle
+# Rundate: Fri 14 Feb 2014 11:11:50
+# Commandline: needle
+#    -auto
+#    -stdout
+#    -asequence emboss_needle-I20140214-111148-0868-90881117-pg.asequence
+#    -bsequence emboss_needle-I20140214-111148-0868-90881117-pg.bsequence
+#    -datafile EBLOSUM62
+#    -gapopen 10.0
+#    -gapextend 0.5
+#    -endopen 10.0
+#    -endextend 0.5
+#    -aformat3 pair
+#    -sprotein1
+#    -sprotein2
+# Align_format: pair
+# Report_file: stdout
+########################################
+
+#=======================================
+#
+# Aligned_sequences: 2
+# 1: AMELY_HUMAN
+# 2: AMELX_HUMAN
+# Matrix: EBLOSUM62
+# Gap_penalty: 10.0
+# Extend_penalty: 0.5
+#
+# Length: 206
+# Identity:     169/206 (82.0%)
+# Similarity:   179/206 (86.9%)
+# Gaps:          15/206 ( 7.3%)
+# Score: 951.5
+# 
+#
+#=======================================
+
+AMELY_HUMAN        1 MGTWILFACLVGAAFAMPLPPHPGHPGYINFSYENSHSQAINVDRIALVL     50
+                     ||||||||||:|||||||||||||||||||||||              ||
+AMELX_HUMAN        1 MGTWILFACLLGAAFAMPLPPHPGHPGYINFSYE--------------VL     36
+
+AMELY_HUMAN       51 TPLKWYQSMIRPPYSSYGYEPMGGWLHHQIIPVVSQQHPLTHTLQSHHHI    100
+                     |||||||| |||||.||||||||||||||||||:|||||.|||||.||||
+AMELX_HUMAN       37 TPLKWYQS-IRPPYPSYGYEPMGGWLHHQIIPVLSQQHPPTHTLQPHHHI     85
+
+AMELY_HUMAN      101 PVVPAQQPRVRQQALMPVPGQQSMTPTQHHQPNLPLPAQQPFQPQPVQPQ    150
+                     ||||||||.:.||.:||||||.||||.||||||||.|||||:||||||||
+AMELX_HUMAN       86 PVVPAQQPVIPQQPMMPVPGQHSMTPIQHHQPNLPPPAQQPYQPQPVQPQ    135
+
+AMELY_HUMAN      151 PHQPMQPQPPVQPMQPLLPQPPLPPMFPLRPLPPILPDLHLEAWPATDKT    200
+                     |||||||||||.|||||.||||||||||::||||:||||.|||||:||||
+AMELX_HUMAN      136 PHQPMQPQPPVHPMQPLPPQPPLPPMFPMQPLPPMLPDLTLEAWPSTDKT    185
+
+AMELY_HUMAN      201 KQEEVD    206
+                     |:||||
+AMELX_HUMAN      186 KREEVD    191
+
+
+#---------------------------------------
+#---------------------------------------
+
+
+

@@ -1,0 +1,57 @@
+// Storyboard
+// Jean-Christophe Taveau
+// Crazybiocomputing
+// Feb 2015
+
+var scenes = {
+  '000' : {
+    'ID'         : '000',
+    'background' : 'mansion.png',
+    'actions'    : [
+      {
+        'area'  : [100,100,200,300,100,100],
+        'event'  : 'dialog'
+      },
+      {
+        'area'  : [100,100,200,300,100,100],
+        'event'  : 'grab'
+      },
+
+    ]
+}
+
+
+}
+var dialog = {
+'000' : {
+  'ID'         : '000',
+  'element'    : 'chat',
+  'people'     : 'boy',
+  'html'       :  '<p>Hi!!...Need a coffee?</p><br></br>__button__',
+  'widgets'    : [
+      {
+      'event'   : 'onclick',
+      'type'    : 'button',
+      'title'   : 'Next'
+      }
+  ],
+  'goto'       : {'button':'00A'},
+},
+'00A' : {
+  'ID'         : '000',
+  'element'    : 'chat',
+  'people'     : 'girl',
+  'background' : 'background.png',
+  'html'     :
+         '<p>In the previous chapter, we determined the overlaps (in dark blue, in the image, below) '+
+         '... and now, we want to cut the dark blue regions, in order to extract the interesting parts of sequences (light blue) '+
+         'and join them for the final assembly (in green)...</p>__button__',
+  'widgets': [
+    {
+    'event'   : 'onclick',
+    'type'    : 'button',
+    'title'   : 'Next'
+    }
+  ],
+  'goto'       : {'button':'001'},
+},

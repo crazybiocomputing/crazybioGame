@@ -1,0 +1,107 @@
+[
+  {
+    "id": 0,
+    "class": "comment",
+    "description": "First chapter"
+  },
+  {
+    "id": 1,
+    "class": "scene",
+    "description": "THE scene",
+    "display": {
+      "width": 700,
+      "height": 453,
+      "graphics": {
+        "path": "./assets/background.png"
+      }
+    },
+    "children": [2,3,4,6,11]
+  },
+  {
+    "id": 2,
+    "class": "sprite",
+    "description": "Clue #1",
+    "display": {
+      "width": 40,
+      "height": 14,
+      "position": [206,202],
+      "graphics" : {
+        "path": "assets/sampleA.png"
+      }
+    }
+  },
+  {
+    "id": 3,
+    "class": "sprite",
+    "description": "Clue #2",
+    "display": {
+      "width": 20,
+      "height": 20,
+      "position": [514,235],
+      "target": {
+        "data": ["C",10,10,10]
+      }
+    },
+    "action": {
+      "if": "click",
+      "then": {
+        "popup": {
+          "header": "Oui!! ",
+          "content": ["Une dent ... peut-être perdue dans un corps à corps"]
+        }
+
+      }
+    }
+  },
+  {
+    "id": 4,
+    "class": "sprite",
+    "description": "Clue #3",
+    "display": {
+      "width": 12,
+      "height": 8,
+      "position": [294,408]
+    }
+  },
+  {
+    "id": 6,
+    "class": "sprite",
+    "description": "Clue #5",
+    "display": {
+      "width": 12,
+      "height": 8,
+      "position": [294,408]
+    },
+    "action": {
+      "if": "click",
+      "then": {
+        "popup": {
+          "header": "Rien d'intéressant..."
+        }
+      }
+    }
+  },
+  {
+    "id": 11,
+    "class": "sprite",
+    "description": "Clue #11",
+    "display": {
+      "width": 88,
+      "height": 85,
+      "position": [280,68]
+    },
+    "action": {
+      "if": "click",
+      "then": {
+        "popup": {
+          "header": "Ahh Miroir, dis-moi qui est...",
+          "content": [
+          "<p>On ne voit rien... Le ménage n'est pas fait depuis longtemps.</p>",
+          "<p>Bizarre, bizarre...<span style=\"float:right\">Hmmm...</span></p>"
+          ]
+        }
+      }
+    }
+  }
+
+]

@@ -1,0 +1,180 @@
+[
+  {
+    "id": 1,
+    "class": "scene",
+    "description": "Crime Scene",
+    "children": [
+      {
+        "id":2,
+        "geometry": ["rect",206,202,246,216]
+      },
+      {
+        "id":3,
+        "geometry": ["rect", 517,238,532,251]
+      },
+      {
+        "id":4,
+        "geometry": ["rect", 294,408,306,416]
+      },
+      {
+        "id":5,
+        "geometry": ["poly", 476,269,491,270,489,319,450,316,424,356,440,394,396,418,385,402,414,388,400,345,354,413,340,403,406,300,357,306,348,292,430,288]
+      },
+      {
+        "id":6,
+        "geometry": ["rect", 136,387,168,416]
+      },
+      {
+        "id":7,
+        "geometry": ["rect", 489,375,502,392]
+      },
+      {
+        "id":8,
+        "geometry": ["rect", 304,224,356,248]
+      },
+      {
+        "id":16,
+        "geometry": ["rect", 162,263,174,318]
+      },
+      {
+        "id":32,
+        "geometry": ["rect", 272,160,294,168]
+      },
+      {
+        "id":60,
+        "geometry": ["poly", 554,160,583,166,598,151,605,190,570,214,575,194,543,189]
+      }
+    ],
+    "layout": {
+      "title": "Première Affaire...",
+      "content": [
+        "Bonjour, je m'appelle Anna et je fais un stage dans le service de police scientifique ",
+        "du CTPD (CrazyTown Police Departement). Je dois travailler sur ma 1ère affaire: ",
+        "<b>Lord Black</b> a été assassiné dans la nuit... ",
+        "Je dois chercher des échantillons pour analyser les ADNs...</p>"
+      ],
+      "graphics": {
+        "path": "assets/anna.svg"
+      }
+    }
+  },
+  {
+    "id": 2,
+    "class": "item",
+    "layout": {
+      "title": "Des cheveux...",
+      "content": "Hmmm!! un échantillon intéressant. On dirait des cheveux.",
+      "graphics": {
+        "path": "assets/sampleA.png"
+      }
+    }
+  },
+  {
+    "id": 3,
+    "class": "sprite",
+    "layout": {
+      "title": "La victime",
+      "content": "Le corps était ici...",
+    }
+  },
+  {
+    "id": 4,
+    "class": "item",
+    "layout": {
+      "title": "Un échantillon intéressant?",
+      "content": "Hmmm, je ne sais pas trop ce que c'est mais je le prends... On ne sait jamais",
+      "graphics": {
+        "path": "assets/sampleB.png"
+      }
+    }
+  },
+  {
+    "id": 5,
+    "class": "sprite",
+    "layout": {
+      "title": "De la poussière...",
+      "content": "Rien d'intéressant",
+    }
+  },
+  {
+    "id": 6,
+    "class": "sprite",
+    "layout": {
+      "title": "Fausse piste",
+      "content": "Nooon!! Seulement de la poussière",
+    }
+  },
+  {
+    "id": 7,
+    "class": "sprite",
+    "layout": {
+      "title": "Y a t-il encore des indices?",
+      "content": "RAS. C'est vraiment difficile...",
+    }
+  },
+  {
+    "id": 8,
+    "class": "item",
+    "layout": {
+      "title": "Des ongles...",
+      "content": "Oui... Hmmm... on dirait des ongles ou ... des écailles, va savoir",
+      "graphics": {
+        "path": "assets/sampleC.png"
+      }
+    }
+  },
+  {
+    "id": 16,
+    "class": "item",
+    "layout": {
+      "title": "Un échantillon intact...",
+      "content": "Enfin!!! on dirait une touffe de poils",
+      "graphics": {
+        "path": "assets/sampleD.png"
+      }
+    }
+  },
+  {
+    "id": 18,
+    "class": "target",
+    "layout": {
+      "title": "Un livre de la bibliothèque...",
+      "content": "Un papier est caché dans le livre",
+      "graphics": {
+        "path": "assets/liste.png"
+      }
+    }
+  },
+  {
+    "id": 32,
+    "class": "item",
+    "layout": {
+      "title": "Une dent...",
+      "content": "Oui!! Une dent ... peut-être perdue dans un corps à corps",
+      "graphics": {
+        "path": "assets/sampleE.png"
+      }
+    }
+  },
+  {
+    "id": 60,
+    "class": "sprite",
+    "layout": {
+      "title": "The Exit",
+      "content": "Je ne veux pas retourner au labo maintenant, il y a peut-être d'autres échantillons à collecter...",
+    }
+  },
+  {
+    "id": 62,
+    "class": "machine.keypad",
+    "layout": {
+      "title": "The Exit",
+      "content": "Zut! la porte s'est fermée avec le courant d'air et il faut un code à 4 chiffres pour l'ouvrir... ",
+    },
+    "params": {
+      "exit": 2367
+    }
+  }
+]
+
+

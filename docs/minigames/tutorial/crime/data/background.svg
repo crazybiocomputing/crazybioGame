@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720" id="svgBckgrnd">
+<image width="1280" height="720" xlink:href="background1280x720.jpg">
+</image>
+<rect x="535" y="500" fill="#fff" opacity="0.5" width="150" height="150" />
+</svg>
