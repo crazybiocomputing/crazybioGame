@@ -73,13 +73,12 @@
       }
     },
     "action": {
-      "if": "click",
-      "then": {
+      "onclick": {
         "new_nodes": [5],
         "del_nodes": [4],
         "popup": {
           "header": "Need some Help?",
-          "content": ["<p>Click and Drag somewhere...</p>"]
+          "body": ["<p>Click and Drag somewhere...</p>"]
         }
       }
     }
@@ -103,11 +102,10 @@
       }
     },
     "action": {
-      "if": "click",
-      "then": {
+      "onclick": {
         "popup": {
           "header": "The solution ?",
-        "content": [
+          "body": [
           "<p>There are two hidden top panels that you can drag to unveil a secret code ",
           "as shown below</p> <img src=\"assets/hiddenPanel1and2.jpg\"></img> <p>And now, you can see the hidden sentence... ",
           "<br> Click on the <b>lock</b> icon to enter the secret code.</p>"

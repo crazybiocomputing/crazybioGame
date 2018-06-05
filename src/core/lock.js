@@ -53,9 +53,8 @@ const createLockText = (props) => {
   lock.element.className = "machine locktext";
 
   let actionProps = {}
-  actionProps.if = 'click',
-  actionProps.then = {};
-  actionProps.then['popup'] = {
+  actionProps.onclick = {};
+  actionProps.onclick['popup'] = {
     header: 'Unlock the game...',
     content: [''],
     footer: 'Lock'
@@ -84,7 +83,7 @@ const createLockText = (props) => {
         `<p>End of this level !!! Return to <a class="exit" href="../index.html#level${CRAZYBIOGAME.level+1}">Home</a>...</p>`;
       displayPopup( {
         header: 'Congratulations !!!',
-        content: [html],
+        body: [html],
         footer:  'You Win !!&nbsp;&nbsp;'
       });
     }
@@ -97,7 +96,7 @@ const createLockText = (props) => {
   container.appendChild(paragraph);
   container.appendChild(input);
   container.appendChild(submitbutton);
-  actionProps.then.popup.contentDOM = container;
+  actionProps.onclick.popup.contentDOM = container;
   lock.action(actionProps);
   
   return lock;

@@ -43,14 +43,18 @@ class Composite extends Node {
       .children(props.childNodes) // Pre-calculated in `preprocess` of game.js
       .forEachChild(this.appendChild);
   }
-  
 
   appendChild(child) {
-    console.log(child);
+    console.log('appendChild ',child);
     if (func !== undefined) {
-      this.element.appendChild(child);
-      if (child.class === 'composite' || child.class === 'scene' || child.class === 'scene.closeup') {
-        child.forEachChild(child.appendChild);
+      if (child.class === 'item') {
+        CRAZYBIOGAME.graph.inventory.appenChild(child);
+      }
+      else {
+        this.element.appendChild(child);
+        if (child.class === 'composite' || child.class === 'scene' || child.class === 'scene.closeup') {
+          child.forEachChild(child.appendChild);
+        }
       }
     }
   }

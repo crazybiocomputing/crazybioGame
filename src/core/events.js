@@ -32,19 +32,23 @@
  */
 const triggerAction = (event,node) => {
   console.log(event);
-  console.log(node.actions.then);
-  switch(node.actions.if) {
-  case 'click': 
-    if (node.actions.then.new_nodes !== undefined) {
-      showNodes(node.actions.then.new_nodes);
+  Object.keys(node.actions).forEach( (event) => {
+    console.log(event);
+    switch(event) {
+    case 'onclick': 
+      if (node.actions[event].new_nodes !== undefined) {
+        showNodes(node.actions[event].new_nodes);
+      }
+      if (node.actions[event].del_nodes !== undefined) {
+        hideNodes(node.actions[event].del_nodes);
+      }
+      if (node.actions[event].popup !== undefined) {
+        displayPopup(node.actions[event].popup);
+      }
     }
-    if (node.actions.then.del_nodes !== undefined) {
-      hideNodes(node.actions.then.del_nodes);
-    }
-    if (node.actions.then.popup !== undefined) {
-      displayPopup(node.actions.then.popup);
-    }
-  }
+  });
+  
+
 }
 
 /**
@@ -56,6 +60,7 @@ const triggerAction = (event,node) => {
 const showNodes = (nodelist) => {
   nodelist.forEach( id => {
     let node = CRAZYBIOGAME.graph.nodeList.filter( (n) => n.id === id)[0];
+    console.log('show node #' + id + node.element.className);
     node.element.style.display = 'block';
   });
 }
@@ -115,7 +120,7 @@ const displayPopup = (props) => {
     modalBody.removeChild(modalBody.lastChild);
   }
   if (props.contentDOM === undefined) {
-    modalBody.innerHTML = (props.content !== undefined) ? props.content.join('') : '';
+    modalBody.innerHTML = (props.body !== undefined) ? props.body.join('') : '';
   }
   else {
     modalBody.appendChild(props.contentDOM);

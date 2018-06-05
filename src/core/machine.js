@@ -116,7 +116,7 @@ const createMachine = (props) => {
  * Create a new `display` machine
  * @author P. Wintringer
  *
- */
+
 
 const createMachineDisplay = (props) => {
   let element = document.createElement('div');
@@ -145,7 +145,7 @@ const createMachineDisplay = (props) => {
   return element;
 
 };
-
+ */
  
  
 /**
@@ -163,11 +163,10 @@ const createMachineDownload = (props) => {
   element.className = "machine download";
   
   let actionProps = {}
-  actionProps.if = 'click',
-  actionProps.then = {};
-  actionProps.then['popup'] = {
+  actionProps.onclick = {};
+  actionProps.onclick['popup'] = {
     header: 'Download...',
-    content: [''],
+    body: [''],
     footer: 'Download '
   };
   
@@ -180,65 +179,12 @@ const createMachineDownload = (props) => {
     it with your favorite scientific software...<br>
     <center> <a class="button" href="${props.features.download}" download="${props.features.download}">
     <i class="fas fa-download fa-3x"></i></a></center>`;
-
-  /*
-  let dwnldButton = document.createElement('a');
-     dwnldButton.className = 'download-button';
-  dwnldButton.href = 'javascript:void(0)';
-    dwnldButton.innerHTML = '';
-    modalFooter.appendChild(dwnldButton);
-  let input = document.createElement('input');
-  input.id = 'lock-input';
-  input.type = 'text';
-  input.placeholder = 'Type the code';
-
-  let submitbutton = document.createElement('button');
-  submitbutton.id = 'button';
-  submitbutton.textContent = "OK";
-  submitbutton.type = "submit";
-
-  submitbutton.onclick = () => {
-    let val = document.getElementById('lock-input').value;
-    console.log(val);
-    if (val === lock.features.exit) {
-      displayPopup( {
-        title: 'Congratulations!!',
-        content: [`<p>Click on this <a class="exit" href="${CRAZYBIOGAME.next_game}">button</a>to go to the next game...</p>`],
-        footer:  'You Win!!'
-      });
-    }
-    else {
-      alert("Wrong code. Try again");
-    }
-  }
-  */
   
   // Add all the elements
   container.appendChild(paragraph);
-  actionProps.then.popup.contentDOM = container;
+  actionProps.onclick.popup.contentDOM = container;
   machine.action(actionProps);
-/*
-  let modal = document.getElementById("ddl");
-  let button = document.getElementById(`svg_${props.id}`);
-  let closeB = document.getElementsByClassName('close'+"ddl")[0];
 
-  button.onclick = function() {
-    modal.style.display = "block";
-  }
-
-  closeB.onclick = function() {
-    modal.style.display = "none";
-  }
-
-  window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-  }
-
-  let dldButton = document.getElementsByClassName('download-button')[0];
-  dldButton.href = (`${props.features.file}`);
-*/
   return machine;
 };
 

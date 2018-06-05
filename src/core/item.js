@@ -30,12 +30,60 @@
  *
  *
  */
- 
-const createItem = (obj) => {
-  let element = document.createElement('div');
-  element.id = obj.id;
+class Item extends Node {
+
+  constructor (id,className,description) {
+    super(id,className,description);
+  }
+
+  static create(props) {
+    return new Item(props.id,props.class,props.description,props.parent)
+      .append('li')
+      .display(props.display)
+      .action(props.action);
+  }
   
-  // TODO
+  display(displayProps) {
+    if (displayProps === undefined) {
+      return this;
+    }
+    
+    this.width = displayProps.width || 0;
+    this.height = displayProps.height || 0;
+    this.topleft = displayProps.position || [0,0];
+      
+    // Image
+    if (displayProps.graphics !== undefined) {
+      // Append the media
+      // TODO
+      // Check extension and create the appropriate HTML5 element
+      let img = document.createElement('img');
+      img.src = displayProps.graphics.path;
+      img.addEventListener('dragstart', () => false,false); 
+      this.element.appendChild(img);
+      
+      if (displayProps.graphics.style !== undefined) {
+        for (let key in displayProps.graphics.style) {
+          this.element.style[key] = displayProps.graphics.style[key];
+        }
+      }
+    }
+
+    console.log(this.width,this.height,this.topleft,CRAZYBIOGAME.width,CRAZYBIOGAME.height);
+    
+    this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
+    this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
+    this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
+    this.element.style.height = 'auto';
+
+    return this;
+
+  }
   
-  return element;
+}
+
+const createItem = (props) => {
+  let item = Item.create(props);
+  
+  return item;
 };

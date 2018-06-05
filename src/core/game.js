@@ -31,7 +31,6 @@ const creators = {
   "deferred": createDeferred,
   "item": createItem,
   "machine": createMachine,
-  "machine.display": createMachineDisplay,
   "machine.download": createMachineDownload,
   "machine.form": createForm,
   "machine.formDragDrop": createFormDragDrop,
@@ -70,6 +69,9 @@ const newGame = (filename) => {
       let graph = new Graph();
       graph.nodeList = storyboard.map( (obj, index, arr) => {
         console.log(obj);
+        if (obj.class === 'item') {
+          hasItems = true;
+        }
         let func = creators[obj.class];
         if (func !== undefined) {
           return func(obj);
@@ -97,16 +99,23 @@ const newGame = (filename) => {
     CRAZYBIOGAME.height = root_obj.display.height;
      
     // Step #1- Preprocess 
+    let hasItems = false;
     CRAZYBIOGAME.graph = preprocess(storyboard);
 
-    // Step #2- Create HTML5 and/or SVG Elements
+    // Step #2 - create Accessory Elements (popup, inventory, etc.)
     let root = document.getElementById('game');
+    root.inventory = document.createElement('aside');
     root.appendChild(CRAZYBIOGAME.graph.root.getHTML());
     let popup = document.createElement('div');
     popup.className = "modal";
     popup.id = 'popup';
     root.appendChild(popup);
-    
+    if (hasItems) {
+      let inventory = document.createElement('aside');
+      root.prepend(inventory);
+      CRAZYBIOGAME.graph.inventory = root;
+    }
+    // Step #3 - Create HTML5 and/or SVG Elements of this graph
     let scene_root = CRAZYBIOGAME.graph.root;
     root.style.maxWidth = `${CRAZYBIOGAME.width}px`;
     CRAZYBIOGAME.graph.traverse(scene_root,appendHTML);
@@ -129,30 +138,6 @@ const newGame = (filename) => {
     })
   };
   
-  /*
-   * Get JSON with XMLHttpRequest
-
-  const getJSONviaXHR = (url) => {
-    return new Promise( (resolve, reject) => {
-      // https://developer.mozilla.org/fr/docs/Learn/JavaScript/Objects/JSON
-      let request = new XMLHttpRequest();
-      request.open('GET', filename);
-      request.responseType = 'json';
-      request.onload = function() {
-        let status = request.status;
-        if (status === 200) {
-          resolve(request.response);
-        }
-        else {
-          // ERROR
-          reject(status);
-        }
-      };
-      request.send();
-    });
-  };
-   */
-   
    
   // Main
   

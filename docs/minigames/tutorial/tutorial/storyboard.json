@@ -33,13 +33,12 @@
       }
     },
     "action": {
-      "if": "click",
-      "then": {
+      "onclick": {
         "new_nodes": [22],
         "del_nodes": [2],
         "popup" : {
           "header": "Help",
-          "content": [
+          "body": [
           "<p>The upper navigation bar is convenient for...</p>",
           "<ul>",
           "<li>",
@@ -73,11 +72,10 @@
       }
     },
     "action": {
-      "if": "click",
-      "then": {
+      "onclick": {
         "popup" : {
           "header": "Answer",
-          "content": [
+          "body": [
           "<p>To solve the mini-game, you must find out what to do on your own by looking for clues, making some computations, etc. ",
           "The purpose is to get a <b>code</b>. </p>",
           "<p>Once this is done, you have to enter this code &mdash; word(s), number(s),etc. &mdash; to unlock the game.</p>"],

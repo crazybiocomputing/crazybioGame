@@ -30,17 +30,19 @@ class Graph {
     this.root;
     this.nodeList = [];
   }
-  
+
+
   traverseFrom(a_node) {
     let children;
     let ancestor;
     if (a_node.hasChildren()) {
+      // ???
       if (a_node.childrenID !== undefined) {
         children = a_node.childrenID;
         ancestor = a_node;
       }
-      else if (a_node.actions.then.new_nodes !== undefined) {
-        children = a_node.actions.then.new_nodes;
+      else if (a_node.actions.onclick.new_nodes !== undefined) {
+        children = a_node.actions.onclick.new_nodes;
         ancestor = a_node.ancestor;
         console.log(`actions.then... id ${a_node.id} ${a_node.ancestor.id}`);
       }
@@ -57,7 +59,8 @@ class Graph {
       this.traverseFrom(nodeChild);
     }
   }
-  
+
+
   traverse(a_node,func) {
     if (a_node.hasChildNodes()) {
       for (let nodeChild of a_node.childNodes) {

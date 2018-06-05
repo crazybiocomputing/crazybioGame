@@ -160,32 +160,34 @@ class Node {
     // Add the event to the parent scene  
     // TODO
     this.actions = actionProps;
-    if (actionProps.if !== undefined) {
-      this.geometry = (this.target === undefined ) ? {type: 'R', data: []} : {type: this.target[0], data: this.target.slice(1)};
-      if (this.geometry.data.length === 0) {
-        switch (this.geometry.type) {
-        case 'R' : 
-          this.geometry.data[0] = this.topleft[0];
-          this.geometry.data[1] = this.topleft[1];
-          this.geometry.data[2] = this.width;
-          this.geometry.data[3] = this.height;
-        }
+    this.geometry = (this.target === undefined ) ? {type: 'R', data: []} : {type: this.target[0], data: this.target.slice(1)};
+    if (this.geometry.data.length === 0) {
+      switch (this.geometry.type) {
+      case 'R' : 
+        this.geometry.data[0] = this.topleft[0];
+        this.geometry.data[1] = this.topleft[1];
+        this.geometry.data[2] = this.width;
+        this.geometry.data[3] = this.height;
       }
-      // Update height
-      this.element.style.height = `${this.height / CRAZYBIOGAME.height * 100}%`;
     }
+    // Update height
+    this.element.style.height = `${this.height / CRAZYBIOGAME.height * 100}%`;
+
     this.element.appendChild(createSensitiveLayer(this.id, this.width, this.height, this.geometry));
-    if (actionProps.then.new_nodes !== undefined) {
-      this.childNodes = [];
-    }
+    
     
     // Add event
-    if (actionProps.if === 'click') {
-      console.log(this.element);
-      // TODO Tricky <svg> => <g> => <a>
-      let action = func || doIt;
-      this.element.children[indexSVG].children[0].children[0].addEventListener('click', doIt,false);
-    }
+    Object.keys(actionProps).forEach( (event) => {
+      if (actionProps[event].new_nodes !== undefined) {
+        this.childNodes = [];
+      }
+      if (event === 'onclick') {
+        // TODO Tricky <svg> => <g> => <a>
+        let action = func || doIt;
+        this.element.children[indexSVG].children[0].children[0].addEventListener('click', doIt,false);
+      }
+    });
+
     return this;
   }
 
@@ -221,9 +223,12 @@ class Node {
    * @author Jean-Christophe Taveau
    */
   hasChildren() {
-     
-    return (this.childrenID === undefined && 
-      (this.actions === undefined || this.actions.then === undefined || this.actions.then.new_nodes === undefined)) ? false : true;
+    let flag = false;
+    flag = (this.childrenID === undefined) ? flag : true;
+    if (this.actions !== undefined) {
+      flag = Object.keys(this.actions).reduce( (flag,event) => (this.actions[event].new_nodes !== undefined) ? true : flag,false);
+    }
+    return  flag;
   }
 
   /**
