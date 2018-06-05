@@ -109,6 +109,7 @@ class Machine extends Node {
  */
 const createMachine = (props) => {
   let machine = Machine.create(props);
+  machine.action(props.action);
   return machine;
 };
 

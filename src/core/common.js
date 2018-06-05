@@ -266,3 +266,25 @@ CRAZYBIOGAME.init = () => {
   createHeader();
 }
 
+const nextGameById = (val,node_id) => {
+  let node = CRAZYBIOGAME.graph.nodeList.filter( (node) => node.id === node_id)[0];
+  nextGame(val,node);
+}
+
+
+const nextGame = (val,node) => {
+  console.log(val,node.features.exit);
+  if (val === node.features.exit.toString()) {
+    let html = (CRAZYBIOGAME.next_game !== '9999') ?
+      `<p>Click on this <a class="exit" href="../${CRAZYBIOGAME.next_game}">button</a>to go to the next game...</p>` :
+      `<p>End of this level !!! Return to <a class="exit" href="../index.html#level${CRAZYBIOGAME.level+1}">Home</a>...</p>`;
+    displayPopup( {
+      header: 'Congratulations !!!',
+      body: [html],
+      footer:  'You Win !!&nbsp;&nbsp;'
+    });
+  }
+  else {
+    alert("Wrong code. Try again");
+  }
+}

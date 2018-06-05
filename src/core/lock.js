@@ -77,19 +77,7 @@ const createLockText = (props) => {
   submitbutton.onclick = () => {
     let val = document.getElementById('lock-input').value;
     console.log(val,lock.features.exit);
-    if (val === lock.features.exit.toString()) {
-      let html = (CRAZYBIOGAME.next_game !== '9999') ?
-        `<p>Click on this <a class="exit" href="../${CRAZYBIOGAME.next_game}">button</a>to go to the next game...</p>` :
-        `<p>End of this level !!! Return to <a class="exit" href="../index.html#level${CRAZYBIOGAME.level+1}">Home</a>...</p>`;
-      displayPopup( {
-        header: 'Congratulations !!!',
-        body: [html],
-        footer:  'You Win !!&nbsp;&nbsp;'
-      });
-    }
-    else {
-      alert("Wrong code. Try again");
-    }
+    nextGame(val,lock);
   }
   
   // Add all the elements
@@ -100,32 +88,6 @@ const createLockText = (props) => {
   lock.action(actionProps);
   
   return lock;
-/*
-  let element = document.createElement('div');
-  element.id = props.id;
-  element.className = "lockText";
-
-  createPopUp(props,"lockText");
-  let modal = document.getElementById('lockText');
-  let button = document.getElementById(`svg_${props.id}`);
-  button.type = "submit";
-  let closeB = document.getElementsByClassName('close'+"lockText")[0];
-
-  button.onclick = function() {
-    modal.style.display = "block";
-
-  }
-  closeB.onclick = function() {
-    modal.style.display = "none";
-  }
-  window.onclick = function(event) {
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-  }
-
-  return element;
-*/
 };
 
 /**
@@ -133,30 +95,8 @@ const createLockText = (props) => {
  * @author 
  */
 const createLockNumerical = (props) => {
+// TODO Add numerical checking onchange event
   return createLockText(props);
-  //element.className = "lock numerical";
-/*
-  createPopUp(props,"lockNum");
-  let modal = document.getElementById('lockNum');
-  let button = document.getElementById(`svg_${props.id}`);
-  let closeB = document.getElementsByClassName('close'+"lockNum")[0];
-
-  button.onclick = function() {
-    modal.style.display = "block";
-
-  }
-  closeB.onclick = function() {
-    modal.style.display = "none";
-  }
-  window.onclick = function(event) {
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-  }
-
-  let lockNum = document.getElementsByClassName('lockNum-button')[0];
-  //lockNum.href = (`${props.features.file}`);
-*/
 };
 
 
