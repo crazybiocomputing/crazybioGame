@@ -1,0 +1,49 @@
+[
+  {
+    "id": 1,
+    "class": "scene",
+    "description": "Work in progress...",
+    "display": {
+      "width": 800,
+      "height": 450,
+      "graphics": {
+        "path": "../../assets/background_transparent.png"
+      }
+    },
+    "children": [3]
+  },
+  {
+    "id": 3,
+    "class": "machine",
+    "description": "wip",
+    "display": {
+      "width": 590,
+      "height": 60,
+      "position": [100, 225],
+      "text": {
+        "content": ["<span style=\"padding:10px;",
+        "text-decoration: none;",
+        "font-family: Arial, Helvetica, sans-serif; font-size: 42px;font-weight: normal;",
+        "color: white;background-color:black;\">",
+        "[ W o r k &nbsp; I n &nbsp; P r o g r e s s ]",
+        "</span>"]
+      }
+    },
+    "action": {
+      "onclick": {
+        "popup": {
+          "header": "Next game...",
+          "body": [
+            "This game is not yet implemented...<br>",
+            "To skip it and go to the next game, click on this button...<br>",
+            "<center><button onclick=\"nextGameById('0000',3)\">Next</button></center>"
+          ],
+          "footer": "Work in progress... "
+        }
+      }
+    },
+    "features": {
+      "exit": "0000"
+    }
+  }
+]
