@@ -1,5 +1,9 @@
 [
   {
+    "level": 0,
+    "topic": "tutorial"
+  },
+  {
     "level": 1,
     "title": "Get started ...",
     "history": "[updated May 2017]",

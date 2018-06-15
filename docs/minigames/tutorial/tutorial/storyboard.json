@@ -26,7 +26,7 @@
       "width": 215,
       "height": 74,
       "text": {
-        "content": ["<span>[ H E L P ]</span>"],
+        "content": ["<a class=\"target dark\" href=\"javascript:void(0)\">[ H E L P ]</a>"],
         "style": {
           "padding": "10px"
         }
@@ -61,10 +61,10 @@
     "description": "Another help", 
     "display": {
       "position": [300,225],
-      "width": 215,
+      "width": 500,
       "height": 74,
       "text": {
-        "content": ["<span>[ H E L P ]</span>"],
+        "content": ["<p class=\"dark\"><em>Second</em> <a class=\"target\" href=\"javascript:void(0)\">[ H E L P ]</a></p>"],
         "style": {
           "display": "none",
           "padding": "10px"
