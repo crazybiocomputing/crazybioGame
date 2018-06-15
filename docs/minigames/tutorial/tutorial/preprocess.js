@@ -15,8 +15,8 @@ let unlock = createSprite({
     width: 215,
     height: 74,
     text: {
-      content: ['<span style="padding:10px; text-decoration: none;font-family: Arial, Helvetica, sans-serif;',
-        'font-size: 42px;font-weight: normal;color: white;background-color:black;">',
+      content: [
+        '<span class="dark">',
         `[ ${codeString} ]</span>`
       ],
       style: {
