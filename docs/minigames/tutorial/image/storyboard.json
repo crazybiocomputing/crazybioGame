@@ -27,9 +27,11 @@
       "height": 80,
       "graphics": {
         "path": "../../assets/lock_symbol.png",
-        "style": {"filter": "invert(80%)"}
-      },
-      "target" : ["C", 40, 40, 40]
+        "style": {
+          "filter": "invert(80%)"
+        },
+        "focus" : ["C", 40, 40, 40]
+      }
     },
     "features": {
       "exit": "congratulations.html"
