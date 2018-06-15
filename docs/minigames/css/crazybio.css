@@ -198,6 +198,49 @@ article .map a {
 }
 
 
+aside
+{
+    position: relative;
+    left: 101%;
+    width: 100px;
+    height: 466px;
+    /*border: solid 2px black;*/
+    padding: 0;
+    color: white;
+    font-size: 0.9em;
+    
+}
+
+aside ul {
+  list-style-type: none;
+  padding: 2px;
+
+}
+
+aside ul li {
+  margin-bottom: 10px;
+}
+
+aside ul li a {
+  text-decoration: none;
+}
+
+aside img:focus {
+  padding: 3px;
+  border: solid 2px red;
+}
+
+.item:hover {
+  opacity: 0.5;
+  color: #fff;
+}
+
+aside .checked > img {
+  box-shadow: 0 0 5px 5px #555;
+  padding: 4px;
+}
+
+
 /* Add Animation */
 @keyframes animatetop {
   from {top: -300px; opacity: 0}

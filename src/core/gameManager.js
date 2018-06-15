@@ -44,8 +44,11 @@ class GameManager {
       this.levels = data;
       // Build the page web with links
       console.log(this.levels);
+      // Get the previous solved game
+      let crazybiolevels = (localStorage.getItem('crazybiolevels_' + this.topic)) ? localStorage.getItem('crazybiolevels_' + this.topic) : '00';
+      console.log(crazybiolevels);
       let section = document.getElementById('levels');
-      this.levels.forEach ( (level) => {
+      this.levels.slice(1).forEach ( (level) => {
         let title=document.createElement('h2');
         title.innerHTML = `<span>${this.topic.charAt(0).toUpperCase() + this.topic.slice(1)} #${level.level} &mdash; ${level.title} ${level.history}</span>`;
         let container = document.createElement('div');
@@ -54,11 +57,14 @@ class GameManager {
         container.appendChild(table);
         section.appendChild(container);
         level.games.forEach( (game,index) => {
+          let i = (level.level - 1 ) * 2;
+          let solvedgame = parseInt(crazybiolevels.slice(i,i + 2),16) & 2**index;
+          console.log(crazybiolevels,level.level,index,solvedgame,(crazybiolevels & (crazybiolevels & (15 << 4*(level.level-1)))).toString(2),(15 << 4*(level.level-1)).toString(2));
           let item = document.createElement('li');
           let link = document.createElement('a');
-          link.href = `${game.path}/index.html?id=${game.id}&cat=${this.topic}&level=${level.level}&game=${index+1}&path=${game.path}`;
+          link.href = `${game.path}/index.html?id=${game.id}&topic=${this.topic}&level=${level.level}&game=${index+1}&path=${game.path}`;
           let img = document.createElement('img');
-          img.src="../assets/thumbnail_unknown.png";
+          img.src= (solvedgame !== 0) ? `${game.path}/thumbnail.png` : "../assets/thumbnail_unknown.png";
           link.appendChild(img);
           item.appendChild(link);
           table.appendChild(item);
@@ -81,6 +87,8 @@ class GameManager {
     )
     .then ( response => response.json() )
     .then( (data) => {
+      // Extract topic at first position (level #0)
+      let topic = data[0].topic;
       console.log('data ' + JSON.stringify(data));
       // Build the URL
       let level = data.filter( (lvl) => lvl.level === parseInt(level_id))[0];
@@ -89,7 +97,7 @@ class GameManager {
       let next_url= '9999';         // Last game of level
       if (game_index !== level.games.length - 1) {
         let next_game = level.games[game_index + 1];
-        next_url = `${next_game.path}/index.html?id=${next_game.id}&cat=${next_game.path}&level=${level_id}&game=${game_index+2}`;
+        next_url = `${next_game.path}/index.html?id=${next_game.id}&topic=${topic}&level=${level_id}&game=${game_index+2}`;
       }
       CRAZYBIOGAME.next_game = next_url;
       console.log(next_url);

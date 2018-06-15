@@ -40,6 +40,23 @@ class Node {
     this.className = className;
     this.description = description;
     this.element; // HTML5
+    this.displayType = Node.NONE;
+  }
+  
+  static get NONE() {
+    return 0;
+  }
+  
+  static get GRAPHICS() {
+    return 1;
+  }
+  
+  static get TEXT() {
+    return 2;
+  }
+  
+  static get TARGET()  {
+    return 3;
   }
   
   /**
@@ -66,7 +83,7 @@ class Node {
   append(htmlTag) {
     // Append the media
     this.element = document.createElement(htmlTag);
-    this.element.id = this.id;
+    this.element.id = `node_${this.id}`;
     this.element.className = this.className;
     
     return this;
@@ -81,11 +98,16 @@ class Node {
   getHTML() {
     return this.element;
   }
+  
+  
   /**
    * Create display features
    */
   display(displayProps) {
+      
+    // M A I N
     if (displayProps === undefined) {
+      alert(`The object #${this.id} must have a 'display' property`);
       return this;
     }
     
@@ -93,33 +115,18 @@ class Node {
     this.height = displayProps.height || 0;
     this.topleft = displayProps.position || [0,0];
       
-    // Image
+    // Media: Image, video, audio?, etc.
     if (displayProps.graphics !== undefined) {
-      //this.width = displayProps.graphics.width || this.width;
-      //this.height = displayProps.graphics.height || this.height;
-      //this.topleft = displayProps.graphics.position || this.topleft;
-      // Append the media
-      // TODO
-      // Check extension and create the appropriate HTML5 element
-      let img = document.createElement('img');
-      img.src = displayProps.graphics.path;
-      img.addEventListener('dragstart', () => false,false); 
-      this.element.appendChild(img);
-      
-      if (displayProps.graphics.style !== undefined) {
-        for (let key in displayProps.graphics.style) {
-          this.element.style[key] = displayProps.graphics.style[key];
-        }
-      }
+      this.displayGraphics(displayProps.graphics);
     }
     // Text
     else if (displayProps.text !== undefined) {
-      this.element.innerHTML = displayProps.text.content.join('');
-      if (displayProps.text.style !== undefined) {
-        for (let key in displayProps.text.style) {
-          this.element.style[key] = displayProps.text.style[key];
-        }
-      }
+      this.displayText(displayProps.text);
+    }
+    // Target to event(s)
+    else if (displayProps.target !== undefined) {
+      this.displayType = Node.TARGET;
+      this.target = (displayProps.target.data === undefined) ? ["R",0,0,this.width,this.height] : displayProps.target.data;
     }
     console.log(this.width,this.height,this.topleft,CRAZYBIOGAME.width,CRAZYBIOGAME.height);
     
@@ -127,16 +134,57 @@ class Node {
     this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
     this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
     this.element.style.height = (displayProps.target === undefined) ? 'auto' : `${this.height / CRAZYBIOGAME.height * 100}%`;
-    // this.element.style.height = `100%`;
-
-    // Target to event(s)
-    if (displayProps.target !== undefined) {
-      this.target = displayProps.target.data;
-    }
 
     return this;
   }
 
+  displayGraphics(propsGraphics) {
+    this.displayType = Node.GRAPHICS;
+    
+    // Append the media
+    // TODO
+    // Check extension and create the appropriate HTML5 element
+    let img = document.createElement('img');
+    img.src = propsGraphics.path;
+    img.addEventListener('dragstart', () => false,false); 
+    this.element.appendChild(img); 
+    
+    // Add focus if any
+    this.focus = (propsGraphics.focus !== undefined) ? propsGraphics.focus : ["R",0,0,this.width,this.height];
+    // Add style if any
+    return this.displayStyle(propsGraphics.style);
+  }
+
+  static getTargetElement(parent) {
+    let found;
+    if (parent.classList.contains('target')) {
+      return parent;
+    }
+    for (let child of parent.children) {
+      found = Node.getTargetElement(child);
+    }
+    return found;
+  }
+    
+  displayText(propsText) {
+    this.displayType = Node.TEXT;
+    this.element.innerHTML = propsText.content.join('');
+    // TODO Must be improved
+    let foundTarget = Node.getTargetElement(this.element);
+    if (foundTarget !== undefined) {
+      foundTarget.dataset.objectid = this.id;
+    }
+    return this.displayStyle(propsText.style);
+  };
+
+  displayStyle(props = {}) {
+    for (let key in props) {
+      this.element.style[key] = props[key];
+    }
+    return this;
+  }
+  
+  
   /**
    * Create event features
    * 
@@ -160,7 +208,9 @@ class Node {
     // Add the event to the parent scene  
     // TODO
     this.actions = actionProps;
-    this.geometry = (this.target === undefined ) ? {type: 'R', data: []} : {type: this.target[0], data: this.target.slice(1)};
+    this.geometry = {type: 'R', data: []};
+    this.geometry = (this.displayType === Node.GRAPHICS) ? {type: this.focus[0], data: this.focus.slice(1)} : this.geometry;
+    this.geometry = (this.displayType === Node.TARGET) ? {type: this.target[0], data: this.target.slice(1)}: this.geometry;
     if (this.geometry.data.length === 0) {
       switch (this.geometry.type) {
       case 'R' : 
@@ -173,18 +223,22 @@ class Node {
     // Update height
     this.element.style.height = `${this.height / CRAZYBIOGAME.height * 100}%`;
 
-    this.element.appendChild(createSensitiveLayer(this.id, this.width, this.height, this.geometry));
-    
-    
     // Add event
     Object.keys(actionProps).forEach( (event) => {
       if (actionProps[event].new_nodes !== undefined) {
         this.childNodes = [];
       }
       if (event === 'onclick') {
+        if (this.displayType !== Node.TEXT) {
+          this.element.appendChild(createSensitiveLayer(this.id, this.width, this.height, this.geometry));
+        }
         // TODO Tricky <svg> => <g> => <a>
         let action = func || doIt;
-        this.element.children[indexSVG].children[0].children[0].addEventListener('click', doIt,false);
+        Node.getTargetElement(this.element).addEventListener('click', doIt,false);
+      }
+      else if (event === 'onchange') {
+        console.log('on change...');
+        this.element.addEventListener('change', doIt,false);
       }
     });
 
@@ -226,9 +280,10 @@ class Node {
     let flag = false;
     flag = (this.childrenID === undefined) ? flag : true;
     if (this.actions !== undefined) {
+      // TODO Object.keys(this.actions).some( (event) => this.actions[event].new_nodes !== undefined );
       flag = Object.keys(this.actions).reduce( (flag,event) => (this.actions[event].new_nodes !== undefined) ? true : flag,false);
     }
-    return  flag;
+    return flag;
   }
 
   /**
@@ -254,3 +309,5 @@ class Node {
   }
 
 }
+
+

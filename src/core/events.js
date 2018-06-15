@@ -30,25 +30,40 @@
  *
  * @author Jean-Christophe Taveau
  */
+const updateNodes = (eventType,node) => { 
+  if (node.actions[eventType].new_nodes !== undefined) {
+    showNodes(node.actions[eventType].new_nodes);
+  }
+  if (node.actions[eventType].del_nodes !== undefined) {
+    hideNodes(node.actions[eventType].del_nodes);
+  }
+  if (node.actions[eventType].new_items !== undefined) {
+    showItems(node.actions[eventType].new_items);
+  }
+  if (node.actions[eventType].popup !== undefined) {
+    displayPopup(node.actions[eventType].popup);
+  }
+}
+
+/**
+ * Factory of action(s)
+ *
+ * @author Jean-Christophe Taveau
+ */
 const triggerAction = (event,node) => {
   console.log(event);
   Object.keys(node.actions).forEach( (event) => {
-    console.log(event);
     switch(event) {
     case 'onclick': 
-      if (node.actions[event].new_nodes !== undefined) {
-        showNodes(node.actions[event].new_nodes);
+      if (CRAZYBIOGAME.useItem) {
+        updateNodes('onuse',node);
       }
-      if (node.actions[event].del_nodes !== undefined) {
-        hideNodes(node.actions[event].del_nodes);
+      else {
+        updateNodes('onclick',node);
       }
-      if (node.actions[event].popup !== undefined) {
-        displayPopup(node.actions[event].popup);
-      }
+
     }
   });
-  
-
 }
 
 /**
@@ -60,10 +75,15 @@ const triggerAction = (event,node) => {
 const showNodes = (nodelist) => {
   nodelist.forEach( id => {
     let node = CRAZYBIOGAME.graph.nodeList.filter( (n) => n.id === id)[0];
-    console.log('show node #' + id + node.element.className);
+    console.log(`show node #${id} ${node.element.className}`);
     node.element.style.display = 'block';
+    if (node.actions !== undefined && node.actions.ondisplay !== undefined) {
+      updateNodes('ondisplay',node);
+    }
+
   });
 }
+
 
 /**
  * Hide objects in the scene

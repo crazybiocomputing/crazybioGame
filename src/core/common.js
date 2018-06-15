@@ -34,6 +34,11 @@
 /* Global Variable */
 let CRAZYBIOGAME = {
   name: 'A crazyBioComputing Game',
+  level: 0,
+  game: 0,
+  topic: 'none',
+  next_game: -1,
+  useItem: false,
   deferred: {}
 };
 
@@ -101,13 +106,10 @@ const NS = 'http://www.w3.org/2000/svg';
 const createBasicSVG = (id,w,h) => {
   // M a i n
 
-    
     let svg = document.createElementNS(NS,'svg');
     // TODO BUG
     svg.setAttributeNS(null, 'viewBox',`0 0 ${w} ${h}`);
     svg.setAttributeNS(null, 'class', 'map');
-    //svg.setAttributeNS(null,'width','100%');
-    //svg.setAttributeNS(null,'height','100%');
     svg.setAttributeNS(null,'preserveAspectRatio','xMinYMin meet');
     
     return svg;
@@ -122,7 +124,7 @@ const appendImage = (image_path,id, svg) => {
   return svg;
 };
 
-const appendSensitive = (geom, id, svg) => {
+const appendSensitive = (id, geom) => {
 
   const createCircle = (cx,cy,radius) => {
     let shape = document.createElementNS(NS,'circle');
@@ -162,14 +164,14 @@ const appendSensitive = (geom, id, svg) => {
   let link = document.createElementNS(NS,'a');
   link.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', 'javascript:void(0)');
   link.setAttributeNS(null, 'id',`link_${id}`);
-  link.setAttributeNS(null, 'class', 'btn');
+  link.setAttributeNS(null, 'class', 'target');
   
   let shape = geometries[geom.type](...geom.data);
   shape.dataset.objectid = id;
   link.appendChild(shape);
 
   group.appendChild(link);
-  svg.appendChild(group);
+  return group;
 };
 
 
@@ -207,32 +209,13 @@ const createSensitiveLayer = (id,w,h,geom) => {
   const NS = 'http://www.w3.org/2000/svg';
   
   let svg = document.createElementNS(NS,'svg');
-  // TODO BUG
   svg.setAttributeNS(null, 'viewBox',`0 0 ${w} ${h}`);
   svg.setAttributeNS(null, 'class', 'map');
-  //svg.setAttributeNS(null,'width','100%');
-  //svg.setAttributeNS(null,'height','100%');
   svg.setAttributeNS(null,'preserveAspectRatio','xMinYMin meet');
 
   // Define clickable areas if any
-  let group = document.createElementNS(NS,'g');
-  group.setAttributeNS(null, 'class', 'hover_group');
-  group.setAttributeNS(null, 'opacity', '0');
-  group.setAttributeNS(null, 'id', `area_${id}`);
-
-  let link = document.createElementNS(NS,'a');
-  link.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', 'javascript:void(0)');
-  link.setAttributeNS(null, 'id',`svg_${id}`);
-  link.setAttributeNS(null, 'class', 'btn');
+  svg.appendChild(appendSensitive(id,geom));
   
-  let shape = geometries[geom.type](...geom.data);
-
-  shape.dataset.objectid = id;
-  link.appendChild(shape);
-
-  group.appendChild(link);
-  svg.appendChild(group);
-
   return svg;
 }
 
@@ -241,6 +224,7 @@ const createHeader = () => {
   let url = new URL(window.location.href);
   let id = url.searchParams.get("id");
   let level = url.searchParams.get("level");
+  let topic = url.searchParams.get("topic");
   let game = url.searchParams.get("game");
   let next_id = url.searchParams.get("next");
   // Add Title
@@ -258,6 +242,8 @@ const createHeader = () => {
     
   // Some storage...
   CRAZYBIOGAME.level = parseInt(level);
+  CRAZYBIOGAME.game = parseInt(game);
+  CRAZYBIOGAME.topic = topic.toLowerCase();
   let mgr = new GameManager();
   mgr.calcNextURL('../levels.json',level,game);
 }
@@ -275,6 +261,29 @@ const nextGameById = (val,node_id) => {
 const nextGame = (val,node) => {
   console.log(val,node.features.exit);
   if (val === node.features.exit.toString()) {
+    // Update crazybiolevels localstorage
+    let crazybiolevels = 2**(CRAZYBIOGAME.game - 1);
+    let str = '';
+    if (localStorage.getItem('crazybiolevels_' + CRAZYBIOGAME.topic)) {
+      let i = (CRAZYBIOGAME.level - 1 ) * 2;
+      let storage = localStorage.getItem('crazybiolevels_'+ CRAZYBIOGAME.topic);
+      crazybiolevels += (i < storage.length) ? parseInt(storage.slice(i,i+2),16) : 0;
+
+      console.log(crazybiolevels,CRAZYBIOGAME.level,CRAZYBIOGAME.game);
+
+      str = storage.padEnd(2 * CRAZYBIOGAME.level,'0');
+      let arr = str.split('');
+      arr[2*(CRAZYBIOGAME.level - 1)] = crazybiolevels.toString(16).padStart(2,'0')[0];
+      arr[2*(CRAZYBIOGAME.level - 1) + 1] = crazybiolevels.toString(16).padStart(2,'0')[1];
+      str = arr.join('');
+    }
+    else {
+      str = crazybiolevels.toString(16).padStart(2 * CRAZYBIOGAME.level,'0');
+    }
+    console.log('updated value',str);
+    localStorage.setItem('crazybiolevels_' + CRAZYBIOGAME.topic,str);
+
+
     let html = (CRAZYBIOGAME.next_game !== '9999') ?
       `<p>Click on this <a class="exit" href="../${CRAZYBIOGAME.next_game}">button</a>to go to the next game...</p>` :
       `<p>End of this level !!! Return to <a class="exit" href="../index.html#level${CRAZYBIOGAME.level+1}">Home</a>...</p>`;
@@ -288,3 +297,5 @@ const nextGame = (val,node) => {
     alert("Wrong code. Try again");
   }
 }
+
+

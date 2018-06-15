@@ -12,61 +12,178 @@
       "width": 800,
       "height": 468,
       "graphics": {
-        "path": "assets/background.png"
+        "path": "assets/background2.png"
       }
     },
-    "children": [3,4,7]
+    "children": [2,5,10,11,12,13]
   },
   {
-    "id": 3,
+    "id": 2,
+    "class": "deferred",
+    "description": "Lock"
+  },
+  {
+    "id": 5,
     "class": "sprite",
-    "description": "Key",
+    "description": "Something for cleanup",
     "display": {
       "width": 100,
       "height": 100,
       "position": [20,20],
-      "graphics" : {
-        "path": "../../assets/lock_symbol.png"
-      },
-      "target": {
-        "data": ["C", 50, 50, 50]
-      }
-    }
-  },
-  {
-    "id": 4,
-    "class": "sprite",
-    "description": "Lock",
-    "display": {
-      "width": 100,
-      "height": 100,
-      "position": [680,348],
-      "graphics" : {
-        "path": "../../assets/lock_symbol.png"
-      },
-      "target": {
-        "data": ["C", 50, 50, 50]
-      }
-    }
-  },
-  {
-    "id": 7,
-    "class": "machine.lockNumerical",
-    "description": "Exit lock",
-    "display": {
-      "width": 100,
-      "height": 100,
-      "position": [680,20],
-      "graphics" : {
-        "path": "../../assets/lock_symbol.png"
-      },
       "target": {
         "data": ["C", 50, 50, 50]
       }
     },
-    "features": {
-      "exit": 1249
+    "action": {
+      "onclick": {
+        "new_nodes": [15],
+        "del_nodes": [5],
+        "popup": {
+          "header": "Detergent...",
+          "body": ["You find detergent in the garage... <br>",
+            "<center><img src=\"./assets/detergent.png\" width=100></center><br>",
+            "...Convenient for cleaning the wall.<br>"]
+        }
+      }
     }
+  },
+  {
+    "id": 15,
+    "class": "item",
+    "description": "Detergent...",
+    "display": {
+      "width": 150,
+      "height": 150,
+      "graphics": {
+        "path": "./assets/detergent.png"
+      }
+    },
+    "features": {
+      "comment": "Create a 32x32 thumbnail of graphics",
+      "thumbnail": "assets/detergent_cursor.png"
+    }
+  },
+  {
+    "id": 50,
+    "class": "sprite",
+    "description": "A Key",
+    "display": {
+      "width": 100,
+      "height": 100,
+      "position": [20,370],
+      "target": {
+        "data": ["C", 50, 50, 50]
+      }
+    },
+    "action": {
+      "onclick": {
+        "new_nodes": [51],
+        "del_nodes": [50]
+      }
+    }
+  },
+  {
+    "id": 51,
+    "class": "item",
+    "description": "A Key...",
+    "display": {
+      "width": 150,
+      "height": 150,
+      "graphics": {
+        "path": "./assets/key.png"
+      }
+    },
+    "features": {
+      "thumbnail": "./assets/key_cursor.png"
+    }
+  },
+  {
+    "id": 10,
+    "class": "sprite",
+    "description": "Painting",
+    "display": {
+      "width": 80,
+      "height": 110,
+      "position": [250,180],
+      "target" : {}
+    },
+    "action": {
+      "onclick": {
+        "popup": {
+          "header": "This is a very dirty wall"
+        }
+      }
+    }
+  },
+  {
+    "id": 11,
+    "class": "sprite",
+    "description": "Painting",
+    "display": {
+      "width": 80,
+      "height": 110,
+      "position": [330,180],
+      "target" : {}
+    },
+    "action": {
+      "onclick": {
+        "popup": {
+          "header": "Dirt..."
+        }
+      }
+    }
+  },
+  {
+    "id": 12,
+    "class": "sprite",
+    "description": "Painting",
+    "display": {
+      "width": 80,
+      "height": 110,
+      "position": [410,180],
+      "target" : {}
+    },
+    "action": {
+      "onclick": {
+        "popup": {
+          "header": "Need something for cleaning..."
+        }
+      }
+    }
+  },
+  {
+    "id": 13,
+    "class": "sprite",
+    "description": "Painting",
+    "display": {
+      "width": 80,
+      "height": 110,
+      "position": [490,180],
+      "target" : {}
+    },
+    "action": {
+      "onclick": {
+        "popup": {
+          "header": "There is something below..."
+        }
+      }
+    }
+  },
+  {
+    "id": 25,
+    "class": "deferred"
+  },
+  {
+    "id": 26,
+    "class": "deferred"
+  },
+  {
+    "id": 27,
+    "class": "deferred"
+  },
+  {
+    "id": 28,
+    "class": "deferred"
   }
 ]
 

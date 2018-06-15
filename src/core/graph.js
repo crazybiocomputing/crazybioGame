@@ -41,10 +41,15 @@ class Graph {
         children = a_node.childrenID;
         ancestor = a_node;
       }
-      else if (a_node.actions.onclick.new_nodes !== undefined) {
-        children = a_node.actions.onclick.new_nodes;
-        ancestor = a_node.ancestor;
-        console.log(`actions.then... id ${a_node.id} ${a_node.ancestor.id}`);
+      else {
+        console.log('Check if new_nodes in ' + a_node.id);
+        Object.keys(a_node.actions).forEach( on_event => {
+          if (a_node.actions[on_event].new_nodes !== undefined) {
+            children = a_node.actions[on_event].new_nodes;
+            ancestor = a_node.ancestor;
+            console.log(`actions.then... id ${a_node.id} ${a_node.ancestor.id}`);
+          }
+        });
       }
     }
     else {

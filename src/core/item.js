@@ -30,54 +30,63 @@
  *
  *
  */
-class Item extends Node {
+class Item extends Machine {
 
   constructor (id,className,description) {
     super(id,className,description);
   }
 
   static create(props) {
-    return new Item(props.id,props.class,props.description,props.parent)
-      .append('li')
+    props.display.id = props.id;
+    props.display.title = props.description;
+    
+    let item = new Item(props.id,props.class,props.description,props.parent)
       .display(props.display)
-      .action(props.action);
+      .features(props.features);
+
+    return item;
   }
-  
+
   display(displayProps) {
     if (displayProps === undefined) {
       return this;
     }
-    
-    this.width = displayProps.width || 0;
-    this.height = displayProps.height || 0;
-    this.topleft = displayProps.position || [0,0];
-      
-    // Image
-    if (displayProps.graphics !== undefined) {
-      // Append the media
-      // TODO
-      // Check extension and create the appropriate HTML5 element
-      let img = document.createElement('img');
-      img.src = displayProps.graphics.path;
-      img.addEventListener('dragstart', () => false,false); 
-      this.element.appendChild(img);
-      
-      if (displayProps.graphics.style !== undefined) {
-        for (let key in displayProps.graphics.style) {
-          this.element.style[key] = displayProps.graphics.style[key];
-        }
-      }
-    }
-
-    console.log(this.width,this.height,this.topleft,CRAZYBIOGAME.width,CRAZYBIOGAME.height);
-    
-    this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
-    this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
-    this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
-    this.element.style.height = 'auto';
-
+    // Add image in `inventory`
+    this.element = document.createElement('li');
+    this.element.id = `item_${displayProps.id}`;
+    this.element.style.display = 'none';
+    this.element.className = 'item';
+    let link = document.createElement('a');
+    link.href = 'javascript:void(0)';
+    link.title = displayProps.title;
+    let media = document.createElement('img');
+    media.src = displayProps.graphics.path;
+    link.appendChild(media);
+    this.element.appendChild(link);
+    document.querySelector('aside ul').appendChild(this.element);
     return this;
-
+    
+  }
+  
+  features(featuresProps) {
+    // Add event
+    let link = this.element.children[0];
+    link.addEventListener('click', (ev) => {
+      if (link.className.includes('checked')) {
+        link.className = 'item';
+        document.querySelector('section').style.cursor = 'auto';
+        document.querySelectorAll('.sprite a').forEach( el => el.style.cursor = `pointer`);
+        CRAZYBIOGAME.useItem = false;
+      }
+      else {
+        link.className = ' item checked';
+        document.querySelector('section').style.cursor = `url(${featuresProps.thumbnail}),grab`;
+        document.querySelectorAll('.sprite a').forEach( el => el.style.cursor = `url(${featuresProps.thumbnail}),pointer`);
+        CRAZYBIOGAME.useItem = true;
+      }
+    });
+    return this;
+    
   }
   
 }

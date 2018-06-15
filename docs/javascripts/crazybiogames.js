@@ -128,7 +128,7 @@ class Node {
       this.displayType = Node.TARGET;
       this.target = (displayProps.target.data === undefined) ? ["R",0,0,this.width,this.height] : displayProps.target.data;
     }
-    
+    console.log(this.width,this.height,this.topleft,CRAZYBIOGAME.width,CRAZYBIOGAME.height);
     
     this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
     this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
@@ -193,7 +193,7 @@ class Node {
   action(actionProps, func) {
   
     const doIt = (ev) => {
-      
+      console.log(`Click with ${ev.button} on object ${ev.target.dataset.objectid} and update display of ???`);
       let node = CRAZYBIOGAME.graph.nodeList.filter ( node => node.id === parseInt(ev.target.dataset.objectid) )[0];
       // Trigger Action depending of Event in common.js
       triggerAction(ev,node);
@@ -237,7 +237,7 @@ class Node {
         Node.getTargetElement(this.element).addEventListener('click', doIt,false);
       }
       else if (event === 'onchange') {
-        
+        console.log('on change...');
         this.element.addEventListener('change', doIt,false);
       }
     });
@@ -367,7 +367,7 @@ class Machine extends Node {
 
       // centers the tile at (pageX, pageY) coordinates
       const moveAt = (pageX, pageY) => {
-        // 
+        // console.log(orgX,orgY,pageX,pageY,dx,dy,' = ',pageX - orgX + dx,pageY - orgY + dy);
         dragged.style.left = pageX - orgX  + dx + 'px';
         dragged.style.top = pageY - orgY + dy + 'px';
       }
@@ -761,7 +761,7 @@ const createLockText = (props) => {
 
   submitbutton.onclick = () => {
     let val = document.getElementById('lock-input').value;
-    
+    console.log(val,lock.features.exit);
     nextGame(val,lock);
   }
   
@@ -1056,7 +1056,7 @@ class Composite extends Node {
   }
 
   appendChild(child) {
-    
+    console.log('appendChild ',child);
     if (func !== undefined) {
       if (child.class === 'item') {
         CRAZYBIOGAME.graph.inventory.appenChild(child);
@@ -1096,7 +1096,7 @@ const createTarget = (node) => {
     if (node.display.path !== "undefined") {
       let img = document.createElement('img');
       img.src = node.display.graphics.path;
-      
+      console.log(node.display.graphics.position);
       element.appendChild(img);
     }
     element.style.display = (node.display.visibility) ? "inline-block" : "none";
@@ -1254,7 +1254,7 @@ const createDeferred = (props) => {
   obj.element.style.top = `${obj.topleft[1] / CRAZYBIOGAME.height * 100}%`;
   obj.element.style.width = `${obj.width / CRAZYBIOGAME.width * 100}%`;
   obj.element.style.height = (obj.display.target === undefined) ? 'auto' : `${obj.height / CRAZYBIOGAME.height * 100}%`;
-  
+  console.log(obj);
   return obj;
 }
 /*
@@ -1304,7 +1304,7 @@ class Scene extends Composite {
   }
   
   appendChild(node) {
-    
+    console.log(node);
     let func = creators[child.class];
     if (func !== undefined) {
       this.element.appendChild(func(node));
@@ -1379,7 +1379,7 @@ class Scene extends Composite {
       elementA.setAttributeNS(null, 'class', 'btn');
 
       let shape;
-      
+      console.log(child);
       if (child.geometry !== undefined) {
         shape = geometries[child.geometry.type](...child.geometry.data);
         elementA.appendChild(shape);
@@ -1406,7 +1406,7 @@ const createScene = (props) => {
 
   _scene.childNodes = [];
 
-  
+  console.log(_scene);
   
   return _scene;
 };
@@ -1454,12 +1454,12 @@ class Graph {
         ancestor = a_node;
       }
       else {
-        
+        console.log('Check if new_nodes in ' + a_node.id);
         Object.keys(a_node.actions).forEach( on_event => {
           if (a_node.actions[on_event].new_nodes !== undefined) {
             children = a_node.actions[on_event].new_nodes;
             ancestor = a_node.ancestor;
-            
+            console.log(`actions.then... id ${a_node.id} ${a_node.ancestor.id}`);
           }
         });
       }
@@ -1469,7 +1469,7 @@ class Graph {
     }
 
     for (let id of children) {
-      
+      console.log(`id ${id} ${ancestor.id}`);
       let nodeChild = this.nodeList.filter( (node) => node.id === id)[0];
       ancestor.childNodes.push(nodeChild);
       nodeChild.ancestor = ancestor;
@@ -1561,15 +1561,15 @@ const newGame = (filename) => {
     const process = (storyboard) => {
       let graph = new Graph();
       graph.nodeList = storyboard.map( (obj, index, arr) => {
-        
+        console.log(obj);
         let func = creators[obj.class];
         if (func !== undefined) {
           return func(obj);
         }
         return {};
       });
-      
-      
+      console.log('nodeList');
+      console.log(graph.nodeList);
 
       graph.root = graph.nodeList.filter( (node) => node.className === 'scene' && node.id === 1)[0];
       graph.traverseFrom(graph.root);
@@ -1600,7 +1600,7 @@ const newGame = (filename) => {
       let inventory = document.createElement('aside');
       inventory.appendChild(document.createElement('ul'));
       root.prepend(inventory);
-      
+      console.log('create inventory');
       // Complete the `new_nodes` property if any
       // Collect all the ids and the items ids
       let sprites = storyboard.filter(obj => obj.id !== 0 && obj.class !== 'item');
@@ -1610,8 +1610,8 @@ const newGame = (filename) => {
           let new_nodeid = sprite.id + modifier;
           let new_nodes = sprites.filter( obj => obj.id === new_nodeid);
           if (new_nodes.length !== 0) {
-            
-            
+            console.log(sprite);
+            console.log(new_nodes);
             // When a item is used, trigger the `onuse` action(s)
             sprite.action.onuse = {
               new_nodes: new_nodes.map( node => node.id),
@@ -1620,10 +1620,10 @@ const newGame = (filename) => {
           }
         }
       });
-      
-      
+      console.log(sprites);
+      console.log(modifiers);
     }
-    
+    console.log(storyboard);
     
     // Step #2 - Create the graph and nodes
     CRAZYBIOGAME.graph = process(storyboard);
@@ -1717,7 +1717,7 @@ const updateNodes = (eventType,node) => {
  * @author Jean-Christophe Taveau
  */
 const triggerAction = (event,node) => {
-  
+  console.log(event);
   Object.keys(node.actions).forEach( (event) => {
     switch(event) {
     case 'onclick': 
@@ -1741,7 +1741,7 @@ const triggerAction = (event,node) => {
 const showNodes = (nodelist) => {
   nodelist.forEach( id => {
     let node = CRAZYBIOGAME.graph.nodeList.filter( (n) => n.id === id)[0];
-    
+    console.log(`show node #${id} ${node.element.className}`);
     node.element.style.display = 'block';
     if (node.actions !== undefined && node.actions.ondisplay !== undefined) {
       updateNodes('ondisplay',node);
@@ -2234,7 +2234,7 @@ const nextGameById = (val,node_id) => {
 
 
 const nextGame = (val,node) => {
-  
+  console.log(val,node.features.exit);
   if (val === node.features.exit.toString()) {
     // Update crazybiolevels localstorage
     let crazybiolevels = 2**(CRAZYBIOGAME.game - 1);
@@ -2244,7 +2244,7 @@ const nextGame = (val,node) => {
       let storage = localStorage.getItem('crazybiolevels_'+ CRAZYBIOGAME.topic);
       crazybiolevels += (i < storage.length) ? parseInt(storage.slice(i,i+2),16) : 0;
 
-      
+      console.log(crazybiolevels,CRAZYBIOGAME.level,CRAZYBIOGAME.game);
 
       str = storage.padEnd(2 * CRAZYBIOGAME.level,'0');
       let arr = str.split('');
@@ -2255,7 +2255,7 @@ const nextGame = (val,node) => {
     else {
       str = crazybiolevels.toString(16).padStart(2 * CRAZYBIOGAME.level,'0');
     }
-    
+    console.log('updated value',str);
     localStorage.setItem('crazybiolevels_' + CRAZYBIOGAME.topic,str);
 
 
@@ -2319,10 +2319,10 @@ class GameManager {
     .then( (data) => {
       this.levels = data;
       // Build the page web with links
-      
+      console.log(this.levels);
       // Get the previous solved game
       let crazybiolevels = (localStorage.getItem('crazybiolevels_' + this.topic)) ? localStorage.getItem('crazybiolevels_' + this.topic) : '00';
-      
+      console.log(crazybiolevels);
       let section = document.getElementById('levels');
       this.levels.slice(1).forEach ( (level) => {
         let title=document.createElement('h2');
@@ -2335,7 +2335,7 @@ class GameManager {
         level.games.forEach( (game,index) => {
           let i = (level.level - 1 ) * 2;
           let solvedgame = parseInt(crazybiolevels.slice(i,i + 2),16) & 2**index;
-          
+          console.log(crazybiolevels,level.level,index,solvedgame,(crazybiolevels & (crazybiolevels & (15 << 4*(level.level-1)))).toString(2),(15 << 4*(level.level-1)).toString(2));
           let item = document.createElement('li');
           let link = document.createElement('a');
           link.href = `${game.path}/index.html?id=${game.id}&topic=${this.topic}&level=${level.level}&game=${index+1}&path=${game.path}`;
@@ -2353,7 +2353,7 @@ class GameManager {
   }
   
   calcNextURL(bdd,level_id,game) {
-    
+    console.log(level_id,game);
     fetch(bdd, {
       method: 'GET',
       headers: new Headers({'Content-Type': 'application/json'}),
@@ -2365,18 +2365,18 @@ class GameManager {
     .then( (data) => {
       // Extract topic at first position (level #0)
       let topic = data[0].topic;
-      
+      console.log('data ' + JSON.stringify(data));
       // Build the URL
       let level = data.filter( (lvl) => lvl.level === parseInt(level_id))[0];
       let game_index = game - 1;
-      
+      console.log(game_index);
       let next_url= '9999';         // Last game of level
       if (game_index !== level.games.length - 1) {
         let next_game = level.games[game_index + 1];
         next_url = `${next_game.path}/index.html?id=${next_game.id}&topic=${topic}&level=${level_id}&game=${game_index+2}`;
       }
       CRAZYBIOGAME.next_game = next_url;
-      
+      console.log(next_url);
     })
     .catch ( error => {
       alert(`Something went wrong - ${error}`) 

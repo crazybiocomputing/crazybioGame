@@ -64,14 +64,15 @@ const newGame = (filename) => {
    */
   const parseGraph = (storyboard) => {
   
-    // Preprocess storyboard
-    const preprocess = (storyboard) => {
+    const hasItems = () => {
+      return storyboard.some( (obj) => obj.class === 'item');
+    }
+    
+    // Process storyboard
+    const process = (storyboard) => {
       let graph = new Graph();
       graph.nodeList = storyboard.map( (obj, index, arr) => {
         console.log(obj);
-        if (obj.class === 'item') {
-          hasItems = true;
-        }
         let func = creators[obj.class];
         if (func !== undefined) {
           return func(obj);
@@ -88,34 +89,64 @@ const newGame = (filename) => {
     };
 
     const appendHTML = (node) => {
-      node.ancestor.getHTML().appendChild(node.getHTML());
+      if (node.className === 'item') {
+        document.querySelector('aside ul').appendChild(node.getHTML());
+      }
+      else {
+        node.ancestor.getHTML().appendChild(node.getHTML());
+      }
+
     }
     
     /**** M  a  i  n ****/
 
     // Step #0- Get Width and Height of game
     let root_obj = storyboard.filter ( obj => obj.id === 1 && obj.class === 'scene')[0];
+    let root = document.getElementById('game');
     CRAZYBIOGAME.width = root_obj.display.width;
     CRAZYBIOGAME.height = root_obj.display.height;
      
-    // Step #1- Preprocess 
-    let hasItems = false;
-    CRAZYBIOGAME.graph = preprocess(storyboard);
+    // Step #1- Preprocess
+    if (hasItems()) {
+      let inventory = document.createElement('aside');
+      inventory.appendChild(document.createElement('ul'));
+      root.prepend(inventory);
+      console.log('create inventory');
+      // Complete the `new_nodes` property if any
+      // Collect all the ids and the items ids
+      let sprites = storyboard.filter(obj => obj.id !== 0 && obj.class !== 'item');
+      let modifiers = storyboard.filter( obj => obj.class === 'item').map( item => item.id);
+      modifiers.forEach( modifier => {
+        for (let sprite of sprites) {
+          let new_nodeid = sprite.id + modifier;
+          let new_nodes = sprites.filter( obj => obj.id === new_nodeid);
+          if (new_nodes.length !== 0) {
+            console.log(sprite);
+            console.log(new_nodes);
+            // When a item is used, trigger the `onuse` action(s)
+            sprite.action.onuse = {
+              new_nodes: new_nodes.map( node => node.id),
+              modifier: modifier
+            }
+          }
+        }
+      });
+      console.log(sprites);
+      console.log(modifiers);
+    }
+    console.log(storyboard);
+    
+    // Step #2 - Create the graph and nodes
+    CRAZYBIOGAME.graph = process(storyboard);
 
-    // Step #2 - create Accessory Elements (popup, inventory, etc.)
-    let root = document.getElementById('game');
-    root.inventory = document.createElement('aside');
+    // Step #3 - Post-process - create Accessory Elements (popup, etc.)
     root.appendChild(CRAZYBIOGAME.graph.root.getHTML());
     let popup = document.createElement('div');
     popup.className = "modal";
     popup.id = 'popup';
     root.appendChild(popup);
-    if (hasItems) {
-      let inventory = document.createElement('aside');
-      root.prepend(inventory);
-      CRAZYBIOGAME.graph.inventory = root;
-    }
-    // Step #3 - Create HTML5 and/or SVG Elements of this graph
+
+    // Step #4 - Finalize HTML5 and/or SVG Elements of this graph
     let scene_root = CRAZYBIOGAME.graph.root;
     root.style.maxWidth = `${CRAZYBIOGAME.width}px`;
     CRAZYBIOGAME.graph.traverse(scene_root,appendHTML);
