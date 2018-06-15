@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "class": "scene",
+    "description": "Work in progress...",
+    "display": {
+      "width": 800,
+      "height": 450,
+      "graphics": {
+        "path": "../../assets/background_transparent.png"
+      }
+    },
+    "children": [3,5]
+  },
+  {
+    "id": 3,
+    "class": "machine.tile",
+    "description": "dialog",
+    "display": {
+      "width": 251,
+      "height": 259,
+      "position": [100, 225],
+      "graphics": {
+        "path": "./assets/foregroundcolor.png"
+      }
+    }
+  },
+  {
+    "id": 5,
+    "class": "machine.form",
+    "description": "form",
+    "display": {
+      "width": 200,
+      "height": 70,
+      "position": [0, 0],
+      "target": {}
+    },
+    "features": {
+      "form": [
+        "<pre>",
+        "<label style=\"display: inline-block; width:25px; text-align:right;\">Red:</label>",
+        "  <img style=\"display: inline-block;\" src=\"assets/slider.png\"></img>@200@<br>",
+        "<label style=\"display: inline-block; width:25px; text-align:right;\">Green:</label>",
+        "  <img style=\"display: inline-block;\" src=\"assets/slider.png\"></img>@200@<br>",
+        "<label style=\"display: inline-block; width:25px; text-align:right;\">Blue:</label>",
+        "  <img style=\"display: inline-block;\" src=\"assets/slider.png\"></img>@200@<br>",
+        "</pre>"
+      ]
+    }
+  }
+]

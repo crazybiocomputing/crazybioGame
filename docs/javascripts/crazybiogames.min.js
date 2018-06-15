@@ -422,7 +422,7 @@ class Machine extends Node {
  */
 const createMachine = (props) => {
   let machine = Machine.create(props);
-  machine.action(props.action);
+  // machine.action(props.action);
   return machine;
 };
 
@@ -504,12 +504,80 @@ const createMachineDownload = (props) => {
 
 
 /**
+ * Create a Tile machine
+ *
+ * @author Jean-Christophe Taveau
+ *
+ */
+const createMachineTile = (props) => {
+  let machine = Machine.create(props).draggable();
+  machine.element.className = "machine tile";
+  return machine;
+};
+
+
+/*
+ *  crazybioGame: CrazyBioComputing Game Engine
+ *  Copyright (C) 2015-2018  Jean-Christophe Taveau.
+ *
+ *  This file is part of crazybioGame
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with crazybioGame.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
+ * Authors:
+ * Jean-Christophe Taveau
+ */
+
+
+'use strict';
+
+class Form extends Machine {
+  constructor (id,className,description) {
+    super(id,className,description);
+  }
+  
+  static create(props) {
+    return new Form(props.id,props.class,props.description,props.parent)
+      .append('article')
+      .display(props.display)
+      .features(props.features);
+  }
+  
+  features(featuresProps) {
+    let formHTML = featuresProps.form.join('');
+    formHTML = formHTML.replace(/@(.+?)@/g,'<input type="text" size="3" data-expression="$&"></input>');
+    this.element.innerHTML = formHTML;
+    this.element.style.width = 'auto';
+    this.element.style.height = 'auto';
+    this.element.style.backgroundColor = '#efefef';
+    return this;
+  }
+}
+
+/**
  * Create a new `form` machine using a `GapFill` mode
  *
  * @author P. Wintringer
- */
+ * @author Jean-Christophe Taveau
+ **/
 const createForm = (props) => {
-  let element = document.createElement('div');
+  let form = Form.create(props);
+  return form;
+  
+  /*
+    let element = document.createElement('div');
   element.id = props.id;
   element.className = "formgapfill";
   
@@ -527,8 +595,7 @@ const createForm = (props) => {
         modal.style.display = "none";
     }
   }
-  
-  /*let myForm = document.createElement('form');
+  let myForm = document.createElement('form');
   myForm.method = "post";
   myForm.onsubmit = return validateForm();
   let field = document.createElement('input');
@@ -549,7 +616,6 @@ function validateForm() {
   //}
   //document.getElementById("machine").addEventListener("click",download(img.src));
 
-  return element;
 };
 
 
@@ -667,19 +733,6 @@ const createFormDropDown = (props) => {
 }*/
 
   return element;
-};
-
-
-/**
- * Create a Tile machine
- *
- * @author Jean-Christophe Taveau
- *
- */
-const createMachineTile = (props) => {
-  let machine = Machine.create(props).draggable();
-  machine.element.className = "machine tile";
-  return machine;
 };
 
 
@@ -938,24 +991,6 @@ class Item extends Machine {
     let item = new Item(props.id,props.class,props.description,props.parent)
       .display(props.display)
       .features(props.features);
-/*
-    let itemAction = {
-      onclick: {
-        new_items: [props.id],
-        del_nodes: [props.id],
-        popup:  {
-          header: 'A clue...' || props.features.inventory.header,
-          body: [`You find something...<br><center><img src="${props.features.inventory.path}"></img></center>`],
-          footer: 'Add it in your bag...&nbsp;'
-        }
-      }
-    };
-      
-    if (props.action !== undefined) {
-      itemAction = props.action;
-    }
-     item.action(itemAction);
-*/
 
     return item;
   }
