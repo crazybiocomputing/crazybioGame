@@ -35,8 +35,8 @@
   },
   {
     "id": 4,
-    "class": "machine.download",
-    "description": "Download Machine",
+    "class": "sprite",
+    "description": "Coordinates",
     "display": {
       "position": [368,181],
       "width": 40,
@@ -45,8 +45,30 @@
         "data": ["C", 20, 20, 20]
       }
     },
-    "features": {
-      "download": "assets/lines.png"
+    "action": {
+      "onclick": {
+        "popup": {
+          "header": "Where is the treasure?",
+          "body": [
+            "<div class=\"pirate\">",
+            "... My entire life, I gathered all these treasures, and now ",
+            "they are within reach of the most audacious pirates ",
+            "ready to face the terrible storms to dock on my island [...]<br>",
+            "Wealth to those who will be able to decipher this enigma...",
+            "<pre>",
+            "- (iG;bB)<br>",
+            "- (7A;Eiv)<br>",
+            "- (giv;F4)<br>",
+            "- (6d;aA)<br>",
+            "- (gvii;fG)<br>",
+            "- (iG;8v)<br>",
+            "- (9vi;3F)<br>",
+            "</pre>",
+            "</div>"
+          ],
+          "footer": ["<b>My Life</b> - Red Beard..."]
+        }
+      }
     }
   },
   {
