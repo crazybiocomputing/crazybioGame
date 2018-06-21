@@ -1,5 +1,12 @@
 [
   {
+    "id": 0,
+    "comment": [
+      "Game originally created by Jean-Christophe Taveau",
+      "Updated by Charlotte Goncalves-Frasco - Master in Bioinformatics, Prom' 2019"
+    ]
+  }
+  {
     "id": 1,
     "class": "scene",
     "description": "Three clocks...",
