@@ -115,6 +115,11 @@ class Node {
     this.height = displayProps.height || 0;
     this.topleft = displayProps.position || [0,0];
       
+    this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
+    this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
+    this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
+    this.element.style.height = (displayProps.target === undefined) ? 'auto' : `${this.height / CRAZYBIOGAME.height * 100}%`;
+
     // Media: Image, video, audio?, etc.
     if (displayProps.graphics !== undefined) {
       this.displayGraphics(displayProps.graphics);
@@ -128,13 +133,8 @@ class Node {
       this.displayType = Node.TARGET;
       this.target = (displayProps.target.data === undefined) ? ["R",0,0,this.width,this.height] : displayProps.target.data;
     }
-    console.log(this.width,this.height,this.topleft,CRAZYBIOGAME.width,CRAZYBIOGAME.height);
+    console.log(this.width,this.height,this.element.style.width,this.element.style.height,this.topleft,CRAZYBIOGAME.width,CRAZYBIOGAME.height);
     
-    this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
-    this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
-    this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
-    this.element.style.height = (displayProps.target === undefined) ? 'auto' : `${this.height / CRAZYBIOGAME.height * 100}%`;
-
     return this;
   }
 
@@ -159,7 +159,7 @@ class Node {
     // Add focus if any
     this.focus = (propsGraphics.focus !== undefined) ? propsGraphics.focus : ["R",0,0,this.width,this.height];
     // Add style if any
-    return this.displayStyle(propsGraphics.style);
+    return this.displayStyle(this.element,propsGraphics.style);
   }
 
   static getTargetElement(parent) {
@@ -175,18 +175,34 @@ class Node {
     
   displayText(propsText) {
     this.displayType = Node.TEXT;
+    this.element.style.width = 'auto';
+    this.element.style.height = 'auto';
     this.element.innerHTML = propsText.content.join('');
     // TODO Must be improved
     let foundTarget = Node.getTargetElement(this.element);
     if (foundTarget !== undefined) {
       foundTarget.dataset.objectid = this.id;
     }
-    return this.displayStyle(propsText.style);
+    return this.displayStyle(this.element,propsText.style);
   };
 
-  displayStyle(props = {}) {
+  displayStyle(element,props = {}) {
+    let reserved = ['a', 'span'];
+    let reservedCrazy = ['form','header','body','footer'];
     for (let key in props) {
-      this.element.style[key] = props[key];
+      if (reserved.includes(key)) {
+        Array.from(this.element.children)
+          .filter( el => el.tagName === key.toUpperCase() )
+          .forEach( child => this.displayStyle(child,props[key]) );
+      }
+      else if (reservedCrazy.includes(key)) {
+        // let child = document.querySelector(`${} ${key}`);
+        this.displayStyle(child,props[key]);
+      }
+      else {
+        element.style[key] = props[key];
+      }
+
     }
     return this;
   }
@@ -228,7 +244,7 @@ class Node {
       }
     }
     // Update height
-    this.element.style.height = `${this.height / CRAZYBIOGAME.height * 100}%`;
+    // this.element.style.height = `${this.height / CRAZYBIOGAME.height * 100}%`;
 
     // Add event
     Object.keys(actionProps).forEach( (event) => {
@@ -244,7 +260,6 @@ class Node {
         Node.getTargetElement(this.element).addEventListener('click', doIt,false);
       }
       else if (event === 'onchange') {
-        console.log('on change...');
         this.element.addEventListener('change', doIt,false);
       }
     });
@@ -256,13 +271,15 @@ class Node {
    * Create specific features
    * 
    * @author Jean-Christophe Taveau
-   */
+
   features(featuresProps) {
     // TODO
     this.features = featuresProps;
     return this;
   }
-
+   */
+   
+   
   /**
    * Add children to composite/scene object
    *
@@ -350,6 +367,8 @@ class Machine extends Node {
 
   constructor (id,className,description) {
     super(id,className,description);
+    // Specific of `machine`
+    this.features = {};
   }
   
   /**
@@ -360,9 +379,40 @@ class Machine extends Node {
     return new Machine(props.id,props.class,props.description,props.parent)
       .append('article')
       .display(props.display)
-      .features(props.features);
+      .draggable(props.features.draggable)
+      .exit(props.features.exit);
   }
 
+  /**
+   * Features - Properties specific of the `machine`
+   *
+   * @author Jean-Christophe Taveau
+
+  features(featuresProps) {
+    // Various methods of machines
+    let f = {exit: this.exit};
+    Object.keys(featuresProps).forEach( (feat) => {
+      f[feat].call(this,featuresProps[feat]);
+    });
+    return this;
+  }
+*/
+
+  /**
+   * exit - Properties specific of the `machine`
+   *
+   * @author Jean-Christophe Taveau
+   */
+  exit(value) {
+    if (value === undefined) {
+      return this;
+    }
+    console.log('exit code ' + value.slice(9));
+    this.exitCode = (value.toString().includes('deferred')) ? CRAZYBIOGAME.deferred[value.slice(9)] : value;
+
+    return this;
+  }
+  
   /**
    * Click and Drag Feature 
    *
@@ -371,7 +421,6 @@ class Machine extends Node {
   draggable(flag = false) {
     
     const dragstart = (event) => {
-
       // centers the tile at (pageX, pageY) coordinates
       const moveAt = (pageX, pageY) => {
         // console.log(orgX,orgY,pageX,pageY,dx,dy,' = ',pageX - orgX + dx,pageY - orgY + dy);
@@ -433,47 +482,44 @@ class Machine extends Node {
  *
  */
 const createMachine = (props) => {
-  let machine = Machine.create(props);
-  // machine.action(props.action);
+  let machine = Machine.create(props)
+    .action(props.action)
+    .features(props.features);
+    
   return machine;
 };
 
-/**
- * Create a new `display` machine
- * @author P. Wintringer
- *
+
+const svg2img = (svgString,format,width,height,container) => {
+
+  console.log(svgString);
+  let canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  let ctx = canvas.getContext("2d");
+  let DOMURL = window.URL || window.webkitURL;
+  let img = new Image();
+  let blob = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
+  let url = DOMURL.createObjectURL(blob);
+  img.onload = function() {
+      ctx.drawImage(img, 0, 0);
+      var png = canvas.toDataURL(`image/${format}`);
+      container.innerHTML = `
+        <p>
+          Click on the icon below to download the file and process 
+          it with your favorite scientific software...<br>
+          <center> 
+            <a class="button" href="${png}" download="${CRAZYBIOGAME.gamepath}_image.${format}")/>
+              <i class="fas fa-download fa-3x"></i>
+            </a>
+          </center>
+        </p>`;
+      DOMURL.revokeObjectURL(png);
+  };
+  img.src = url;
+}
 
 
-const createMachineDisplay = (props) => {
-  let element = document.createElement('div');
-  element.id = props.id;
-  element.className = "machDisplay";
-
-  createPopUp(props,"dp");
-  let modal = document.getElementById("dp");
-  let button = document.getElementById(`svg_${props.id}`);
-  let closeB = document.getElementsByClassName('close'+"dp")[0];
-
-  button.onclick = function() {
-    modal.style.display = "block";
-  }
-  
-  closeB.onclick = function() {
-    modal.style.display = "none";
-  }
-
-  window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-  }
-
-  return element;
-
-};
- */
- 
- 
 /**
  * Create a new `download` machine
  *
@@ -499,15 +545,28 @@ const createMachineDownload = (props) => {
   // create the 'form'
   let container = document.createElement('div');
   container.id = 'lock-container';
-  let paragraph = document.createElement('p'); 
-  paragraph.innerHTML = 
-    `Click on the icon below to download the file and process 
-    it with your favorite scientific software...<br>
-    <center> <a class="button" href="${props.features.download}" download="${props.features.download}">
-    <i class="fas fa-download fa-3x"></i></a></center>`;
+
   
-  // Add all the elements
-  container.appendChild(paragraph);
+  if (props.features.download.includes('deferred')) {
+    let [result,format] = /:svg2(\w+):/.exec(props.features.download);
+    console.log(result,result.index,result.length,format);
+    let index = props.features.download.indexOf(result) + result.length;
+    let svg = props.features.download.slice(index);
+    let w = parseInt(/width=\s*\s*\"(\d+)/g.exec(svg)[1]);
+    let h = parseInt(/height\s*=\s*\"(\d+)/.exec(svg)[1]);
+    svg2img(svg,format,w,h,container);
+  }
+  else {
+    let paragraph = document.createElement('p');
+    paragraph.innerHTML = 
+      `Click on the icon below to download the file and process 
+      it with your favorite scientific software...<br>
+      <center> <a class="button" href="${props.features.download}" download="${props.features.download}">
+      <i class="fas fa-download fa-3x"></i></a></center>`;
+    // Add all the elements
+    container.appendChild(paragraph);
+  }
+
   actionProps.onclick.popup.contentDOM = container;
   machine.action(actionProps);
 
@@ -522,7 +581,10 @@ const createMachineDownload = (props) => {
  *
  */
 const createMachineTile = (props) => {
-  let machine = Machine.create(props).draggable(true);
+  if (props.features === undefined) {
+    props.features = {draggable: true};
+  }
+  let machine = Machine.create(props);
   machine.element.className = "machine tile";
   return machine;
 };
@@ -564,18 +626,20 @@ class Form extends Machine {
     let form =  new Form(props.id,props.class,props.description,props.parent)
     form.append('article')
       .display(props.display)
-      .features(props.features)
-      .draggable(props.features.draggable);
+      .form(props.features)
+      .action(props.action)
+      .draggable(props.features.draggable)
+      .exit(props.features.exit);
 
     return form;
   }
   
   /**
-   * Create the 'features' of this machine.form
+   * Create the 'form' of this machine.
    *
    * @author Jean-Christophe Taveau
    **/
-  features(featuresProps) {
+  form(featuresProps) {
     // Set CSS style
     const setStyle = (element,props = {}) => {
       for (let key in props) {
@@ -598,8 +662,10 @@ class Form extends Machine {
       
     }
     
+    // Step #0: Store some properties
+    this.features.exit = featuresProps.exit || '';
     
-    // Step #1: Create the HTML5 element(s)
+    // Step #1: Create the HTML5 element(s) from features.form
     let sections = ['header','body','footer'];
     
     let form = this.element;
@@ -615,21 +681,47 @@ class Form extends Machine {
         if (s === 'body') {
           this.answers = getAnswers(child.innerHTML);
           child.innerHTML = child.innerHTML.replace(/@(.+?)@/g,'<input type="text" placeholder="0" size="4"></input>');
+          console.log('regexp');
+          let regex = /(\[\[(__(.+?)__)\]\])/g;
+          let result = child.innerHTML;
+          while ( (result = regex.exec(result)) ) {
+              console.log(result);
+              console.log(result.index);
+          }
+          regex = /\[\[(__(.+?)__)\]\]/g;
+
+          // The same for buttons
+          // TODO
+          // <div class="buttongroup" style="float:right">
+          // <button type="submit">OK</button>
+          // <button type=\"reset\">Reset</button>
+          // </div>
         }
         form.appendChild(child);
       }
     });
 
     // Step #2: Extract the buttons from the form
-    let buttons = Array.from(this.element.children).reduce( (accu,child) => {
-      if (child.children !== undefined) {
-        return [...accu,...Array.from(child.children).filter( sub => sub.tagName === 'BUTTON')];
+    // TODO
+    const findDeep = (el,name) => {
+      console.log(el);
+      let found;
+      if (el.className === name) {
+        found = el;
       }
-      return accu;
-    },[]);
+      else if (el.children !== undefined) {
+        for (let child of Array.from(el.children)) {
+          found = findDeep(child,name);
+        }
+      }
+      return found;
+    }
+    
+    let buttons = findDeep(this.element,'buttongroup');
 
     // Step #3: Add the actions 
-    buttons.forEach( button => {
+    console.log(buttons);
+    Array.from(buttons.children).forEach( button => {
       // Block draggable if any
       button.addEventListener('mousedown', ev => ev.stopPropagation(),false );
       button.dataset.parent = `node_${this.id}`;
@@ -637,9 +729,12 @@ class Form extends Machine {
       if (button.type === 'submit') {
         button.addEventListener('click', ev => {
           ev.stopPropagation();
-          let values = Array.from(document.querySelectorAll(`#${ev.target.dataset.parent} input`)).map( (input)=> input.value);
+          let values = Array.from(document.querySelectorAll(`#${ev.target.dataset.parent} input`)).map( (input) => input.value);
           console.log(values);
           console.log(this.answers);
+          if (this.answers.every ( (answer,i) => answer === parseFloat(values[i]) ) === true) {
+            triggerAction('onsuccess',this);
+          }
         },true);
       }
     });
@@ -856,7 +951,8 @@ class Lock extends Machine {
     return new Lock(props.id,props.class,props.description,props.parent)
       .append('article')
       .display(props.display)
-      .features(props.features);
+      .draggable(props.features.draggable)
+      .exit(props.features.exit);
   }
 }
 
@@ -877,8 +973,8 @@ const createLockText = (props) => {
   actionProps.onclick = {};
   actionProps.onclick['popup'] = {
     header: 'Unlock the game...',
-    content: [''],
-    footer: 'Lock'
+    body: [`Type the code... to unlock the game<br>@${this.exitCode}@__ok__ <br>` ],
+    footer: 'Lock&nbsp;'
   };
   
   // create the popup content + events
@@ -897,7 +993,7 @@ const createLockText = (props) => {
 
   submitbutton.onclick = () => {
     let val = document.getElementById('lock-input').value;
-    console.log(val,lock.features.exit);
+    console.log(val,lock.exitCode);
     nextGame(val,lock);
   }
   
@@ -1365,14 +1461,16 @@ const createSprite = (props) => {
 
 'use strict';
 
+
 const createDeferred = (props) => {
   let obj = CRAZYBIOGAME.deferred[props.id];
+  console.log(obj);
   // Update properties...
   obj.element.style.left = `${obj.topleft[0] / CRAZYBIOGAME.width * 100}%`;
   obj.element.style.top = `${obj.topleft[1] / CRAZYBIOGAME.height * 100}%`;
   obj.element.style.width = `${obj.width / CRAZYBIOGAME.width * 100}%`;
-  obj.element.style.height = (obj.display.target === undefined) ? 'auto' : `${obj.height / CRAZYBIOGAME.height * 100}%`;
-  console.log(obj);
+  obj.element.style.height = (obj.target === undefined) ? 'auto' : `${obj.height / CRAZYBIOGAME.height * 100}%`;
+
   return obj;
 }
 /*
@@ -1845,7 +1943,10 @@ const triggerAction = (event,node) => {
       else {
         updateNodes('onclick',node);
       }
-
+      break;
+    case 'onsuccess': 
+      updateNodes('onsuccess',node);
+      break;
     }
   });
 }
@@ -2129,6 +2230,7 @@ let CRAZYBIOGAME = {
   name: 'A crazyBioComputing Game',
   level: 0,
   game: 0,
+  gamepath: '',
   topic: 'none',
   next_game: -1,
   useItem: false,
@@ -2241,8 +2343,8 @@ const appendSensitive = (id, geom) => {
   }
 
   const createPolygon = (path) => {
-    let shape = document.createElementNS(NS,'polygon');
-    shape.setAttributeNS(null,'points',path);
+    let shape = document.createElementNS(NS,'path');
+    shape.setAttributeNS(null,'d',path);
     return shape;
   }
   
@@ -2291,8 +2393,8 @@ const createSensitiveLayer = (id,w,h,geom) => {
   }
 
   const createPolygon = (path) => {
-    let shape = document.createElementNS(NS,'polygon');
-    shape.setAttributeNS(null,'points',path);
+    let shape = document.createElementNS(NS,'path');
+    shape.setAttributeNS(null,'d',path);
     return shape;
   }
   
@@ -2319,6 +2421,7 @@ const createHeader = () => {
   let level = url.searchParams.get("level");
   let topic = url.searchParams.get("topic");
   let game = url.searchParams.get("game");
+  let gamepath = url.searchParams.get("path");
   let next_id = url.searchParams.get("next");
   // Add Title
   let title = document.createElement('title');
@@ -2336,6 +2439,7 @@ const createHeader = () => {
   // Some storage...
   CRAZYBIOGAME.level = parseInt(level);
   CRAZYBIOGAME.game = parseInt(game);
+  CRAZYBIOGAME.gamepath = gamepath.toLowerCase();
   CRAZYBIOGAME.topic = topic.toLowerCase();
   let mgr = new GameManager();
   mgr.calcNextURL('../levels.json',level,game);
@@ -2352,8 +2456,8 @@ const nextGameById = (val,node_id) => {
 
 
 const nextGame = (val,node) => {
-  console.log(val,node.features.exit);
-  if (val === node.features.exit.toString()) {
+  console.log(val,node.exitCode);
+  if (val === node.exitCode.toString()) {
     // Update crazybiolevels localstorage
     let crazybiolevels = 2**(CRAZYBIOGAME.game - 1);
     let str = '';
