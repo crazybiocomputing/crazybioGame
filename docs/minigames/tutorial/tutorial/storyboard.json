@@ -64,7 +64,7 @@
       "width": 500,
       "height": 74,
       "text": {
-        "content": ["<p class=\"dark\"><em>Second</em> <a class=\"target\" href=\"javascript:void(0)\">[ H E L P ]</a></p>"],
+        "content": ["<a class=\"target dark\" href=\"javascript:void(0)\">[ H E L P ]</a>"],
         "style": {
           "display": "none",
           "padding": "10px"
@@ -93,8 +93,23 @@
   },
   {
     "id": 44, 
-    "class": "deferred", 
-    "description": "lock"
+    "class": "machine.lockNumerical",
+    "description": "lock",
+    "display": {
+      "position": [370,100],
+      "width": 70,
+      "height": 70,
+      "graphics": {
+        "path": "../../assets/lock_symbol.png",
+        "focus" : ["C",35,35,35],
+        "style": {
+          "display": "none"
+        }
+      }
+    },
+    "features": {
+      "exit": "deferred:code"
+    }
   }
 ]
 
