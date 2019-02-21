@@ -62,7 +62,7 @@ code.forEach ( (digit,index) => {
   });
 });
 
-let lock = createLockNumerical({
+CRAZYBIOGAME.deferred[2] = createLockNumerical({
   id : 2,
   class: "machine.lockNumerical", 
   description: "Exit Lock", 
@@ -76,9 +76,10 @@ let lock = createLockNumerical({
     }
   },
   features: {
-    exit: codenumber
+    exit: 'deferred:code'
   }
 });
 
-CRAZYBIOGAME.deferred[lock.id] = lock;
+CRAZYBIOGAME.deferred['code'] = codenumber;
+
 
