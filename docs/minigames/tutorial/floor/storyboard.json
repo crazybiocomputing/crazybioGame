@@ -7,45 +7,52 @@
       "width": 800,
       "height": 450,
       "graphics": {
-        "path": "../../assets/background_transparent.png"
+        "path": "assets/background.svg"
       }
     },
-    "children": [3,5]
-  },
-  {
-    "id": 3,
-    "class": "machine.tile",
-    "description": "dialog",
-    "display": {
-      "width": 251,
-      "height": 259,
-      "position": [100, 225],
-      "graphics": {
-        "path": "./assets/foregroundcolor.png"
-      }
-    }
+    "children": [5,10,15,20]
   },
   {
     "id": 5,
-    "class": "machine.form",
-    "description": "form",
+    "class": "machine.lockNumerical", 
+    "description": "Lock",
     "display": {
-      "width": 200,
-      "height": 70,
-      "position": [0, 0],
-      "target": {}
+      "width": 100,
+      "height": 100,
+      "position": [490,10],
+      "graphics": {
+        "path" : "../../assets/lock_symbol.png",
+        "focus": ["C", 50, 50, 50]
+      }
     },
     "features": {
-      "form": [
-        "<pre>",
-        "<label style=\"display: inline-block; width:25px; text-align:right;\">Red:</label>",
-        "  <img style=\"display: inline-block;\" src=\"assets/slider.png\"></img>@200@<br>",
-        "<label style=\"display: inline-block; width:25px; text-align:right;\">Green:</label>",
-        "  <img style=\"display: inline-block;\" src=\"assets/slider.png\"></img>@200@<br>",
-        "<label style=\"display: inline-block; width:25px; text-align:right;\">Blue:</label>",
-        "  <img style=\"display: inline-block;\" src=\"assets/slider.png\"></img>@200@<br>",
-        "</pre>"
-      ]
+      "exit": "deferred:code"
+    }
+  },
+  {
+    "id": 10,
+    "class": "deferred",
+    "description": "circles"
+  },
+  {
+    "id": 15,
+    "class": "deferred",
+    "description": "circles download"
+  },
+
+  {
+    "id": 20,
+    "class": "sprite",
+    "description": "instructions",
+    "display": {
+      "position": [490,120],
+      "text": {
+        "content": ["Visually count the number of circles..."],
+        "style": {
+          "fontFamily": "Lato",
+          "fontSize": "42px"
+        }
+      }
     }
   }
 ]
