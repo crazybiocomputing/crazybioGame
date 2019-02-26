@@ -46,6 +46,10 @@
       {
         "id": 28,
         "path": "dialog"
+      },
+      {
+        "id": 31,
+        "path": "unlock"
       }
     ]
   },
