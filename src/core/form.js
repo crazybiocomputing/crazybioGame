@@ -31,19 +31,123 @@ class Form extends Machine {
   }
   
   static create(props) {
-    return new Form(props.id,props.class,props.description,props.parent)
-      .append('article')
+    let form =  new Form(props.id,props.class,props.description,props.parent)
+    form.append('article')
       .display(props.display)
-      .features(props.features);
+      .form(props.features)
+      .action(props.action)
+      .draggable(props.features.draggable)
+      .exit(props.features.exit);
+
+    return form;
   }
   
-  features(featuresProps) {
-    let formHTML = featuresProps.form.join('');
-    formHTML = formHTML.replace(/@(.+?)@/g,'<input type="text" size="3" data-expression="$&"></input>');
-    this.element.innerHTML = formHTML;
-    this.element.style.width = 'auto';
-    this.element.style.height = 'auto';
-    this.element.style.backgroundColor = '#efefef';
+  /**
+   * Create the 'form' of this machine.
+   *
+   * @author Jean-Christophe Taveau
+   **/
+  form(featuresProps) {
+    // Set CSS style
+    const setStyle = (element,props = {}) => {
+      for (let key in props) {
+        element.style[key] = props[key];
+      }
+    }
+    
+    // Get fields answers
+    const getAnswers = (text) => {
+      // #1: Extract the values between delimiters '@...@'
+      let matches = text.match(/@(.+?)@/g);
+      // #2: Store the answer(s)
+      return matches.map( a_match => {
+        let v = a_match.slice(1,-1).split(/[=:]/);
+        console.log(v);
+        // v[0] num(erical) or txt
+        // v[1] value or deferred
+        return (v[1] === 'deferred') ? CRAZYBIOGAME.deferred[v[2]] : v[1];
+      });
+      
+    }
+    
+    // Step #0: Store some properties
+    this.features.exit = featuresProps.exit || '';
+    
+    // Step #1: Create the HTML5 element(s) from features.form
+    let sections = ['header','body','footer'];
+    
+    let form = this.element;
+    form.className += ' form';
+    setStyle(form,featuresProps.style.form);
+    
+    sections.forEach( (s) => {
+      if (featuresProps.form[s] !== undefined) {
+        let child = document.createElement(s);
+        setStyle(child,featuresProps.style[s]);
+        child.innerHTML = featuresProps.form[s].join('');
+        // TODO Must be improved...
+        if (s === 'body') {
+          this.answers = getAnswers(child.innerHTML);
+          child.innerHTML = child.innerHTML.replace(/@(.+?)@/g,'<input type="text" placeholder="0" size="4"></input>');
+          console.log('regexp');
+          let regex = /(\[\[(__(.+?)__)\]\])/g;
+          let result = child.innerHTML;
+          while ( (result = regex.exec(result)) ) {
+              console.log(result);
+              console.log(result.index);
+          }
+          regex = /\[\[(__(.+?)__)\]\]/g;
+
+          // The same for buttons
+          // TODO
+          // <div class="buttongroup" style="float:right">
+          // <button type="submit">OK</button>
+          // <button type=\"reset\">Reset</button>
+          // </div>
+        }
+        form.appendChild(child);
+      }
+    });
+
+    // Step #2: Extract the buttons from the form
+    // TODO
+    const findDeep = (el,name) => {
+      console.log(el);
+      let found;
+      if (el.className === name) {
+        found = el;
+      }
+      else if (el.children !== undefined) {
+        for (let child of Array.from(el.children)) {
+          found = findDeep(child,name);
+        }
+      }
+      return found;
+    }
+    
+    let buttons = findDeep(this.element,'buttongroup');
+
+    // Step #3: Add the actions 
+    console.log(buttons);
+    Array.from(buttons.children).forEach( button => {
+      // Block draggable if any
+      button.addEventListener('mousedown', ev => ev.stopPropagation(),false );
+      button.dataset.parent = `node_${this.id}`;
+      // Add event when click button(s)
+      if (button.type === 'submit') {
+        button.addEventListener('click', ev => {
+          ev.stopPropagation();
+          let values = Array.from(document.querySelectorAll(`#${ev.target.dataset.parent} input`)).map( (input) => input.value);
+          console.log(values);
+          console.log(this.answers);
+          if (this.answers.every ( (answer,i) => answer === parseFloat(values[i]) ) === true) {
+            triggerAction('onsuccess',this);
+          }
+        },true);
+      }
+    });
+    console.log(buttons);
+        
     return this;
   }
 }

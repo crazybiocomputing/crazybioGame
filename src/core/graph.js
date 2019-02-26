@@ -37,6 +37,10 @@ class Graph {
     let ancestor;
     if (a_node.hasChildren()) {
       // ???
+      if (a_node.className.includes('scene') ) {
+        children = a_node.childrenID;
+        ancestor = this.root;
+      }
       if (a_node.childrenID !== undefined) {
         children = a_node.childrenID;
         ancestor = a_node;
@@ -55,9 +59,9 @@ class Graph {
     else {
       return;
     }
-
+    console.log(children);
     for (let id of children) {
-      console.log(`id ${id} ${ancestor.id}`);
+      console.log(`id ${id} <-- ${ancestor.id}`);
       let nodeChild = this.nodeList.filter( (node) => node.id === id)[0];
       ancestor.childNodes.push(nodeChild);
       nodeChild.ancestor = ancestor;
@@ -69,8 +73,10 @@ class Graph {
   traverse(a_node,func) {
     if (a_node.hasChildNodes()) {
       for (let nodeChild of a_node.childNodes) {
+        console.log(func);
+        console.log(nodeChild);
         func(nodeChild);
-        this.traverse(nodeChild);
+        this.traverse(nodeChild,func);
       }
     }
   }

@@ -32,12 +32,14 @@
  */
 const updateNodes = (eventType,node) => { 
   if (node.actions[eventType].new_nodes !== undefined) {
+    console.log('show nodes');
     showNodes(node.actions[eventType].new_nodes);
   }
   if (node.actions[eventType].del_nodes !== undefined) {
     hideNodes(node.actions[eventType].del_nodes);
   }
   if (node.actions[eventType].new_items !== undefined) {
+      console.log('show items');
     showItems(node.actions[eventType].new_items);
   }
   if (node.actions[eventType].popup !== undefined) {
@@ -61,7 +63,10 @@ const triggerAction = (event,node) => {
       else {
         updateNodes('onclick',node);
       }
-
+      break;
+    case 'onsuccess': 
+      updateNodes('onsuccess',node);
+      break;
     }
   });
 }
@@ -80,7 +85,6 @@ const showNodes = (nodelist) => {
     if (node.actions !== undefined && node.actions.ondisplay !== undefined) {
       updateNodes('ondisplay',node);
     }
-
   });
 }
 

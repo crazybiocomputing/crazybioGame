@@ -36,6 +36,7 @@ let CRAZYBIOGAME = {
   name: 'A crazyBioComputing Game',
   level: 0,
   game: 0,
+  gamepath: '',
   topic: 'none',
   next_game: -1,
   useItem: false,
@@ -148,8 +149,8 @@ const appendSensitive = (id, geom) => {
   }
 
   const createPolygon = (path) => {
-    let shape = document.createElementNS(NS,'polygon');
-    shape.setAttributeNS(null,'points',path);
+    let shape = document.createElementNS(NS,'path');
+    shape.setAttributeNS(null,'d',path);
     return shape;
   }
   
@@ -198,8 +199,8 @@ const createSensitiveLayer = (id,w,h,geom) => {
   }
 
   const createPolygon = (path) => {
-    let shape = document.createElementNS(NS,'polygon');
-    shape.setAttributeNS(null,'points',path);
+    let shape = document.createElementNS(NS,'path');
+    shape.setAttributeNS(null,'d',path);
     return shape;
   }
   
@@ -226,6 +227,7 @@ const createHeader = () => {
   let level = url.searchParams.get("level");
   let topic = url.searchParams.get("topic");
   let game = url.searchParams.get("game");
+  let gamepath = url.searchParams.get("path");
   let next_id = url.searchParams.get("next");
   // Add Title
   let title = document.createElement('title');
@@ -243,6 +245,7 @@ const createHeader = () => {
   // Some storage...
   CRAZYBIOGAME.level = parseInt(level);
   CRAZYBIOGAME.game = parseInt(game);
+  CRAZYBIOGAME.gamepath = gamepath.toLowerCase();
   CRAZYBIOGAME.topic = topic.toLowerCase();
   let mgr = new GameManager();
   mgr.calcNextURL('../levels.json',level,game);
@@ -259,8 +262,8 @@ const nextGameById = (val,node_id) => {
 
 
 const nextGame = (val,node) => {
-  console.log(val,node.features.exit);
-  if (val === node.features.exit.toString()) {
+  console.log(val,node.exitCode);
+  if (val === node.exitCode.toString()) {
     // Update crazybiolevels localstorage
     let crazybiolevels = 2**(CRAZYBIOGAME.game - 1);
     let str = '';

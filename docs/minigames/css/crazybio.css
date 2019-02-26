@@ -20,6 +20,14 @@ img {
   height: auto;
 }
 
+.game {
+  position:relative;
+  margin: 0px auto 0px auto;
+}
+.game section {
+  position: absolute;
+}
+
 .target .sprite, .machine {
   margin: 0;
   padding: 0;
@@ -97,6 +105,25 @@ article .map a {
   top: 92px;
   left: 80px;
 }
+
+section .close {
+    background-color: rgba(255,220,0,1.0);
+    font-family: 'Lato';
+    font-size: 2.5em;
+    padding: 8px;
+    color: #000;
+    line-height: 25px;
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    top: 10px;
+    width: 26px;
+    text-decoration: none;
+    font-weight: bold;
+    border: solid 2px black;
+    box-shadow: 1px 1px 3px #000;
+}
+
 
 /* Modal */
 #popup,.modal {

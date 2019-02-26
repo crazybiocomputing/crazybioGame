@@ -1,0 +1,169 @@
+ [
+  {
+    "id": 1,
+    "class": "scene",
+    "description": "A locked office ...",
+    "help": ["Hint #1","Hint #2","Hint #3"],
+    "display": {
+      "width": 794,
+      "height": 655,
+      "graphics": {
+        "path"     : "assets/officeBackground.png"
+      }
+    },
+    "children": [11,21,35,42,69]
+  },
+  {
+    "id": 11,
+    "class": "item",
+    "description": "A key...",
+    "display": {
+      "width":10,
+      "height":10,
+      "position":[10,10],
+      "graphics": {
+        "path": "assets/key.svg"
+      },
+      "target": ["C",301,590,22]
+    },
+    "action": {
+      "if_success_then": {
+        "del_nodes":[11,35]
+      }
+    }
+  },
+  {
+    "id": 16,
+    "class": "item",
+    "description": "A 10cm long electrical wire...",
+    "display": {
+      "width":10,
+      "height":10,
+      "position":[10,10],
+      "target": {
+        "data": []
+      }
+    }
+  },
+  {
+    "id": 21,
+    "class": "lockNumpad",
+    "description": "The exit door...",
+    "features": {
+      "exit": [9372]
+    } 
+  },
+  {
+    "id": 25,
+    "class": "sprite",
+    "description": "the electricity is back...",
+    "display": {
+      "width": 10,
+      "height": 10,
+      "position": [10,10],
+      "target": ["R",0,0,10,10]
+    },
+    "action": {
+      "on_click": {
+        "popup": {
+          "header": "Well done, you have restored the electricity...",
+          "body": ["<img src=\"assets/officeGrid.svg\"></img>"]
+        }
+      },
+      "del_nodes": [16,46,67,42],
+      "new_nodes": [48]
+    }
+  },
+  {
+    "id": 35,
+    "class": "sprite",
+    "description": "A locked cabinet",
+    "display": {
+      "width":10,
+      "height":10,
+      "position": [10,10]
+    },
+    "action": {
+      "on_click": {
+        "popup": {
+          "header": "A locked cabinet",
+          "body": [
+            "<img src=\"assets/cabinet.svg\"></img>",
+            " You need a key..." 
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": 42,
+    "class": "sprite",
+    "description": "A TV... no electricity", 
+    "display": {
+      "width": 10,
+      "height": 10,
+      "position": [10,10]
+    },
+    "action": {
+      "if": "click",
+      "then": {
+        "popup": {
+          "header": "A TV",
+          "body": ["<img src=\"assets/tv.svg\"></img>","...There is no electricity"]
+        }
+      }
+    }
+  },
+  {
+    "id": 46,
+    "class": "scene.closeup",
+    "description": "Unlocked Cabinet",
+    "display": {
+      "width":400,
+      "height": 400,
+      "graphics": {
+        "path": "assets/opencabinet.svg",
+        "header": "An empty cabinet...",
+        "body": ["Maybe, need a better inspection"]
+      }
+    },
+    "children": [16]
+  },
+  {
+    "id": 48,
+    "class": "sprite",
+    "description": "The TV screen is on...",
+    "del_nodes": [25,42],
+    "display": {
+      "width": 10,
+      "height": 10,
+      "position": [10,10],
+      "graphics"   : {
+        "path"     : "assets/tv.svg"
+      }
+    }
+
+  },
+  {
+    "id": 69,
+    "class": "machine",
+    "description": ["A grid with pins...","I need a connector..."]
+  },
+  {
+    "id": 83,
+    "class": "machine",
+    "description": "Connectors",
+    "graphics"   : {
+      "path"     : "assets/grid.svg"
+    }
+  },
+  {
+    "id": 9372,
+    "class": "exit", 
+    "description": "Digital code",
+    "graphics"   : {
+      "path"     : "assets/grid.svg"
+    }
+  }
+  
+]

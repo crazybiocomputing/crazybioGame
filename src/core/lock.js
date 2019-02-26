@@ -35,7 +35,8 @@ class Lock extends Machine {
     return new Lock(props.id,props.class,props.description,props.parent)
       .append('article')
       .display(props.display)
-      .features(props.features);
+      .draggable(props.features.draggable)
+      .exit(props.features.exit);
   }
 }
 
@@ -56,8 +57,8 @@ const createLockText = (props) => {
   actionProps.onclick = {};
   actionProps.onclick['popup'] = {
     header: 'Unlock the game...',
-    content: [''],
-    footer: 'Lock'
+    body: [`Type the code... to unlock the game<br>@${this.exitCode}@__ok__ <br>` ],
+    footer: 'Lock&nbsp;'
   };
   
   // create the popup content + events
@@ -76,7 +77,7 @@ const createLockText = (props) => {
 
   submitbutton.onclick = () => {
     let val = document.getElementById('lock-input').value;
-    console.log(val,lock.features.exit);
+    console.log(val,lock.exitCode);
     nextGame(val,lock);
   }
   

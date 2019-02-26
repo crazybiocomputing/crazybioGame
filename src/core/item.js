@@ -27,11 +27,14 @@
 
 /**
  * Create a new item
- *
+ * @class Item
+ * @extends Machine
  *
  */
 class Item extends Machine {
-
+  /**
+   * @constructor
+   */
   constructor (id,className,description) {
     super(id,className,description);
   }
@@ -42,11 +45,15 @@ class Item extends Machine {
     
     let item = new Item(props.id,props.class,props.description,props.parent)
       .display(props.display)
-      .features(props.features);
+      .inventoriable(props.features);
 
     return item;
   }
 
+  /**
+   * Create HTML code for display
+   *
+   */
   display(displayProps) {
     if (displayProps === undefined) {
       return this;
@@ -68,7 +75,11 @@ class Item extends Machine {
     
   }
   
-  features(featuresProps) {
+  /**
+   * Manage thumbnail and events for item
+   * @author Jean-Christophe Taveau
+   */
+  inventoriable(featuresProps) {
     // Add event
     let link = this.element.children[0];
     link.addEventListener('click', (ev) => {

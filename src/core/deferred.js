@@ -25,13 +25,16 @@
 
 'use strict';
 
+
 const createDeferred = (props) => {
   let obj = CRAZYBIOGAME.deferred[props.id];
+  console.log(CRAZYBIOGAME.deferred);
+  console.log(obj);
   // Update properties...
   obj.element.style.left = `${obj.topleft[0] / CRAZYBIOGAME.width * 100}%`;
   obj.element.style.top = `${obj.topleft[1] / CRAZYBIOGAME.height * 100}%`;
   obj.element.style.width = `${obj.width / CRAZYBIOGAME.width * 100}%`;
-  obj.element.style.height = (obj.display.target === undefined) ? 'auto' : `${obj.height / CRAZYBIOGAME.height * 100}%`;
-  console.log(obj);
+  obj.element.style.height = (obj.target === undefined) ? 'auto' : `${obj.height / CRAZYBIOGAME.height * 100}%`;
+
   return obj;
 }

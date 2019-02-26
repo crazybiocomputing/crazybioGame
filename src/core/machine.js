@@ -30,6 +30,8 @@ class Machine extends Node {
 
   constructor (id,className,description) {
     super(id,className,description);
+    // Specific of `machine`
+    this.features = {};
   }
   
   /**
@@ -40,18 +42,50 @@ class Machine extends Node {
     return new Machine(props.id,props.class,props.description,props.parent)
       .append('article')
       .display(props.display)
-      .features(props.features);
+      .draggable(props.features.draggable)
+      .action(props.action)
+      .exit(props.features.exit);
   }
 
+  /*
+   * Features - Properties specific of the `machine`
+   *
+   * @author Jean-Christophe Taveau
+
+  features(featuresProps) {
+    // Various methods of machines
+    let f = {exit: this.exit};
+    Object.keys(featuresProps).forEach( (feat) => {
+      f[feat].call(this,featuresProps[feat]);
+    });
+    return this;
+  }
+*/
+
+  /**
+   * exit - Properties specific of the `machine`
+   *
+   * @author Jean-Christophe Taveau
+   */
+  exit(value) {
+    if (value === undefined) {
+      return this;
+    }
+    console.log('exit code ' + value + ' ' );
+    console.log(' '+value.slice(9));
+    this.exitCode = (value.toString().includes('deferred')) ? CRAZYBIOGAME.deferred[value.slice(9)] : value;
+
+    return this;
+  }
+  
   /**
    * Click and Drag Feature 
    *
    * @author Jean-Christophe Taveau
    */
-  draggable() {
+  draggable(flag = false) {
     
     const dragstart = (event) => {
-
       // centers the tile at (pageX, pageY) coordinates
       const moveAt = (pageX, pageY) => {
         // console.log(orgX,orgY,pageX,pageY,dx,dy,' = ',pageX - orgX + dx,pageY - orgY + dy);
@@ -77,8 +111,8 @@ class Machine extends Node {
       let orgX = event.pageX;
       let orgY = event.pageY;
       // TODO Must be improved - All the parents up to `game`
-      let dx = dragged.getBoundingClientRect().left - document.getElementById('game').getBoundingClientRect().left;
-      let dy = dragged.getBoundingClientRect().top - document.getElementById('game').getBoundingClientRect().top;
+      let dx = dragged.getBoundingClientRect().left - document.getElementById('node_0').getBoundingClientRect().left;
+      let dy = dragged.getBoundingClientRect().top - document.getElementById('node_0').getBoundingClientRect().top;
       dragged.style.zIndex = 1000;
 
       moveAt(event.pageX, event.pageY);
@@ -88,10 +122,15 @@ class Machine extends Node {
 
       // Drop the tile, remove unneeded handlers
       document.querySelector('main').addEventListener('mouseup', drag_end);
-
     };
 
+    // M A I N
+    if (!flag) {
+      return this;
+    }
+    
     this.element.draggable = false;
+    this.element.className += ' movable';
     this.element.addEventListener('mousedown', dragstart,false); 
     this.element.addEventListener('dragstart', (e) => {e.preventDefault();return false},false); 
     this.element.addEventListener('dragover', (e) => {return false},false); 
@@ -109,46 +148,41 @@ class Machine extends Node {
  */
 const createMachine = (props) => {
   let machine = Machine.create(props);
-  machine.action(props.action);
+    
   return machine;
 };
 
-/**
- * Create a new `display` machine
- * @author P. Wintringer
- *
+
+const svg2img = (svgString,format,width,height,container) => {
+
+  console.log(svgString);
+  let canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  let ctx = canvas.getContext("2d");
+  let DOMURL = window.URL || window.webkitURL;
+  let img = new Image();
+  let blob = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
+  let url = DOMURL.createObjectURL(blob);
+  img.onload = function() {
+      ctx.drawImage(img, 0, 0);
+      var png = canvas.toDataURL(`image/${format}`);
+      container.innerHTML = `
+        <p>
+          Click on the icon below to download the file and process 
+          it with your favorite scientific software...<br>
+          <center> 
+            <a class="button" href="${png}" download="${CRAZYBIOGAME.gamepath}_image.${format}")/>
+              <i class="fas fa-download fa-3x"></i>
+            </a>
+          </center>
+        </p>`;
+      DOMURL.revokeObjectURL(png);
+  };
+  img.src = url;
+}
 
 
-const createMachineDisplay = (props) => {
-  let element = document.createElement('div');
-  element.id = props.id;
-  element.className = "machDisplay";
-
-  createPopUp(props,"dp");
-  let modal = document.getElementById("dp");
-  let button = document.getElementById(`svg_${props.id}`);
-  let closeB = document.getElementsByClassName('close'+"dp")[0];
-
-  button.onclick = function() {
-    modal.style.display = "block";
-  }
-  
-  closeB.onclick = function() {
-    modal.style.display = "none";
-  }
-
-  window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-  }
-
-  return element;
-
-};
- */
- 
- 
 /**
  * Create a new `download` machine
  *
@@ -174,186 +208,32 @@ const createMachineDownload = (props) => {
   // create the 'form'
   let container = document.createElement('div');
   container.id = 'lock-container';
-  let paragraph = document.createElement('p'); 
-  paragraph.innerHTML = 
-    `Click on the icon below to download the file and process 
-    it with your favorite scientific software...<br>
-    <center> <a class="button" href="${props.features.download}" download="${props.features.download}">
-    <i class="fas fa-download fa-3x"></i></a></center>`;
+
   
-  // Add all the elements
-  container.appendChild(paragraph);
+  if (props.features.download.includes('deferred')) {
+    let [result,format] = /:svg2(\w+):/.exec(props.features.download);
+    console.log(result,result.index,result.length,format);
+    let index = props.features.download.indexOf(result) + result.length;
+    let svg = props.features.download.slice(index);
+    let w = parseInt(/width=\s*\s*\"(\d+)/g.exec(svg)[1]);
+    let h = parseInt(/height\s*=\s*\"(\d+)/.exec(svg)[1]);
+    svg2img(svg,format,w,h,container);
+  }
+  else {
+    let paragraph = document.createElement('p');
+    paragraph.innerHTML = 
+      `Click on the icon below to download the file and process 
+      it with your favorite scientific software...<br>
+      <center> <a class="button" href="${props.features.download}" download="${props.features.download}">
+      <i class="fas fa-download fa-3x"></i></a></center>`;
+    // Add all the elements
+    container.appendChild(paragraph);
+  }
+
   actionProps.onclick.popup.contentDOM = container;
   machine.action(actionProps);
 
   return machine;
-};
-
-
-/**
- * Create a new `form` machine using a `GapFill` mode
- *
- * @author P. Wintringer
- */
-const createForm = (props) => {
-  let element = document.createElement('div');
-  element.id = props.id;
-  element.className = "formgapfill";
-  
-  createPopUp(props,"gapfill");
-  let modal = document.getElementById("gapfill");
-  let closeB = document.getElementsByClassName('close'+"gapfill")[0];
-  button.onclick = function() {
-    modal.style.display = "block";
-  }
-  closeB.onclick = function() {
-    modal.style.display = "none";
-  }
-  window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-  }
-  
-  /*let myForm = document.createElement('form');
-  myForm.method = "post";
-  myForm.onsubmit = return validateForm();
-  let field = document.createElement('input');
-  field.setAttribute('type',"text");
-  let buttonS = document.createElement('input');
-  buttonS.setAttribute('type',"submit");
-  
-function validateForm() {
-    let var x = document.forms["myForm"].value;
-    if (x == "") {
-        alert("All fields must be input.");
-        return false;
-    }
- }*/
-
-  //function download(url){
-  //  window.location.href = url;
-  //}
-  //document.getElementById("machine").addEventListener("click",download(img.src));
-
-  return element;
-};
-
-
-/**
- * Create a new `form` machine using a `Drag and Drop` mode
- *
- * @author P.Wintringer
- */
-const createFormDragDrop = (props) => {
-  let element = document.createElement('div');
-  element.id = props.id;
-  element.className = "formDnd";
-  
-  createPopUp(props,"fdnd");
-  let modal = document.getElementById("fdnd");
-  let closeB = document.getElementsByClassName('close'+"fdnd")[0];
-  button.onclick = function() {
-    modal.style.display = "block";
-  }
-  closeB.onclick = function() {
-    modal.style.display = "none";
-  }
-  window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-  }
-  
-  /*let tile = document.getElementByClassName('sprite'); // sprite as tiles
-  let dropfield = document.createElement('div'); // tiles can only be dropped in fields
-  dropfield.setAttribute('class','field');
-  tile.setAttribute('draggable', true);
-  tile.addEventListener('dragstart',drag_start);
-  tile.addEventListener('dragend',drag_end);
-  let const fields = document.getElementByClassName('field');
-  for (let const fieldelem of fields){
-    field.addEventListener('dragover',drag_over);
-    field.addEventListener('drop',drop);
-  }
-  
-  function drag_start(){
-    this.className += " held";
-    setTimeout(()=>this.className="invisible", 0);
-  }
-  
-  function drag_end() {
-    this.className -= " held";
-    //this.className = 'sprite'; //if line above doesn't work
-  }
-  
-  function drop(){
-    this.className = "field"
-    this.append(tile);
-  }
-  
-  function drag_over(event) {
-    event.preventDefault();
-    return false;
-  } */
-  
-  return element;
-};
-
-
-/**
- * Create a new `form` machine using a `Drop-down` mode
- *
- * @author P. Wintringer
- */
-const createFormDropDown = (props) => {
-  let element = document.createElement('div');
-  element.id = props.id;
-  element.className = "formDropdown";
-  
-  createPopUp(props,"dropdown");
-  let modal = document.getElementById("dropdown");
-  let closeB = document.getElementsByClassName('close'+"dropdown")[0];
-  button.onclick = function() {
-    modal.style.display = "block";
-  }
-  closeB.onclick = function() {
-    modal.style.display = "none";
-  }
-  window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-  }
-  
-  /*let dropdown = element.createElement('button'); //creation of the drop down menu
-  dropdown.id = ddm;
-  dropdown.className = dropbtn;
-  dropdown.onClick = unroll();
-  
-  let content = element.createElement('div');
-  content.className = ddmcontent;
-  //add line to fetch content of ddm
-  content.display = block; //hidden unless clicked
-  
-  function unroll(){
-    document.getElementById("ddm").classList.toggle("show");
-  }
-  
-  window.onclick = function(event) { //
-  if (!event.target.matches('.dropbtn')) {
-    let dropdowns = document.getElementsByClassName("ddmcontent");
-    let i;
-    for (i = 0; i < dropdowns.length; i++) {
-      let openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}*/
-
-  return element;
 };
 
 
@@ -364,7 +244,10 @@ const createFormDropDown = (props) => {
  *
  */
 const createMachineTile = (props) => {
-  let machine = Machine.create(props).draggable();
+  if (props.features === undefined) {
+    props.features = {draggable: true};
+  }
+  let machine = Machine.create(props);
   machine.element.className = "machine tile";
   return machine;
 };

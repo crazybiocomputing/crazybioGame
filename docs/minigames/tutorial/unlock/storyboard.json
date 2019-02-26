@@ -1,0 +1,274 @@
+ [
+  {
+    "id": 1,
+    "class": "scene",
+    "description": "A locked office ...",
+    "help": ["Hint #1","Hint #2","Hint #3"],
+    "display": {
+      "width": 700,
+      "height": 467,
+      "graphics": {
+        "path"     : "assets/officeBackground.png"
+      }
+    },
+    "children": [10,21,35,42,67]
+  },
+  {
+    "id": 10,
+    "class": "sprite",
+    "description": "A key...",
+    "display": {
+      "width":51,
+      "height":15,
+      "position":[110,33],
+      "target": {
+        "data": ["P","M 0 0,37 0,47 14,10 14Z"]
+      }
+    },
+    "action": {
+      "onclick": {
+        "new_nodes": [11],
+        "del_nodes": [10],
+        "popup": {
+          "header": "A key...",
+          "body": ["<center><img src=\"assets/officeKey.png\" width=200></center><br>"],
+          "footer": "I take it. That could be useful ...&nbsp;"
+        }
+      }
+    }
+  },
+  {
+    "id": 11,
+    "class": "item",
+    "description": "Key...",
+    "display": {
+      "width": 150,
+      "height": 150,
+      "graphics": {
+        "path": "./assets/officeKey.png"
+      }
+    },
+    "features": {
+      "comment": "Create a 32x32 thumbnail of graphics",
+      "thumbnail": "assets/officeKey_cursor.png"
+    }
+  },
+  {
+    "id": 15,
+    "class": "sprite",
+    "description": "A Wire...",
+    "display": {
+      "width":100,
+      "height":100,
+      "position":[355,200],
+      "target": {
+        "data": ["P","M 58 0,111 20,58 41,0 13Z"]
+      }
+    },
+    "action": {
+      "onclick": {
+        "new_nodes": [16],
+        "del_nodes": [15],
+        "popup": {
+          "header": "A Wire...",
+          "body": ["<center><img src=\"assets/officeWire.png\" width=200></center><br>"],
+          "footer": "I take it. That could be useful ...&nbsp;"
+        }
+      }
+    }
+  },
+  {
+    "id": 16,
+    "class": "item",
+    "description": "Wire...",
+    "display": {
+      "width": 150,
+      "height": 150,
+      "graphics": {
+        "path": "./assets/officeWire.png"
+      }
+    },
+    "features": {
+      "comment": "Create a 32x32 thumbnail of graphics",
+      "thumbnail": "assets/officeWire_cursor.png"
+    }
+  },
+  {
+    "id": 21,
+    "class": "sprite",
+    "description": "The exit door...",
+    "display": {
+      "width": 98,
+      "height": 61,
+      "position": [230,382],
+      "target": {
+        "data": ["P","M 0 61,29 0,98 0,92 61Z"]
+      }
+    },
+    "action": {
+      "onclick": {
+        "new_nodes": [22],
+        "popup": {
+          "header": "The exit door... ",
+          "body": ["It is locked.<br>"],
+          "footer": "U n f o r t u n a t e l y ...&nbsp;"
+        }
+      }
+    }
+  },
+  {
+    "id": 22,
+    "class": "scene.closeup",
+    "description": "The exit door...",
+    "display": {
+      "width": 700,
+      "height": 467,
+      "graphics": {
+        "path": "assets/officeDoor.png",
+        "style": {
+          "display":"none"
+        }
+      }
+    },
+    "children": [27]
+  },
+  {
+    "id": 27, 
+    "class": "machine.lockText", 
+    "description": "A lock symbol", 
+    "display": {
+      "position": [470,202],
+      "width": 73,
+      "height": 76,
+      "target" : {
+        "data": ["P", "M 0 0,73 0,73 76,0 76Z"]
+      }
+    },
+    "features": {
+      "exit": "9372"
+    }
+  }, 
+  {
+    "id": 35,
+    "class": "sprite",
+    "description": "Locked Cabinet...",
+    "display": {
+      "width": 83,
+      "height": 128,
+      "position": [523,172],
+      "graphics": {
+        "path": "assets/officeCabinetTop.png",
+        "focus": ["P","M 1 18,33 2,82 4,82 128, 34 128,2 114Z"]
+      }
+    },
+    "action": {
+      "onclick": {
+        "popup": {
+          "header": "A locked Cabinet...",
+          "body": ["<center><img src=\"assets/officeCabinet.png\" width=400></center><br>"]
+        }
+      }
+    }
+  },
+  {
+    "id": 42,
+    "class": "sprite",
+    "description": "TV screen off...",
+    "display": {
+      "width": 139,
+      "height": 40,
+      "position": [407,13],
+      "target": {
+        "data": ["P","M 22 0,138 0,108 40,0 40Z"]
+      }
+    },
+    "action": {
+      "onclick": {
+        "popup": {
+          "header": "A TV screen... There is no electricity.",
+          "body": ["<center><img src=\"assets/officeTV.png\" width=400></center><br>"]
+        }
+      }
+    }
+  },
+  {
+    "id": 46,
+    "class": "sprite",
+    "description": "Unlocked Cabinet...",
+    "display": {
+      "width": 132,
+      "height": 128,
+      "position": [474,172],
+      "graphics": {
+        "path": "assets/officeCabinetTopOpen.png",
+        "focus": ["P","M 1 19,49 15,85 0,130 3,131 125,83 127,49 113,2 110Z"],
+        "style": {
+          "display":"none"
+        }
+      }
+    },
+    "action": {
+      "onclick": {
+        "new_nodes": [47]
+      }
+    }
+  },
+  {
+    "id": 47,
+    "class": "scene.closeup",
+    "description": "Unlocked Cabinet... Closeup",
+    "display": {
+      "width": 700,
+      "height": 467,
+      "graphics": {
+        "path": "assets/officeCabinetOpen.png",
+        "style": {
+          "display":"none"
+        }
+      }
+    },
+    "children": [15]
+  },
+  {
+    "id": 67,
+    "class": "sprite",
+    "description": "Grid with pins...",
+    "display": {
+      "width": 55,
+      "height": 16,
+      "position": [466,396],
+      "target": {
+        "data": ["P","M 1 1,39 1,53 15,10 15Z"]
+      }
+    },
+    "action": {
+      "onclick": {
+        "popup": {
+          "header": "A Grid with pins...",
+          "body": ["<center><img src=\"assets/officeGrid.png\" width=400></center><br>"]
+        }
+      }
+    }
+  },
+  {
+    "id": 83,
+    "class": "sprite",
+    "description": "Machine ready - Grid with pins + wire...",
+    "display": {
+      "width": 55,
+      "height": 16,
+      "position": [466,396],
+      "target": {
+        "data": ["P","M 1 1,39 1,53 15,10 15Z"]
+      }
+    },
+    "action": {
+      "onclick": {
+        "popup": {
+          "header": "A Grid with pins...",
+          "body": ["<center><img src=\"assets/officeGridActive.jpg\" width=400></center><br>"]
+        }
+      }
+    }
+  }
+]

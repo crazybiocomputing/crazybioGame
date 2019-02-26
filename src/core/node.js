@@ -27,13 +27,17 @@
 
 
 /**
- * Class Node - Ancestor of all the other classes
+ * Ancestor of all the other classes
+ * @class Node
  *
  * @author Jean-Christophe Taveau
  */
 class Node {
   /**
    * @constructor
+   * @param {number} id - Node ID
+   * @param {string} className - Object type
+   * @param {string} description - Description
    */
   constructor(id,className,description) {
     this.id = id;
@@ -92,7 +96,7 @@ class Node {
   /**
    * Get HTML Element
    * 
-   * @return {object} HTML Element
+   * @returns {object} HTML Element
    * @author Jean-Christophe Taveau
    */
   getHTML() {
@@ -115,6 +119,11 @@ class Node {
     this.height = displayProps.height || 0;
     this.topleft = displayProps.position || [0,0];
       
+    this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
+    this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
+    this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
+    this.element.style.height = (displayProps.target === undefined) ? 'auto' : `${this.height / CRAZYBIOGAME.height * 100}%`;
+
     // Media: Image, video, audio?, etc.
     if (displayProps.graphics !== undefined) {
       this.displayGraphics(displayProps.graphics);
@@ -123,18 +132,13 @@ class Node {
     else if (displayProps.text !== undefined) {
       this.displayText(displayProps.text);
     }
-    // Target to event(s)
+    // Shape - Target to event(s)
     else if (displayProps.target !== undefined) {
       this.displayType = Node.TARGET;
       this.target = (displayProps.target.data === undefined) ? ["R",0,0,this.width,this.height] : displayProps.target.data;
     }
-    console.log(this.width,this.height,this.topleft,CRAZYBIOGAME.width,CRAZYBIOGAME.height);
+    console.log(this.width,this.height,this.element.style.width,this.element.style.height,this.topleft,CRAZYBIOGAME.width,CRAZYBIOGAME.height);
     
-    this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
-    this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
-    this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
-    this.element.style.height = (displayProps.target === undefined) ? 'auto' : `${this.height / CRAZYBIOGAME.height * 100}%`;
-
     return this;
   }
 
@@ -142,17 +146,24 @@ class Node {
     this.displayType = Node.GRAPHICS;
     
     // Append the media
-    // TODO
-    // Check extension and create the appropriate HTML5 element
-    let img = document.createElement('img');
-    img.src = propsGraphics.path;
-    img.addEventListener('dragstart', () => false,false); 
-    this.element.appendChild(img); 
+    if (propsGraphics.element !== undefined) {
+      // WARNING - DOES NOT WORK WITH JSON STORYBOARD!!!
+      this.element.appendChild(propsGraphics.element);
+    }
+    else {
+      // TODO
+      // Check extension and create the appropriate HTML5 element
+      let img = document.createElement('img');
+      img.src = propsGraphics.path;
+      img.addEventListener('dragstart', () => false,false); 
+      this.element.appendChild(img); 
+    }
+
     
     // Add focus if any
     this.focus = (propsGraphics.focus !== undefined) ? propsGraphics.focus : ["R",0,0,this.width,this.height];
     // Add style if any
-    return this.displayStyle(propsGraphics.style);
+    return this.displayStyle(this.element,propsGraphics.style);
   }
 
   static getTargetElement(parent) {
@@ -168,18 +179,34 @@ class Node {
     
   displayText(propsText) {
     this.displayType = Node.TEXT;
+    this.element.style.width = 'auto';
+    this.element.style.height = 'auto';
     this.element.innerHTML = propsText.content.join('');
     // TODO Must be improved
     let foundTarget = Node.getTargetElement(this.element);
     if (foundTarget !== undefined) {
       foundTarget.dataset.objectid = this.id;
     }
-    return this.displayStyle(propsText.style);
+    return this.displayStyle(this.element,propsText.style);
   };
 
-  displayStyle(props = {}) {
+  displayStyle(element,props = {}) {
+    let reserved = ['a', 'span'];
+    let reservedCrazy = ['form','header','body','footer'];
     for (let key in props) {
-      this.element.style[key] = props[key];
+      if (reserved.includes(key)) {
+        Array.from(this.element.children)
+          .filter( el => el.tagName === key.toUpperCase() )
+          .forEach( child => this.displayStyle(child,props[key]) );
+      }
+      else if (reservedCrazy.includes(key)) {
+        // let child = document.querySelector(`${} ${key}`);
+        this.displayStyle(child,props[key]);
+      }
+      else {
+        element.style[key] = props[key];
+      }
+
     }
     return this;
   }
@@ -221,7 +248,7 @@ class Node {
       }
     }
     // Update height
-    this.element.style.height = `${this.height / CRAZYBIOGAME.height * 100}%`;
+    // this.element.style.height = `${this.height / CRAZYBIOGAME.height * 100}%`;
 
     // Add event
     Object.keys(actionProps).forEach( (event) => {
@@ -237,7 +264,6 @@ class Node {
         Node.getTargetElement(this.element).addEventListener('click', doIt,false);
       }
       else if (event === 'onchange') {
-        console.log('on change...');
         this.element.addEventListener('change', doIt,false);
       }
     });
@@ -245,17 +271,19 @@ class Node {
     return this;
   }
 
-  /**
+  /*
    * Create specific features
    * 
    * @author Jean-Christophe Taveau
-   */
+
   features(featuresProps) {
     // TODO
     this.features = featuresProps;
     return this;
   }
-
+   */
+   
+   
   /**
    * Add children to composite/scene object
    *
@@ -272,7 +300,7 @@ class Node {
   /**
    * Check if this object has children IDs
    *
-   * @return {boolean} true or false
+   * @returns {boolean} true or false
    * 
    * @author Jean-Christophe Taveau
    */
@@ -289,7 +317,7 @@ class Node {
   /**
    * Check if this object has children Nodes
    *
-   * @return {boolean} true or false
+   * @returns {boolean} true or false
    * 
    * @author Jean-Christophe Taveau
    */

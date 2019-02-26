@@ -39,11 +39,37 @@ class Scene extends Composite {
   static create(props) {
     return new Scene(props.id,props.class,props.description)
       .append('section')
+      .appendClose()
       .display(props.display)
       .children(props.children); // Pre-calculated in `preprocess` of game.js
       // .forEachChild(this.appendChild);
   }
   
+  appendClose() {
+    if (this.className === 'scene') {
+      return this;
+    }
+    
+    // Only for scene.closeup
+    let self = this;
+    
+    let closeButton = document.createElement('a')
+    closeButton.href="#close";
+    closeButton.title="Close";
+    closeButton.className ="close";
+    closeButton.textContent='×';
+    closeButton.addEventListener('click', (e) => {
+      self.element.style.display = 'none';
+      e.stopPropagation();
+    }, false);
+    this.element.appendChild(closeButton);
+    return this;
+  }
+  /**
+   * ???
+   * @obsolete
+   *
+   */
   appendChild(node) {
     console.log(node);
     let func = creators[child.class];

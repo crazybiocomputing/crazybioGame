@@ -59,7 +59,16 @@ class GameManager {
         level.games.forEach( (game,index) => {
           let i = (level.level - 1 ) * 2;
           let solvedgame = parseInt(crazybiolevels.slice(i,i + 2),16) & 2**index;
-          console.log(crazybiolevels,level.level,index,solvedgame,(crazybiolevels & (crazybiolevels & (15 << 4*(level.level-1)))).toString(2),(15 << 4*(level.level-1)).toString(2));
+          /* HACK
+          console.log(
+            crazybiolevels,
+            level.level,
+            index,
+            solvedgame,
+            (crazybiolevels & (crazybiolevels & (15 << 4*(level.level-1)))).toString(2),
+            (15 << 4*(level.level-1)).toString(2)
+          );
+          */
           let item = document.createElement('li');
           let link = document.createElement('a');
           link.href = `${game.path}/index.html?id=${game.id}&topic=${this.topic}&level=${level.level}&game=${index+1}&path=${game.path}`;
