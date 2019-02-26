@@ -1,6 +1,7 @@
 [
   {
-    "id": 0, 
+    "id": 0,
+    "class": "game", 
     "author": "Jean-Christophe Taveau", 
     "description": "Tutorial - Example of user interaction with `machine.tiles`"
   },
