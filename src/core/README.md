@@ -1,4 +1,4 @@
-Core JS classes, functions for the puzzle games
+# Core JS classes, functions for the puzzle games
 
 ## common.js
 Toolbox of various functions and global variable (_e.g._ CRAZYBIOGAME object).
