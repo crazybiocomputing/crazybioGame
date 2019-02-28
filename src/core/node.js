@@ -55,6 +55,10 @@ class Node {
     return 1;
   }
   
+  static get MEDIA() {
+    return 1;
+  }
+  
   static get TEXT() {
     return 2;
   }
@@ -125,8 +129,9 @@ class Node {
     this.element.style.height = (displayProps.target === undefined) ? 'auto' : `${this.height / CRAZYBIOGAME.height * 100}%`;
 
     // Media: Image, video, audio?, etc.
-    if (displayProps.graphics !== undefined) {
-      this.displayGraphics(displayProps.graphics);
+    let dprops = displayProps.graphics || displayProps.media;
+    if (dprops !== undefined ) {
+      this.displayMedia(dprops);
     }
     // Text
     else if (displayProps.text !== undefined) {
@@ -136,14 +141,15 @@ class Node {
     else if (displayProps.target !== undefined) {
       this.displayType = Node.TARGET;
       this.target = (displayProps.target.data === undefined) ? ["R",0,0,this.width,this.height] : displayProps.target.data;
+      this.displayStyle(this.element,displayProps.target.style);
     }
     console.log(this.width,this.height,this.element.style.width,this.element.style.height,this.topleft,CRAZYBIOGAME.width,CRAZYBIOGAME.height);
     
     return this;
   }
 
-  displayGraphics(propsGraphics) {
-    this.displayType = Node.GRAPHICS;
+  displayMedia(propsGraphics) {
+    this.displayType = Node.MEDIA;
     
     // Append the media
     if (propsGraphics.element !== undefined) {
@@ -151,12 +157,27 @@ class Node {
       this.element.appendChild(propsGraphics.element);
     }
     else {
-      // TODO
-      // Check extension and create the appropriate HTML5 element
-      let img = document.createElement('img');
-      img.src = propsGraphics.path;
-      img.addEventListener('dragstart', () => false,false); 
-      this.element.appendChild(img); 
+      // Check the media type and create the appropriate HTML5 element
+      let src = propsGraphics.path || propsGraphics.image;
+      let media;
+      if ( src !== undefined) {
+        media = document.createElement('img');
+        media.src = src;
+      }
+      else if (propsGraphics.video !== undefined) {
+        let media = document.createElement('video');
+        media.src = propsGraphics.video;
+      }
+      else if (propsGraphics.audio !== undefined) {
+        let media = document.createElement('audio');
+        media.src = propsGraphics.audio;
+      }
+      else {
+        alert("Could not find the media source: image, video or audio");
+      }
+      
+      media.addEventListener('dragstart', () => false,false); 
+      this.element.appendChild(media); 
     }
 
     

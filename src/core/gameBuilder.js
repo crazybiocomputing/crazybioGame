@@ -134,10 +134,6 @@ class GameBuilder {
       if (node.className === 'item') {
         document.querySelector('aside ul').appendChild(node.getHTML());
       }
-      else if (node.className.includes('scene') ) {
-        // HACK - NEW
-        node.ancestor.getHTML().appendChild(node.getHTML());
-      }
       else {
         node.ancestor.getHTML().appendChild(node.getHTML());
       }

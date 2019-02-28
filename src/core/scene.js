@@ -55,9 +55,9 @@ class Scene extends Composite {
     
     let closeButton = document.createElement('a')
     closeButton.href="#close";
-    closeButton.title="Close";
+    closeButton.title="Back";
     closeButton.className ="close";
-    closeButton.textContent='×';
+    closeButton.textContent='↶';
     closeButton.addEventListener('click', (e) => {
       self.element.style.display = 'none';
       e.stopPropagation();

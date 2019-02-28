@@ -67,7 +67,7 @@ class Item extends Machine {
     link.href = 'javascript:void(0)';
     link.title = displayProps.title;
     let media = document.createElement('img');
-    media.src = displayProps.graphics.path;
+    media.src = (displayProps.graphics !== undefined ) ? displayProps.graphics.path : displayProps.media.image;
     link.appendChild(media);
     this.element.appendChild(link);
     document.querySelector('aside ul').appendChild(this.element);
@@ -85,13 +85,13 @@ class Item extends Machine {
     link.addEventListener('click', (ev) => {
       if (link.className.includes('checked')) {
         link.className = 'item';
-        document.querySelector('section').style.cursor = 'auto';
+        document.querySelectorAll('section').forEach( el => el.style.cursor = 'auto');
         document.querySelectorAll('.sprite a').forEach( el => el.style.cursor = `pointer`);
         CRAZYBIOGAME.useItem = false;
       }
       else {
         link.className = ' item checked';
-        document.querySelector('section').style.cursor = `url(${featuresProps.thumbnail}),grab`;
+        document.querySelectorAll('section').forEach( el => el.style.cursor = `url(${featuresProps.thumbnail}),grab`);
         document.querySelectorAll('.sprite a').forEach( el => el.style.cursor = `url(${featuresProps.thumbnail}),pointer`);
         CRAZYBIOGAME.useItem = true;
       }

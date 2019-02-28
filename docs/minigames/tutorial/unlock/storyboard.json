@@ -5,24 +5,33 @@
     "description": "A locked office ...",
     "help": ["Hint #1","Hint #2","Hint #3"],
     "display": {
-      "width": 700,
-      "height": 467,
-      "graphics": {
-        "path"     : "assets/officeBackground.png"
+      "width": 705,
+      "height": 426,
+      "media": {
+        "image": "assets/office3DBackground.png"
       }
     },
-    "children": [10,21,35,42,67]
+    "children": [10,21,35,42,48,67],
+    "children_": [
+      {"comment": "HACK - NOT YET IMPLEMENTED"},
+      {"comment": "id: link_to_nodeID, focus: area_sensitive_to_clicks"},
+      {"id": 10, "focus": ["P","M 110 33,147 33,157 47,120 47Z"]},
+      {"id": 21, "focus": ["C",356,94,33]},
+      {"id": 35, "focus": ["C",200,350,33,42]},
+      {"id": 42, "focus": ["C",356,350,33,67]},
+      {"id": 67}
+    ]
   },
   {
     "id": 10,
     "class": "sprite",
     "description": "A key...",
     "display": {
-      "width":51,
-      "height":15,
-      "position":[110,33],
+      "width":58,
+      "height":54,
+      "position":[226,140],
       "target": {
-        "data": ["P","M 0 0,37 0,47 14,10 14Z"]
+        "data": ["R",0,0,58,54]
       }
     },
     "action": {
@@ -44,12 +53,12 @@
     "display": {
       "width": 150,
       "height": 150,
-      "graphics": {
-        "path": "./assets/officeKey.png"
+      "media": {
+        "image": "./assets/officeKey.png"
       }
     },
     "features": {
-      "comment": "Create a 32x32 thumbnail of graphics",
+      "comment": "Create a 32x32 thumbnail of media",
       "thumbnail": "assets/officeKey_cursor.png"
     }
   },
@@ -84,12 +93,12 @@
     "display": {
       "width": 150,
       "height": 150,
-      "graphics": {
-        "path": "./assets/officeWire.png"
+      "media": {
+        "image": "./assets/officeWire.png"
       }
     },
     "features": {
-      "comment": "Create a 32x32 thumbnail of graphics",
+      "comment": "Create a 32x32 thumbnail of media",
       "thumbnail": "assets/officeWire_cursor.png"
     }
   },
@@ -98,11 +107,11 @@
     "class": "sprite",
     "description": "The exit door...",
     "display": {
-      "width": 98,
-      "height": 61,
-      "position": [230,382],
+      "width": 58,
+      "height": 219,
+      "position": [96,124],
       "target": {
-        "data": ["P","M 0 61,29 0,98 0,92 61Z"]
+        "data": ["P","M 0 24,56 0,58 180,3 219Z"]
       }
     },
     "action": {
@@ -123,8 +132,8 @@
     "display": {
       "width": 700,
       "height": 467,
-      "graphics": {
-        "path": "assets/officeDoor.png",
+      "media": {
+        "image": "assets/officeDoor.png",
         "style": {
           "display":"none"
         }
@@ -153,12 +162,12 @@
     "class": "sprite",
     "description": "Locked Cabinet...",
     "display": {
-      "width": 83,
-      "height": 128,
-      "position": [523,172],
-      "graphics": {
-        "path": "assets/officeCabinetTop.png",
-        "focus": ["P","M 1 18,33 2,82 4,82 128, 34 128,2 114Z"]
+      "width": 247,
+      "height": 93,
+      "position": [295,230],
+      "media": {
+        "image": "assets/office3DCabinet.png",
+        "focus": ["P","M 2 27,31 0,197 0, 220 26,201 92,12 92Z"]
       }
     },
     "action": {
@@ -175,11 +184,11 @@
     "class": "sprite",
     "description": "TV screen off...",
     "display": {
-      "width": 139,
-      "height": 40,
-      "position": [407,13],
+      "width": 103,
+      "height": 148,
+      "position": [572,134],
       "target": {
-        "data": ["P","M 22 0,138 0,108 40,0 40Z"]
+        "data": ["P","M 0 0,103 37,103 148,0 100Z"]
       }
     },
     "action": {
@@ -196,12 +205,12 @@
     "class": "sprite",
     "description": "Unlocked Cabinet...",
     "display": {
-      "width": 132,
-      "height": 128,
-      "position": [474,172],
-      "graphics": {
-        "path": "assets/officeCabinetTopOpen.png",
-        "focus": ["P","M 1 19,49 15,85 0,130 3,131 125,83 127,49 113,2 110Z"],
+      "width": 261,
+      "height": 120,
+      "position": [280,230],
+      "media": {
+        "image": "assets/office3DCabinetOpen.png",
+        "focus": ["P","M 0 120,22 84,17 28,45 0,208 0,233 27,221 84,238 118Z"],
         "style": {
           "display":"none"
         }
@@ -209,6 +218,7 @@
     },
     "action": {
       "onclick": {
+        "del_nodes": [11,35],
         "new_nodes": [47]
       }
     }
@@ -220,8 +230,8 @@
     "display": {
       "width": 700,
       "height": 467,
-      "graphics": {
-        "path": "assets/officeCabinetOpen.png",
+      "media": {
+        "image": "assets/officeCabinetOpen.png",
         "style": {
           "display":"none"
         }
@@ -230,15 +240,37 @@
     "children": [15]
   },
   {
+    "id": 48,
+    "class": "sprite",
+    "description": "TV screen on...",
+    "display": {
+      "width": 103,
+      "height": 148,
+      "position": [572,134],
+      "target": {
+        "data": ["P","M 0 0,103 37,103 148,0 100Z"]
+      }
+    },
+    "action": {
+      "onclick": {
+        "popup": {
+          "header": "The TV screen is now on.",
+          "body": ["<center><img src=\"assets/officeTVon.png\" width=400></center><br>"]
+        }
+      }
+    }
+  },
+
+  {
     "id": 67,
     "class": "sprite",
     "description": "Grid with pins...",
     "display": {
-      "width": 55,
-      "height": 16,
-      "position": [466,396],
+      "width": 58,
+      "height": 98,
+      "position": [24,196],
       "target": {
-        "data": ["P","M 1 1,39 1,53 15,10 15Z"]
+        "data": ["P","M 0 20,52 0,58 74,6 98Z"]
       }
     },
     "action": {
@@ -252,23 +284,62 @@
   },
   {
     "id": 83,
-    "class": "sprite",
+    "class": "scene.closeup",
     "description": "Machine ready - Grid with pins + wire...",
     "display": {
-      "width": 55,
-      "height": 16,
-      "position": [466,396],
+      "width": 700,
+      "height": 467,
+      "media": {
+        "image": "assets/officeGridActive.png",
+        "style": {
+          "display": "none"
+        }
+      },
+      "shapeset": {
+        "comment": "cx,cy,radius,link to nodeID,modifier",
+        "circle": [200,94,33,0,1],
+        "circle": [356,94,33,0,3],
+        "circle": [512,94,33,0,5],
+        "circle": [200,350,33,0,4],
+        "circle": [356,350,33,0,6],
+        "circle": [512,350,33,0,9]
+      }
+    },
+    "children": [84],
+    
+    "action": {
+      "comment": "Just for debug",
+      "onclick": {
+        "new_nodes": [48],
+        "del_nodes": [42,83]
+      },
+      "onsuccess": {
+        "new_nodes": [48],
+        "del_nodes": [42,83]
+      }
+    },
+    "features": {
+      "clickable": 2
+    }
+  },
+  {
+    "id": 84,
+    "class": "sprite",
+    "description": "TV screen off...",
+    "display": {
+      "width": 40,
+      "height": 40,
+      "position": [340,78],
       "target": {
-        "data": ["P","M 1 1,39 1,53 15,10 15Z"]
+        "data": ["C",20,20,20]
       }
     },
     "action": {
       "onclick": {
-        "popup": {
-          "header": "A Grid with pins...",
-          "body": ["<center><img src=\"assets/officeGridActive.jpg\" width=400></center><br>"]
-        }
+        "new_nodes": [48],
+        "del_nodes": [42]
       }
     }
   }
+
 ]

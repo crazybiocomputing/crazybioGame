@@ -55,6 +55,10 @@ class Node {
     return 1;
   }
   
+  static get MEDIA() {
+    return 1;
+  }
+  
   static get TEXT() {
     return 2;
   }
@@ -125,8 +129,9 @@ class Node {
     this.element.style.height = (displayProps.target === undefined) ? 'auto' : `${this.height / CRAZYBIOGAME.height * 100}%`;
 
     // Media: Image, video, audio?, etc.
-    if (displayProps.graphics !== undefined) {
-      this.displayGraphics(displayProps.graphics);
+    let dprops = displayProps.graphics || displayProps.media;
+    if (dprops !== undefined ) {
+      this.displayMedia(dprops);
     }
     // Text
     else if (displayProps.text !== undefined) {
@@ -136,14 +141,15 @@ class Node {
     else if (displayProps.target !== undefined) {
       this.displayType = Node.TARGET;
       this.target = (displayProps.target.data === undefined) ? ["R",0,0,this.width,this.height] : displayProps.target.data;
+      this.displayStyle(this.element,displayProps.target.style);
     }
     console.log(this.width,this.height,this.element.style.width,this.element.style.height,this.topleft,CRAZYBIOGAME.width,CRAZYBIOGAME.height);
     
     return this;
   }
 
-  displayGraphics(propsGraphics) {
-    this.displayType = Node.GRAPHICS;
+  displayMedia(propsGraphics) {
+    this.displayType = Node.MEDIA;
     
     // Append the media
     if (propsGraphics.element !== undefined) {
@@ -151,12 +157,27 @@ class Node {
       this.element.appendChild(propsGraphics.element);
     }
     else {
-      // TODO
-      // Check extension and create the appropriate HTML5 element
-      let img = document.createElement('img');
-      img.src = propsGraphics.path;
-      img.addEventListener('dragstart', () => false,false); 
-      this.element.appendChild(img); 
+      // Check the media type and create the appropriate HTML5 element
+      let src = propsGraphics.path || propsGraphics.image;
+      let media;
+      if ( src !== undefined) {
+        media = document.createElement('img');
+        media.src = src;
+      }
+      else if (propsGraphics.video !== undefined) {
+        let media = document.createElement('video');
+        media.src = propsGraphics.video;
+      }
+      else if (propsGraphics.audio !== undefined) {
+        let media = document.createElement('audio');
+        media.src = propsGraphics.audio;
+      }
+      else {
+        alert("Could not find the media source: image, video or audio");
+      }
+      
+      media.addEventListener('dragstart', () => false,false); 
+      this.element.appendChild(media); 
     }
 
     
@@ -1198,7 +1219,7 @@ class Item extends Machine {
     link.href = 'javascript:void(0)';
     link.title = displayProps.title;
     let media = document.createElement('img');
-    media.src = displayProps.graphics.path;
+    media.src = (displayProps.graphics !== undefined ) ? displayProps.graphics.path : displayProps.media.image;
     link.appendChild(media);
     this.element.appendChild(link);
     document.querySelector('aside ul').appendChild(this.element);
@@ -1216,13 +1237,13 @@ class Item extends Machine {
     link.addEventListener('click', (ev) => {
       if (link.className.includes('checked')) {
         link.className = 'item';
-        document.querySelector('section').style.cursor = 'auto';
+        document.querySelectorAll('section').forEach( el => el.style.cursor = 'auto');
         document.querySelectorAll('.sprite a').forEach( el => el.style.cursor = `pointer`);
         CRAZYBIOGAME.useItem = false;
       }
       else {
         link.className = ' item checked';
-        document.querySelector('section').style.cursor = `url(${featuresProps.thumbnail}),grab`;
+        document.querySelectorAll('section').forEach( el => el.style.cursor = `url(${featuresProps.thumbnail}),grab`);
         document.querySelectorAll('.sprite a').forEach( el => el.style.cursor = `url(${featuresProps.thumbnail}),pointer`);
         CRAZYBIOGAME.useItem = true;
       }
@@ -1546,9 +1567,9 @@ class Scene extends Composite {
     
     let closeButton = document.createElement('a')
     closeButton.href="#close";
-    closeButton.title="Close";
+    closeButton.title="Back";
     closeButton.className ="close";
-    closeButton.textContent='×';
+    closeButton.textContent='↶';
     closeButton.addEventListener('click', (e) => {
       self.element.style.display = 'none';
       e.stopPropagation();
@@ -1695,13 +1716,22 @@ const createScene = (props) => {
 
 'use strict';
 
+/**
+ * @class Graph
+ */
 class Graph {
+
+  /**
+   * @constructor
+   */
   constructor() {
     this.root;
     this.nodeList = [];
   }
 
-
+  /**
+   * 
+   */
   traverseFrom(a_node) {
     let children;
     let ancestor;
@@ -2571,10 +2601,6 @@ class GameBuilder {
       console.log(node);
       if (node.className === 'item') {
         document.querySelector('aside ul').appendChild(node.getHTML());
-      }
-      else if (node.className.includes('scene') ) {
-        // HACK - NEW
-        node.ancestor.getHTML().appendChild(node.getHTML());
       }
       else {
         node.ancestor.getHTML().appendChild(node.getHTML());

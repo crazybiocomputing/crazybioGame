@@ -25,13 +25,22 @@
 
 'use strict';
 
+/**
+ * @class Graph
+ */
 class Graph {
+
+  /**
+   * @constructor
+   */
   constructor() {
     this.root;
     this.nodeList = [];
   }
 
-
+  /**
+   * 
+   */
   traverseFrom(a_node) {
     let children;
     let ancestor;
