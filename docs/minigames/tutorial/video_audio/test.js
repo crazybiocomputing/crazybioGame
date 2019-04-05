@@ -99,16 +99,15 @@ const load_medias = (storyboard) => {
       alert("Could not find the media source: image, video or audio.");
     }
   }
-  console.log(medias);
+  return medias;
 }
 
 var request = new XMLHttpRequest();
 request.open('GET',"storyboard.json",true);
 request.onload=function(){
   var storyboard=JSON.parse(request.response);
-  console.log(storyboard);
-  console.log(typeof(storyboard));
-  load_medias(storyboard);
+  let medias = load_medias(storyboard);
+  console.log(medias);
 }
 request.send(null);
 
