@@ -75,7 +75,8 @@ div.appendChild(media);*/
 
 const load_medias = (storyboard) => {
   let display="block";
-  var medias={"img":[],"vid":[],"aud":[]};
+  var medias=new Object();
+  // Trouver un moyen de stocké les objectURL quelquepart pour les ajouté ensuite déjà essayé avec un objet mais les fetch ne s'attendent pas et du coup j'arrive pas à récupérer la valeur
   for(let i=0; i<storyboard.length;i++){
     let dprops = storyboard[i].display.graphics || storyboard[i].display.media;
     if (dprops!==undefined){
@@ -85,9 +86,9 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        medias["img"+i.toString()]=objectURL;
+        // Récupérer ici objectURL
       });
-      }
+    }
     else if (storyboard[i].display.video !== undefined){
       fetch(storyboard[i].display.video.path)
       .then(function(response){
@@ -95,7 +96,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        medias["vid"].push(objectURL);
+        // Récupérer ici objectURL
       });
     }
     else if (storyboard[i].display.audio !== undefined){
@@ -105,7 +106,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        medias["aud"].push(objectURL);
+        // Récupérer ici objectURL
       });
     }
     else {
@@ -119,14 +120,7 @@ var request = new XMLHttpRequest();
 request.open('GET',"storyboard.json",true);
 request.onload=function(){
   var storyboard=JSON.parse(request.response);
-  var medias = load_medias(storyboard);
-  for (var i in medias){
-    console.log(medias[i]);
-  }
+  var medias = load_medias(storyboard)
+  // Capturer les objectURL puis les afficher avec displayMedias
   /*displayMedias(medias);*/
 }
-request.send(null);
-
-/*var storyboard =[{"id": 1,"class": "scene","description": "A poster...","display": {"width": 690,"height": 480,"audio": {"path": "Audio.mp3"}},"children":[2,4,20,21]},{"id": 2,"class": "machine.lockText","description": "A lock symbol","display": {"position": [530,90],"width": 60,"height": 60,"video": {"path": "Video.mp4"},"target" : {"data": ["C", 30,30, 30]}},"features": {"exit": "allright"}},{"id": 20,"class": "machine.tile","description": "Some text","display": {"width": 335,"height": 195,"position": [1, 0],"graphics": {"path": "assets/congratulations_0.jpg"}}}];
-console.log(storyboard);
-process(storyboard);*/
