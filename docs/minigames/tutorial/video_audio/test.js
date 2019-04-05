@@ -105,7 +105,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        medias["vid"].push(objectURL);
+        medias["aud"].push(objectURL);
       });
     }
     else {
@@ -120,7 +120,7 @@ request.open('GET',"storyboard.json",true);
 request.onload=function(){
   var storyboard=JSON.parse(request.response);
   var medias = load_medias(storyboard);
-  console.log(medias);
+  console.log(medias["img"]);
   /*displayMedias(medias);*/
 }
 request.send(null);
