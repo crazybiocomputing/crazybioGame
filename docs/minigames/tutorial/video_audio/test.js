@@ -76,7 +76,7 @@ div.appendChild(media);*/
 
 const load_medias = (storyboard) => {
   let display="block";
-  let medias=[];
+  var medias;
   for(let i=0; i<storyboard.length;i++){
     let dprops = storyboard[i].display.graphics || storyboard[i].display.media;
     if (dprops!==undefined){
@@ -120,7 +120,7 @@ var request = new XMLHttpRequest();
 request.open('GET',"storyboard.json",true);
 request.onload=function(){
   var storyboard=JSON.parse(request.response);
-  let medias = load_medias(storyboard);
+  var medias = load_medias(storyboard);
   console.log(medias);
   displayMedias(medias);
 }
