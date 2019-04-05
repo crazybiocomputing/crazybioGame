@@ -52,6 +52,7 @@ const load_medias = (storyboard) => {
       let media= document.createElement('img');
       fetch(dprops.path)
       .then(function(response){
+        console.log(response.blob());
         return response.blob();
       })
       .then(function(myBlob){
@@ -67,6 +68,7 @@ const load_medias = (storyboard) => {
       let media= document.createElement('VIDEO');
       fetch(obj.display.video.path)
       .then(function(response){
+        console.log(response.blob());
         return response.blob();
       })
       .then(function(myBlob){
@@ -83,6 +85,7 @@ const load_medias = (storyboard) => {
       let media= document.createElement('AUDIO');
       fetch(obj.display.audio.path)
       .then(function(response){
+        console.log(response.blob());
         return response.blob();
       })
       .then(function(myBlob){
