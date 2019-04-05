@@ -64,7 +64,7 @@ const load_medias = (storyboard) => {
   let display="block";
   let medias={"img":[],"vid":[],"aud":[]};
   for(let i=0; i<storyboard.length;i++){
-    let dprops = obj.display.graphics || obj.display.media;
+    let dprops = storyboard[i].display.graphics || storyboard[i].display.media;
     if (dprops!==undefined){
       fetch(dprops.path)
       .then(function(response){
@@ -75,8 +75,8 @@ const load_medias = (storyboard) => {
         medias["img"].push(objectURL);
       });
       }
-    else if (obj.display.video !== undefined){
-      fetch(obj.display.video.path)
+    else if (storyboard[i].display.video !== undefined){
+      fetch(storyboard[i].display.video.path)
       .then(function(response){
         return response.blob();
       })
@@ -85,8 +85,8 @@ const load_medias = (storyboard) => {
         medias["vid"].push(objectURL);
       });
     }
-    else if (obj.display.audio !== undefined){
-      fetch(obj.display.audio.path)
+    else if (storyboard[i].display.audio !== undefined){
+      fetch(storyboard[i].display.audio.path)
       .then(function(response){
         return response.blob();
       })
