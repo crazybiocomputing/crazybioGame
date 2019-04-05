@@ -66,7 +66,7 @@ const load_medias = (storyboard) => {
     var medias = {"img":[],"vid":[],"aud":[]};
     let dprops = obj.display.graphics || obj.display.media;
     if (dprops!==undefined){
-      media["img"].push(fetch(dprops.path)
+      medias["img"].push(fetch(dprops.path)
       .then(function(response){
         return response.blob();
       })
@@ -76,7 +76,7 @@ const load_medias = (storyboard) => {
       }));
       }
     else if (obj.display.video !== undefined){
-      media["vid"].push(fetch(obj.display.video.path)
+      medias["vid"].push(fetch(obj.display.video.path)
       .then(function(response){
         return response.blob();
       })
@@ -86,7 +86,7 @@ const load_medias = (storyboard) => {
       }));
     }
     else if (obj.display.audio !== undefined){
-      media["aud"].push(fetch(obj.display.audio.path)
+      medias["aud"].push(fetch(obj.display.audio.path)
       .then(function(response){
         return response.blob();
       })
