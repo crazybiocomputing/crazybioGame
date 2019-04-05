@@ -62,8 +62,7 @@ div.appendChild(media);*/
 
 const load_medias = (storyboard) => {
   let display="block";
-  let my = storyboard.map((obj) => {
-    var medias = {"img":[],"vid":[],"aud":[]};
+  let medias = storyboard.map((obj) => {
     let dprops = obj.display.graphics || obj.display.media;
     if (dprops!==undefined){
       medias["img"].push(fetch(dprops.path)
@@ -98,8 +97,8 @@ const load_medias = (storyboard) => {
     else {
       alert("Could not find the media source: image, video or audio.");
     }
-    console.log(medias);
   })
+  console.log(medias);
 }
 
 var request = new XMLHttpRequest();
