@@ -9,10 +9,6 @@ Descritpion partie 2 : Fonction test pour le preprocess , pour l'import au débu
 
 const displayMedias = (medias) => {
   let display = "block";
-  console.log(medias.length);
-  medias.forEach(function(element){
-    console.log(element[0]);
-  })
   for (let i=0;i<medias.length;i++){
     if (medias[i][0]=="img"){
       let src = medias[i][1];
