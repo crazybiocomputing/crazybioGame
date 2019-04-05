@@ -48,6 +48,7 @@ const process = (storyboard) => {
 //Partie 2
 onload=function(){
   var storyboard=this.response;
+  console.log(storyboard);
   return storyboard;
 }
 var request = new XMLHttpRequest();
