@@ -104,7 +104,7 @@ request.send();
 request.onload=function(){
   var storyboard=request.response;
   console.log(storyboard);
-  typeof(storyboard);
+  console.log(typeof(storyboard));
   load_medias(storyboard);
 }
 
