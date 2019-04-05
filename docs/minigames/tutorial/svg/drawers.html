@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf8">
+
+<style>
+figure,canvas {
+  margin:0;
+  padding:0;
+}
+</style>
+</head>
+<body>
+<figure id="node_24" style="position:absolute">
+<canvas id="layer" width=512 height=468 style="position:absolute;top:0;left:0"></canvas>
+</figure>
+<script type="text/javascript">
+
+/// Draw Functions ///
+
+// Clear Canvas
+const clearCanvas = () => {
+  let canvas = document.getElementById('layer');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+
+// Draw polyline...
+const drawPolyline = (primitive,X, Y) => {
+  // console.log(orgX,orgY,pageX,pageY,dx,dy,' = ',pageX - orgX + dx,pageY - orgY + dy);
+  primitive.last.x = X - primitive.points[0].x + primitive.last.dx;
+  primitive.last.y = Y - primitive.points[0].y + primitive.last.dy;
+  
+  let canvas = document.getElementById('layer');
+  let ctx = canvas.getContext('2d');
+  clearCanvas();
+  ctx.beginPath();
+  ctx.strokeStyle = "red";
+  ctx.lineCap="round";
+  ctx.lineJoin="round";
+  ctx.lineWidth = 20;
+  primitive.points.forEach( (p,index) => {
+    if (index == 0) {
+      ctx.moveTo(p.x - ctx.lineWidth/2.0,p.y - ctx.lineWidth/2.0);
+    }
+    else {
+      ctx.lineTo(p.x  + ctx.lineWidth/2.0, p.y  + ctx.lineWidth/2.0);
+    }
+  })
+
+  if (X !== -1 && Y !== -1) {
+    ctx.lineTo(primitive.last.x  + ctx.lineWidth/2.0, primitive.last.y  + ctx.lineWidth/2.0);
+  }
+  ctx.stroke();
+  ctx.closePath();
+
+}
+
+
+class Machine {
+
+  constructor() {
+    this.polyline = undefined;
+    this.features = {
+      numVertices: 3,
+      values: [0,-1,-2,-3,-4,-5,-6]
+    }
+    this.drawFunction = drawPolyline;
+  }
+
+
+  /**
+   * Click and Drag Feature 
+   *
+   * @author Jean-Christophe Taveau
+   */
+  connectable(flag = false) {
+    
+    const getValue = (str) => {
+      return this.features.values[parseInt(str.replace(/[^0-9]/g, ''),10)]
+    }
+
+    // Move over
+    const moveover = (event) => {
+      console.log('over');
+      this.drawFunction(this.polyline,event.pageX, event.pageY);
+      event.preventDefault();
+      return false;
+    }
+
+    // Move Click - End of Move
+    const moveend = (event) => {
+      event.target.parentNode.style.zIndex = 1;
+      //this.polyline.parent.removeEventListener('mouseup', move_end,false);
+      this.polyline.points.push({
+        x: this.polyline.last.x,
+        y: this.polyline.last.y,
+        id: event.target.parentNode.id,
+        value: getValue(event.target.parentNode.id)
+      });
+      this.drawFunction(this.polyline,-1, -1);
+      if (this.polyline.points.length === this.features.numVertices) {
+        // Close
+        console.log('This is the end...');
+        console.log(this.polyline);
+        document.querySelectorAll('.connector').forEach( (c) => {
+          c.removeEventListener('click', movestart );
+          c.addEventListener('mouseover', (e) => c.style.cursor = "not-allowed" );
+        } );
+        document.querySelector('svg').removeEventListener('mousemove', moveover,false);
+
+      }
+    }
+
+    const movestart = (event) => {
+
+      ///////// MAIN of `movestart` ///////// 
+
+      console.log('start');
+      // TODO Must be improved - All the parents up to `game`
+      event.target.parentNode.style.zIndex = 1000;
+
+      if (this.polyline === undefined) {
+        this.polyline = {
+          parent: event.target.parentNode,
+          points: [{x: event.pageX,y:event.pageY,id: event.target.parentNode.id,value:getValue(event.target.parentNode.id)}],
+          last: {
+            x: 0.0,
+            y:0.0,
+            dx: event.target.parentNode.getBoundingClientRect().left,
+            dy: event.target.parentNode.getBoundingClientRect().top,
+            id:0
+          }
+        };
+        console.log('Add mousemove');
+      }
+
+
+      // Activate mousemove
+      document.querySelector('svg').addEventListener('mousemove', moveover,false);
+
+      if (this.polyline.points[this.polyline.points.length - 1].id !== event.target.parentNode.id) {
+        moveend(event);
+      }
+
+      this.drawFunction(this.polyline,event.pageX, event.pageY);
+
+    }; // End of movestart
+
+    // M A I N
+    if (!flag) {
+      return this;
+    }
+    
+
+    // Create events
+
+    let element = document.querySelector('svg');
+    // element.addEventListener('click', (e) => console.log('svg'));
+    element.connectable = flag;
+    console.log(element);
+    element.classList.add('connectable');
+    //element.addEventListener('click', movestart,false); 
+    //element.addEventListener('dragstart', (e) => {e.preventDefault();return false},false); 
+    //element.addEventListener('dragover', (e) => {return false},false); 
+    //element.addEventListener('drop', (e) => false,false); 
+    document.querySelectorAll('.connector').forEach( (c) => {
+      c.addEventListener('click', movestart );
+      c.addEventListener('mouseover', (e) => c.style.cursor = "pointer" );
+    } );
+    return this;
+  }
+
+} // End of class Machine
+
+
+//////////////   M A I N   //////////////
+
+fetch("assets/gridConnectors_simple.svg")
+  .then(response => response.text())
+  .then(svg => {
+    // Append to <figure id="connect">
+    document.getElementById('node_24').insertAdjacentHTML("afterbegin", svg);
+
+    // Canvas is READ-ONLY - No interactivity
+    let layer = document.getElementById('layer');
+    layer.style.pointerEvents = 'none';
+    //document.querySelector('svg').addEventListener('click', (e) => console.log('svg'));
+    let machine = new Machine();
+    machine.connectable(true);
+  });
+</script>
+</body>
+</html>
