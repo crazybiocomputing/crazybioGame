@@ -62,6 +62,9 @@ div.appendChild(media);*/
 
 const load_medias = (storyboard) => {
   let display="block";
+  for(let i=0; i<storyboard.length;i++){
+    console.log(storyboard[i].display);
+  }
   let medias = storyboard.map((obj) => {
     let dprops = obj.display.graphics || obj.display.media;
     if (dprops!==undefined){
