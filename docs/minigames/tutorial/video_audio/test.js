@@ -10,7 +10,7 @@ Descritpion partie 2 : Fonction test pour le preprocess , pour l'import au débu
 const displayMedias = (medias) => {
   let display = "block";
   for (let i=0;i<medias.length;i++){
-    if (medias[i][0]=="img"){
+    if (medias[i]=="img"){
       let src = medias[i][1];
       console.log("image");
       let media;
@@ -75,41 +75,38 @@ div.appendChild(media);*/
 
 const load_medias = (storyboard) => {
   let display="block";
-  var medias=[];
+  var medias={"img":[];"vid":[];"aud":[]};
   for(let i=0; i<storyboard.length;i++){
     let dprops = storyboard[i].display.graphics || storyboard[i].display.media;
     if (dprops!==undefined){
-      console.log(fetch(dprops.path)
+      fetch(dprops.path)
       .then(function(response){
         return response.blob();
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        console.log(typeof(objectURL));
-        return ["img",objectURL];
-      }));
+        medias["img"].push(objectURL);
+      });
       }
     else if (storyboard[i].display.video !== undefined){
-      console.log(fetch(storyboard[i].display.video.path)
+      fetch(storyboard[i].display.video.path)
       .then(function(response){
         return response.blob();
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        console.log(typeof(objectURL));
-        return ["vid",objectURL];
-      }));
+        medias["vid"].push(objectURL);
+      });
     }
     else if (storyboard[i].display.audio !== undefined){
-      console.log(fetch(storyboard[i].display.audio.path)
+      fetch(storyboard[i].display.audio.path)
       .then(function(response){
         return response.blob();
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        console.log(typeof(objectURL));
-        return ["aud",objectURL];
-      }));
+        medias["vid"].push(objectURL);
+      });
     }
     else {
       alert("Could not find the media source: image, video or audio.");
@@ -124,7 +121,7 @@ request.onload=function(){
   var storyboard=JSON.parse(request.response);
   var medias = load_medias(storyboard);
   console.log(medias);
-  displayMedias(medias);
+  /*displayMedias(medias);*/
 }
 request.send(null);
 
