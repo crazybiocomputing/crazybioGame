@@ -43,63 +43,62 @@ const display = (type,obj) => {
 
 //Partie 2
 
+/*media.src=objectURL;
+media.style.display=display;
+let div = document.getElementById("ma_div");
+div.appendChild(media);
+
+media.src=objectURL;
+media.setAttribute("controls","controls");
+media.style.display=display;
+let div = document.getElementById("ma_div");
+div.appendChild(media);
+
+media.src=objectURL;
+media.setAttribute("controls","controls");
+media.style.display=display;
+let div = document.getElementById("ma_div");
+div.appendChild(media);*/
+
 const load_medias = (storyboard) => {
   let display="block";
   let my = storyboard.map((obj) => {
     let dprops = obj.display.graphics || obj.display.media;
     if (dprops!==undefined){
-      console.log("image !");
-      let media= document.createElement('img');
+      var medias = {"img":[],"vid":[],"aud":[]};
       fetch(dprops.path)
       .then(function(response){
-        console.log(response.blob());
         return response.blob();
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        media.src=objectURL;
-        media.style.display=display;
-        let div = document.getElementById("ma_div");
-        div.appendChild(media);
+        medias["img"].push(objectURL);
       });
       }
     else if (obj.display.video !== undefined){
-      console.log("video !");
-      let media= document.createElement('VIDEO');
       fetch(obj.display.video.path)
       .then(function(response){
-        console.log(response.blob());
         return response.blob();
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        media.src=objectURL;
-        media.setAttribute("controls","controls");
-        media.style.display=display;
-        let div = document.getElementById("ma_div");
-        div.appendChild(media);
+        medias["vid"].push(objectURL);
       });
     }
     else if (obj.display.audio !== undefined){
-      console.log("audio !");
-      let media= document.createElement('AUDIO');
       fetch(obj.display.audio.path)
       .then(function(response){
-        console.log(response.blob());
         return response.blob();
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        media.src=objectURL;
-        media.setAttribute("controls","controls");
-        media.style.display=display;
-        let div = document.getElementById("ma_div");
-        div.appendChild(media);
+        medias["aud"].push(objectURL);
       });
     }
     else {
       alert("Could not find the media source: image, video or audio.");
     }
+    console.log(medias);
   })
 }
 
