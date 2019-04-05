@@ -62,10 +62,8 @@ div.appendChild(media);*/
 
 const load_medias = (storyboard) => {
   let display="block";
+  let medias={"img"=[],"vid"=[],"aud"=[]};
   for(let i=0; i<storyboard.length;i++){
-    console.log(storyboard[i].display);
-  }
-  let medias = storyboard.map((obj) => {
     let dprops = obj.display.graphics || obj.display.media;
     if (dprops!==undefined){
       fetch(dprops.path)
@@ -74,7 +72,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        console.log(objectURL);
+        medias["img"].push(objectURL);
       });
       }
     else if (obj.display.video !== undefined){
@@ -84,7 +82,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        obj=objectURL;
+        medias["vid"].push(objectURL);
       });
     }
     else if (obj.display.audio !== undefined){
@@ -94,13 +92,13 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        obj=objectURL;
-      });
+        medias["aud"].push(objectURL);
+      })
     }
     else {
       alert("Could not find the media source: image, video or audio.");
     }
-  });
+  }
   console.log(medias);
 }
 
