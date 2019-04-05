@@ -56,23 +56,6 @@ const displayMedias = (medias) => {
 
 //Partie 2
 
-/*media.src=objectURL;
-media.style.display=display;
-let div = document.getElementById("ma_div");
-div.appendChild(media);
-
-media.src=objectURL;
-media.setAttribute("controls","controls");
-media.style.display=display;
-let div = document.getElementById("ma_div");
-div.appendChild(media);
-
-media.src=objectURL;
-media.setAttribute("controls","controls");
-media.style.display=display;
-let div = document.getElementById("ma_div");
-div.appendChild(media);*/
-
 const load_medias = (storyboard) => {
   let display="block";
   var medias=new Object();
