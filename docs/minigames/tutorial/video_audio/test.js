@@ -9,10 +9,6 @@ Descritpion partie 2 : Fonction test pour le preprocess , pour l'import au débu
 
 const displayMedias = (medias) => {
   let display = "block";
-  var coucou=[];
-  console.log(coucou.length);
-  coucou.push([1,5]);
-  console.log(coucou.length);
   for (let i=0;i<medias.length;i++){
     if (medias[i][0]=="img"){
       let src = medias[i][1];
@@ -79,37 +75,40 @@ div.appendChild(media);*/
 
 const load_medias = (storyboard) => {
   let display="block";
-  var medias=new Array(0);
+  var medias=[];
   for(let i=0; i<storyboard.length;i++){
     let dprops = storyboard[i].display.graphics || storyboard[i].display.media;
     if (dprops!==undefined){
-      fetch(dprops.path)
+      medias=fetch(dprops.path)
       .then(function(response){
         return response.blob();
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
         medias.push(["img",objectURL]);
+        return medias;
       });
       }
     else if (storyboard[i].display.video !== undefined){
-      fetch(storyboard[i].display.video.path)
+      media=fetch(storyboard[i].display.video.path)
       .then(function(response){
         return response.blob();
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
         medias.push(["vid",objectURL]);
+        return medias;
       });
     }
     else if (storyboard[i].display.audio !== undefined){
-      fetch(storyboard[i].display.audio.path)
+      medias=fetch(storyboard[i].display.audio.path)
       .then(function(response){
         return response.blob();
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
         medias.push(["aud",objectURL]);
+        return medias;
       })
     }
     else {
