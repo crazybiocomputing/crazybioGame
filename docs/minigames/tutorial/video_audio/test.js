@@ -9,7 +9,7 @@ Descritpion partie 2 : Fonction test pour le preprocess , pour l'import au débu
 
 const displayMedias = (medias) => {
   let display = "block";
-  console.log(medias[""0""]);
+  console.log(medias);
   for (let i=0;i<medias.length;i++){
     if (medias[i][0]=="img"){
       let src = medias[i][1];
@@ -76,7 +76,7 @@ div.appendChild(media);*/
 
 const load_medias = (storyboard) => {
   let display="block";
-  var medias=[];
+  var medias=new Array(0);
   for(let i=0; i<storyboard.length;i++){
     let dprops = storyboard[i].display.graphics || storyboard[i].display.media;
     if (dprops!==undefined){
