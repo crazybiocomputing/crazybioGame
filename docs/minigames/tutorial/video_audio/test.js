@@ -62,8 +62,8 @@ div.appendChild(media);*/
 
 const load_medias = (storyboard) => {
   let display="block";
-  var medias = {"img":[],"vid":[],"aud":[]};
   let my = storyboard.map((obj) => {
+    var medias = {"img":[],"vid":[],"aud":[]};
     let dprops = obj.display.graphics || obj.display.media;
     if (dprops!==undefined){
       fetch(dprops.path)
@@ -73,7 +73,6 @@ const load_medias = (storyboard) => {
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
         medias["img"].push(objectURL);
-        console.log(medias);
       });
       }
     else if (obj.display.video !== undefined){
