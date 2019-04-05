@@ -7,21 +7,18 @@ Descritpion partie 2 : Fonction test pour le preprocess , pour l'import au débu
 
 'use strict';
 
-const process = (storyboard) => {
+const display = (type,obj) => {
   let display = "block";
-  let my = storyboard.map((obj) => {
-    let dprops = obj.display.graphics || obj.display.media;
-    if (dprops!==undefined){
-      let src = dprops.path;
-      let media;
-      if (src !==undefined){
-        media= document.createElement('img');
-        media.src =src;
-        media.style.display=display;
-        let div = document.getElementById("ma_div");
-        div.appendChild(media);
-
-      }
+  if (type=="img"){
+    let src = obj;
+    let media;
+    if (src !==undefined){
+      media= document.createElement('img');
+      media.src =src;
+      media.style.display=display;
+      let div = document.getElementById("ma_div");
+      div.appendChild(media);
+    }
     }
     else if (obj.display.video !== undefined){
       let media= document.createElement("VIDEO");
@@ -47,6 +44,60 @@ const process = (storyboard) => {
 
 //Partie 2
 
+const load_medias = (storyboard) => {
+  let media;
+  let my = storyboard.map((obj) => {
+    let dprops = obj.display.graphics || obj.display.media;
+    if (dprops!==undefined){
+      media= document.createElement('img');
+      fetch(dprops.path)
+      .then(function(response){
+        return response.blob();
+      })
+      .then(function(myBlob){
+        var objectURL =URL.createObjectURL(myBlob);
+        media.src=objectURL;
+        media.style.display=display;
+        let div = document.getElementById("ma_div");
+        div.appendChild(media);
+      });
+      }
+    else if (obj.display.video !== undefined){
+      media= document.createElement('VIDEO');
+      fetch(obj.display.video.path)
+      .then(function(response){
+        return response.blob();
+      })
+      .then(function(myBlob){
+        var objectURL =URL.createObjectURL(myBlob);
+        media.src=objectURL;
+        media.setAttribute("controls","controls");
+        media.style.display=display;
+        let div = document.getElementById("ma_div");
+        div.appendChild(media);
+      });
+    }
+    else if (obj.display.audio !== undefined){
+      media= document.createElement('AUDIO');
+      fetch(obj.display.audio.path)
+      .then(function(response){
+        return response.blob();
+      })
+      .then(function(myBlob){
+        var objectURL =URL.createObjectURL(myBlob);
+        media.src=objectURL;
+        media.setAttribute("controls","controls");
+        media.style.display=display;
+        let div = document.getElementById("ma_div");
+        div.appendChild(media);
+      });
+    }
+    else {
+      alert("Could not find the media source: image, video or audio.");
+    }
+  })
+}
+
 var request = new XMLHttpRequest();
 request.open('GET',"storyboard.json");
 request.responseTYpe='json';
@@ -54,6 +105,7 @@ request.send();
 request.onload=function(){
   var storyboard=request.response;
   console.log(storyboard);
+  load_medias(storyboard);
 }
 
 /*var storyboard =[{"id": 1,"class": "scene","description": "A poster...","display": {"width": 690,"height": 480,"audio": {"path": "Audio.mp3"}},"children":[2,4,20,21]},{"id": 2,"class": "machine.lockText","description": "A lock symbol","display": {"position": [530,90],"width": 60,"height": 60,"video": {"path": "Video.mp4"},"target" : {"data": ["C", 30,30, 30]}},"features": {"exit": "allright"}},{"id": 20,"class": "machine.tile","description": "Some text","display": {"width": 335,"height": 195,"position": [1, 0],"graphics": {"path": "assets/congratulations_0.jpg"}}}];
