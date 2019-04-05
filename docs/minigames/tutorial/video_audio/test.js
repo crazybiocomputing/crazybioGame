@@ -120,7 +120,9 @@ request.open('GET',"storyboard.json",true);
 request.onload=function(){
   var storyboard=JSON.parse(request.response);
   var medias = load_medias(storyboard);
-  console.log(medias);
+  for (var i in medias){
+    console.log(medias[i]);
+  }
   /*displayMedias(medias);*/
 }
 request.send(null);
