@@ -65,34 +65,34 @@ const load_medias = (storyboard) => {
   let medias = storyboard.map((obj) => {
     let dprops = obj.display.graphics || obj.display.media;
     if (dprops!==undefined){
-      medias["img"].push(fetch(dprops.path)
+      fetch(dprops.path)
       .then(function(response){
         return response.blob();
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
         return objectURL;
-      }));
+      });
       }
     else if (obj.display.video !== undefined){
-      medias["vid"].push(fetch(obj.display.video.path)
+      fetch(obj.display.video.path)
       .then(function(response){
         return response.blob();
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
         medias["vid"].push(objectURL);
-      }));
+      });
     }
     else if (obj.display.audio !== undefined){
-      medias["aud"].push(fetch(obj.display.audio.path)
+      fetch(obj.display.audio.path)
       .then(function(response){
         return response.blob();
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
         return objectURL;
-      }));
+      });
     }
     else {
       alert("Could not find the media source: image, video or audio.");
