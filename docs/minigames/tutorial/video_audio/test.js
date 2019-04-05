@@ -98,10 +98,10 @@ const load_medias = (storyboard) => {
 }
 
 var request = new XMLHttpRequest();
-request.responseType='json';
+request.overrideMimeType("application/json");
 request.open('GET',"storyboard.json",true);
 request.onload=function(){
-  var storyboard=request.response;
+  var storyboard=JSON.parse(request.responseText);
   console.log(storyboard);
   console.log(typeof(storyboard));
   load_medias(storyboard);
