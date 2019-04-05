@@ -75,7 +75,7 @@ div.appendChild(media);*/
 
 const load_medias = (storyboard) => {
   let display="block";
-  var medias={"img":[];"vid":[];"aud":[]};
+  var medias={"img":[],"vid":[],"aud":[]};
   for(let i=0; i<storyboard.length;i++){
     let dprops = storyboard[i].display.graphics || storyboard[i].display.media;
     if (dprops!==undefined){
