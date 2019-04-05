@@ -10,6 +10,9 @@ Descritpion partie 2 : Fonction test pour le preprocess , pour l'import au débu
 const displayMedias = (medias) => {
   let display = "block";
   console.log(medias.length);
+  medias.forEach(function(element){
+    console.log(element);
+  })
   for (let i=0;i<medias.length;i++){
     if (medias[i][0]=="img"){
       let src = medias[i][1];
@@ -113,7 +116,6 @@ const load_medias = (storyboard) => {
       alert("Could not find the media source: image, video or audio.");
     }
   }
-  console.log(medias.length);
   return medias;
 }
 
