@@ -73,6 +73,7 @@ const load_medias = (storyboard) => {
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
         medias["img"].push(objectURL);
+        console.log(medias);
       });
       }
     else if (obj.display.video !== undefined){
