@@ -44,7 +44,7 @@ const process = (storyboard) => {
   })
 }
 var request = new XMLHttpRequest();
-request.open('GET',"https://github.com/crazybiocomputing/crazybioGame/tree/master/docs/minigames/tutorial/video_audio/assets/storyboard.json");
+request.open('GET',"storyboard.json");
 request.responseTYpe='json';
 request.send();
 request.onload=function(){
