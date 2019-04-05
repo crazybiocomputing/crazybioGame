@@ -39,7 +39,6 @@ const display = (type,obj) => {
     else {
       alert("Could not find the media source: image, video or audio.");
     }
-  })
 }
 
 //Partie 2
