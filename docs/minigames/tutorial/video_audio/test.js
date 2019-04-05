@@ -98,7 +98,7 @@ const load_medias = (storyboard) => {
 }
 
 var request = new XMLHttpRequest();
-request.open('GET',"storyboard.json");
+request.open('GET',"storyboard.json",true);
 request.responseType='json';
 request.send();
 request.onload=function(){
