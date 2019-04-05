@@ -11,7 +11,7 @@ const displayMedias = (medias) => {
   let display = "block";
   var coucou=[];
   console.log(coucou.length);
-  coucou.push(1);
+  coucou.push([1]);
   console.log(coucou.length);
   for (let i=0;i<medias.length;i++){
     if (medias[i][0]=="img"){
