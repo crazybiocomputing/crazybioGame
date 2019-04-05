@@ -96,7 +96,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        console.log(medias.push(["vid",objectURL]));
+        medias.push(["vid",objectURL]);
       });
     }
     else if (storyboard[i].display.audio !== undefined){
@@ -112,7 +112,9 @@ const load_medias = (storyboard) => {
     else {
       alert("Could not find the media source: image, video or audio.");
     }
-  }.then(return medias);
+  }
+  console.log(medias.length);
+  return medias;
 }
 
 var request = new XMLHttpRequest();
