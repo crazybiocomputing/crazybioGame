@@ -79,7 +79,7 @@ const load_medias = (storyboard) => {
   for(let i=0; i<storyboard.length;i++){
     let dprops = storyboard[i].display.graphics || storyboard[i].display.media;
     if (dprops!==undefined){
-      medias.push(fetch(dprops.path)
+      console.log(fetch(dprops.path)
       .then(function(response){
         return response.blob();
       })
@@ -90,7 +90,7 @@ const load_medias = (storyboard) => {
       }));
       }
     else if (storyboard[i].display.video !== undefined){
-      medias.push(fetch(storyboard[i].display.video.path)
+      console.log(fetch(storyboard[i].display.video.path)
       .then(function(response){
         return response.blob();
       })
@@ -101,7 +101,7 @@ const load_medias = (storyboard) => {
       }));
     }
     else if (storyboard[i].display.audio !== undefined){
-      medias.push(fetch(storyboard[i].display.audio.path)
+      console.log(fetch(storyboard[i].display.audio.path)
       .then(function(response){
         return response.blob();
       })
