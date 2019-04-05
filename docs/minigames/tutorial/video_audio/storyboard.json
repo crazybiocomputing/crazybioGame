@@ -1,0 +1,33 @@
+[
+  {
+    "id": 1,
+    "class": "Image",
+    "description": "Image",
+    "display": {
+      "graphics": {
+        "path": "assets/congratulations_0.jpg"
+      }
+    },
+  },
+  {
+    "id": 2,
+    "class": "Video",
+    "description": "video",
+    "display": {
+      "video": {
+        "path": "assets/video.mp4"
+      },
+    },
+  },
+  {
+    "id": 20,
+    "class": "Audio",
+    "description": "audio",
+    "display": {
+        "position": [1, 0],
+      "audio": {
+        "path": "assets/audio.mp3"
+      }
+    }
+  }
+]
