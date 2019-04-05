@@ -62,7 +62,7 @@ div.appendChild(media);*/
 
 const load_medias = (storyboard) => {
   let display="block";
-  let medias={"img"=[],"vid"=[],"aud"=[]};
+  let medias={"img":[],"vid":[],"aud":[]};
   for(let i=0; i<storyboard.length;i++){
     let dprops = obj.display.graphics || obj.display.media;
     if (dprops!==undefined){
