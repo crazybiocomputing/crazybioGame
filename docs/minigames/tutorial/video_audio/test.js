@@ -9,41 +9,48 @@ Descritpion partie 2 : Fonction test pour le preprocess , pour l'import au débu
 
 const displayMedias = (medias) => {
   let display = "block";
-  console.log(medias["img"][0]);
-  for (let i=0;i<medias["img"].length;i++){
-    let src = medias["img"][i];
-    console.log("image");
-    let media;
-    if (src !==undefined){
-      media= document.createElement('img');
-      media.src =src;
-      media.style.display=display;
-      let div = document.getElementById("ma_div");
-      div.appendChild(media);
+  console.log(medias[0]);
+  for (let i=0;i<medias.length;i++){
+    if (medias[i][0]=="img"){
+      let src = medias[i][1];
+      console.log("image");
+      let media;
+      if (src !==undefined){
+        media= document.createElement('img');
+        media.src =src;
+        media.style.display=display;
+        let div = document.getElementById("ma_div");
+        div.appendChild(media);
+      }
     }
-  }
-  for (let i=0;i<medias["vid"].length;i++){
-    let src = medias["vid"][i];
-    let media;
-    if (src !==undefined){
-      let media= document.createElement("VIDEO");
-      media.src=src;
-      media.setAttribute("controls","controls");
-      media.style.display=display;
-      let div = document.getElementById("ma_div");
-      div.appendChild(media);
+    else if (medias[i][0]=="vid"){
+      let src = medias[i][1];
+      console.log("image");
+      let media;
+      if (src !==undefined){
+        let media= document.createElement("VIDEO");
+        media.src=src;
+        media.setAttribute("controls","controls");
+        media.style.display=display;
+        let div = document.getElementById("ma_div");
+        div.appendChild(media);
+      }
     }
-  }
-  for (let i=0;i<medias["aud"].length;i++){
-    let src = medias["aud"][i];
-    let media;
-    if (src !==undefined){
-      let media =document.createElement("AUDIO");
-      media.src=src;
-      media.style.display=display;
-      media.setAttribute("controls","controls");
-      let div =document.getElementById("ma_div");
-      div.appendChild(media);
+    else if (medias[i][0]=="aud"){
+      let src = medias[i][1];
+      console.log("image");
+      let media;
+      if (src !==undefined){
+        let media =document.createElement("AUDIO");
+        media.src=src;
+        media.style.display=display;
+        media.setAttribute("controls","controls");
+        let div =document.getElementById("ma_div");
+        div.appendChild(media);
+      }
+    }
+    else{
+      alert("Couldn't find the media !");
     }
   }
 }
@@ -69,7 +76,7 @@ div.appendChild(media);*/
 
 const load_medias = (storyboard) => {
   let display="block";
-  let medias={"img":[],"vid":[],"aud":[]};
+  let medias=[];
   for(let i=0; i<storyboard.length;i++){
     let dprops = storyboard[i].display.graphics || storyboard[i].display.media;
     if (dprops!==undefined){
@@ -79,7 +86,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        medias["img"].push(objectURL);
+        medias.push(["img",objectURL]);
       });
       }
     else if (storyboard[i].display.video !== undefined){
@@ -89,7 +96,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        medias["vid"].push(objectURL);
+        medias.push(["vid",objectURL]);
       });
     }
     else if (storyboard[i].display.audio !== undefined){
@@ -99,7 +106,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        medias["aud"].push(objectURL);
+        medias.push(["aud",objectURL]);
       })
     }
     else {
