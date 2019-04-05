@@ -97,7 +97,7 @@ const load_medias = (storyboard) => {
     else {
       alert("Could not find the media source: image, video or audio.");
     }
-  })
+  });
   console.log(medias);
 }
 
