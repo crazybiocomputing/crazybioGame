@@ -1,8 +1,9 @@
 /*
 Author : Marina BOUDIN
+Description partie 1 : Ajouter du contenue audio et vidéo.
+Descritpion partie 2 : Fonction test pour le preprocess , pour l'import au début de touts les médias, de crazybiogame. */
 
-Descritpion : Fonction test pour le preprocess , pour l'import au début de touts les médias, de crazybiogame. */
-
+// Partie 1
 
 'use strict';
 
@@ -43,14 +44,20 @@ const process = (storyboard) => {
     }
   })
 }
+
+//Partie 2
+function onload(){
+  var storyboard=this.response;
+  return storyboard;
+}
 var request = new XMLHttpRequest();
 request.open('GET',"storyboard.json");
 request.responseTYpe='json';
 request.send();
-request.onload=function(){
-  var storyboard=request.response;
-  console.log(storyboard);
-}
+let storyboard;
+storyboard =request.onload();
+console.log(storyboard);
+
 /*var storyboard =[{"id": 1,"class": "scene","description": "A poster...","display": {"width": 690,"height": 480,"audio": {"path": "Audio.mp3"}},"children":[2,4,20,21]},{"id": 2,"class": "machine.lockText","description": "A lock symbol","display": {"position": [530,90],"width": 60,"height": 60,"video": {"path": "Video.mp4"},"target" : {"data": ["C", 30,30, 30]}},"features": {"exit": "allright"}},{"id": 20,"class": "machine.tile","description": "Some text","display": {"width": 335,"height": 195,"position": [1, 0],"graphics": {"path": "assets/congratulations_0.jpg"}}}];
 console.log(storyboard);
 process(storyboard);*/
