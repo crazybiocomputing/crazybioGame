@@ -71,7 +71,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        return objectURL;
+        obj = objectURL;
       });
       }
     else if (obj.display.video !== undefined){
@@ -81,7 +81,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        return objectURL;
+        obj=objectURL;
       });
     }
     else if (obj.display.audio !== undefined){
@@ -91,7 +91,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        return objectURL;
+        obj=objectURL;
       });
     }
     else {
