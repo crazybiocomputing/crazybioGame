@@ -51,8 +51,11 @@ var request = new XMLHttpRequest();
 request.open('GET',"storyboard.json");
 request.responseTYpe='json';
 request.send();
-var storyboard=request.response;
-console.log(storyboard);
+request.onload=function(){
+  var storyboard=request.response;
+  return storyboard;
+}
+console.log(request.onload);
 
 /*var storyboard =[{"id": 1,"class": "scene","description": "A poster...","display": {"width": 690,"height": 480,"audio": {"path": "Audio.mp3"}},"children":[2,4,20,21]},{"id": 2,"class": "machine.lockText","description": "A lock symbol","display": {"position": [530,90],"width": 60,"height": 60,"video": {"path": "Video.mp4"},"target" : {"data": ["C", 30,30, 30]}},"features": {"exit": "allright"}},{"id": 20,"class": "machine.tile","description": "Some text","display": {"width": 335,"height": 195,"position": [1, 0],"graphics": {"path": "assets/congratulations_0.jpg"}}}];
 console.log(storyboard);
