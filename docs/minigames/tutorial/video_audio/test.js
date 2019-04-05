@@ -7,10 +7,10 @@ Descritpion partie 2 : Fonction test pour le preprocess , pour l'import au débu
 
 'use strict';
 
-const display = (type,obj) => {
+const displayMedias = (medias) => {
   let display = "block";
-  if (type=="img"){
-    let src = obj;
+  for (let i=0;i<medias["img"].length;i++){
+    let src = medias["img"][i];
     let media;
     if (src !==undefined){
       media= document.createElement('img');
@@ -19,26 +19,31 @@ const display = (type,obj) => {
       let div = document.getElementById("ma_div");
       div.appendChild(media);
     }
-    }
-    else if (obj.display.video !== undefined){
+  }
+  for (let i=0;i<medias["vid"].length;i++){
+    let src = medias["vid"][i];
+    let media;
+    if (src !==undefined){
       let media= document.createElement("VIDEO");
-      media.src=obj.display.video.path;
+      media.src=src;
       media.setAttribute("controls","controls");
       media.style.display=display;
       let div = document.getElementById("ma_div");
       div.appendChild(media);
-      }
-    else if (obj.display.audio !== undefined){
+    }
+  }
+  for (let i=0;i<medias["aud"].length;i++){
+    let src = medias["aud"][i];
+    let media;
+    if (src !==undefined){
       let media =document.createElement("AUDIO");
-      media.src=obj.display.audio.path;
+      media.src=src;
       media.style.display=display;
       media.setAttribute("controls","controls");
       let div =document.getElementById("ma_div");
       div.appendChild(media);
     }
-    else {
-      alert("Could not find the media source: image, video or audio.");
-    }
+  }
 }
 
 //Partie 2
@@ -108,6 +113,7 @@ request.onload=function(){
   var storyboard=JSON.parse(request.response);
   let medias = load_medias(storyboard);
   console.log(medias);
+  displayMedias(medias);
 }
 request.send(null);
 
