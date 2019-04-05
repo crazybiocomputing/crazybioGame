@@ -71,7 +71,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        obj = objectURL;
+        console.log(objectURL);
       });
       }
     else if (obj.display.video !== undefined){
