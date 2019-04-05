@@ -112,8 +112,7 @@ const load_medias = (storyboard) => {
     else {
       alert("Could not find the media source: image, video or audio.");
     }
-  }
-  return medias;
+  }.then(return medias);
 }
 
 var request = new XMLHttpRequest();
