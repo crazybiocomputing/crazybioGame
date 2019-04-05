@@ -62,10 +62,10 @@ div.appendChild(media);*/
 
 const load_medias = (storyboard) => {
   let display="block";
+  var medias = {"img":[],"vid":[],"aud":[]};
   let my = storyboard.map((obj) => {
     let dprops = obj.display.graphics || obj.display.media;
     if (dprops!==undefined){
-      var medias = {"img":[],"vid":[],"aud":[]};
       fetch(dprops.path)
       .then(function(response){
         return response.blob();
