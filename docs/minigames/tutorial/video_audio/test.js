@@ -9,7 +9,7 @@ Descritpion partie 2 : Fonction test pour le preprocess , pour l'import au débu
 
 const displayMedias = (medias) => {
   let display = "block";
-  console.log("image");
+  console.log("image1");
   for (let i=0;i<medias["img"].length;i++){
     let src = medias["img"][i];
     console.log("image");
