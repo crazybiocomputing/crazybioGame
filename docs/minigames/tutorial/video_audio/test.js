@@ -85,7 +85,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        medias["img"+str(i)]=objectURL;
+        medias["img"+i.toString()]=objectURL;
       });
       }
     else if (storyboard[i].display.video !== undefined){
