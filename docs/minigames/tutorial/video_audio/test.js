@@ -79,37 +79,34 @@ const load_medias = (storyboard) => {
   for(let i=0; i<storyboard.length;i++){
     let dprops = storyboard[i].display.graphics || storyboard[i].display.media;
     if (dprops!==undefined){
-      medias=fetch(dprops.path)
+      medias.push(fetch(dprops.path)
       .then(function(response){
         return response.blob();
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        medias.push(["img",objectURL]);
-        return medias;
-      });
+        return ["img",objectURL];
+      }));
       }
     else if (storyboard[i].display.video !== undefined){
-      media=fetch(storyboard[i].display.video.path)
+      medias.push(fetch(storyboard[i].display.video.path)
       .then(function(response){
         return response.blob();
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        medias.push(["vid",objectURL]);
-        return medias;
-      });
+        return ["vid",objectURL];
+      }));
     }
     else if (storyboard[i].display.audio !== undefined){
-      medias=fetch(storyboard[i].display.audio.path)
+      medias.push(fetch(storyboard[i].display.audio.path)
       .then(function(response){
         return response.blob();
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        medias.push(["aud",objectURL]);
-        return medias;
-      })
+        return ["aud",objectURL];
+      }));
     }
     else {
       alert("Could not find the media source: image, video or audio.");
