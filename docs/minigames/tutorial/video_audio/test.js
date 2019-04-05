@@ -85,6 +85,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
+        console.log(objectURL);
         return ["img",objectURL];
       }));
       }
@@ -95,6 +96,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
+        console.log(objectURL);
         return ["vid",objectURL];
       }));
     }
@@ -105,6 +107,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
+        console.log(objectURL);
         return ["aud",objectURL];
       }));
     }
