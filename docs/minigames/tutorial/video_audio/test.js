@@ -96,7 +96,7 @@ const load_medias = (storyboard) => {
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
-        medias.push(["vid",objectURL]);
+        console.log(medias.push(["vid",objectURL]));
       });
     }
     else if (storyboard[i].display.audio !== undefined){
