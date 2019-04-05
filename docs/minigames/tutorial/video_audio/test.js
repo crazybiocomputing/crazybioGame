@@ -44,10 +44,12 @@ const display = (type,obj) => {
 //Partie 2
 
 const load_medias = (storyboard) => {
+  let display="block";
   let media;
   let my = storyboard.map((obj) => {
     let dprops = obj.display.graphics || obj.display.media;
     if (dprops!==undefined){
+      console.log("image !");
       media= document.createElement('img');
       fetch(dprops.path)
       .then(function(response){
@@ -62,6 +64,7 @@ const load_medias = (storyboard) => {
       });
       }
     else if (obj.display.video !== undefined){
+      console.log("video !");
       media= document.createElement('VIDEO');
       fetch(obj.display.video.path)
       .then(function(response){
@@ -77,6 +80,7 @@ const load_medias = (storyboard) => {
       });
     }
     else if (obj.display.audio !== undefined){
+      console.log("audio !");
       media= document.createElement('AUDIO');
       fetch(obj.display.audio.path)
       .then(function(response){
