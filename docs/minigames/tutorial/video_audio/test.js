@@ -11,6 +11,7 @@ const displayMedias = (medias) => {
   let display = "block";
   for (let i=0;i<medias["img"].length;i++){
     let src = medias["img"][i];
+    console.log("image");
     let media;
     if (src !==undefined){
       media= document.createElement('img');
