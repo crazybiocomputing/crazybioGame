@@ -101,10 +101,10 @@ const load_medias = (storyboard) => {
 
 var request = new XMLHttpRequest();
 request.open('GET',"storyboard.json",true);
+request.send();
 request.onload=function(){
   var storyboard=JSON.parse(request.response);
-  var medias = load_medias(storyboard)
-  console.log("coucou");
+  var medias = load_medias(storyboard);
   // Capturer les objectURL puis les afficher avec displayMedias
   /*displayMedias(medias);*/
 }
