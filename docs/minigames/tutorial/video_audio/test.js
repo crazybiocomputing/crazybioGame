@@ -9,35 +9,37 @@ Descritpion partie 2 : Fonction test pour le preprocess , pour l'import au débu
 
 const displayMedias = (medias) => {
   let display = "block";
-  for (let i=0;i<medias.length;i++){
-    if (medias[i][1]=="img"){
+  for (let i=0;i<medias.length;i++){ // Pour chaque médias préchargés
+    if (medias[i][1]=="img"){ // Si c'est une image
       medias[i][0].then(function(defs){
-        let src = defs;
+        let src = defs; // Ma valeur de objectURL est le defs
         let media;
-        if (src !==undefined){
+        if (src !==undefined){ // Je crée l'objet html
           media= document.createElement('img');
           media.src =src;
           media.style.display=display;
           let div = document.getElementById("ma_div");
           div.appendChild(media);
         }
-      });
+      }); // Je récupère la valeur de mon objectURL
+      // Ici un peu particulier la valeur est stockée dans PromiseValue de ma promises
+      // On ne peut pas y accèder directement je dois passer par un .then
     }
-    else if (medias[i][1]=="vid"){
+    else if (medias[i][1]=="vid"){ // Si c'est une vidéo pareil
       medias[i][0].then(function(defs){
         let src = defs;
         let media;
         if (src !==undefined){
           let media= document.createElement("VIDEO");
           media.src=src;
-          media.setAttribute("controls","controls");
+          media.setAttribute("controls","controls"); // Permet de contrôler la lecture de la vidéo
           media.style.display=display;
           let div = document.getElementById("ma_div");
           div.appendChild(media);
         }
       });
     }
-    else if (medias[i][1]=="aud"){
+    else if (medias[i][1]=="aud"){ // Si c'est un audio pareil
       medias[i][0].then(function(defs){
         let src = defs;
         let media;
@@ -45,15 +47,14 @@ const displayMedias = (medias) => {
           let media =document.createElement("AUDIO");
           media.src=src;
           media.style.display=display;
-          media.setAttribute("controls","controls");
+          media.setAttribute("controls","controls"); // Contrôler la lecture de l'audio
           let div =document.getElementById("ma_div");
           div.appendChild(media);
         }
       });
-      /**/
     }
     else{
-      alert("Couldn't find the media !");
+      alert("Couldn't display the media !");
     }
   }
 }
@@ -62,12 +63,11 @@ const displayMedias = (medias) => {
 
 const load_medias = (storyboard) => {
   let display="block";
-  var medias=[];
+  var medias=[]; // Liste qui va contenir tous les promises
   let my_promise;
-  // Trouver un moyen de stocké les objectURL quelquepart pour les ajouté ensuite déjà essayé avec un objet mais les fetch ne s'attendent pas et du coup j'arrive pas à récupérer la valeur
-  for(let i=0; i<storyboard.length;i++){
+  for(let i=0; i<storyboard.length;i++){ // Pour chaque objet
     let dprops = storyboard[i].display.graphics || storyboard[i].display.media;
-    if (dprops!==undefined){
+    if (dprops!==undefined){ // Si c'est une image alors
       my_promise = fetch(dprops.path)
       .then(function(response){
         return response.blob();
@@ -75,11 +75,12 @@ const load_medias = (storyboard) => {
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
         return objectURL;
-        // Récupérer ici objectURL
-      });
+      }); // Je vais chercher l'image via son chemin et stocke la promise de retour dans my_promise
+      // Cette variable contient aussi la valeur de objectURL
+      // Je l'ajoute dans la liste ainsi que son type
       medias.push([my_promise,"img"]);
     }
-    else if (storyboard[i].display.video !== undefined){
+    else if (storyboard[i].display.video !== undefined){ // Si c'est une vidéo alors pareil
       my_promise=fetch(storyboard[i].display.video.path)
       .then(function(response){
         return response.blob();
@@ -87,11 +88,10 @@ const load_medias = (storyboard) => {
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
         return objectURL;
-        // Récupérer ici objectURL
       });
       medias.push([my_promise,"vid"]);
     }
-    else if (storyboard[i].display.audio !== undefined){
+    else if (storyboard[i].display.audio !== undefined){ // Si c'est un ausio alors pareil
       my_promise=fetch(storyboard[i].display.audio.path)
       .then(function(response){
         return response.blob();
@@ -99,7 +99,6 @@ const load_medias = (storyboard) => {
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
         return objectURL;
-        // Récupérer ici objectURL
       });
       medias.push([my_promise,"aud"]);
     }
@@ -107,16 +106,19 @@ const load_medias = (storyboard) => {
       alert("Could not find the media source: image, video or audio.");
     }
   }
-  return medias;
+  return medias; // Je retourne la liste des medias chargés
 }
+
+// Ouverture du storyboard json
 
 var request = new XMLHttpRequest();
 request.open('GET',"storyboard.json",true);
 request.send();
 request.onload=function(){
   var storyboard=JSON.parse(request.response);
+  // On charge d'abord tous les médias
   var medias = load_medias(storyboard);
   console.log(medias);
-  // Capturer les objectURL puis les afficher avec displayMedias
+  // Affichage seulement dans un second temps des medias
   displayMedias(medias);
 }
