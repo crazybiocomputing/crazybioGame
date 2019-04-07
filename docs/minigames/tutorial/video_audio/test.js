@@ -13,7 +13,6 @@ const displayMedias = (medias) => {
     if (medias[i][1]=="img"){
       medias[i][0].then(function(defs){
         let src = defs;
-        console.log("image");
         let media;
         if (src !==undefined){
           media= document.createElement('img');
@@ -27,7 +26,6 @@ const displayMedias = (medias) => {
     else if (medias[i][1]=="vid"){
       medias[i][0].then(function(defs){
         let src = defs;
-        console.log("image");
         let media;
         if (src !==undefined){
           let media= document.createElement("VIDEO");
@@ -42,7 +40,6 @@ const displayMedias = (medias) => {
     else if (medias[i][1]=="aud"){
       medias[i][0].then(function(defs){
         let src = defs;
-        console.log("image");
         let media;
         if (src !==undefined){
           let media =document.createElement("AUDIO");
