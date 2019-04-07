@@ -63,14 +63,14 @@ const load_medias = (storyboard) => {
   for(let i=0; i<storyboard.length;i++){
     let dprops = storyboard[i].display.graphics || storyboard[i].display.media;
     if (dprops!==undefined){
-      fetch(dprops.path)
+      console.log(fetch(dprops.path)
       .then(function(response){
         return response.blob();
       })
       .then(function(myBlob){
         var objectURL =URL.createObjectURL(myBlob);
         // Récupérer ici objectURL
-      });
+      }));
     }
     else if (storyboard[i].display.video !== undefined){
       fetch(storyboard[i].display.video.path)
@@ -104,6 +104,7 @@ request.open('GET',"storyboard.json",true);
 request.onload=function(){
   var storyboard=JSON.parse(request.response);
   var medias = load_medias(storyboard)
+  console.log("coucou");
   // Capturer les objectURL puis les afficher avec displayMedias
   /*displayMedias(medias);*/
 }
