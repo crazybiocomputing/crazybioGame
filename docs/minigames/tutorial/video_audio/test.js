@@ -9,66 +9,73 @@ Descritpion partie 2 : Fonction test pour le preprocess , pour l'import au débu
 
 const displayMedias = (medias) => {
   let display = "block";
-  for (let i=0;i<medias.length;i++){ // Pour chaque médias préchargés
-    if (medias[i][1]=="img"){ // Si c'est une image
-      medias[i][0].then(function(defs){
+  // Pour chaque médias préchargés
+  for (var objet in medias){
+    // Si c'est une image
+    if (medias[objet].type=="img"){
+      medias[objet].source.then(function(defs){
         let src = defs; // Ma valeur de objectURL est le defs
         let media;
         if (src !==undefined){ // Je crée l'objet html
-          media= document.createElement('img');
-          media.src =src;
-          media.style.display=display;
-          let div = document.getElementById("ma_div");
-          div.appendChild(media);
-        }
-      }); // Je récupère la valeur de mon objectURL
-      // Ici un peu particulier la valeur est stockée dans PromiseValue de ma promises
-      // On ne peut pas y accèder directement je dois passer par un .then
-    }
-    else if (medias[i][1]=="vid"){ // Si c'est une vidéo pareil
-      medias[i][0].then(function(defs){
-        let src = defs;
-        let media;
-        if (src !==undefined){
-          let media= document.createElement("VIDEO");
-          media.src=src;
-          media.setAttribute("controls","controls"); // Permet de contrôler la lecture de la vidéo
-          media.style.display=display;
-          let div = document.getElementById("ma_div");
-          div.appendChild(media);
-        }
-      });
-    }
-    else if (medias[i][1]=="aud"){ // Si c'est un audio pareil
-      medias[i][0].then(function(defs){
-        let src = defs;
-        let media;
-        if (src !==undefined){
-          let media =document.createElement("AUDIO");
-          media.src=src;
-          media.style.display=display;
-          media.setAttribute("controls","controls"); // Contrôler la lecture de l'audio
-          let div =document.getElementById("ma_div");
-          div.appendChild(media);
-        }
-      });
-    }
-    else{
-      alert("Couldn't display the media !");
-    }
+        media= document.createElement('img');
+        media.src =src;
+        media.style.display=display;
+        let div = document.getElementById("ma_div");
+        div.appendChild(media);
+      }
+    }); // Je récupère la valeur de mon objectURL
+    // Ici un peu particulier la valeur est stockée dans PromiseValue de ma promises
+    // On ne peut pas y accèder directement je dois passer par un .then
   }
+  // Si c'est une vidéo pareil
+  else if (medias[objet].type=="vid"){
+    medias[objet].source.then(function(defs){
+      let src = defs;
+      let media;
+      if (src !==undefined){
+        let media= document.createElement("VIDEO");
+        media.src=src;
+        media.setAttribute("controls","controls"); // Permet de contrôler la lecture de la vidéo
+        media.style.display=display;
+        let div = document.getElementById("ma_div");
+        div.appendChild(media);
+      }
+    });
+  }
+  // Si c'est un audio pareil
+  else if (medias[objet].type=="aud"){
+    medias[objet].source.then(function(defs){
+      let src = defs;
+      let media;
+      if (src !==undefined){
+        let media =document.createElement("AUDIO");
+        media.src=src;
+        media.style.display=display;
+        media.setAttribute("controls","controls"); // Contrôler la lecture de l'audio
+        let div =document.getElementById("ma_div");
+        div.appendChild(media);
+      }
+    });
+  }
+  else{
+    alert("Couldn't display the media !");
+  }
+}
 }
 
 //Partie 2
 
 const load_medias = (storyboard) => {
   let display="block";
-  var medias=[]; // Liste qui va contenir tous les promises
+  var medias={}; // Liste qui va contenir tous les promises
   let my_promise;
   for(let i=0; i<storyboard.length;i++){ // Pour chaque objet
     let dprops = storyboard[i].display.graphics || storyboard[i].display.media;
-    if (dprops!==undefined){ // Si c'est une image alors
-      my_promise = fetch(dprops.path)
+    // Si c'est une image alors
+    if (dprops!==undefined){
+      let media={};
+      media.type="img";
+      media.source = fetch(dprops.path)
       .then(function(response){
         return response.blob();
       })
@@ -78,10 +85,13 @@ const load_medias = (storyboard) => {
       }); // Je vais chercher l'image via son chemin et stocke la promise de retour dans my_promise
       // Cette variable contient aussi la valeur de objectURL
       // Je l'ajoute dans la liste ainsi que son type
-      medias.push([my_promise,"img"]);
+      medias["img"+i.toString()]=media;
     }
-    else if (storyboard[i].display.video !== undefined){ // Si c'est une vidéo alors pareil
-      my_promise=fetch(storyboard[i].display.video.path)
+    // Si c'est une vidéo alors pareil
+    else if (storyboard[i].display.video !== undefined){
+      let media={};
+      media.type="vid";
+      media.source =fetch(storyboard[i].display.video.path)
       .then(function(response){
         return response.blob();
       })
@@ -89,10 +99,13 @@ const load_medias = (storyboard) => {
         var objectURL =URL.createObjectURL(myBlob);
         return objectURL;
       });
-      medias.push([my_promise,"vid"]);
+      medias["vid"+i.toString()]=media;
     }
-    else if (storyboard[i].display.audio !== undefined){ // Si c'est un ausio alors pareil
-      my_promise=fetch(storyboard[i].display.audio.path)
+    // Si c'est un audio alors pareil
+    else if (storyboard[i].display.audio !== undefined){
+      let media={};
+      media.type="aud";
+      media.source =fetch(storyboard[i].display.audio.path)
       .then(function(response){
         return response.blob();
       })
@@ -100,7 +113,7 @@ const load_medias = (storyboard) => {
         var objectURL =URL.createObjectURL(myBlob);
         return objectURL;
       });
-      medias.push([my_promise,"aud"]);
+      medias["aud"+i.toString()]=media;
     }
     else {
       alert("Could not find the media source: image, video or audio.");
