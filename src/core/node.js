@@ -238,7 +238,7 @@ class Node {
    * 
    * @author Jean-Christophe Taveau
    */
-  action(actionProps, func) {
+  actionable(actionProps, func) {
   
     const doIt = (ev) => {
       console.log(`Click with ${ev.button} on object ${ev.target.dataset.objectid} and update display of ???`);

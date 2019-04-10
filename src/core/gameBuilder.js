@@ -51,7 +51,8 @@ const creators = {
   "machine.lockNumerical":  createLockNumerical,
   "scene": createScene,
   "scene.closeup": createScene,
-  "sprite": createSprite
+  "sprite": createSprite,
+  "switch": createSwitch
 };
   
   
@@ -131,12 +132,13 @@ class GameBuilder {
     const appendHTML = (node) => {
       console.log('appendHTML');
       console.log(node);
-      if (node.className === 'item') {
+/*      if (node.className === 'item') {
         document.querySelector('aside ul').appendChild(node.getHTML());
       }
       else {
+*/
         node.ancestor.getHTML().appendChild(node.getHTML());
-      }
+//      }
 
     }
     
@@ -165,13 +167,25 @@ class GameBuilder {
       // Complete the `new_nodes` property if any
       // Collect all the ids and the items ids
       let sprites = storyboard.filter(obj => obj.id !== 0 && obj.class !== 'item');
-      let modifiers = storyboard.filter( obj => obj.class === 'item').map( item => item.id);
-      modifiers.forEach( modifier => {
+      let items = storyboard.filter( obj => obj.class === 'item');
+      items.forEach( item => {
+          let modifier = item.id;
+          // An item is a composite of a sprite and a invertoriable object
+          // Create Sprite as child of Item
+          storyboard.push({
+            id : 1000 + item.id,
+            class : 'sprite',
+            description: item.description,
+            display: item.display,
+            action: item.action
+          });
+
         for (let sprite of sprites) {
+          // Update item props
           let new_nodeid = sprite.id + modifier;
           let new_nodes = sprites.filter( obj => obj.id === new_nodeid);
           if (new_nodes.length !== 0) {
-            console.log(sprite);
+            console.log(`The item ${modifier} interacts with the object ${sprite.id} ${sprite.class}\n`);
             console.log(new_nodes);
             // When a item is used, trigger the `onuse` action(s)
             sprite.action.onuse = {
@@ -182,7 +196,7 @@ class GameBuilder {
         }
       });
       console.log(sprites);
-      console.log(modifiers);
+      console.log(items);
     }
     console.log(storyboard);
     
@@ -194,6 +208,9 @@ class GameBuilder {
     popup.className = "modal";
     popup.id = 'popup';
     root.appendChild(popup);
+    // TODO HACK
+    let subSprites = document.querySelectorAll('div.item .sprite');
+    console.log('INVENT. ',subSprites);
 
     // Step #4 - Finalize HTML5 and/or SVG Elements of this graph
     let scene_root = CRAZYBIOGAME.graph.root;

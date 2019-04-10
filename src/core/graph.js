@@ -82,7 +82,6 @@ class Graph {
   traverse(a_node,func) {
     if (a_node.hasChildNodes()) {
       for (let nodeChild of a_node.childNodes) {
-        console.log(func);
         console.log(nodeChild);
         func(nodeChild);
         this.traverse(nodeChild,func);

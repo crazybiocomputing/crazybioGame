@@ -238,7 +238,7 @@ class Node {
    * 
    * @author Jean-Christophe Taveau
    */
-  action(actionProps, func) {
+  actionable(actionProps, func) {
   
     const doIt = (ev) => {
       console.log(`Click with ${ev.button} on object ${ev.target.dataset.objectid} and update display of ???`);
@@ -387,6 +387,218 @@ class Node {
 
 'use strict';
 
+/**
+ * Create a new scene
+ *
+ * @author Jean-Christophe Taveau
+ */
+class Composite extends Node {
+
+  constructor(id,className,description) {
+    super(id,className,description);
+  };
+  
+  static create(props) {
+    return new Composite(props.id,props.class,props.description)
+      .append('article')
+      .display(props.display)
+      .children(props.childNodes) // Pre-calculated in `preprocess` of game.js
+      .forEachChild(this.appendChild);
+  }
+
+  appendChild(child) {
+    console.log('appendChild ',child);
+    if (func !== undefined) {
+/*      if (child.class === 'item') {
+        CRAZYBIOGAME.graph.inventory.appenChild(child);
+      }
+      else {
+*/
+        this.element.appendChild(child);
+        if (child.class === 'composite' || child.class === 'scene' || child.class === 'scene.closeup') {
+          child.forEachChild(child.appendChild);
+        }
+      //}
+    }
+  }
+  
+  traverse(func) {
+    this.childNodes.forEach ( (child) => func(this,child));
+  }
+}
+
+
+const createComposite = (props) => {
+  let composite = Composite.create(props);
+  return composite.element;
+};
+
+/**
+ * Create a new target
+ *
+ *
+
+ 
+const createTarget = (node) => {
+  let element = document.createElement('div');
+  element.id = node.id;
+  element.className = 'target';
+  // TODO
+  if (node.display !== "undefined") {
+    if (node.display.path !== "undefined") {
+      let img = document.createElement('img');
+      img.src = node.display.graphics.path;
+      console.log(node.display.graphics.position);
+      element.appendChild(img);
+    }
+    element.style.display = (node.display.visibility) ? "inline-block" : "none";
+    // TODO need parent dimension
+    let parentWidth = node.display.parentWidth;
+    let parentHeight = node.display.parentHeight;
+    element.style.left = `${node.display.graphics.position[0]/parentWidth * 100 || 0}%`;
+    element.style.top = `${node.display.graphics.position[1]/parentHeight * 100 || 0}%`;
+    element.style.maxWidth = `${node.display.graphics.width/parentWidth * 100 || 0}%`;
+  }
+
+  
+  // TODO
+  
+  return element;
+};
+ */
+/*
+ *  crazybioGame: CrazyBioComputing Game Engine
+ *  Copyright (C) 2015-2018  Jean-Christophe Taveau.
+ *
+ *  This file is part of crazybioGame
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with crazybioGame.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
+ * Authors:
+ * Jean-Christophe Taveau
+ */
+
+
+'use strict';
+
+
+/**
+ * Create a new `sprite` node
+ *
+ * @author Jean-Christophe Taveau
+ */
+class Sprite extends Node {
+ 
+  constructor (id,className,description) {
+    super(id,className,description);
+  }
+  
+  static create(props) {
+    return new Sprite(props.id,props.class,props.description,props.parent)
+      .append('figure')
+      .display(props.display)
+      .actionable(props.action);
+  }
+}
+ 
+const createSprite = (props) => {
+  let sprite = Sprite.create(props);
+  return sprite;
+}
+
+
+/*const createSprite = (props) => {
+  let element = document.createElement('div');
+  element.id = props.id;
+  element.className = 'sprite';
+  element.style.display = (props.display !== "undefined" && props.display.visibility) ? "inline-block" : "none";
+  // TODO
+  let img = document.createElement('img');
+  img.src = props.display.graphics.path;
+  img.src = props.display.graphics.path;
+  element.style.left = `${props.display.graphics.position[0] || 0}px`;
+  element.style.top = `${props.display.graphics.position[1] || 0}px`;
+  element.appendChild(img);
+  
+  
+  return element;
+};*/
+
+
+/**
+ * Create a new generic sprite
+ *
+ * @author Jean-Christophe Taveau, GONCALVES FRASCO Charlotte, SCHRIEKE Hans
+
+const createSprite = (props) => {
+  let position = document.createElement('div');
+  position.className = "position";
+  position.style = "position:relative;top=-480px;left:-344px";
+  let element = document.createElement('div');
+  //element.draggable ="true";
+  element.id = props.id;
+  element.className = 'sprite';
+  element.style.display = (props.display !== "undefined" && props.display.visibility) ? "inline-block" : "none";
+  //element.style = "height: 1px; width: 1px; top: 35px; left: 755px; background-color: rgb(255, 0, 0); color: rgb(255, 255, 255); z-index: 509"
+  // TODO
+  let img = document.createElement('img');
+  img.src = props.display.graphics.path;
+  img.src = props.display.graphics.path;
+  element.style.left = `${props.display.graphics.position[0] || 0}px`;
+  element.style.top = `${props.display.graphics.position[1] || 0}px`;
+  //element.ondragstart="event.dataTransfer.setData('image/plain', 'Ce texte peut être glissé')";
+  element.appendChild(img);
+  position.appendChild(element);
+  let pos = document.createElement('div');
+  pos.style = "position:relative;top=-480px;left:-344px";
+  let sprite = document.getElementsByClassName('position');
+  sprite.addEventListener("drag",function(event){
+  },true);
+
+  return element;
+};
+*/
+
+
+/*
+ *  crazybioGame: CrazyBioComputing Game Engine
+ *  Copyright (C) 2015-2018  Jean-Christophe Taveau.
+ *
+ *  This file is part of crazybioGame
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with crazybioGame.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
+ * Authors:
+ * Jean-Christophe Taveau
+ */
+
+
+'use strict';
+
 
 class Machine extends Node {
 
@@ -405,7 +617,7 @@ class Machine extends Node {
       .append('article')
       .display(props.display)
       .draggable(props.features.draggable)
-      .action(props.action)
+      .actionable(props.action)
       .exit(props.features.exit);
   }
 
@@ -593,7 +805,7 @@ const createMachineDownload = (props) => {
   }
 
   actionProps.onclick.popup.contentDOM = container;
-  machine.action(actionProps);
+  machine.actionable(actionProps);
 
   return machine;
 };
@@ -994,6 +1206,7 @@ const createLockText = (props) => {
   let lock = Lock.create(props);
   lock.element.className = "machine locktext";
 
+  // TODO - New syntax of form
   let actionProps = {}
   actionProps.onclick = {};
   actionProps.onclick['popup'] = {
@@ -1027,7 +1240,7 @@ const createLockText = (props) => {
   container.appendChild(input);
   container.appendChild(submitbutton);
   actionProps.onclick.popup.contentDOM = container;
-  lock.action(actionProps);
+  lock.actionable(actionProps);
   
   return lock;
 };
@@ -1180,10 +1393,10 @@ const createLockNumpad = (props) => {
 /**
  * Create a new item
  * @class Item
- * @extends Machine
+ * @extends Composite
  *
  */
-class Item extends Machine {
+class Item extends Composite {
   /**
    * @constructor
    */
@@ -1192,48 +1405,41 @@ class Item extends Machine {
   }
 
   static create(props) {
-    props.display.id = props.id;
-    props.display.title = props.description;
-    
-    let item = new Item(props.id,props.class,props.description,props.parent)
-      .display(props.display)
+    props.features.id = props.id;
+    props.features.title = props.description;
+
+    let item = new Item(props.id,props.class,props.description)
+      .append('div')
+      .children([1000 + props.id])
       .inventoriable(props.features);
 
+    item.childNodes = [];
+    console.log('SPRITE ',document.getElementById('node_1011'));
     return item;
   }
 
-  /**
-   * Create HTML code for display
-   *
-   */
-  display(displayProps) {
-    if (displayProps === undefined) {
-      return this;
-    }
-    // Add image in `inventory`
-    this.element = document.createElement('li');
-    this.element.id = `item_${displayProps.id}`;
-    this.element.style.display = 'none';
-    this.element.className = 'item';
-    let link = document.createElement('a');
-    link.href = 'javascript:void(0)';
-    link.title = displayProps.title;
-    let media = document.createElement('img');
-    media.src = (displayProps.graphics !== undefined ) ? displayProps.graphics.path : displayProps.media.image;
-    link.appendChild(media);
-    this.element.appendChild(link);
-    document.querySelector('aside ul').appendChild(this.element);
-    return this;
-    
-  }
   
   /**
    * Manage thumbnail and events for item
    * @author Jean-Christophe Taveau
    */
   inventoriable(featuresProps) {
+    // Add image in `inventory`
+    this.elementItem = document.createElement('li');
+    this.elementItem.id = `item_${featuresProps.id}`;
+    this.elementItem.style.display = 'none';
+    this.elementItem.className = 'item';
+    let link = document.createElement('a');
+    link.href = 'javascript:void(0)';
+    link.title = featuresProps.title;
+    let media = document.createElement('img');
+    media.src = featuresProps.image;
+    link.appendChild(media);
+    this.elementItem.appendChild(link);
+    document.querySelector('aside ul').appendChild(this.elementItem);
+
     // Add event
-    let link = this.element.children[0];
+    // link = this.element.children[0];
     link.addEventListener('click', (ev) => {
       if (link.className.includes('checked')) {
         link.className = 'item';
@@ -1252,224 +1458,47 @@ class Item extends Machine {
     
   }
   
-}
-
-const createItem = (props) => {
-  let item = Item.create(props);
-  
-  return item;
-};
-/*
- *  crazybioGame: CrazyBioComputing Game Engine
- *  Copyright (C) 2015-2018  Jean-Christophe Taveau.
- *
- *  This file is part of crazybioGame
- *
- * This program is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with crazybioGame.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- * Authors:
- * Jean-Christophe Taveau
- */
+} // End of class Item
 
 
-'use strict';
 
-/**
- * Create a new scene
- *
- * @author Jean-Christophe Taveau
- */
-class Composite extends Node {
+class ItemCombo extends Composite {
 
-  constructor(id,className,description) {
-    super(id,className,description);
-  };
-  
-  static create(props) {
-    return new Composite(props.id,props.class,props.description)
-      .append('article')
-      .display(props.display)
-      .children(props.childNodes) // Pre-calculated in `preprocess` of game.js
-      .forEachChild(this.appendChild);
-  }
-
-  appendChild(child) {
-    console.log('appendChild ',child);
-    if (func !== undefined) {
-      if (child.class === 'item') {
-        CRAZYBIOGAME.graph.inventory.appenChild(child);
-      }
-      else {
-        this.element.appendChild(child);
-        if (child.class === 'composite' || child.class === 'scene' || child.class === 'scene.closeup') {
-          child.forEachChild(child.appendChild);
-        }
-      }
-    }
-  }
-  
-  traverse(func) {
-    this.childNodes.forEach ( (child) => func(this,child));
-  }
-}
-
-
-const createComposite = (props) => {
-  let composite = Composite.create(props);
-  return composite.element;
-};
-
-/**
- * Create a new target
- *
- *
-
- 
-const createTarget = (node) => {
-  let element = document.createElement('div');
-  element.id = node.id;
-  element.className = 'target';
-  // TODO
-  if (node.display !== "undefined") {
-    if (node.display.path !== "undefined") {
-      let img = document.createElement('img');
-      img.src = node.display.graphics.path;
-      console.log(node.display.graphics.position);
-      element.appendChild(img);
-    }
-    element.style.display = (node.display.visibility) ? "inline-block" : "none";
-    // TODO need parent dimension
-    let parentWidth = node.display.parentWidth;
-    let parentHeight = node.display.parentHeight;
-    element.style.left = `${node.display.graphics.position[0]/parentWidth * 100 || 0}%`;
-    element.style.top = `${node.display.graphics.position[1]/parentHeight * 100 || 0}%`;
-    element.style.maxWidth = `${node.display.graphics.width/parentWidth * 100 || 0}%`;
-  }
-
-  
-  // TODO
-  
-  return element;
-};
- */
-/*
- *  crazybioGame: CrazyBioComputing Game Engine
- *  Copyright (C) 2015-2018  Jean-Christophe Taveau.
- *
- *  This file is part of crazybioGame
- *
- * This program is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with crazybioGame.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- * Authors:
- * Jean-Christophe Taveau
- */
-
-
-'use strict';
-
-
-/**
- * Create a new `sprite` node
- *
- * @author Jean-Christophe Taveau
- */
-class Sprite extends Node {
- 
+  /**
+   * @constructor
+   */
   constructor (id,className,description) {
     super(id,className,description);
   }
-  
+
   static create(props) {
-    return new Sprite(props.id,props.class,props.description,props.parent)
-      .append('figure')
-      .display(props.display)
-      .action(props.action);
+
+    props.class = 'item';
+    let _item = Item.create(props);
+
+    props.class = 'sprite';
+    props.id +=1000;
+    let _sprite = Sprite.create(props);
+
+
+    let itemCombo = new ItemCombo(_item.id,'itemcombo',props.description);
+    itemCombo.children = [_item.id,_sprite.id];
+    _item.setParent(itemCombo);
+    _sprite.setParent(itemCombo);
+    itemCombo.childNodes = [_sprite,_item];
+    itemCombo.element = _sprite.element;
+
+    return itemCombo;
   }
-}
- 
-const createSprite = (props) => {
-  let sprite = Sprite.create(props);
-  return sprite;
-}
+
+} // End of class ItemCombo
 
 
-/*const createSprite = (props) => {
-  let element = document.createElement('div');
-  element.id = props.id;
-  element.className = 'sprite';
-  element.style.display = (props.display !== "undefined" && props.display.visibility) ? "inline-block" : "none";
-  // TODO
-  let img = document.createElement('img');
-  img.src = props.display.graphics.path;
-  img.src = props.display.graphics.path;
-  element.style.left = `${props.display.graphics.position[0] || 0}px`;
-  element.style.top = `${props.display.graphics.position[1] || 0}px`;
-  element.appendChild(img);
-  
-  
-  return element;
-};*/
 
+const createItem = (props) => {
+  return Item.create(props);
 
-/**
- * Create a new generic sprite
- *
- * @author Jean-Christophe Taveau, GONCALVES FRASCO Charlotte, SCHRIEKE Hans
-
-const createSprite = (props) => {
-  let position = document.createElement('div');
-  position.className = "position";
-  position.style = "position:relative;top=-480px;left:-344px";
-  let element = document.createElement('div');
-  //element.draggable ="true";
-  element.id = props.id;
-  element.className = 'sprite';
-  element.style.display = (props.display !== "undefined" && props.display.visibility) ? "inline-block" : "none";
-  //element.style = "height: 1px; width: 1px; top: 35px; left: 755px; background-color: rgb(255, 0, 0); color: rgb(255, 255, 255); z-index: 509"
-  // TODO
-  let img = document.createElement('img');
-  img.src = props.display.graphics.path;
-  img.src = props.display.graphics.path;
-  element.style.left = `${props.display.graphics.position[0] || 0}px`;
-  element.style.top = `${props.display.graphics.position[1] || 0}px`;
-  //element.ondragstart="event.dataTransfer.setData('image/plain', 'Ce texte peut être glissé')";
-  element.appendChild(img);
-  position.appendChild(element);
-  let pos = document.createElement('div');
-  pos.style = "position:relative;top=-480px;left:-344px";
-  let sprite = document.getElementsByClassName('position');
-  sprite.addEventListener("drag",function(event){
-  },true);
-
-  return element;
 };
-*/
-
-
 /*
  *  crazybioGame: CrazyBioComputing Game Engine
  *  Copyright (C) 2015-2018  Jean-Christophe Taveau.
@@ -1717,6 +1746,72 @@ const createScene = (props) => {
 'use strict';
 
 /**
+ * Create a new `switch` object allowing the management of object in different states
+ *
+ * @author Jean-Christophe Taveau
+ */
+class Switch extends Composite {
+  
+  constructor(id,className,description) {
+    super(id,className,description);
+  };
+  
+  static create(props) {
+    return new Switch(props.id,props.class,props.description)
+      .append('div')
+      .display(props.display)
+      .children(props.children); 
+  }
+
+  display(displayProps) {
+    // Get information from node to display...
+    // TODO
+    return this;
+  }
+}
+
+
+/**
+ * Create a new switch
+ *
+ * @author Jean-Christophe Taveau
+ */
+const createSwitch = (props) => {
+
+  let _switch = Switch.create(props);
+
+  _switch.childNodes = [];
+  
+  return _switch;
+};
+/*
+ *  crazybioGame: CrazyBioComputing Game Engine
+ *  Copyright (C) 2015-2018  Jean-Christophe Taveau.
+ *
+ *  This file is part of crazybioGame
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with crazybioGame.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
+ * Authors:
+ * Jean-Christophe Taveau
+ */
+
+
+'use strict';
+
+/**
  * @class Graph
  */
 class Graph {
@@ -1773,7 +1868,6 @@ class Graph {
   traverse(a_node,func) {
     if (a_node.hasChildNodes()) {
       for (let nodeChild of a_node.childNodes) {
-        console.log(func);
         console.log(nodeChild);
         func(nodeChild);
         this.traverse(nodeChild,func);
@@ -1918,6 +2012,23 @@ const triggerAction = (event,node) => {
     case 'onsuccess': 
       updateNodes('onsuccess',node);
       break;
+    }
+  });
+}
+
+/**
+ * Display/Show objects in the scene
+ *
+ * @param {array} nodelist - List of Objects
+ * @author Jean-Christophe Taveau
+ */
+const showItems = (nodelist) => {
+  nodelist.forEach( id => {
+    let node = CRAZYBIOGAME.graph.nodeList.filter( (n) => n.id === id)[0];
+    console.log(`show node #${id} ${node.element.className}`);
+    document.getElementById(`item_${id}`).style.display = 'block';
+    if (node.actions !== undefined && node.actions.ondisplay !== undefined) {
+      updateNodes('ondisplay',node);
     }
   });
 }
@@ -2519,7 +2630,8 @@ const creators = {
   "machine.lockNumerical":  createLockNumerical,
   "scene": createScene,
   "scene.closeup": createScene,
-  "sprite": createSprite
+  "sprite": createSprite,
+  "switch": createSwitch
 };
   
   
@@ -2599,12 +2711,13 @@ class GameBuilder {
     const appendHTML = (node) => {
       console.log('appendHTML');
       console.log(node);
-      if (node.className === 'item') {
+/*      if (node.className === 'item') {
         document.querySelector('aside ul').appendChild(node.getHTML());
       }
       else {
+*/
         node.ancestor.getHTML().appendChild(node.getHTML());
-      }
+//      }
 
     }
     
@@ -2633,13 +2746,25 @@ class GameBuilder {
       // Complete the `new_nodes` property if any
       // Collect all the ids and the items ids
       let sprites = storyboard.filter(obj => obj.id !== 0 && obj.class !== 'item');
-      let modifiers = storyboard.filter( obj => obj.class === 'item').map( item => item.id);
-      modifiers.forEach( modifier => {
+      let items = storyboard.filter( obj => obj.class === 'item');
+      items.forEach( item => {
+          let modifier = item.id;
+          // An item is a composite of a sprite and a invertoriable object
+          // Create Sprite as child of Item
+          storyboard.push({
+            id : 1000 + item.id,
+            class : 'sprite',
+            description: item.description,
+            display: item.display,
+            action: item.action
+          });
+
         for (let sprite of sprites) {
+          // Update item props
           let new_nodeid = sprite.id + modifier;
           let new_nodes = sprites.filter( obj => obj.id === new_nodeid);
           if (new_nodes.length !== 0) {
-            console.log(sprite);
+            console.log(`The item ${modifier} interacts with the object ${sprite.id} ${sprite.class}\n`);
             console.log(new_nodes);
             // When a item is used, trigger the `onuse` action(s)
             sprite.action.onuse = {
@@ -2650,7 +2775,7 @@ class GameBuilder {
         }
       });
       console.log(sprites);
-      console.log(modifiers);
+      console.log(items);
     }
     console.log(storyboard);
     
@@ -2662,6 +2787,9 @@ class GameBuilder {
     popup.className = "modal";
     popup.id = 'popup';
     root.appendChild(popup);
+    // TODO HACK
+    let subSprites = document.querySelectorAll('div.item .sprite');
+    console.log('INVENT. ',subSprites);
 
     // Step #4 - Finalize HTML5 and/or SVG Elements of this graph
     let scene_root = CRAZYBIOGAME.graph.root;

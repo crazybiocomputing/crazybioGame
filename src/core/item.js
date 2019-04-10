@@ -28,10 +28,10 @@
 /**
  * Create a new item
  * @class Item
- * @extends Machine
+ * @extends Composite
  *
  */
-class Item extends Machine {
+class Item extends Composite {
   /**
    * @constructor
    */
@@ -40,48 +40,41 @@ class Item extends Machine {
   }
 
   static create(props) {
-    props.display.id = props.id;
-    props.display.title = props.description;
-    
-    let item = new Item(props.id,props.class,props.description,props.parent)
-      .display(props.display)
+    props.features.id = props.id;
+    props.features.title = props.description;
+
+    let item = new Item(props.id,props.class,props.description)
+      .append('div')
+      .children([1000 + props.id])
       .inventoriable(props.features);
 
+    item.childNodes = [];
+    console.log('SPRITE ',document.getElementById('node_1011'));
     return item;
   }
 
-  /**
-   * Create HTML code for display
-   *
-   */
-  display(displayProps) {
-    if (displayProps === undefined) {
-      return this;
-    }
-    // Add image in `inventory`
-    this.element = document.createElement('li');
-    this.element.id = `item_${displayProps.id}`;
-    this.element.style.display = 'none';
-    this.element.className = 'item';
-    let link = document.createElement('a');
-    link.href = 'javascript:void(0)';
-    link.title = displayProps.title;
-    let media = document.createElement('img');
-    media.src = (displayProps.graphics !== undefined ) ? displayProps.graphics.path : displayProps.media.image;
-    link.appendChild(media);
-    this.element.appendChild(link);
-    document.querySelector('aside ul').appendChild(this.element);
-    return this;
-    
-  }
   
   /**
    * Manage thumbnail and events for item
    * @author Jean-Christophe Taveau
    */
   inventoriable(featuresProps) {
+    // Add image in `inventory`
+    this.elementItem = document.createElement('li');
+    this.elementItem.id = `item_${featuresProps.id}`;
+    this.elementItem.style.display = 'none';
+    this.elementItem.className = 'item';
+    let link = document.createElement('a');
+    link.href = 'javascript:void(0)';
+    link.title = featuresProps.title;
+    let media = document.createElement('img');
+    media.src = featuresProps.image;
+    link.appendChild(media);
+    this.elementItem.appendChild(link);
+    document.querySelector('aside ul').appendChild(this.elementItem);
+
     // Add event
-    let link = this.element.children[0];
+    // link = this.element.children[0];
     link.addEventListener('click', (ev) => {
       if (link.className.includes('checked')) {
         link.className = 'item';
@@ -100,10 +93,44 @@ class Item extends Machine {
     
   }
   
-}
+} // End of class Item
+
+
+
+class ItemCombo extends Composite {
+
+  /**
+   * @constructor
+   */
+  constructor (id,className,description) {
+    super(id,className,description);
+  }
+
+  static create(props) {
+
+    props.class = 'item';
+    let _item = Item.create(props);
+
+    props.class = 'sprite';
+    props.id +=1000;
+    let _sprite = Sprite.create(props);
+
+
+    let itemCombo = new ItemCombo(_item.id,'itemcombo',props.description);
+    itemCombo.children = [_item.id,_sprite.id];
+    _item.setParent(itemCombo);
+    _sprite.setParent(itemCombo);
+    itemCombo.childNodes = [_sprite,_item];
+    itemCombo.element = _sprite.element;
+
+    return itemCombo;
+  }
+
+} // End of class ItemCombo
+
+
 
 const createItem = (props) => {
-  let item = Item.create(props);
-  
-  return item;
+  return Item.create(props);
+
 };

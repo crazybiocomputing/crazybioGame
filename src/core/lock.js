@@ -53,6 +53,7 @@ const createLockText = (props) => {
   let lock = Lock.create(props);
   lock.element.className = "machine locktext";
 
+  // TODO - New syntax of form
   let actionProps = {}
   actionProps.onclick = {};
   actionProps.onclick['popup'] = {
@@ -86,7 +87,7 @@ const createLockText = (props) => {
   container.appendChild(input);
   container.appendChild(submitbutton);
   actionProps.onclick.popup.contentDOM = container;
-  lock.action(actionProps);
+  lock.actionable(actionProps);
   
   return lock;
 };

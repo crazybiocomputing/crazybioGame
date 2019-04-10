@@ -77,6 +77,23 @@ const triggerAction = (event,node) => {
  * @param {array} nodelist - List of Objects
  * @author Jean-Christophe Taveau
  */
+const showItems = (nodelist) => {
+  nodelist.forEach( id => {
+    let node = CRAZYBIOGAME.graph.nodeList.filter( (n) => n.id === id)[0];
+    console.log(`show node #${id} ${node.element.className}`);
+    document.getElementById(`item_${id}`).style.display = 'block';
+    if (node.actions !== undefined && node.actions.ondisplay !== undefined) {
+      updateNodes('ondisplay',node);
+    }
+  });
+}
+
+/**
+ * Display/Show objects in the scene
+ *
+ * @param {array} nodelist - List of Objects
+ * @author Jean-Christophe Taveau
+ */
 const showNodes = (nodelist) => {
   nodelist.forEach( id => {
     let node = CRAZYBIOGAME.graph.nodeList.filter( (n) => n.id === id)[0];

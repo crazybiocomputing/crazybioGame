@@ -47,15 +47,16 @@ class Composite extends Node {
   appendChild(child) {
     console.log('appendChild ',child);
     if (func !== undefined) {
-      if (child.class === 'item') {
+/*      if (child.class === 'item') {
         CRAZYBIOGAME.graph.inventory.appenChild(child);
       }
       else {
+*/
         this.element.appendChild(child);
         if (child.class === 'composite' || child.class === 'scene' || child.class === 'scene.closeup') {
           child.forEachChild(child.appendChild);
         }
-      }
+      //}
     }
   }
   

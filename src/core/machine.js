@@ -43,7 +43,7 @@ class Machine extends Node {
       .append('article')
       .display(props.display)
       .draggable(props.features.draggable)
-      .action(props.action)
+      .actionable(props.action)
       .exit(props.features.exit);
   }
 
@@ -231,7 +231,7 @@ const createMachineDownload = (props) => {
   }
 
   actionProps.onclick.popup.contentDOM = container;
-  machine.action(actionProps);
+  machine.actionable(actionProps);
 
   return machine;
 };
