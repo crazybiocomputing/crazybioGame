@@ -4,6 +4,8 @@
     "class": "Image",
     "description": "Image",
     "display": {
+      "name":"congrat",
+      "position":[1,0],
       "graphics": {
         "path": "assets/congratulations_0.jpg"
       }
@@ -14,6 +16,8 @@
     "class": "Video",
     "description": "video",
     "display": {
+      "name":"la_video",
+      "position":[2,0],
       "video": {
         "path": "assets/Video.mp4"
       }
@@ -24,9 +28,22 @@
     "class": "Audio",
     "description": "audio",
     "display": {
-        "position": [1, 0],
+      "name":"l_audio",
+      "position":[0,1],
       "audio": {
         "path": "assets/Audio.mp3"
+      }
+    }
+  },
+  {
+    "id": 3,
+    "class":"SVG",
+    "description":"SVG",
+    "display":{
+      "name":"svg",
+      "position":[0,2],
+      "svg":{
+        "path":"assets/dessin.svg"
       }
     }
   }

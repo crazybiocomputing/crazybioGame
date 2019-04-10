@@ -7,60 +7,103 @@ Descritpion partie 2 : Fonction test pour le preprocess , pour l'import au débu
 
 'use strict';
 
+function bye_bleu(){
+  let bleu = document.getElementById(11);
+  bleu.style.display="none";
+  let vert = document.getElementById(12);
+  vert.style.display="block";
+}
+function bye_vert(){
+  let vert = document.getElementById(12);
+  vert.style.display="none";
+  let bleu = document.getElementById(11);
+  bleu.style.display="block";
+}
+
 const displayMedias = (medias) => {
-  let display = "block";
+  let display = "align";
   // Pour chaque médias préchargés
   for (var objet in medias){
     // Si c'est une image
     if (medias[objet].type=="img"){
-      medias[objet].source.then(function(defs){
-        let src = defs; // Ma valeur de objectURL est le defs
+      medias[objet].props.then(function(props){
+        let src = props.source; // Ma valeur de objectURL est le defs
         let media;
-        if (src !==undefined){ // Je crée l'objet html
-        media= document.createElement('img');
-        media.src =src;
-        media.style.display=display;
-        let div = document.getElementById("ma_div");
-        div.appendChild(media);
-      }
-    }); // Je récupère la valeur de mon objectURL
-    // Ici un peu particulier la valeur est stockée dans PromiseValue de ma promises
-    // On ne peut pas y accèder directement je dois passer par un .then
+        // Je crée l'objet html
+        if (src !==undefined){
+          media= document.createElement('img');
+          media.src =src;
+          media.id=props.id;
+          media.name=props.name;
+          media.style.left=`${props.position[0]*100}%`;
+          media.style.top=`${props.position[1]*100}%`;
+          media.style.display=display;
+          let div = document.getElementById("ma_div");
+          div.appendChild(media);
+        }
+      }); // Je récupère la valeur de mon objectURL
+      // Ici un peu particulier la valeur est stockée dans PromiseValue de ma promises
+      // On ne peut pas y accèder directement je dois passer par un .then
+    }
+    // Si c'est une vidéo pareil
+    else if (medias[objet].type=="vid"){
+      medias[objet].props.then(function(props){
+        let src = props.source;
+        let media;
+        if (src !==undefined){
+          let media= document.createElement("VIDEO");
+          media.src=src;
+          media.id=props.id;
+          media.name=props.name;
+          media.style.left=`${props.position[0]*100}%`;
+          media.style.top=`${props.position[1]*100}%`;
+          media.setAttribute("controls","controls"); // Permet de contrôler la lecture de la vidéo
+          media.style.display=display;
+          let div = document.getElementById("ma_div");
+          div.appendChild(media);
+        }
+      });
+    }
+    // Si c'est un audio pareil
+    else if (medias[objet].type=="aud"){
+      medias[objet].props.then(function(props){
+        let src = props.source;
+        let media;
+        if (src !==undefined){
+          let media =document.createElement("AUDIO");
+          media.src=src;
+          media.id=props.id;
+          media.name=props.name;
+          media.style.left=`${props.position[0]*100}%`;
+          media.style.top=`${props.position[1]*100}%`;
+          media.style.display=display;
+          media.setAttribute("controls","controls"); // Contrôler la lecture de l'audio
+          let div =document.getElementById("ma_div");
+          div.appendChild(media);
+        }
+      });
+    }
+    // Si c'est un svg
+    else if (medias[objet].type=="svg"){
+      medias[objet].props.then(function(props){
+        document.getElementById("ma_div").insertAdjacentHTML("afterbegin", props.source); // Ajout de mon svg
+        // Tests pour ajout d'évennements sur les objets de mon svg
+        let svg = document.getElementById(props.id);
+        svg.style.width="500px";
+        svg.style.heigth="500px";
+        svg.style.left=`${props.position[0]*100}%`;
+        svg.style.top=`${props.position[1]*100}%`;
+        let media = document.getElementById(12);
+        media.style.display="none";
+        let bleu = document.getElementById(11);
+        bleu.addEventListener("click",bye_bleu);
+        media.addEventListener("click",bye_vert);
+      })
+    }
+    else{
+      alert("Couldn't display the media !");
+    }
   }
-  // Si c'est une vidéo pareil
-  else if (medias[objet].type=="vid"){
-    medias[objet].source.then(function(defs){
-      let src = defs;
-      let media;
-      if (src !==undefined){
-        let media= document.createElement("VIDEO");
-        media.src=src;
-        media.setAttribute("controls","controls"); // Permet de contrôler la lecture de la vidéo
-        media.style.display=display;
-        let div = document.getElementById("ma_div");
-        div.appendChild(media);
-      }
-    });
-  }
-  // Si c'est un audio pareil
-  else if (medias[objet].type=="aud"){
-    medias[objet].source.then(function(defs){
-      let src = defs;
-      let media;
-      if (src !==undefined){
-        let media =document.createElement("AUDIO");
-        media.src=src;
-        media.style.display=display;
-        media.setAttribute("controls","controls"); // Contrôler la lecture de l'audio
-        let div =document.getElementById("ma_div");
-        div.appendChild(media);
-      }
-    });
-  }
-  else{
-    alert("Couldn't display the media !");
-  }
-}
 }
 
 //Partie 2
@@ -75,13 +118,20 @@ const load_medias = (storyboard) => {
     if (dprops!==undefined){
       let media={};
       media.type="img";
-      media.source = fetch(dprops.path)
+      let img = new Image();
+      img.src=dprops.path;
+      media.props = fetch(dprops.path)
       .then(function(response){
         return response.blob();
       })
       .then(function(myBlob){
+        let props={};
         var objectURL =URL.createObjectURL(myBlob);
-        return objectURL;
+        props.source=objectURL;
+        props.name=storyboard[i].display.name;
+        props.id=storyboard[i].id;
+        props.position=storyboard[i].display.position;
+        return props;
       }); // Je vais chercher l'image via son chemin et stocke la promise de retour dans my_promise
       // Cette variable contient aussi la valeur de objectURL
       // Je l'ajoute dans la liste ainsi que son type
@@ -91,13 +141,18 @@ const load_medias = (storyboard) => {
     else if (storyboard[i].display.video !== undefined){
       let media={};
       media.type="vid";
-      media.source =fetch(storyboard[i].display.video.path)
+      media.props =fetch(storyboard[i].display.video.path)
       .then(function(response){
         return response.blob();
       })
       .then(function(myBlob){
+        let props={};
         var objectURL =URL.createObjectURL(myBlob);
-        return objectURL;
+        props.source=objectURL;
+        props.name=storyboard[i].display.name;
+        props.id=storyboard[i].id;
+        props.position=storyboard[i].display.position;
+        return props;
       });
       medias["vid"+i.toString()]=media;
     }
@@ -105,15 +160,37 @@ const load_medias = (storyboard) => {
     else if (storyboard[i].display.audio !== undefined){
       let media={};
       media.type="aud";
-      media.source =fetch(storyboard[i].display.audio.path)
+      media.props =fetch(storyboard[i].display.audio.path)
       .then(function(response){
         return response.blob();
       })
       .then(function(myBlob){
+        let props={};
         var objectURL =URL.createObjectURL(myBlob);
-        return objectURL;
+        props.source=objectURL;
+        props.name=storyboard[i].display.name;
+        props.id=storyboard[i].id;
+        props.position=storyboard[i].display.position;
+        return props;
       });
       medias["aud"+i.toString()]=media;
+    }
+    else if (storyboard[i].display.svg !== undefined){
+      let media={};
+      media.type="svg";
+      media.props =fetch(storyboard[i].display.svg.path)
+      .then(function(response){
+        return response.text();
+      })
+      .then(function(svg){
+        let props={};
+        props.source=svg;
+        props.name=storyboard[i].display.name;
+        props.id=storyboard[i].id;
+        props.position=storyboard[i].display.position;
+        return props;
+      });
+      medias["svg"+i.toString()]=media;
     }
     else {
       alert("Could not find the media source: image, video or audio.");
