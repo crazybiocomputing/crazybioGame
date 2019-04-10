@@ -5,7 +5,7 @@
     "description": "A locked office ...",
     "help": ["Hint #1","Hint #2","Hint #3"],
     "display": {
-      "width": 705,
+      "width": 725,
       "height": 426,
       "media": {
         "image": "assets/office3DBackground.png"
@@ -44,10 +44,21 @@
       "height":134,
       "position":[350,80],
       "media": {
+        "comment": "layers could be useful",
+        "layers": [
+          {
+            "image": "assets/ellipse_frame.png"
+          },
+          {
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Joseph_Fourier.jpg/220px-Joseph_Fourier.jpg",
+            "style": {
+              "clip-path":"ellipse(35px 46px at 40px 46px)"
+            }
+          }
+        ],
         "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Joseph_Fourier.jpg/220px-Joseph_Fourier.jpg",
         "style": {
-          "clip-path":"ellipse(35px 46px at 40px 46px)",
-          "border": "10px"
+          "clip-path":"ellipse(35px 46px at 40px 46px)"
         }
       }
     },
@@ -405,12 +416,13 @@
     "class": "sprite",
     "description": "Grid with Electricity ON...",
     "display": {
-      "width": 512,
+      "width": 400,
       "height": 468,
-      "position": [24,196],
-      "target": {
-        "data": ["P","M 0 20,52 0,58 74,6 98Z"]
+      "position": [24,30],
+      "media": {
+        "image": "assets/gridConnectors_simple.svg"
       }
+
     }
   }
 ]
