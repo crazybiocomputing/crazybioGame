@@ -35,8 +35,6 @@ const displayMedias = (medias) => {
           media.src =src;
           media.id=props.id;
           media.name=props.name;
-          media.style.left=`${props.position[0]*100}%`;
-          media.style.top=`${props.position[1]*100}%`;
           media.style.display=display;
           let div = document.getElementById("ma_div");
           div.appendChild(media);
@@ -55,8 +53,6 @@ const displayMedias = (medias) => {
           media.src=src;
           media.id=props.id;
           media.name=props.name;
-          media.style.left=`${props.position[0]*100}%`;
-          media.style.top=`${props.position[1]*100}%`;
           media.setAttribute("controls","controls"); // Permet de contrôler la lecture de la vidéo
           media.style.display=display;
           let div = document.getElementById("ma_div");
@@ -74,8 +70,6 @@ const displayMedias = (medias) => {
           media.src=src;
           media.id=props.id;
           media.name=props.name;
-          media.style.left=`${props.position[0]*100}%`;
-          media.style.top=`${props.position[1]*100}%`;
           media.style.display=display;
           media.setAttribute("controls","controls"); // Contrôler la lecture de l'audio
           let div =document.getElementById("ma_div");
@@ -89,13 +83,10 @@ const displayMedias = (medias) => {
         document.getElementById("ma_div").insertAdjacentHTML("afterbegin", props.source); // Ajout de mon svg
         // Tests pour ajout d'évennements sur les objets de mon svg
         let svg = document.getElementById(props.id);
-        svg.style.width="500px";
-        svg.style.heigth="500px";
-        svg.style.left=`${props.position[0]*100}%`;
-        svg.style.top=`${props.position[1]*100}%`;
         let media = document.getElementById(12);
         media.style.display="none";
         let bleu = document.getElementById(11);
+        // Quand clique sur rond bleu le vert disparaît et vice versa
         bleu.addEventListener("click",bye_bleu);
         media.addEventListener("click",bye_vert);
       })
@@ -109,7 +100,6 @@ const displayMedias = (medias) => {
 //Partie 2
 
 const load_medias = (storyboard) => {
-  let display="block";
   var medias={}; // Liste qui va contenir tous les promises
   let my_promise;
   for(let i=0; i<storyboard.length;i++){ // Pour chaque objet
@@ -125,7 +115,7 @@ const load_medias = (storyboard) => {
         return response.blob();
       })
       .then(function(myBlob){
-        let props={};
+        let props={}; // Pour récuperer l'id, le name et la position et autre sibesoin quand ajout de l'html
         var objectURL =URL.createObjectURL(myBlob);
         props.source=objectURL;
         props.name=storyboard[i].display.name;
@@ -146,7 +136,7 @@ const load_medias = (storyboard) => {
         return response.blob();
       })
       .then(function(myBlob){
-        let props={};
+        let props={};// Pour récuperer l'id, le name et la position et autre sibesoin quand ajout de l'html
         var objectURL =URL.createObjectURL(myBlob);
         props.source=objectURL;
         props.name=storyboard[i].display.name;
@@ -165,7 +155,7 @@ const load_medias = (storyboard) => {
         return response.blob();
       })
       .then(function(myBlob){
-        let props={};
+        let props={};// Pour récuperer l'id, le name et la position et autre sibesoin quand ajout de l'html
         var objectURL =URL.createObjectURL(myBlob);
         props.source=objectURL;
         props.name=storyboard[i].display.name;
@@ -183,7 +173,7 @@ const load_medias = (storyboard) => {
         return response.text();
       })
       .then(function(svg){
-        let props={};
+        let props={};// Pour récuperer l'id, le name et la position et autre sibesoin quand ajout de l'html
         props.source=svg;
         props.name=storyboard[i].display.name;
         props.id=storyboard[i].id;
