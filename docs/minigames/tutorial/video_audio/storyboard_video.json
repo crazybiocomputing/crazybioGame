@@ -10,7 +10,7 @@
                 "path": "assets/..."
             }
         },
-        "children":[20,10]
+        "children":[20,3,4,10]
     },
     {
         "id": 20,
@@ -66,6 +66,20 @@
                 "del_nodes":[21]
             }
         }
+    },
+    {
+        "id":4,
+        "class":"sprite",
+        "description":"Button Play",
+        "display":{
+            "width":100,
+            "heigth":100,
+            "position":100,
+            "graphics":{
+                "path":"assets/..."
+            }
+        },
+        "action":{}
     },
     {
        "id": 10,
