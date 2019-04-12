@@ -1,0 +1,91 @@
+[
+  {
+    "id": 1,
+    "class": "scene",
+    "description": "Scene with TV",
+    "display": {
+      "width": 600,
+      "height": 400,
+      "media": {
+        "image": "assets/tv.png"
+      }
+    },
+    "children": [2]
+  },
+  {
+    "id": 2,
+    "class": "switch",
+    "description": "TV programs",
+    "display": {},
+    "children": [5,6,7]
+  },
+  {
+    "id": 5,
+    "class": "sprite",
+    "description": "Cube",
+    "display": {
+      "width": 230,
+      "height": 242,
+      "position": [240,120],
+      "media": {
+        "image": "assets/cube.png",
+        "focus": ["P","M 58 0 L 113 24 L 110 89 L 50 122 L 0 90 L 0 26 Z"]
+      }
+    },
+    "action": {
+      "onclick": {
+        "del_nodes": [5],
+        "new_nodes": [6]
+      }
+    }
+  },
+  {
+    "id": 6,
+    "class": "sprite",
+    "description": "TV movie",
+    "display": {
+      "width": 370,
+      "height": 208,
+      "position": [112,71],
+      "media": {
+        "comment": "should be video:assets/movie.mp4",
+        "image": "assets/pin.png",
+        "style": {
+          "display": "none"
+        }
+      }
+    },
+    "action": {
+      "comment": "the event should be onend",
+      "onclick": {
+        "del_nodes": [6],
+        "new_nodes": [7]
+      }
+    }
+  },
+  {
+    "id": 7,
+    "class": "machine.lockNumerical",
+    "description": "TV lock channel",
+    "display": {
+      "position": [240,120],
+      "width": 120,
+      "height": 120,
+      "media": {
+        "image": "../../assets/lock_symbol.png",
+        "focus": ["C", 60, 60, 60],
+        "style": {
+          "display": "none"
+        }
+      }
+    },
+    "features": {
+      "exit": 3482,
+      "message": [
+        "<p>Congratulations!!, you win. Click on the button to go to the next game.</p>"
+      ],
+      "theme": "metal"
+    }
+  }
+
+]

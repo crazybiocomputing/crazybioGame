@@ -21,11 +21,11 @@
         "path": "intro"
       },
       {
-        "id": 34,
+        "id": 14,
         "path": "image"
       },
       {
-        "id": 35,
+        "id": 15,
         "path": "lock"
       }
     ]
@@ -44,17 +44,32 @@
         "path": "floor"
       },
       {
-        "id": 28,
+        "id": 25,
         "path": "dialog"
       },
       {
-        "id": 31,
+        "id": 28,
         "path": "unlock"
+      },
+      {
+        "id": 29,
+        "path": "media"
       }
     ]
   },
   {
     "level": 3,
+    "title": "Still ...",
+    "history": "[updated Apr 2018]",
+    "games": [
+      {
+        "id": 31,
+        "path": "media"
+      }
+    ]
+  },
+  {
+    "level": 4,
     "title": "Peur sur la Bioinformatique!!",
     "history": "[updated May 2017]",
     "games": [
