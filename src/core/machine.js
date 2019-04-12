@@ -72,7 +72,6 @@ class Machine extends Node {
       return this;
     }
     console.log('exit code ' + value + ' ' );
-    console.log(' '+value.slice(9));
     this.exitCode = (value.toString().includes('deferred')) ? CRAZYBIOGAME.deferred[value.slice(9)] : value;
 
     return this;
