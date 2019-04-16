@@ -283,8 +283,13 @@ class GameBuilder {
    * @author
    */
   process(json) {
-    return this;
-  }
+    process(json) {
+
+      this.graph.root = Game.create(json.filter( (node) => node.class === 'game' && node.id === 0)[0]);
+      this.graph.traverseFrom(this.graph.root,func);
+  
+      return this;
+    }
 
   /**
    * ???

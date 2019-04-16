@@ -41,11 +41,21 @@ class Game extends Composite {
   
   static create(props) {
     let _game = new Game(props.id,props.class,props.description)
+      .append('main')
       .children(props.children);
     _game.childNodes = [];
     return _game;
   }
   
+  append(htmlTag) {
+    
+    // let main = 
+    // Create inventory
+    // Create popup
+    //
+    this.element = document.createElement('div');
+    main.appendChild(this.element); //div.appendChild()
+  }
 } // End of class Game
 
 
