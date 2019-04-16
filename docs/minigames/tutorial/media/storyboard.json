@@ -48,8 +48,7 @@
       "height": 208,
       "position": [112,71],
       "media": {
-        "comment": "should be video:assets/movie.mp4",
-        "image": "assets/pin.png",
+        "video": "assets/movie.mp4",
         "style": {
           "display": "none"
         }
