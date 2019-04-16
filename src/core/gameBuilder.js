@@ -224,7 +224,7 @@ class GameBuilder {
    *
    * @author 
    */
-  preprocess() {
+  preprocess(json) {
     return this;
   }
 
@@ -233,7 +233,7 @@ class GameBuilder {
    *
    * @author 
    */
-  process() {
+  process(json) {
     return this;
   }
 
@@ -242,7 +242,7 @@ class GameBuilder {
    *
    * @author 
    */
-  postprocess() {
+  postprocess(json) {
 
   }
 
