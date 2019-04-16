@@ -225,6 +225,22 @@ class GameBuilder {
    * @author 
    */
   preprocess(json) {
+    // Step #1 : Get Assets  
+    let assets=[];
+    for(let i=0;i<json.length;i++) {
+      let node = json[i];
+      let media = node.display.media;
+      if ( media !== undefined) {
+        let asset = {
+          id: node.id,
+          path: media.image ||  media.svg || media.video || media.audio || "none",
+          type: Object.keys(media)[0]
+        }
+        assets.push(asset);
+      }
+    }
+    console.log(assets);
+    // Step #2 : Load Assets 
     return this;
   }
 
@@ -278,9 +294,10 @@ const newGame = (filename) => {
     .then( (data) => {
       // GameBuilder.create(data)
       let _gb = new GameBuilder();
-      _gb.preprocess()
-          .process()
-          .postprocess();
+      console.log(data);
+      _gb.preprocess(data)
+          .process(data)
+          .postprocess(data);
 
       return _gb;
     } );
