@@ -218,6 +218,34 @@ class GameBuilder {
     CRAZYBIOGAME.graph.traverse(scene_root,appendHTML);
 
   }
+
+  /**
+   * Preload assets
+   *
+   * @author 
+   */
+  preprocess() {
+    return this;
+  }
+
+  /**
+   * Build Scene Graph and DOM
+   *
+   * @author 
+   */
+  process() {
+    return this;
+  }
+
+  /**
+   * ???
+   *
+   * @author 
+   */
+  postprocess() {
+
+  }
+
 } // End of class GameBuilder
 
 
@@ -247,7 +275,15 @@ const newGame = (filename) => {
   // Main
   
   return getJSON(filename)
-    .then( (data) => GameBuilder.create(data) );
+    .then( (data) => {
+      // GameBuilder.create(data)
+      let _gb = new GameBuilder();
+      _gb.preprocess()
+          .process()
+          .postprocess();
+
+      return _gb;
+    } );
 
 };
 
