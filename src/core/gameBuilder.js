@@ -237,18 +237,17 @@ class GameBuilder {
       return types[filtered[0]];
     }
     let assets = [];
-    for(let i=0;i<json.length;i++) {
-      let node = json[i];
-      let media = node.display.media;
-      if ( media !== undefined) {
+    const getAssets = (obj) => {
+      if(obj.display.media !== undefined){
         let asset = {
-          id: node.id,
-          path: media.image ||  media.svg || media.video || media.audio || "none",
-          type: getTypes(Object.keys(media)) || "none"
+          id: obj.id,
+          path: obj.display.media.image ||  obj.display.media.svg || obj.display.media.video || obj.display.media.audio || "none",
+          type: getTypes(Object.keys(obj.display.media)) || "none"
         }
         assets.push(asset);
       }
     }
+    json.filter(getAssets);
     console.log(assets);
     // Step #2 : Load Assets
     const fetch_media=(media)=>{
@@ -283,11 +282,8 @@ class GameBuilder {
    * @author
    */
   process(json) {
-    process(json) {
-
       this.graph.root = Game.create(json.filter( (node) => node.class === 'game' && node.id === 0)[0]);
       this.graph.traverseFrom(this.graph.root,func);
-  
       return this;
     }
 
