@@ -58,7 +58,7 @@ const creators = {
   
 /**
  * Create a game graph and corresponding HTML5 elements
- * @class GameBuilder
+ * @class GameBuildergit pu
  *
  * @author Jean-Christophe Taveau
  */
@@ -226,7 +226,17 @@ class GameBuilder {
    */
   preprocess(json) {
     // Step #1 : Get Assets  
-    let assets=[];
+    const getTypes = (keys) => {
+        const types = {
+          image: "img",
+          audio: "audio",
+          svg: "svg",
+          video: "video"
+        }
+      let filtered = keys.filter(( keyword) => Object.keys(types).includes(keyword));
+      return types[filtered[0]];
+    }
+    let assets = [];
     for(let i=0;i<json.length;i++) {
       let node = json[i];
       let media = node.display.media;
@@ -234,7 +244,7 @@ class GameBuilder {
         let asset = {
           id: node.id,
           path: media.image ||  media.svg || media.video || media.audio || "none",
-          type: Object.keys(media)[0]
+          type: getTypes(Object.keys(media)) || "none"
         }
         assets.push(asset);
       }
