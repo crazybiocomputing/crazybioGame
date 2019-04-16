@@ -251,36 +251,29 @@ class GameBuilder {
     }
     console.log(assets);
     // Step #2 : Load Assets
-    let div_media=document.createElement("div");
-    div_media.id="media";
-    div_media.style.display="none";
-    document.body.appendChild(div_media);
-    for (let k=0;k<assets.length;k++){
-      let media=assets[k];
+    const fetch_media=(media)=>{
       if (media.type==="svg"){
-        fetch(media.path)
-        .then(function(response){
-          return response.text()
-        })
+        fetch(media.path).then(function(response){return response.text()})
         .then(function(svg){
-          div_media.insertAdjacentHTML("afterbegin",svg);
-        })
+          div_media.insertAdjacentHTML("afterbegin",svg);})
       }
       else{
-        fetch(media.path)
-        .then(function(response){
-          return response.blob();
-        })
+        fetch(media.path).then(function(response){return response.blob();})
         .then(function(myBlob){
           var objectURL = URL.createObjectURL(myBlob);
           let media_html=document.createElement(media.type);
           media_html.src=objectURL;
           media_html.id=media.id;
           media_html.dataset.src=media.path;
-          div_media.appendChild(media_html);
-        });
-      }
+          let div_media=document.getElementById("media");
+          div_media.appendChild(media_html);});
+        }
     }
+    let div_media=document.createElement("div");
+    div_media.id="media";
+    div_media.style.display="none";
+    document.body.appendChild(div_media);
+    assets.filter((obj) => fetch_media(obj));
     return this;
   }
 
