@@ -1,14 +1,15 @@
 #!/bin/bash
 
 cat ./core/node.js \
+./core/composite.js  \
+./core/sprite.js  \
 ./core/machine.js  \
 ./core/form.js  \
 ./core/lock.js  \
 ./core/item.js  \
-./core/composite.js  \
-./core/sprite.js  \
 ./core/deferred.js  \
 ./core/scene.js  \
+./core/switch.js  \
 ./core/graph.js  \
 ./core/game.js \
 ./core/events.js \
