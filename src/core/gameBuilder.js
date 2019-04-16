@@ -54,25 +54,25 @@ const creators = {
   "sprite": createSprite,
   "switch": createSwitch
 };
-  
-  
+
+
 /**
  * Create a game graph and corresponding HTML5 elements
  * @class GameBuildergit pu
  *
  * @author Jean-Christophe Taveau
  */
- 
+
 class GameBuilder {
 
   constructor() {
     this.graph = new Graph();
   }
-  
+
   static create(json) {
-  
+
     let _builder = new GameBuilder();
-    
+
     // Step #1: Create a root node `Game`
     // Check node ID=0
     let id0 = json.filter( (obj) => obj.id === 0);
@@ -98,18 +98,18 @@ class GameBuilder {
 
     return _builder;
   }
-  
+
   /**
    * Parse storyboard and create various HTML5 Elements
    *
    * @author: Jean-Christophe Taveau
    */
   parse(storyboard) {
-    
+
     const hasItems = () => {
       return storyboard.some( (obj) => obj.class === 'item');
     }
-    
+
     // Process storyboard
     const process = (storyboard) => {
       this.graph.nodeList = storyboard.map( (obj, index, arr) => {
@@ -125,7 +125,7 @@ class GameBuilder {
 
       this.graph.root = this.graph.nodeList.filter( (node) => node.className === 'game' && node.id === 0)[0];
       this.graph.traverseFrom(this.graph.root);
-      
+
       return this.graph;
     };
 
@@ -141,7 +141,7 @@ class GameBuilder {
 //      }
 
     }
-    
+
     /**** M  a  i  n ****/
     console.log('Parse/Build game');
     console.log(storyboard);
@@ -150,14 +150,14 @@ class GameBuilder {
     CRAZYBIOGAME.width = root_obj.display.width;
     CRAZYBIOGAME.height = root_obj.display.height;
     console.log(root_obj);
-    
+
     // Create HTML5 div for game
     let top = document.getElementById('main');
     let root = document.createElement('div');
     root.id = 'node_0';
     root.className = 'game';
     top.appendChild(root);
-     
+
     // Step #1- Preprocess
     if (hasItems()) {
       let inventory = document.createElement('aside');
@@ -199,7 +199,7 @@ class GameBuilder {
       console.log(items);
     }
     console.log(storyboard);
-    
+
     // Step #2 - Create the graph and nodes
     CRAZYBIOGAME.graph = process(storyboard);
 
@@ -222,10 +222,10 @@ class GameBuilder {
   /**
    * Preload assets
    *
-   * @author 
+   * @author
    */
   preprocess(json) {
-    // Step #1 : Get Assets  
+    // Step #1 : Get Assets
     const getTypes = (keys) => {
         const types = {
           image: "img",
@@ -250,14 +250,44 @@ class GameBuilder {
       }
     }
     console.log(assets);
-    // Step #2 : Load Assets 
+    // Step #2 : Load Assets
+    let div_media=document.createElement("div");
+    div_media.id="media";
+    div_media.style.display="none";
+    document.body.appendChild(div_media);
+    for (let k=0;k<assets.length;k++){
+      let media=assets[k];
+      if (media.type==="svg"){
+        fetch(media.path)
+        .then(function(response){
+          return response.text()
+        })
+        .then(function(svg){
+          div_media.insertAdjacentHTML("afterbegin",svg);
+        })
+      }
+      else{
+        fetch(media.path)
+        .then(function(response){
+          return response.blob();
+        })
+        .then(function(myBlob){
+          var objectURL = URL.createObjectURL(myBlob);
+          let media_html=document.createElement(media.type);
+          media_html.src=objectURL;
+          media_html.id=media.id;
+          media_html.dataset.src=media.path;
+          div_media.appendChild(media_html);
+        });
+      }
+    }
     return this;
   }
 
   /**
    * Build Scene Graph and DOM
    *
-   * @author 
+   * @author
    */
   process(json) {
     return this;
@@ -266,7 +296,7 @@ class GameBuilder {
   /**
    * ???
    *
-   * @author 
+   * @author
    */
   postprocess(json) {
 
@@ -278,7 +308,7 @@ class GameBuilder {
 /*
  * common.js??
  */
- 
+
 const newGame = (filename) => {
 
   /*
@@ -289,17 +319,17 @@ const newGame = (filename) => {
       method: 'GET',
       headers: new Headers({'Content-Type': 'application/json'}),
       mode: 'cors',
-      cache: 'default' 
+      cache: 'default'
       }
     )
     .then ( response => response.json() )
     .catch ( error => {
-      alert(`Something went wrong - ${error}`) 
+      alert(`Something went wrong - ${error}`)
     })
   };
 
   // Main
-  
+
   return getJSON(filename)
     .then( (data) => {
       // GameBuilder.create(data)
@@ -313,6 +343,3 @@ const newGame = (filename) => {
     } );
 
 };
-
-
-
