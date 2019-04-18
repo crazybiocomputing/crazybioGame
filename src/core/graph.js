@@ -41,9 +41,10 @@ class Graph {
   /**
    * 
    */
-  traverseFrom(a_node) {
+  traverseFrom(a_node)   {
     let children;
     let ancestor;
+    console.log(a_node);
     if (a_node.hasChildren()) {
       // ???
       if (a_node.className.includes('scene') ) {
@@ -72,6 +73,8 @@ class Graph {
     for (let id of children) {
       console.log(`id ${id} <-- ${ancestor.id}`);
       let nodeChild = this.nodeList.filter( (node) => node.id === id)[0];
+      console.log("TEST1");
+      console.log(nodeChild);
       ancestor.childNodes.push(nodeChild);
       nodeChild.ancestor = ancestor;
       this.traverseFrom(nodeChild);
