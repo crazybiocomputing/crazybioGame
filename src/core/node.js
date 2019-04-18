@@ -91,7 +91,7 @@ class Node {
   append(htmlTag) {
     // Append the media
     this.element = document.createElement(htmlTag);
-    this.element.id = `node_${this.id}`;
+    this.element.id = this.id;
     this.element.className = this.className;
     
     return this;
@@ -131,7 +131,14 @@ class Node {
     // Media: Image, video, audio?, etc.
     let dprops = displayProps.graphics || displayProps.media;
     if (dprops !== undefined ) {
-      this.displayMedia(dprops);
+      console.log(this.id);
+
+      //Where the image must be searched and append: NOT WORKING RIGHT NOW
+        document.onload = function(){
+        let test = document.getElementById(`node_${this.id}`);
+        console.log(test);
+      };
+      
     }
     // Text
     else if (displayProps.text !== undefined) {
