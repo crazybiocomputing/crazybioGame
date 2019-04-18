@@ -41,21 +41,36 @@ class Game extends Composite {
   
   static create(props) {
     let _game = new Game(props.id,props.class,props.description)
-      .append('main')
-      .children(props.children);
+    .append()
+    .children(props.children);
     _game.childNodes = [];
     return _game;
   }
   
-  append(htmlTag) {
+  append(){
+
+    let main = document.getElementById("node_0");
     
-    // let main = 
-    // Create inventory
-    // Create popup
-    //
-    this.element = document.createElement('div');
-    main.appendChild(this.element); //div.appendChild()
+    //Inventory
+    let inventory = document.createElement('aside');
+    inventory.appendChild(document.createElement('ul'));
+    main.appendChild(inventory);
+    
+    //Popup
+    let popup = document.createElement('div');
+    popup.className = "modal";
+    popup.id = 'popup';
+    main.appendChild(popup);
+
+
+
+    return this;
+
+      
+
   }
+
+
 } // End of class Game
 
 
