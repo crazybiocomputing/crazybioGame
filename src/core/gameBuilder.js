@@ -237,42 +237,50 @@ class GameBuilder {
       return types[filtered[0]];
     }
     let assets = [];
-    const getAssets = (obj) => {
-      if(obj.display.media !== undefined){
+    for(let i=0;i<json.length;i++) {
+      let node = json[i];
+      let media = node.display.media;
+      if ( media !== undefined) {
         let asset = {
-          id: obj.id,
-          path: obj.display.media.image ||  obj.display.media.svg || obj.display.media.video || obj.display.media.audio || "none",
-          type: getTypes(Object.keys(obj.display.media)) || "none"
+          id: node.id,
+          path: media.image ||  media.svg || media.video || media.audio || "none",
+          type: getTypes(Object.keys(media)) || "none"
         }
         assets.push(asset);
       }
     }
-    json.filter(getAssets);
     console.log(assets);
     // Step #2 : Load Assets
-    const fetch_media=(media)=>{
-      if (media.type==="svg"){
-        fetch(media.path).then(function(response){return response.text()})
-        .then(function(svg){
-          div_media.insertAdjacentHTML("afterbegin",svg);})
-      }
-      else{
-        fetch(media.path).then(function(response){return response.blob();})
-        .then(function(myBlob){
-          var objectURL = URL.createObjectURL(myBlob);
-          let media_html=document.createElement(media.type);
-          media_html.src=objectURL;
-          media_html.id=media.id;
-          media_html.dataset.src=media.path;
-          let div_media=document.getElementById("media");
-          div_media.appendChild(media_html);});
-        }
-    }
     let div_media=document.createElement("div");
     div_media.id="media";
     div_media.style.display="none";
     document.body.appendChild(div_media);
-    assets.filter((obj) => fetch_media(obj));
+    for (let k=0;k<assets.length;k++){
+      let media=assets[k];
+      if (media.type==="svg"){
+        fetch(media.path)
+        .then(function(response){
+          return response.text()
+        })
+        .then(function(svg){
+          div_media.insertAdjacentHTML("afterbegin",svg);
+        })
+      }
+      else{
+        fetch(media.path)
+        .then(function(response){
+          return response.blob();
+        })
+        .then(function(myBlob){
+          var objectURL = URL.createObjectURL(myBlob);
+          let media_html=document.createElement(media.type);
+          media_html.src=objectURL;
+          media_html.id=`node_${media.id}`;
+          media_html.dataset.src=media.path;
+          div_media.appendChild(media_html);
+        });
+      }
+    }
     return this;
   }
 
@@ -282,10 +290,53 @@ class GameBuilder {
    * @author
    */
   process(json) {
-      this.graph.root = Game.create(json.filter( (node) => node.class === 'game' && node.id === 0)[0]);
-      this.graph.traverseFrom(this.graph.root,func);
-      return this;
+
+    //Fonction pour append le HTML
+    const appendHTML = (node) => {
+      console.log('appendHTML');
+      console.log(node);
+/*      if (node.className === 'item') {
+        document.querySelector('aside ul').appendChild(node.getHTML());
+      }
+      else {
+*/
+        node.ancestor.getHTML().appendChild(node.getHTML());
+//      }
+
     }
+
+    //Create Root
+    let top = document.getElementById('main');
+    top.id = 'node_0';
+    top.className = 'game'; 
+    let props = {id:0,class:'game',description:'Game Root',children:[1]};
+    json.push(props);
+
+    //Create the NodeList = List with all the nodes
+    this.graph.nodeList = json.map( (obj, index, arr) => {
+      console.log(obj);
+      let func = creators[obj.class];
+      if (func !== undefined) {
+        return func(obj);
+      }
+      return {};
+    });
+    console.log('nodeList');
+    console.log(this.graph.nodeList);
+
+
+    //Create the Graph
+    this.graph.root = Game.create(json.filter( (node) => node.id === 0)[0]);
+    console.log(this.graph.root);
+    this.graph.traverseFrom(this.graph.root,json);
+    console.log(this.graph);
+
+    //Create the HTML
+    let scene_root = this.graph.root;
+    this.graph.traverse(scene_root,appendHTML); 
+    
+    return this;
+  }
 
   /**
    * ???
