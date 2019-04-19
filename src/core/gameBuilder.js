@@ -277,11 +277,28 @@ class GameBuilder {
           media_html.src=objectURL;
           media_html.id=`node_${media.id}`;
           media_html.dataset.src=media.path;
-          div_media.appendChild(media_html);
+          media_html.onload=function(){
+            Object.size=function(obj) {
+            var size = 0, key;
+            for (key in obj) {
+                if (obj.hasOwnProperty(key)) size++;
+            }
+            return size;};
+            let taille=Object.size(assets)+2;
+            let div_media=document.getElementById("media");
+            div_media.appendChild(this);
+            console.log(`ajouté ${media.id}`);
+            let t_div = div_media.childNodes;
+            console.log(t_div.length);
+            if(t_div.length==taille){
+              console.log("tout chargé");
+              this.process();
+            }
+          };
         });
       }
     }
-    return this;
+    return [this,0];
   }
 
   /**
@@ -290,7 +307,11 @@ class GameBuilder {
    * @author
    */
   process(json) {
-
+    console.log("coucou");
+    let media = document.getElementById("media");
+    media.style.display="block";
+    let img = document.getElementById("node_1");
+    console.log(img);
     //Fonction pour append le HTML
     const appendHTML = (node) => {
       console.log('appendHTML');
@@ -308,7 +329,7 @@ class GameBuilder {
     //Create Root
     let top = document.getElementById('main');
     top.id = 'node_0';
-    top.className = 'game'; 
+    top.className = 'game';
     let props = {id:0,class:'game',description:'Game Root',children:[1]};
     json.push(props);
 
@@ -333,8 +354,8 @@ class GameBuilder {
 
     //Create the HTML
     let scene_root = this.graph.root;
-    this.graph.traverse(scene_root,appendHTML); 
-    
+    this.graph.traverse(scene_root,appendHTML);
+
     return this;
   }
 
@@ -380,10 +401,7 @@ const newGame = (filename) => {
       // GameBuilder.create(data)
       let _gb = new GameBuilder();
       console.log(data);
-      _gb.preprocess(data)
-          .process(data)
-          .postprocess(data);
-
+      _gb.preprocess(data);
       return _gb;
     } );
 
