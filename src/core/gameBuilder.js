@@ -238,7 +238,6 @@ class GameBuilder {
           id: obj.id,
           path: obj.display.media.image ||  obj.display.media.svg || obj.display.media.video || obj.display.media.audio || "none",
           type: getTypes(Object.keys(obj.display.media)) || "none",
-          display: (obj.display.media.style !== undefined)?obj.display.media.style.display : "block"
         }
         assets.push(asset)
       }
@@ -276,8 +275,6 @@ class GameBuilder {
         })
         .then(function(svg){
           div_media.insertAdjacentHTML("afterbegin",svg);
-          let my_svg = document.getElementById(media.id);
-          my_svg.style.display = media.display;
           console.log(`ajouté ${media.id}`);
           nb_obj=test_loading_assets(nb_obj,taille);
         })
@@ -293,7 +290,6 @@ class GameBuilder {
           media_html.src=objectURL;
           media_html.id=media.id;
           media_html.dataset.src=media.path;
-          media_html.style.display = media.display;
           if (media.type=="img"){
             media_html.onload=function(){
               let div_media=document.getElementById("media");
@@ -366,6 +362,7 @@ class GameBuilder {
     //Create the HTML
     let scene_root = CRAZYBIOGAME.graph.root;
     CRAZYBIOGAME.graph.traverse(scene_root,appendHTML);
+    //this.graph.travers(scene_root,appendHTML);
     let mediv =document.getElementById("media");
     mediv.remove();
 
@@ -416,4 +413,4 @@ const newGame = (filename) => {
     _gb.preprocess(data);
     return _gb;
   } );
-é };
+};
