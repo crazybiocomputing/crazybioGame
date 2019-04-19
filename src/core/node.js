@@ -132,14 +132,13 @@ class Node {
     let dprops = displayProps.graphics || displayProps.media;
     if (dprops !== undefined ) {
       console.log(this.id);
-
       //Where the image must be searched and append: NOT WORKING RIGHT NOW
-        document.onload = function(){
-        let test = document.getElementById(`node_${this.id}`);
-        console.log(test);
-      };
+      let the_media = document.getElementById(`node_${this.id}`);
+      console.log(the_media);
+      this.element.appendChild(the_media);
+      }
       
-    }
+    
     // Text
     else if (displayProps.text !== undefined) {
       this.displayText(displayProps.text);
