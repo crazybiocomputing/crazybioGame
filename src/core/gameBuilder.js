@@ -339,6 +339,9 @@ class GameBuilder {
     top.className = 'game';
     let props = {id:0,class:'game_root',description:'Game Root',children:[1]};
     json.push(props);
+    let root_obj = json.filter( obj => obj.class === 'scene')[0];
+    CRAZYBIOGAME.width = root_obj.display.width;
+    CRAZYBIOGAME.height = root_obj.display.height;
 
     //Create the NodeList = List with all the nodes
     this.graph.nodeList = json.map( (obj, index, arr) => {
@@ -357,11 +360,12 @@ class GameBuilder {
     this.graph.root = Game.create(json.filter( (node) => node.id === 0)[0]);
     console.log(this.graph.root);
     this.graph.traverseFrom(this.graph.root,json);
+    CRAZYBIOGAME.graph=this.graph;
     console.log(this.graph);
 
     //Create the HTML
-    let scene_root = this.graph.root;
-    this.graph.traverse(scene_root,appendHTML);
+    let scene_root = CRAZYBIOGAME.graph.root;
+    CRAZYBIOGAME.graph.traverse(scene_root,appendHTML);
     let mediv =document.getElementById("media");
     mediv.remove();
 
