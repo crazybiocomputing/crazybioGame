@@ -237,7 +237,8 @@ class GameBuilder {
         let asset={
           id: obj.id,
           path: obj.display.media.image ||  obj.display.media.svg || obj.display.media.video || obj.display.media.audio || "none",
-          type: getTypes(Object.keys(obj.display.media)) || "none"
+          type: getTypes(Object.keys(obj.display.media)) || "none",
+          display: (obj.display.media.style !== undefined)?obj.display.media.style.display : "block"
         }
         assets.push(asset)
       }
@@ -247,7 +248,6 @@ class GameBuilder {
     // Step #2 : Load Assets
     let div_media=document.createElement("div");
     div_media.id="media";
-    div_media.style.display="none";
     document.body.appendChild(div_media);
     Object.size=function(obj) {
       var size = 0, key;
@@ -276,6 +276,8 @@ class GameBuilder {
         })
         .then(function(svg){
           div_media.insertAdjacentHTML("afterbegin",svg);
+          let my_svg = document.getElementById(media.id);
+          my_svg.style.display = media.display;
           console.log(`ajouté ${media.id}`);
           nb_obj=test_loading_assets(nb_obj,taille);
         })
@@ -291,6 +293,7 @@ class GameBuilder {
           media_html.src=objectURL;
           media_html.id=media.id;
           media_html.dataset.src=media.path;
+          media_html.style.display = media.display;
           if (media.type=="img"){
             media_html.onload=function(){
               let div_media=document.getElementById("media");
