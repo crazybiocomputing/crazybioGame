@@ -237,172 +237,171 @@ class GameBuilder {
       return types[filtered[0]];
     }
     let assets = [];
-    for(let i=0;i<json.length;i++) {
-      let node = json[i];
-      let media = node.display.media;
-      if ( media !== undefined) {
-        let asset = {
-          id: node.id,
-          path: media.image ||  media.svg || media.video || media.audio || "none",
-          type: getTypes(Object.keys(media)) || "none"
+    const getAssets = (obj) => {
+      if(obj.display.media !== undefined){
+        let asset={
+          id: obj.id,
+          path: obj.display.media.image ||  obj.display.media.svg || obj.display.media.video || obj.display.media.audio || "none",
+          type: getTypes(Object.keys(obj.display.media)) || "none"
         }
-        assets.push(asset);
+        assets.push(asset)
       }
     }
-    console.log(assets);
-    // Step #2 : Load Assets
-    let div_media=document.createElement("div");
-    div_media.id="media";
-    div_media.style.display="none";
-    document.body.appendChild(div_media);
-    for (let k=0;k<assets.length;k++){
-      let media=assets[k];
-      if (media.type==="svg"){
-        fetch(media.path)
-        .then(function(response){
-          return response.text()
-        })
-        .then(function(svg){
-          div_media.insertAdjacentHTML("afterbegin",svg);
-        })
-      }
-      else{
-        fetch(media.path)
-        .then(function(response){
-          return response.blob();
-        })
-        .then(function(myBlob){
-          var objectURL = URL.createObjectURL(myBlob);
-          let media_html=document.createElement(media.type);
-          media_html.src=objectURL;
-          media_html.id=`node_${media.id}`;
-          media_html.dataset.src=media.path;
-          media_html.onload=function(){
-            Object.size=function(obj) {
-            var size = 0, key;
-            for (key in obj) {
-                if (obj.hasOwnProperty(key)) size++;
-            }
-            return size;};
-            let taille=Object.size(assets)+2;
-            let div_media=document.getElementById("media");
-            div_media.appendChild(this);
-            console.log(`ajouté ${media.id}`);
-            let t_div = div_media.childNodes;
-            console.log(t_div.length);
-            if(t_div.length==taille){
-              console.log("tout chargé");
-              this.process();
-            }
-          };
-        });
-      }
-    }
-    return [this,0];
-  }
+   json.filter(getAssets);
+   console.log(assets);
+   // Step #2 : Load Assets
+   let div_media=document.createElement("div");
+   div_media.id="media";
+   div_media.style.display="none";
+   document.body.appendChild(div_media);
+   for (let k=0;k<assets.length;k++){
+     let media=assets[k];
+     if (media.type==="svg"){
+       fetch(media.path)
+       .then(function(response){
+         return response.text()
+       })
+       .then(function(svg){
+         div_media.insertAdjacentHTML("afterbegin",svg);
+       })
+     }
+     else{
+       fetch(media.path)
+       .then(function(response){
+         return response.blob();
+       })
+       .then(function(myBlob){
+         var objectURL = URL.createObjectURL(myBlob);
+         let media_html=document.createElement(media.type);
+         media_html.src=objectURL;
+         media_html.id=`node_${media.id}`;
+         media_html.dataset.src=media.path;
+         media_html.onload=function(){
+           Object.size=function(obj) {
+             var size = 0, key;
+             for (key in obj) {
+               if (obj.hasOwnProperty(key)) size++;
+             }
+             return size;};
+             let taille=Object.size(assets)+2;
+             let div_media=document.getElementById("media");
+             div_media.appendChild(this);
+             console.log(`ajouté ${media.id}`);
+             let t_div = div_media.childNodes;
+             console.log(t_div.length);
+             if(t_div.length==taille){
+               console.log("tout chargé");
+               this.process();
+             }
+           };
+         });
+       }
+     }
+     return [this,0];
+   }
 
-  /**
+   /**
    * Build Scene Graph and DOM
    *
    * @author
    */
-  process(json) {
-    console.log("coucou");
-    let media = document.getElementById("media");
-    media.style.display="block";
-    let img = document.getElementById("node_1");
-    console.log(img);
-    //Fonction pour append le HTML
-    const appendHTML = (node) => {
-      console.log('appendHTML');
-      console.log(node);
-/*      if (node.className === 'item') {
-        document.querySelector('aside ul').appendChild(node.getHTML());
-      }
-      else {
-*/
-        node.ancestor.getHTML().appendChild(node.getHTML());
-//      }
+   process(json) {
+     console.log("coucou");
+     let media = document.getElementById("media");
+     media.style.display="block";
+     let img = document.getElementById("node_1");
+     console.log(img);
+     //Fonction pour append le HTML
+     const appendHTML = (node) => {
+       console.log('appendHTML');
+       console.log(node);
+       /*      if (node.className === 'item') {
+       document.querySelector('aside ul').appendChild(node.getHTML());
+     }
+     else {
+     */
+     node.ancestor.getHTML().appendChild(node.getHTML());
+     //      }
 
-    }
+   }
 
-    //Create Root
-    let top = document.getElementById('main');
-    top.id = 'node_0';
-    top.className = 'game';
-    let props = {id:0,class:'game',description:'Game Root',children:[1]};
-    json.push(props);
+   //Create Root
+   let top = document.getElementById('main');
+   top.id = 'node_0';
+   top.className = 'game';
+   let props = {id:0,class:'game',description:'Game Root',children:[1]};
+   json.push(props);
 
-    //Create the NodeList = List with all the nodes
-    this.graph.nodeList = json.map( (obj, index, arr) => {
-      console.log(obj);
-      let func = creators[obj.class];
-      if (func !== undefined) {
-        return func(obj);
-      }
-      return {};
-    });
-    console.log('nodeList');
-    console.log(this.graph.nodeList);
+   //Create the NodeList = List with all the nodes
+   this.graph.nodeList = json.map( (obj, index, arr) => {
+     console.log(obj);
+     let func = creators[obj.class];
+     if (func !== undefined) {
+       return func(obj);
+     }
+     return {};
+   });
+   console.log('nodeList');
+   console.log(this.graph.nodeList);
 
 
-    //Create the Graph
-    this.graph.root = Game.create(json.filter( (node) => node.id === 0)[0]);
-    console.log(this.graph.root);
-    this.graph.traverseFrom(this.graph.root,json);
-    console.log(this.graph);
+   //Create the Graph
+   this.graph.root = Game.create(json.filter( (node) => node.id === 0)[0]);
+   console.log(this.graph.root);
+   this.graph.traverseFrom(this.graph.root,json);
+   console.log(this.graph);
 
-    //Create the HTML
-    let scene_root = this.graph.root;
-    this.graph.traverse(scene_root,appendHTML);
+   //Create the HTML
+   let scene_root = this.graph.root;
+   this.graph.traverse(scene_root,appendHTML);
 
-    return this;
-  }
+   return this;
+ }
 
-  /**
-   * ???
-   *
-   * @author
-   */
-  postprocess(json) {
+ /**
+ * ???
+ *
+ * @author
+ */
+ postprocess(json) {
 
-  }
+ }
 
 } // End of class GameBuilder
 
 
 /*
- * common.js??
- */
+* common.js??
+*/
 
 const newGame = (filename) => {
 
   /*
-   * Get JSON with fetch(..)
-   */
+  * Get JSON with fetch(..)
+  */
   const getJSON = (url) => {
     return fetch(url, {
       method: 'GET',
       headers: new Headers({'Content-Type': 'application/json'}),
       mode: 'cors',
       cache: 'default'
-      }
-    )
-    .then ( response => response.json() )
-    .catch ( error => {
-      alert(`Something went wrong - ${error}`)
-    })
-  };
+    }
+  )
+  .then ( response => response.json() )
+  .catch ( error => {
+    alert(`Something went wrong - ${error}`)
+  })
+};
 
-  // Main
+// Main
 
-  return getJSON(filename)
-    .then( (data) => {
-      // GameBuilder.create(data)
-      let _gb = new GameBuilder();
-      console.log(data);
-      _gb.preprocess(data);
-      return _gb;
-    } );
+return getJSON(filename)
+.then( (data) => {
+  // GameBuilder.create(data)
+  let _gb = new GameBuilder();
+  console.log(data);
+  _gb.preprocess(data);
+  return _gb;
+} );
 
 };
