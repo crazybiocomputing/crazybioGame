@@ -225,6 +225,7 @@ class GameBuilder {
    * @author
    */
   preprocess(json) {
+    let _gb=this;
     // Step #1 : Get Assets
     const getTypes = (keys) => {
         const types = {
@@ -293,7 +294,7 @@ class GameBuilder {
                nb_obj++;
                if(nb_obj==taille){
                  console.log("tout chargé");
-                 this.process();
+                 _gb.process(json);
                }
              };
          }
@@ -305,14 +306,13 @@ class GameBuilder {
                nb_obj++;
                if(nb_obj==taille){
                  console.log("Tout à été chargé");
-                 this.process();
+                 _gb.process(json);
                }
              }
            }
          })
        }
      }
-     return [this,0];
    }
 
    /**
