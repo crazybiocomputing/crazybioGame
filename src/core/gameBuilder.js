@@ -344,7 +344,7 @@ class GameBuilder {
    let top = document.getElementById('main');
    top.id = 'node_0';
    top.className = 'game';
-   let props = {id:0,class:'game',description:'Game Root',children:[1]};
+   let props = {id:0,class:'game_root',description:'Game Root',children:[1]};
    json.push(props);
 
    //Create the NodeList = List with all the nodes
@@ -369,6 +369,8 @@ class GameBuilder {
    //Create the HTML
    let scene_root = this.graph.root;
    this.graph.traverse(scene_root,appendHTML);
+   let mediv =document.getElementById("media");
+   mediv.remove();
 
    return this;
  }
