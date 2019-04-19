@@ -254,6 +254,15 @@ class GameBuilder {
    div_media.id="media";
    div_media.style.display="none";
    document.body.appendChild(div_media);
+   Object.size=function(obj) {
+     var size = 0, key;
+     for (key in obj) {
+       if (obj.hasOwnProperty(key)) size++;
+     }
+     return size;
+   };
+   let nb_obj=0;
+   let taille=Object.size(assets);
    for (let k=0;k<assets.length;k++){
      let media=assets[k];
      if (media.type==="svg"){
@@ -276,25 +285,31 @@ class GameBuilder {
          media_html.src=objectURL;
          media_html.id=`node_${media.id}`;
          media_html.dataset.src=media.path;
-         media_html.onload=function(){
-           Object.size=function(obj) {
-             var size = 0, key;
-             for (key in obj) {
-               if (obj.hasOwnProperty(key)) size++;
+         if (media.type=="img"){
+           media_html.onload=function(){
+               let div_media=document.getElementById("media");
+               div_media.appendChild(this);
+               console.log(`ajouté ${media_html.id}`);
+               nb_obj++;
+               if(nb_obj==taille){
+                 console.log("tout chargé");
+                 this.process();
+               }
+             };
+         }
+         else {
+           media_html.onloadeddata=function(){
+               let div_media=document.getElementById("media");
+               div_media.appendChild(this);
+               console.log(`ajouté ${media_html.id}`);
+               nb_obj++;
+               if(nb_obj==taille){
+                 console.log("Tout à été chargé");
+                 this.process();
+               }
              }
-             return size;};
-             let taille=Object.size(assets)+2;
-             let div_media=document.getElementById("media");
-             div_media.appendChild(this);
-             console.log(`ajouté ${media.id}`);
-             let t_div = div_media.childNodes;
-             console.log(t_div.length);
-             if(t_div.length==taille){
-               console.log("tout chargé");
-               this.process();
-             }
-           };
-         });
+           }
+         })
        }
      }
      return [this,0];
