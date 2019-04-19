@@ -1,26 +1,26 @@
 /*
- *  crazybioGame: CrazyBioComputing Game Engine
- *  Copyright (C) 2015-2018  Jean-Christophe Taveau.
- *
- *  This file is part of crazybioGame
- *
- * This program is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with crazybioGame.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- * Authors:
- * Jean-Christophe Taveau
- */
+*  crazybioGame: CrazyBioComputing Game Engine
+*  Copyright (C) 2015-2018  Jean-Christophe Taveau.
+*
+*  This file is part of crazybioGame
+*
+* This program is free software: you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+*  You should have received a copy of the GNU General Public License
+*  along with crazybioGame.  If not, see <http://www.gnu.org/licenses/>.
+*
+*
+* Authors:
+* Jean-Christophe Taveau
+*/
 
 
 'use strict';
@@ -57,11 +57,11 @@ const creators = {
 
 
 /**
- * Create a game graph and corresponding HTML5 elements
- * @class GameBuildergit pu
- *
- * @author Jean-Christophe Taveau
- */
+* Create a game graph and corresponding HTML5 elements
+* @class GameBuildergit pu
+*
+* @author Jean-Christophe Taveau
+*/
 
 class GameBuilder {
 
@@ -100,10 +100,10 @@ class GameBuilder {
   }
 
   /**
-   * Parse storyboard and create various HTML5 Elements
-   *
-   * @author: Jean-Christophe Taveau
-   */
+  * Parse storyboard and create various HTML5 Elements
+  *
+  * @author: Jean-Christophe Taveau
+  */
   parse(storyboard) {
 
     const hasItems = () => {
@@ -132,13 +132,7 @@ class GameBuilder {
     const appendHTML = (node) => {
       console.log('appendHTML');
       console.log(node);
-/*      if (node.className === 'item') {
-        document.querySelector('aside ul').appendChild(node.getHTML());
-      }
-      else {
-*/
-        node.ancestor.getHTML().appendChild(node.getHTML());
-//      }
+      node.ancestor.getHTML().appendChild(node.getHTML());
 
     }
 
@@ -169,16 +163,16 @@ class GameBuilder {
       let sprites = storyboard.filter(obj => obj.id !== 0 && obj.class !== 'item');
       let items = storyboard.filter( obj => obj.class === 'item');
       items.forEach( item => {
-          let modifier = item.id;
-          // An item is a composite of a sprite and a invertoriable object
-          // Create Sprite as child of Item
-          storyboard.push({
-            id : 1000 + item.id,
-            class : 'sprite',
-            description: item.description,
-            display: item.display,
-            action: item.action
-          });
+        let modifier = item.id;
+        // An item is a composite of a sprite and a invertoriable object
+        // Create Sprite as child of Item
+        storyboard.push({
+          id : 1000 + item.id,
+          class : 'sprite',
+          description: item.description,
+          display: item.display,
+          action: item.action
+        });
 
         for (let sprite of sprites) {
           // Update item props
@@ -216,24 +210,24 @@ class GameBuilder {
     let scene_root = CRAZYBIOGAME.graph.root;
     root.style.maxWidth = `${CRAZYBIOGAME.width}px`;
     CRAZYBIOGAME.graph.traverse(scene_root,appendHTML);
-
   }
 
+
   /**
-   * Preload assets
-   *
-   * @author
-   */
+  * Preload assets
+  *
+  * @author
+  */
   preprocess(json) {
     let _gb=this;
     // Step #1 : Get Assets
     const getTypes = (keys) => {
-        const types = {
-          image: "img",
-          audio: "audio",
-          svg: "svg",
-          video: "video"
-        }
+      const types = {
+        image: "img",
+        audio: "audio",
+        svg: "svg",
+        video: "video"
+      }
       let filtered = keys.filter(( keyword) => Object.keys(types).includes(keyword));
       return types[filtered[0]];
     }
@@ -248,141 +242,137 @@ class GameBuilder {
         assets.push(asset)
       }
     }
-   json.filter(getAssets);
-   console.log(assets);
-   // Step #2 : Load Assets
-   let div_media=document.createElement("div");
-   div_media.id="media";
-   div_media.style.display="none";
-   document.body.appendChild(div_media);
-   Object.size=function(obj) {
-     var size = 0, key;
-     for (key in obj) {
-       if (obj.hasOwnProperty(key)) size++;
-     }
-     return size;
-   };
-   let nb_obj=0;
-   let taille=Object.size(assets);
-   for (let k=0;k<assets.length;k++){
-     let media=assets[k];
-     if (media.type==="svg"){
-       fetch(media.path)
-       .then(function(response){
-         return response.text()
-       })
-       .then(function(svg){
-         div_media.insertAdjacentHTML("afterbegin",svg);
-       })
-     }
-     else{
-       fetch(media.path)
-       .then(function(response){
-         return response.blob();
-       })
-       .then(function(myBlob){
-         var objectURL = URL.createObjectURL(myBlob);
-         let media_html=document.createElement(media.type);
-         media_html.src=objectURL;
-         media_html.id=`node_${media.id}`;
-         media_html.dataset.src=media.path;
-         if (media.type=="img"){
-           media_html.onload=function(){
-               let div_media=document.getElementById("media");
-               div_media.appendChild(this);
-               console.log(`ajouté ${media_html.id}`);
-               nb_obj++;
-               if(nb_obj==taille){
-                 console.log("tout chargé");
-                 _gb.process(json);
-               }
-             };
-         }
-         else {
-           media_html.onloadeddata=function(){
-               let div_media=document.getElementById("media");
-               div_media.appendChild(this);
-               console.log(`ajouté ${media_html.id}`);
-               nb_obj++;
-               if(nb_obj==taille){
-                 console.log("Tout à été chargé");
-                 _gb.process(json);
-               }
-             }
-           }
-         })
-       }
-     }
-   }
+    json.filter(getAssets);
+    console.log(assets);
+    // Step #2 : Load Assets
+    let div_media=document.createElement("div");
+    div_media.id="media";
+    div_media.style.display="none";
+    document.body.appendChild(div_media);
+    Object.size=function(obj) {
+      var size = 0, key;
+      for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+      }
+      return size;
+    };
+    let nb_obj=0;
+    let taille=Object.size(assets);
+    function test_loading_assets(nb_obj,tot){
+      nb_obj++;
+      console.log(nb_obj);
+      if(nb_obj==taille){
+        console.log("Everything is loaded");
+        _gb.process(json);
+      }
+      return nb_obj;
+    }
+    for (let k=0;k<assets.length;k++){
+      let media=assets[k];
+      if (media.type==="svg"){
+        fetch(media.path)
+        .then(function(response){
+          return response.text()
+        })
+        .then(function(svg){
+          div_media.insertAdjacentHTML("afterbegin",svg);
+          console.log(`ajouté ${media.id}`);
+          nb_obj=test_loading_assets(nb_obj,taille);
+        })
+      }
+      else if (media.type==="video" || media.type==="img" || media.type==="audio"){
+        fetch(media.path)
+        .then(function(response){
+          return response.blob();
+        })
+        .then(function(myBlob){
+          var objectURL = URL.createObjectURL(myBlob);
+          let media_html=document.createElement(media.type);
+          media_html.src=objectURL;
+          media_html.id=media.id;
+          media_html.dataset.src=media.path;
+          if (media.type=="img"){
+            media_html.onload=function(){
+              let div_media=document.getElementById("media");
+              div_media.appendChild(this);
+              console.log(`ajouté ${media_html.id}`);
+              nb_obj=test_loading_assets(nb_obj,taille);
+            };
+          }
+          else {
+            media_html.onloadeddata=function(){
+              let div_media=document.getElementById("media");
+              div_media.appendChild(this);
+              console.log(`ajouté ${media_html.id}`);
+              nb_obj=test_loading_assets(nb_obj,taille);
+            }
+          }
+        })
+      }
+      else {
+        alert("Couldn't find the media !");
+      }
+    }
+    return this;
+  }
 
-   /**
-   * Build Scene Graph and DOM
-   *
-   * @author
-   */
-   process(json) {
-     console.log("coucou");
-     let media = document.getElementById("media");
-     media.style.display="block";
-     let img = document.getElementById("node_1");
-     console.log(img);
-     //Fonction pour append le HTML
-     const appendHTML = (node) => {
-       console.log('appendHTML');
-       console.log(node);
-       /*      if (node.className === 'item') {
-       document.querySelector('aside ul').appendChild(node.getHTML());
-     }
-     else {
-     */
-     node.ancestor.getHTML().appendChild(node.getHTML());
-     //      }
+  /**
+  * Build Scene Graph and DOM
+  *
+  * @author
+  */
+  process(json) {
+    //Fonction pour append le HTML
+    const appendHTML = (node) => {
+      console.log('appendHTML');
+      console.log(node);
+      node.ancestor.getHTML().appendChild(node.getHTML());
 
-   }
+    }
 
-   //Create Root
-   let top = document.getElementById('main');
-   top.id = 'node_0';
-   top.className = 'game';
-   let props = {id:0,class:'game_root',description:'Game Root',children:[1]};
-   json.push(props);
+    //Create Root
+    let top = document.getElementById('main');
+    top.id = 'node_0';
+    top.className = 'game';
+    let props = {id:0,class:'game_root',description:'Game Root',children:[1]};
+    json.push(props);
 
-   //Create the NodeList = List with all the nodes
-   this.graph.nodeList = json.map( (obj, index, arr) => {
-     console.log(obj);
-     let func = creators[obj.class];
-     if (func !== undefined) {
-       return func(obj);
-     }
-     return {};
-   });
-   console.log('nodeList');
-   console.log(this.graph.nodeList);
+    //Create the NodeList = List with all the nodes
+    this.graph.nodeList = json.map( (obj, index, arr) => {
+      console.log(obj);
+      let func = creators[obj.class];
+      if (func !== undefined) {
+        return func(obj);
+      }
+      return {};
+    });
+    console.log('nodeList');
+    console.log(this.graph.nodeList);
 
 
-   //Create the Graph
-   this.graph.root = Game.create(json.filter( (node) => node.id === 0)[0]);
-   console.log(this.graph.root);
-   this.graph.traverseFrom(this.graph.root,json);
-   console.log(this.graph);
+    //Create the Graph
+    this.graph.root = Game.create(json.filter( (node) => node.id === 0)[0]);
+    console.log(this.graph.root);
+    this.graph.traverseFrom(this.graph.root,json);
+    console.log(this.graph);
 
-   //Create the HTML
-   let scene_root = this.graph.root;
-   this.graph.traverse(scene_root,appendHTML);
-   let mediv =document.getElementById("media");
-   mediv.remove();
+    //Create the HTML
+    let scene_root = this.graph.root;
+    this.graph.traverse(scene_root,appendHTML);
+    let mediv =document.getElementById("media");
+    mediv.remove();
 
-   return this;
- }
+    return this;
+  }
 
- /**
- * ???
- *
- * @author
- */
- postprocess(json) {
+  /**
+  * ???
+  *
+  * @author
+  */
+  postprocess(json) {
 
- }
+  }
 
 } // End of class GameBuilder
 
@@ -407,18 +397,16 @@ const newGame = (filename) => {
   .then ( response => response.json() )
   .catch ( error => {
     alert(`Something went wrong - ${error}`)
-  })
-};
+  })};
 
-// Main
+  // Main
 
-return getJSON(filename)
-.then( (data) => {
-  // GameBuilder.create(data)
-  let _gb = new GameBuilder();
-  console.log(data);
-  _gb.preprocess(data);
-  return _gb;
-} );
-
+  return getJSON(filename)
+  .then( (data) => {
+    // GameBuilder.create(data)
+    let _gb = new GameBuilder();
+    console.log(data);
+    _gb.preprocess(data);
+    return _gb;
+  } );
 };
