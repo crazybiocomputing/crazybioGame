@@ -409,4 +409,4 @@ const newGame = (filename) => {
     _gb.preprocess(data);
     return _gb;
   } );
-};
+é };

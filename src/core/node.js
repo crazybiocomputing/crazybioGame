@@ -133,7 +133,7 @@ class Node {
     if (dprops !== undefined ) {
       console.log(this.id);
       //Where the image must be searched and append: NOT WORKING RIGHT NOW
-      let the_media = document.getElementById(`node_${this.id}`);
+      let the_media = document.getElementById(this.id);
       console.log(the_media);
       this.element.appendChild(the_media);
       }
