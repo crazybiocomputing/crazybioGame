@@ -120,8 +120,6 @@ class Node {
       alert(`The object #${this.id} must have a 'display' property`);
       return this;
     }
-    console.log("CIIIIIIIII");
-    console.log(this);
     this.width = displayProps.width || 0;
     this.height = displayProps.height || 0;
     this.topleft = displayProps.position || [0,0];
@@ -140,7 +138,6 @@ class Node {
       console.log(the_media);
       console.log(this.height);
       this.element.appendChild(the_media);
-      console.log(this.element.children[0].style);
       if (displayProps.media.style !== undefined){
         this.element.style.display = "none";
       }
