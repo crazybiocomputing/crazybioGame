@@ -46,27 +46,27 @@ class Node {
     this.element; // HTML5
     this.displayType = Node.NONE;
   }
-  
+
   static get NONE() {
     return 0;
   }
-  
+
   static get GRAPHICS() {
     return 1;
   }
-  
+
   static get MEDIA() {
     return 1;
   }
-  
+
   static get TEXT() {
     return 2;
   }
-  
+
   static get TARGET()  {
     return 3;
   }
-  
+
   /**
    * Create a new node
    */
@@ -84,7 +84,7 @@ class Node {
   setParent(parent) {
     this.parent = parent;
   }
-  
+
   /**
    * Create HTML5 element
    */
@@ -94,13 +94,13 @@ class Node {
     this.element.id = this.id;
     this.element.className = this.className;
 
-    
+
     return this;
 }
-  
+
   /**
    * Get HTML Element
-   * 
+   *
    * @returns {object} HTML Element
    * @author Jean-Christophe Taveau
    */
@@ -108,23 +108,24 @@ class Node {
     return this.element;
 
   }
-  
-  
+
+
   /**
    * Create display features
    */
   display(displayProps) {
-      
+
     // M A I N
     if (displayProps === undefined) {
       alert(`The object #${this.id} must have a 'display' property`);
       return this;
     }
-    
+    console.log("CIIIIIIIII");
+    console.log(this);
     this.width = displayProps.width || 0;
     this.height = displayProps.height || 0;
     this.topleft = displayProps.position || [0,0];
-      
+
     this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
     this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
     this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
@@ -137,13 +138,15 @@ class Node {
       //Where the image must be searched and append
       let the_media = document.getElementById(this.id);
       console.log(the_media);
+      console.log(this.height);
       this.element.appendChild(the_media);
+      console.log(this.element.children[0].style);
       if (displayProps.media.style !== undefined){
         this.element.style.display = "none";
       }
     }
-      
-    
+
+
     // Text
     else if (displayProps.text !== undefined) {
       this.displayText(displayProps.text);
@@ -155,48 +158,48 @@ class Node {
       this.displayStyle(this.element,displayProps.target.style);
     }
     console.log(this.width,this.height,this.element.style.width,this.element.style.height,this.topleft,CRAZYBIOGAME.width,CRAZYBIOGAME.height);
-    
+
     return this;
   }
 
-  displayMedia(propsGraphics) {
-    this.displayType = Node.MEDIA;
-    
-    // Append the media
-    if (propsGraphics.element !== undefined) {
-      // WARNING - DOES NOT WORK WITH JSON STORYBOARD!!!
-      this.element.appendChild(propsGraphics.element);
-    }
-    else {
-      // Check the media type and create the appropriate HTML5 element
-      let src = propsGraphics.path || propsGraphics.image;
-      let media;
-      if ( src !== undefined) {
-        media = document.createElement('img');
-        media.src = src;
-      }
-      else if (propsGraphics.video !== undefined) {
-        let media = document.createElement('video');
-        media.src = propsGraphics.video;
-      }
-      else if (propsGraphics.audio !== undefined) {
-        let media = document.createElement('audio');
-        media.src = propsGraphics.audio;
-      }
-      else {
-        alert("Could not find the media source: image, video or audio");
-      }
-      
-      media.addEventListener('dragstart', () => false,false); 
-      this.element.appendChild(media); 
-    }
-
-    
-    // Add focus if any
-    this.focus = (propsGraphics.focus !== undefined) ? propsGraphics.focus : ["R",0,0,this.width,this.height];
-    // Add style if any
-    return this.displayStyle(this.element,propsGraphics.style);
-  }
+  // displayMedia(propsGraphics) {
+  //   this.displayType = Node.MEDIA;
+  //
+  //   // Append the media
+  //   if (propsGraphics.element !== undefined) {
+  //     // WARNING - DOES NOT WORK WITH JSON STORYBOARD!!!
+  //     this.element.appendChild(propsGraphics.element);
+  //   }
+  //   else {
+  //     // Check the media type and create the appropriate HTML5 element
+  //     let src = propsGraphics.path || propsGraphics.image;
+  //     let media;
+  //     if ( src !== undefined) {
+  //       media = document.createElement('img');
+  //       media.src = src;
+  //     }
+  //     else if (propsGraphics.video !== undefined) {
+  //       let media = document.createElement('video');
+  //       media.src = propsGraphics.video;
+  //     }
+  //     else if (propsGraphics.audio !== undefined) {
+  //       let media = document.createElement('audio');
+  //       media.src = propsGraphics.audio;
+  //     }
+  //     else {
+  //       alert("Could not find the media source: image, video or audio");
+  //     }
+  //
+  //     media.addEventListener('dragstart', () => false,false);
+  //     this.element.appendChild(media);
+  //   }
+  //
+  //
+  //   // Add focus if any
+  //   this.focus = (propsGraphics.focus !== undefined) ? propsGraphics.focus : ["R",0,0,this.width,this.height];
+  //   // Add style if any
+  //   return this.displayStyle(this.element,propsGraphics.style);
+  // }
 
   static getTargetElement(parent) {
     let found;
@@ -208,7 +211,7 @@ class Node {
     }
     return found;
   }
-    
+
   displayText(propsText) {
     this.displayType = Node.TEXT;
     this.element.style.width = 'auto';
@@ -242,29 +245,34 @@ class Node {
     }
     return this;
   }
-  
-  
+
+
   /**
    * Create event features
-   * 
+   *
    * @author Jean-Christophe Taveau
    */
   actionable(actionProps, func) {
-  
+
     const doIt = (ev) => {
       console.log(`Click with ${ev.button} on object ${ev.target.dataset.objectid} and update display of ???`);
       let node = CRAZYBIOGAME.graph.nodeList.filter ( node => node.id === parseInt(ev.target.dataset.objectid) )[0];
       // Trigger Action depending of Event in common.js
+      if (node===undefined){ // In the case of a video to catch the end of it
+        let node_id=this.id;
+        node = CRAZYBIOGAME.graph.nodeList.filter(node => node.id===node_id)[0];
+        console.log(node);
+      }
       triggerAction(ev,node);
     }
-    
+
     let indexSVG = this.element.children.length;
-    
+
     if (actionProps === undefined) {
       return this;
     }
-    
-    // Add the event to the parent scene  
+
+    // Add the event to the parent scene
     // TODO
     this.actions = actionProps;
     this.geometry = {type: 'R', data: []};
@@ -272,7 +280,7 @@ class Node {
     this.geometry = (this.displayType === Node.TARGET) ? {type: this.target[0], data: this.target.slice(1)}: this.geometry;
     if (this.geometry.data.length === 0) {
       switch (this.geometry.type) {
-      case 'R' : 
+      case 'R' :
         this.geometry.data[0] = this.topleft[0];
         this.geometry.data[1] = this.topleft[1];
         this.geometry.data[2] = this.width;
@@ -280,7 +288,7 @@ class Node {
       }
     }
     // Update height
-    // this.element.style.height = `${this.height / CRAZYBIOGAME.height * 100}%`;
+    this.element.style.height = `${this.height / CRAZYBIOGAME.height * 100}%`;
 
     // Add event
     Object.keys(actionProps).forEach( (event) => {
@@ -295,17 +303,21 @@ class Node {
         let action = func || doIt;
         Node.getTargetElement(this.element).addEventListener('click', doIt,false);
       }
+      else if (event === "onended"){
+        this.element.children[0].addEventListener('ended',doIt,false);
+      }
       else if (event === 'onchange') {
         this.element.addEventListener('change', doIt,false);
       }
-    });
+    }
+  );
 
     return this;
   }
 
   /*
    * Create specific features
-   * 
+   *
    * @author Jean-Christophe Taveau
 
   features(featuresProps) {
@@ -314,13 +326,13 @@ class Node {
     return this;
   }
    */
-   
-   
+
+
   /**
    * Add children to composite/scene object
    *
    * @param {array} childrenProps - Array of object(s)
-   * 
+   *
    * @author Jean-Christophe Taveau
    */
   children(childrenProps) {
@@ -333,7 +345,7 @@ class Node {
    * Check if this object has children IDs
    *
    * @returns {boolean} true or false
-   * 
+   *
    * @author Jean-Christophe Taveau
    */
   hasChildren() {
@@ -350,7 +362,7 @@ class Node {
    * Check if this object has children Nodes
    *
    * @returns {boolean} true or false
-   * 
+   *
    * @author Jean-Christophe Taveau
    */
   hasChildNodes() {
@@ -369,5 +381,3 @@ class Node {
   }
 
 }
-
-

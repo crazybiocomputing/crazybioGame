@@ -238,6 +238,8 @@ class GameBuilder {
           id: obj.id,
           path: obj.display.media.image ||  obj.display.media.svg || obj.display.media.video || obj.display.media.audio || "none",
           type: getTypes(Object.keys(obj.display.media)) || "none",
+          width : obj.display.width,
+          height : obj.display.height
           // display: (obj.display.media.style !== undefined)?obj.display.media.style.display : "block"
         }
         assets.push(asset)
@@ -292,6 +294,7 @@ class GameBuilder {
           let media_html=document.createElement(media.type);
           media_html.src=objectURL;
           media_html.id=media.id;
+          media_html.name=media.id;
           media_html.dataset.src=media.path;
           // media_html.style.display = media.display;
           if (media.type=="img"){
@@ -304,6 +307,10 @@ class GameBuilder {
           }
           else {
             media_html.onloadeddata=function(){
+              if (media.type==="video"){
+                media_html.style.width=`${media.width}px`;
+                media_html.style.height=`${media.height}px`;
+              }
               let div_media=document.getElementById("media");
               div_media.appendChild(this);
               console.log(`ajouté ${media_html.id}`);

@@ -30,7 +30,7 @@
  *
  * @author Jean-Christophe Taveau
  */
-const updateNodes = (eventType,node) => { 
+const updateNodes = (eventType,node) => {
   if (node.actions[eventType].new_nodes !== undefined) {
     console.log('show nodes');
     showNodes(node.actions[eventType].new_nodes);
@@ -41,6 +41,11 @@ const updateNodes = (eventType,node) => {
   if (node.actions[eventType].new_items !== undefined) {
       console.log('show items');
     showItems(node.actions[eventType].new_items);
+  }
+  if (node.actions[eventType].play !== undefined){
+    let figure = document.getElementById(node.actions[eventType].play[0]);
+    let video = figure.children[0];
+    video.play();
   }
   if (node.actions[eventType].popup !== undefined) {
     displayPopup(node.actions[eventType].popup);
@@ -54,9 +59,10 @@ const updateNodes = (eventType,node) => {
  */
 const triggerAction = (event,node) => {
   console.log(event);
+  console.log(node);
   Object.keys(node.actions).forEach( (event) => {
     switch(event) {
-    case 'onclick': 
+    case 'onclick':
       if (CRAZYBIOGAME.useItem) {
         updateNodes('onuse',node);
       }
@@ -64,9 +70,11 @@ const triggerAction = (event,node) => {
         updateNodes('onclick',node);
       }
       break;
-    case 'onsuccess': 
+    case 'onsuccess':
       updateNodes('onsuccess',node);
       break;
+    case 'onended':
+      updateNodes('onended',node);
     }
   });
 }
@@ -131,11 +139,11 @@ const displayPopup = (props) => {
 
   let modal = document.getElementById('popup');
   modal.style.display = 'block';
-  
+
   // modal-content
   let modalContent = document.querySelector('.modal-content') || document.createElement('div');
   modalContent.className = 'modal-content';
-  
+
   let closeButton = document.createElement('a')
   closeButton.href="#close";
   closeButton.title="Close";
@@ -178,8 +186,8 @@ const displayPopup = (props) => {
 
 
   modal.appendChild(modalContent);
-  
-  
+
+
 /*
   // TODO For each button, add it :
   // Example:
@@ -192,14 +200,14 @@ const displayPopup = (props) => {
     dwnldButton.innerHTML = '<i class="fas fa-download fa-2x"></i>';
     modalFooter.appendChild(dwnldButton);
   }
-  
+
   else if (props.class === "machine.display"){
     let img = document.createElement('img');
     img.className = 'image';
     img.src = props.features.popup.graphics.path;
     modalBody.appendChild(img);
   }
-  
+
   else if (props.class === "machine.form"){
     //to debug
 
@@ -241,11 +249,11 @@ const displayPopup = (props) => {
     modalBody.appendChild(myForm);
 
   }
-  
+
   else if (props.class === "machine.formDragDrop"){
     //prototype in machine.JS to c/p and modify
   }
-  
+
   else if (props.class === "machine.formDropDown"){
     //prototype in machine.JS to c/p and modify
   }
