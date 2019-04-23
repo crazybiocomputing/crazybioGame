@@ -1,19 +1,13 @@
 [
   {
-    "id": 0,
-    "class": "game", 
-    "author": "Jean-Christophe Taveau", 
-    "description": "Tutorial - Example of user interaction with `machine.tiles`"
-  },
-  {
     "id": 1, 
     "class": "scene", 
     "description": "A desktop", 
     "display": {
       "width": 717,
       "height": 540,
-      "graphics": {
-        "path": "assets/background.png"
+      "media": {
+        "image": "assets/background.png"
       }
     },
     "children": [2,10,11,12,13,14]
@@ -26,8 +20,8 @@
       "position": [300,260],
       "width": 80,
       "height": 80,
-      "graphics": {
-        "path": "../../assets/lock_symbol.png",
+      "media": {
+        "image": "../../assets/lock_symbol.png",
         "style": {
           "filter": "invert(80%)"
         },
@@ -46,8 +40,8 @@
       "position": [520,514],
       "width": 124,
       "height": 25,
-      "graphics": {
-        "path": "assets/button02.png"
+      "media": {
+        "image": "assets/button02.png"
       }
     },
     "action": {
@@ -65,8 +59,8 @@
       "width": 124,
       "height": 25,
       "position": [154,515],
-      "graphics": {
-        "path": "assets/button90.png"
+      "media": {
+        "image": "assets/button90.png"
       }
     },
     "action": {
@@ -84,8 +78,8 @@
       "width": 124,
       "height": 25,
       "position": [276,514],
-      "graphics": {
-        "path": "assets/button70.png"
+      "media": {
+        "image": "assets/button70.png"
       }
     },
     "action": {
@@ -103,8 +97,8 @@
       "width": 124,
       "height": 25,
       "position": [398,514],
-      "graphics": {
-        "path": "assets/button54.png"
+      "media": {
+        "image": "assets/button54.png"
       }
     },
     "action": {
@@ -122,8 +116,8 @@
       "width": 124,
       "height": 25,
       "position": [30,514],
-      "graphics": {
-        "path": "assets/button20.png"
+      "media": {
+        "image": "assets/button20.png"
       }
     },
     "action": {
@@ -141,8 +135,8 @@
       "position": [151,42],
       "width": 280,
       "height": 278,
-      "graphics": {
-        "path": "assets/plasma0234_ij.png",
+      "media": {
+        "image": "assets/plasma0234_ij.png",
         "style": {
           "display": "none"
         }
@@ -158,8 +152,8 @@
       "height": 228,
       "position": [402,65],
       "visibility": false,
-      "graphics": {
-        "path": "assets/plasma9009_ij.png",
+      "media": {
+        "image": "assets/plasma9009_ij.png",
         "style": {
           "display": "none"
         }
@@ -175,8 +169,8 @@
       "height": 278,
       "position": [350,195],
       "visibility": false,
-      "graphics": {
-        "path": "assets/plasma7043_ij.png",
+      "media": {
+        "image": "assets/plasma7043_ij.png",
         "style": {
           "display": "none"
         }
@@ -191,8 +185,8 @@
       "width": 110,
       "height": 348,
       "position": [11,26],
-      "graphics": {
-        "path": "assets/plasma5492_ij.png",
+      "media": {
+        "image": "assets/plasma5492_ij.png",
         "style": {
           "display": "none"
         }
@@ -207,8 +201,8 @@
       "width": 550,
       "height": 298,
       "position": [51,148],
-      "graphics": {
-        "path": "assets/plasma2078_ij.png",
+      "media": {
+        "image": "assets/plasma2078_ij.png",
         "style": {
           "display": "none"
         }
@@ -216,4 +210,3 @@
     }
   }
 ]
-

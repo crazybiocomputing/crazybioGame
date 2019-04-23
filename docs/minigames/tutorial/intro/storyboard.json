@@ -6,8 +6,8 @@
     "display": {
       "width": 800,
       "height": 450,
-      "graphics": {
-        "path": "../../assets/background_transparent.png"
+      "media": {
+        "image": "../../assets/background_transparent.png"
       }
     },
     "children": [3]

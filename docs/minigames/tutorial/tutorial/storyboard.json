@@ -1,18 +1,13 @@
 [
   {
-    "id": 0, 
-    "author": "Jean-Christophe Taveau", 
-    "description": "Tutorial - How to play"
-  },
-  {
     "id": 1, 
     "class": "scene", 
     "description": "A desktop", 
     "display": {
       "width": 800,
       "height": 450,
-      "graphics": {
-        "path": "../../assets/background_transparent.png"
+      "media": {
+        "image": "../../assets/background_transparent.png"
       }
     },
     "children": [2]
@@ -99,8 +94,8 @@
       "position": [370,100],
       "width": 70,
       "height": 70,
-      "graphics": {
-        "path": "../../assets/lock_symbol.png",
+      "media": {
+        "image": "../../assets/lock_symbol.png",
         "focus" : ["C",35,35,35],
         "style": {
           "display": "none"
