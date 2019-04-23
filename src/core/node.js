@@ -120,8 +120,6 @@ class Node {
       alert(`The object #${this.id} must have a 'display' property`);
       return this;
     }
-    console.log("CIIIIIIIII");
-    console.log(this);
     this.width = displayProps.width || 0;
     this.height = displayProps.height || 0;
     this.topleft = displayProps.position || [0,0];
