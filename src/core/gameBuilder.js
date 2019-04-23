@@ -238,6 +238,7 @@ class GameBuilder {
           id: obj.id,
           path: obj.display.media.image ||  obj.display.media.svg || obj.display.media.video || obj.display.media.audio || "none",
           type: getTypes(Object.keys(obj.display.media)) || "none",
+          // display: (obj.display.media.style !== undefined)?obj.display.media.style.display : "block"
         }
         assets.push(asset)
       }
@@ -275,6 +276,8 @@ class GameBuilder {
         })
         .then(function(svg){
           div_media.insertAdjacentHTML("afterbegin",svg);
+          // let my_svg = document.getElementById(media.id);
+          // my_svg.style.display = media.display;
           console.log(`ajouté ${media.id}`);
           nb_obj=test_loading_assets(nb_obj,taille);
         })
@@ -290,6 +293,7 @@ class GameBuilder {
           media_html.src=objectURL;
           media_html.id=media.id;
           media_html.dataset.src=media.path;
+          // media_html.style.display = media.display;
           if (media.type=="img"){
             media_html.onload=function(){
               let div_media=document.getElementById("media");
@@ -331,13 +335,16 @@ class GameBuilder {
 
     //Create Root
     let top = document.getElementById('main');
-    top.id = 'node_0';
-    top.className = 'game';
+    let root_div = document.createElement("div");
+    root_div.id = 'node_0';
+    root_div.className = 'game';
+    top.appendChild(root_div);
     let props = {id:0,class:'game_root',description:'Game Root',children:[1]};
     json.push(props);
     let root_obj = json.filter( obj => obj.class === 'scene')[0];
     CRAZYBIOGAME.width = root_obj.display.width;
     CRAZYBIOGAME.height = root_obj.display.height;
+    root_div.style.maxWidth = `${CRAZYBIOGAME.width}px`;
 
     //Create the NodeList = List with all the nodes
     this.graph.nodeList = json.map( (obj, index, arr) => {
@@ -362,7 +369,6 @@ class GameBuilder {
     //Create the HTML
     let scene_root = CRAZYBIOGAME.graph.root;
     CRAZYBIOGAME.graph.traverse(scene_root,appendHTML);
-    //this.graph.travers(scene_root,appendHTML);
     let mediv =document.getElementById("media");
     mediv.remove();
 
@@ -413,4 +419,4 @@ const newGame = (filename) => {
     _gb.preprocess(data);
     return _gb;
   } );
-};
+ };
