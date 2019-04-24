@@ -233,7 +233,7 @@ class GameBuilder {
     }
     let assets = [];
     const getAssets = (obj) => {
-      if(obj.display.media !== undefined){
+      if(obj.display !==undefined && obj.display.media !== undefined){
         let asset={
           id: obj.id,
           path: obj.display.media.image ||  obj.display.media.svg || obj.display.media.video || obj.display.media.audio || "none",
