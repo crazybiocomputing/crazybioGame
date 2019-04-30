@@ -132,17 +132,8 @@ class Node {
     // Media: Image, video, audio?, etc.
     let dprops = displayProps.graphics || displayProps.media;
     if (dprops !== undefined ) {
-      console.log(this.id);
-      //Where the image must be searched and append
-      let the_media = document.getElementById(this.id);
-      console.log(the_media);
-      console.log(this.height);
-      this.element.appendChild(the_media);
-      if (displayProps.media.style !== undefined){
-        this.element.style.display = "none";
-      }
+      this.displayMedia(dprops);
     }
-
 
     // Text
     else if (displayProps.text !== undefined) {
