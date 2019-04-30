@@ -30,7 +30,9 @@ class MachineConnector extends Machine {
 
   constructor (id,className,description) {
     super(id,className,description);
-
+    this.drawFunction = DrawTools.drawPolyline;
+    this.polyline;
+    this.canvas;
   }
   
   /**
@@ -51,16 +53,16 @@ class MachineConnector extends Machine {
    *
    * @author Jean-Christophe Taveau
    */
-  connectable(props) {
+  connectable(propsFeatures) {
     
     const getValue = (str) => {
-      return props.features.values[parseInt(str.replace(/[^0-9]/g, ''),10)]
+      return propsFeatures.connectable.values[parseInt(str.replace(/[^0-9]/g, ''),10)]
     }
 
     // Move over
     const moveover = (event) => {
-      console.log('over');
-      this.drawFunction(this.polyline,event.pageX, event.pageY);
+      console.log('over',event.pageX,event.pageY,event.clientX,event.clientY);
+      this.drawFunction(this.canvas,this.polyline,event.pageX, event.pageY);
       event.preventDefault();
       return false;
     }
@@ -75,17 +77,28 @@ class MachineConnector extends Machine {
         id: event.target.parentNode.id,
         value: getValue(event.target.parentNode.id)
       });
-      this.drawFunction(this.polyline,-1, -1);
-      if (this.polyline.points.length === props.features.numVertices) {
-        // Close
+      this.drawFunction(this.canvas,this.polyline,-1, -1);
+      if (this.polyline.points.length === propsFeatures.connectable.numVertices) {
+        // Close all stuff
         console.log('This is the end...');
         console.log(this.polyline);
         document.querySelectorAll('.connector').forEach( (c) => {
           c.removeEventListener('click', movestart );
           c.addEventListener('mouseover', (e) => c.style.cursor = "not-allowed" );
         } );
-        document.querySelector('svg').removeEventListener('mousemove', moveover,false);
+        document.querySelector(`#node_${this.id} svg`).removeEventListener('mousemove', moveover,false);
 
+        // Trigger Action!! ... Reset if it fails.
+        let total = this.polyline.points.reduce ( (sum,p) => sum + p.value,0);
+        console.log(`${total} === ${propsFeatures.exit}`);
+        if (propsFeatures.exit === total) {
+          triggerAction('onexit',this);
+        }
+        else {
+          // Reset machine...
+          // TODO
+          this.polyline = undefined;
+        }
       }
     }
 
@@ -93,57 +106,62 @@ class MachineConnector extends Machine {
 
       ///////// MAIN of `movestart` ///////// 
 
-      console.log('start');
-      // TODO Must be improved - All the parents up to `game`
       event.target.parentNode.style.zIndex = 1000;
+      let rectangle = document.getElementById(`node_${this.id}`).getBoundingClientRect();
 
       if (this.polyline === undefined) {
         this.polyline = {
           parent: event.target.parentNode,
-          points: [{x: event.pageX,y:event.pageY,id: event.target.parentNode.id,value:getValue(event.target.parentNode.id)}],
+          points: [
+            {
+              x: event.clientX - rectangle.left,
+              y: event.clientY - rectangle.top,
+              id: event.target.parentNode.id,
+              value:getValue(event.target.parentNode.id)
+            }
+          ],
           last: {
             x: 0.0,
             y:0.0,
-            dx: event.target.parentNode.getBoundingClientRect().left,
-            dy: event.target.parentNode.getBoundingClientRect().top,
             id:0
-          }
+          },
+          offsetX: rectangle.left,
+          offsetY: rectangle.top
         };
         console.log('Add mousemove');
+        console.log(this.polyline);
       }
 
       // Activate mousemove
-      document.querySelector('svg').addEventListener('mousemove', moveover,false);
+      document.querySelector(`#node_${this.id} svg`).addEventListener('mousemove', moveover,false);
 
       if (this.polyline.points[this.polyline.points.length - 1].id !== event.target.parentNode.id) {
         moveend(event);
       }
 
-      this.drawFunction(this.polyline,event.pageX, event.pageY);
+      this.drawFunction(this.canvas,this.polyline,event.clientX, event.clientY);
 
     }; // End of movestart
 
     // M A I N
-    if (!flag) {
-      return this;
-    }
-    
-
-    // Create events
-
-    let element = document.querySelector('svg');
-    // element.addEventListener('click', (e) => console.log('svg'));
-    element.connectable = flag;
-    console.log(element);
-    element.classList.add('connectable');
-    document.querySelectorAll('.connector').forEach( (c) => {
+    console.log('CONNECT. start');
+    // Create canvas
+    this.canvas = document.createElement('canvas');
+    this.canvas.id = 'layer';
+    this.canvas.style.pointerEvents = 'none';
+    this.canvas.getContext('2d').canvas.width = this.width;
+    this.canvas.getContext('2d').canvas.height = this.height;
+    this.element.appendChild(this.canvas);
+    // Create events on buttons/connectors
+    let _svg = this.element.firstChild;
+    _svg.classList.add('connectable');
+    _svg.querySelectorAll('.connector').forEach( (c) => {
       c.addEventListener('click', movestart );
       c.addEventListener('mouseover', (e) => c.style.cursor = "pointer" );
     } );
     return this;
   }
-    return this;
-  }
+
 }
 /**
  * Create a Connectable machine
@@ -155,7 +173,7 @@ const createMachineConnector = (props) => {
   if (props.features === undefined) {
     props.features = {draggable: true};
   }
-  let machine = Machine.create(props);
+  let machine = MachineConnector.create(props);
   machine.element.className = "machine connector";
   return machine;
 };
