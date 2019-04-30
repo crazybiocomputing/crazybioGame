@@ -91,7 +91,7 @@ class Node {
   append(htmlTag) {
     // Append the media
     this.element = document.createElement(htmlTag);
-    this.element.id = `node_${this.id}`;
+    this.element.id = this.id;
     this.element.className = this.className;
     
     return this;
@@ -131,7 +131,14 @@ class Node {
     // Media: Image, video, audio?, etc.
     let dprops = displayProps.graphics || displayProps.media;
     if (dprops !== undefined ) {
-      this.displayMedia(dprops);
+      console.log(this.id);
+
+      //Where the image must be searched and append: NOT WORKING RIGHT NOW
+        document.onload = function(){
+        let test = document.getElementById(`node_${this.id}`);
+        console.log(test);
+      };
+      
     }
     // Text
     else if (displayProps.text !== undefined) {
@@ -1826,9 +1833,10 @@ class Graph {
   /**
    * 
    */
-  traverseFrom(a_node) {
+  traverseFrom(a_node)   {
     let children;
     let ancestor;
+    console.log(a_node);
     if (a_node.hasChildren()) {
       // ???
       if (a_node.className.includes('scene') ) {
@@ -1857,6 +1865,8 @@ class Graph {
     for (let id of children) {
       console.log(`id ${id} <-- ${ancestor.id}`);
       let nodeChild = this.nodeList.filter( (node) => node.id === id)[0];
+      console.log("TEST1");
+      console.log(nodeChild);
       ancestor.childNodes.push(nodeChild);
       nodeChild.ancestor = ancestor;
       this.traverseFrom(nodeChild);
@@ -1917,11 +1927,36 @@ class Game extends Composite {
   
   static create(props) {
     let _game = new Game(props.id,props.class,props.description)
-      .children(props.children);
+    .append()
+    .children(props.children);
     _game.childNodes = [];
     return _game;
   }
   
+  append(){
+
+    let main = document.getElementById("node_0");
+    
+    //Inventory
+    let inventory = document.createElement('aside');
+    inventory.appendChild(document.createElement('ul'));
+    main.appendChild(inventory);
+    
+    //Popup
+    let popup = document.createElement('div');
+    popup.className = "modal";
+    popup.id = 'popup';
+    main.appendChild(popup);
+
+
+
+    return this;
+
+      
+
+  }
+
+
 } // End of class Game
 
 
@@ -2632,25 +2667,25 @@ const creators = {
   "sprite": createSprite,
   "switch": createSwitch
 };
-  
-  
+
+
 /**
  * Create a game graph and corresponding HTML5 elements
- * @class GameBuilder
+ * @class GameBuildergit pu
  *
  * @author Jean-Christophe Taveau
  */
- 
+
 class GameBuilder {
 
   constructor() {
     this.graph = new Graph();
   }
-  
+
   static create(json) {
-  
+
     let _builder = new GameBuilder();
-    
+
     // Step #1: Create a root node `Game`
     // Check node ID=0
     let id0 = json.filter( (obj) => obj.id === 0);
@@ -2676,18 +2711,18 @@ class GameBuilder {
 
     return _builder;
   }
-  
+
   /**
    * Parse storyboard and create various HTML5 Elements
    *
    * @author: Jean-Christophe Taveau
    */
   parse(storyboard) {
-    
+
     const hasItems = () => {
       return storyboard.some( (obj) => obj.class === 'item');
     }
-    
+
     // Process storyboard
     const process = (storyboard) => {
       this.graph.nodeList = storyboard.map( (obj, index, arr) => {
@@ -2703,7 +2738,7 @@ class GameBuilder {
 
       this.graph.root = this.graph.nodeList.filter( (node) => node.className === 'game' && node.id === 0)[0];
       this.graph.traverseFrom(this.graph.root);
-      
+
       return this.graph;
     };
 
@@ -2719,7 +2754,7 @@ class GameBuilder {
 //      }
 
     }
-    
+
     /**** M  a  i  n ****/
     console.log('Parse/Build game');
     console.log(storyboard);
@@ -2728,14 +2763,14 @@ class GameBuilder {
     CRAZYBIOGAME.width = root_obj.display.width;
     CRAZYBIOGAME.height = root_obj.display.height;
     console.log(root_obj);
-    
+
     // Create HTML5 div for game
     let top = document.getElementById('main');
     let root = document.createElement('div');
     root.id = 'node_0';
     root.className = 'game';
     top.appendChild(root);
-     
+
     // Step #1- Preprocess
     if (hasItems()) {
       let inventory = document.createElement('aside');
@@ -2777,7 +2812,7 @@ class GameBuilder {
       console.log(items);
     }
     console.log(storyboard);
-    
+
     // Step #2 - Create the graph and nodes
     CRAZYBIOGAME.graph = process(storyboard);
 
@@ -2796,13 +2831,163 @@ class GameBuilder {
     CRAZYBIOGAME.graph.traverse(scene_root,appendHTML);
 
   }
+
+  /**
+   * Preload assets
+   *
+   * @author
+   */
+  preprocess(json) {
+    // Step #1 : Get Assets
+    const getTypes = (keys) => {
+        const types = {
+          image: "img",
+          audio: "audio",
+          svg: "svg",
+          video: "video"
+        }
+      let filtered = keys.filter(( keyword) => Object.keys(types).includes(keyword));
+      return types[filtered[0]];
+    }
+    let assets = [];
+    for(let i=0;i<json.length;i++) {
+      let node = json[i];
+      let media = node.display.media;
+      if ( media !== undefined) {
+        let asset = {
+          id: node.id,
+          path: media.image ||  media.svg || media.video || media.audio || "none",
+          type: getTypes(Object.keys(media)) || "none"
+        }
+        assets.push(asset);
+      }
+    }
+    console.log(assets);
+    // Step #2 : Load Assets
+    let div_media=document.createElement("div");
+    div_media.id="media";
+    div_media.style.display="none";
+    document.body.appendChild(div_media);
+    for (let k=0;k<assets.length;k++){
+      let media=assets[k];
+      if (media.type==="svg"){
+        fetch(media.path)
+        .then(function(response){
+          return response.text()
+        })
+        .then(function(svg){
+          div_media.insertAdjacentHTML("afterbegin",svg);
+        })
+      }
+      else{
+        fetch(media.path)
+        .then(function(response){
+          return response.blob();
+        })
+        .then(function(myBlob){
+          var objectURL = URL.createObjectURL(myBlob);
+          let media_html=document.createElement(media.type);
+          media_html.src=objectURL;
+          media_html.id=`node_${media.id}`;
+          media_html.dataset.src=media.path;
+          media_html.onload=function(){
+            Object.size=function(obj) {
+            var size = 0, key;
+            for (key in obj) {
+                if (obj.hasOwnProperty(key)) size++;
+            }
+            return size;};
+            let taille=Object.size(assets)+2;
+            let div_media=document.getElementById("media");
+            div_media.appendChild(this);
+            console.log(`ajouté ${media.id}`);
+            let t_div = div_media.childNodes;
+            console.log(t_div.length);
+            if(t_div.length==taille){
+              console.log("tout chargé");
+              this.process();
+            }
+          };
+        });
+      }
+    }
+    return [this,0];
+  }
+
+  /**
+   * Build Scene Graph and DOM
+   *
+   * @author
+   */
+  process(json) {
+    console.log("coucou");
+    let media = document.getElementById("media");
+    media.style.display="block";
+    let img = document.getElementById("node_1");
+    console.log(img);
+    //Fonction pour append le HTML
+    const appendHTML = (node) => {
+      console.log('appendHTML');
+      console.log(node);
+/*      if (node.className === 'item') {
+        document.querySelector('aside ul').appendChild(node.getHTML());
+      }
+      else {
+*/
+        node.ancestor.getHTML().appendChild(node.getHTML());
+//      }
+
+    }
+
+    //Create Root
+    let top = document.getElementById('main');
+    top.id = 'node_0';
+    top.className = 'game';
+    let props = {id:0,class:'game',description:'Game Root',children:[1]};
+    json.push(props);
+
+    //Create the NodeList = List with all the nodes
+    this.graph.nodeList = json.map( (obj, index, arr) => {
+      console.log(obj);
+      let func = creators[obj.class];
+      if (func !== undefined) {
+        return func(obj);
+      }
+      return {};
+    });
+    console.log('nodeList');
+    console.log(this.graph.nodeList);
+
+
+    //Create the Graph
+    this.graph.root = Game.create(json.filter( (node) => node.id === 0)[0]);
+    console.log(this.graph.root);
+    this.graph.traverseFrom(this.graph.root,json);
+    console.log(this.graph);
+
+    //Create the HTML
+    let scene_root = this.graph.root;
+    this.graph.traverse(scene_root,appendHTML);
+
+    return this;
+  }
+
+  /**
+   * ???
+   *
+   * @author
+   */
+  postprocess(json) {
+
+  }
+
 } // End of class GameBuilder
 
 
 /*
  * common.js??
  */
- 
+
 const newGame = (filename) => {
 
   /*
@@ -2813,24 +2998,27 @@ const newGame = (filename) => {
       method: 'GET',
       headers: new Headers({'Content-Type': 'application/json'}),
       mode: 'cors',
-      cache: 'default' 
+      cache: 'default'
       }
     )
     .then ( response => response.json() )
     .catch ( error => {
-      alert(`Something went wrong - ${error}`) 
+      alert(`Something went wrong - ${error}`)
     })
   };
 
   // Main
-  
+
   return getJSON(filename)
-    .then( (data) => GameBuilder.create(data) );
+    .then( (data) => {
+      // GameBuilder.create(data)
+      let _gb = new GameBuilder();
+      console.log(data);
+      _gb.preprocess(data);
+      return _gb;
+    } );
 
 };
-
-
-
 /*
  *  crazybioGame: CrazyBioComputing Game Engine
  *  Copyright (C) 2015-2018  Jean-Christophe Taveau.

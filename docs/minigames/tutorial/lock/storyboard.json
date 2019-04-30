@@ -6,8 +6,8 @@
     "display": {
       "width": 800,
       "height": 432,
-      "graphics": {
-        "path": "assets/background.png"
+      "media": {
+        "image": "assets/background.png"
       }
     },
     "children": [2,3]

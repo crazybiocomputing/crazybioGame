@@ -6,8 +6,8 @@
     "display": {
       "width": 690,
       "height": 480,
-      "graphics": {
-        "path": "assets/background.jpg"
+      "media": {
+        "image": "assets/background.jpg"
       }
     },
     "children":[2,4,20,21]
@@ -20,8 +20,8 @@
       "position": [530,90],
       "width": 60,
       "height": 60,
-      "graphics": {
-        "path": "../../assets/lock_symbol.png"
+      "media": {
+        "image": "../../assets/lock_symbol.png"
       },
       "target" : {
         "data": ["C", 30,30, 30]
@@ -39,8 +39,8 @@
       "width": 335,
       "height": 195,
         "position": [1, 0],
-      "graphics": {
-        "path": "assets/congratulations_0.jpg"
+      "media": {
+        "image": "assets/congratulations_0.jpg"
       }
     }
   },
@@ -52,8 +52,8 @@
       "width": 355,
       "height": 195,
       "position": [336, 0],
-      "graphics": {
-        "path": "assets/congratulations_1.jpg"
+      "media": {
+        "image": "assets/congratulations_1.jpg"
       }
     }
   },
@@ -65,8 +65,8 @@
       "width": 100,
       "height": 100,
       "position": [120,330],
-      "graphics": {
-        "path": "../../assets/question.png",
+      "media": {
+        "image": "../../assets/question.png",
         "focus": ["C",50,50, 50]
       }
     },
@@ -89,8 +89,8 @@
       "width": 100,
       "height": 100,
       "position": [520,330],
-      "graphics": {
-        "path": "../../assets/question.png",
+      "media": {
+        "image": "../../assets/question.png",
         "focus": ["C",50,50, 50],
         "style": {
           "display": "none"

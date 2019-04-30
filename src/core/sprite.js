@@ -32,11 +32,11 @@
  * @author Jean-Christophe Taveau
  */
 class Sprite extends Node {
- 
+
   constructor (id,className,description) {
     super(id,className,description);
   }
-  
+
   static create(props) {
     return new Sprite(props.id,props.class,props.description,props.parent)
       .append('figure')
@@ -44,7 +44,7 @@ class Sprite extends Node {
       .actionable(props.action);
   }
 }
- 
+
 const createSprite = (props) => {
   let sprite = Sprite.create(props);
   return sprite;
@@ -63,8 +63,8 @@ const createSprite = (props) => {
   element.style.left = `${props.display.graphics.position[0] || 0}px`;
   element.style.top = `${props.display.graphics.position[1] || 0}px`;
   element.appendChild(img);
-  
-  
+
+
   return element;
 };*/
 
@@ -102,5 +102,3 @@ const createSprite = (props) => {
   return element;
 };
 */
-
-

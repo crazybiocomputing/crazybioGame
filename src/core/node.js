@@ -46,27 +46,27 @@ class Node {
     this.element; // HTML5
     this.displayType = Node.NONE;
   }
-  
+
   static get NONE() {
     return 0;
   }
-  
+
   static get GRAPHICS() {
     return 1;
   }
-  
+
   static get MEDIA() {
     return 1;
   }
-  
+
   static get TEXT() {
     return 2;
   }
-  
+
   static get TARGET()  {
     return 3;
   }
-  
+
   /**
    * Create a new node
    */
@@ -84,45 +84,46 @@ class Node {
   setParent(parent) {
     this.parent = parent;
   }
-  
+
   /**
    * Create HTML5 element
    */
   append(htmlTag) {
     // Append the media
     this.element = document.createElement(htmlTag);
-    this.element.id = `node_${this.id}`;
+    this.element.id = this.id;
     this.element.className = this.className;
-    
+
+
     return this;
-  }
-  
+}
+
   /**
    * Get HTML Element
-   * 
+   *
    * @returns {object} HTML Element
    * @author Jean-Christophe Taveau
    */
-  getHTML() {
+  getHTML(){
     return this.element;
+
   }
-  
-  
+
+
   /**
    * Create display features
    */
   display(displayProps) {
-      
+
     // M A I N
     if (displayProps === undefined) {
       alert(`The object #${this.id} must have a 'display' property`);
       return this;
     }
-    
     this.width = displayProps.width || 0;
     this.height = displayProps.height || 0;
     this.topleft = displayProps.position || [0,0];
-      
+
     this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
     this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
     this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
@@ -131,8 +132,18 @@ class Node {
     // Media: Image, video, audio?, etc.
     let dprops = displayProps.graphics || displayProps.media;
     if (dprops !== undefined ) {
-      this.displayMedia(dprops);
+      console.log(this.id);
+      //Where the image must be searched and append
+      let the_media = document.getElementById(this.id);
+      console.log(the_media);
+      console.log(this.height);
+      this.element.appendChild(the_media);
+      if (displayProps.media.style !== undefined){
+        this.element.style.display = "none";
+      }
     }
+
+
     // Text
     else if (displayProps.text !== undefined) {
       this.displayText(displayProps.text);
@@ -144,9 +155,10 @@ class Node {
       this.displayStyle(this.element,displayProps.target.style);
     }
     console.log(this.width,this.height,this.element.style.width,this.element.style.height,this.topleft,CRAZYBIOGAME.width,CRAZYBIOGAME.height);
-    
+
     return this;
   }
+
 
   displayMedia(propsGraphics) {
     this.displayType = Node.MEDIA;
@@ -190,6 +202,7 @@ class Node {
     return this.displayStyle(this.element,propsGraphics.style);
   }
 
+
   static getTargetElement(parent) {
     let found;
     if (parent.classList.contains('target')) {
@@ -200,7 +213,7 @@ class Node {
     }
     return found;
   }
-    
+
   displayText(propsText) {
     this.displayType = Node.TEXT;
     this.element.style.width = 'auto';
@@ -234,29 +247,34 @@ class Node {
     }
     return this;
   }
-  
-  
+
+
   /**
    * Create event features
-   * 
+   *
    * @author Jean-Christophe Taveau
    */
   actionable(actionProps, func) {
-  
+
     const doIt = (ev) => {
       console.log(`Click with ${ev.button} on object ${ev.target.dataset.objectid} and update display of ???`);
       let node = CRAZYBIOGAME.graph.getNodeById (parseInt(ev.target.dataset.objectid) );
       // Trigger Action depending of Event in common.js
+      if (node===undefined){ // In the case of a video to catch the end of it
+        let node_id=this.id;
+        node = CRAZYBIOGAME.graph.nodeList.filter(node => node.id===node_id)[0];
+        console.log(node);
+      }
       triggerAction(ev,node);
     }
-    
+
     let indexSVG = this.element.children.length;
-    
+
     if (actionProps === undefined) {
       return this;
     }
-    
-    // Add the event to the parent scene  
+
+    // Add the event to the parent scene
     // TODO
     this.actions = actionProps;
     this.geometry = {type: 'R', data: []};
@@ -264,7 +282,7 @@ class Node {
     this.geometry = (this.displayType === Node.TARGET) ? {type: this.target[0], data: this.target.slice(1)}: this.geometry;
     if (this.geometry.data.length === 0) {
       switch (this.geometry.type) {
-      case 'R' : 
+      case 'R' :
         this.geometry.data[0] = this.topleft[0];
         this.geometry.data[1] = this.topleft[1];
         this.geometry.data[2] = this.width;
@@ -272,7 +290,7 @@ class Node {
       }
     }
     // Update height
-    // this.element.style.height = `${this.height / CRAZYBIOGAME.height * 100}%`;
+    this.element.style.height = `${this.height / CRAZYBIOGAME.height * 100}%`;
 
     // Add event
     Object.keys(actionProps).forEach( (event) => {
@@ -287,17 +305,21 @@ class Node {
         let action = func || doIt;
         Node.getTargetElement(this.element).addEventListener('click', doIt,false);
       }
+      else if (event === "onended"){
+        this.element.children[0].addEventListener('ended',doIt,false);
+      }
       else if (event === 'onchange') {
         this.element.addEventListener('change', doIt,false);
       }
-    });
+    }
+  );
 
     return this;
   }
 
   /*
    * Create specific features
-   * 
+   *
    * @author Jean-Christophe Taveau
 
   features(featuresProps) {
@@ -306,13 +328,13 @@ class Node {
     return this;
   }
    */
-   
-   
+
+
   /**
    * Add children to composite/scene object
    *
    * @param {array} childrenProps - Array of object(s)
-   * 
+   *
    * @author Jean-Christophe Taveau
    */
   children(childrenProps) {
@@ -325,7 +347,7 @@ class Node {
    * Check if this object has children IDs
    *
    * @returns {boolean} true or false
-   * 
+   *
    * @author Jean-Christophe Taveau
    */
   hasChildren() {
@@ -342,12 +364,13 @@ class Node {
    * Check if this object has children Nodes
    *
    * @returns {boolean} true or false
-   * 
+   *
    * @author Jean-Christophe Taveau
    */
   hasChildNodes() {
     return (this.childNodes !== undefined);
   }
+
   /**
    * Create composite features
    * @obsolete
@@ -361,5 +384,3 @@ class Node {
   }
 
 }
-
-

@@ -44,8 +44,8 @@ class Game extends Composite {
   
   static create(props) {
     let _game = new Game(props.id,props.class,props.description)
-      .append('main')
-      .children(props.children);
+    .append()
+    .children(props.children);
     _game.childNodes = [];
 
     return _game;

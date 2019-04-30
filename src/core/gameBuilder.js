@@ -1,26 +1,26 @@
 /*
- *  crazybioGame: CrazyBioComputing Game Engine
- *  Copyright (C) 2015-2018  Jean-Christophe Taveau.
- *
- *  This file is part of crazybioGame
- *
- * This program is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with crazybioGame.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- * Authors:
- * Jean-Christophe Taveau
- */
+*  crazybioGame: CrazyBioComputing Game Engine
+*  Copyright (C) 2015-2018  Jean-Christophe Taveau.
+*
+*  This file is part of crazybioGame
+*
+* This program is free software: you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+*  You should have received a copy of the GNU General Public License
+*  along with crazybioGame.  If not, see <http://www.gnu.org/licenses/>.
+*
+*
+* Authors:
+* Jean-Christophe Taveau
+*/
 
 
 'use strict';
@@ -58,11 +58,11 @@ const creators = {
 
 
 /**
- * Create a game graph and corresponding HTML5 elements
- * @class GameBuildergit pu
- *
- * @author Jean-Christophe Taveau
- */
+* Create a game graph and corresponding HTML5 elements
+* @class GameBuildergit pu
+*
+* @author Jean-Christophe Taveau
+*/
 
 class GameBuilder {
 
@@ -133,9 +133,6 @@ class GameBuilder {
     const appendHTML = (node) => {
       console.log('appendHTML');
       console.log(node);
-
-      node.ancestor.getHTML().appendChild(node.getHTML());
-
     }
 
     ///// M  a  i  n /////
@@ -165,16 +162,16 @@ class GameBuilder {
       let sprites = storyboard.filter(obj => obj.id !== 0 && obj.class !== 'item');
       let items = storyboard.filter( obj => obj.class === 'item');
       items.forEach( item => {
-          let modifier = item.id;
-          // An item is a composite of a sprite and a invertoriable object
-          // Create Sprite as child of Item
-          storyboard.push({
-            id : 1000 + item.id,
-            class : 'sprite',
-            description: item.description,
-            display: item.display,
-            action: item.action
-          });
+        let modifier = item.id;
+        // An item is a composite of a sprite and a invertoriable object
+        // Create Sprite as child of Item
+        storyboard.push({
+          id : 1000 + item.id,
+          class : 'sprite',
+          description: item.description,
+          display: item.display,
+          action: item.action
+        });
 
         for (let sprite of sprites) {
           // Update item props
@@ -212,9 +209,9 @@ class GameBuilder {
     let scene_root = CRAZYBIOGAME.graph.root;
     root.style.maxWidth = `${CRAZYBIOGAME.width}px`;
     CRAZYBIOGAME.graph.traverse(scene_root,appendHTML);
-
   }
    */
+
 
 
   /**
@@ -283,27 +280,26 @@ class GameBuilder {
 
 
 /*
- * common.js??
- */
+* common.js??
+*/
 
 const newGame = (filename) => {
 
   /*
-   * Get JSON with fetch(..)
-   */
+  * Get JSON with fetch(..)
+  */
   const getJSON = (url) => {
     return fetch(url, {
       method: 'GET',
       headers: new Headers({'Content-Type': 'application/json'}),
       mode: 'cors',
       cache: 'default'
-      }
-    )
-    .then ( response => response.json() )
-    .catch ( error => {
-      alert(`Something went wrong - ${error}`)
-    })
-  };
+    }
+  )
+  .then ( response => response.json() )
+  .catch ( error => {
+    alert(`Something went wrong - ${error}`)
+  })};
 
   // Main
   return getJSON(filename)
@@ -318,3 +314,4 @@ const newGame = (filename) => {
       return GameBuilder.postprocess(data);
     });
 };
+
