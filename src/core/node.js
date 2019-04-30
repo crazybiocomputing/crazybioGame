@@ -91,7 +91,7 @@ class Node {
   append(htmlTag) {
     // Append the media
     this.element = document.createElement(htmlTag);
-    this.element.id = this.id;
+    this.element.id = `node_${this.id}`;
     this.element.className = this.className;
 
 
@@ -134,7 +134,6 @@ class Node {
     if (dprops !== undefined ) {
       this.displayMedia(dprops);
     }
-
     // Text
     else if (displayProps.text !== undefined) {
       this.displayText(displayProps.text);
