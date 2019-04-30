@@ -76,6 +76,7 @@ class Graph {
         children = gnode.childrenID;
         ancestor = gnode;
       }
+/*
       else {
         console.log('Check if new_nodes in ' + a_node.id);
         Object.keys(gnode.actions).forEach( on_event => {
@@ -86,6 +87,7 @@ class Graph {
           }
         });
       }
+*/
     }
     else {
       return;

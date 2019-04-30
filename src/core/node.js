@@ -106,7 +106,6 @@ class Node {
    */
   getHTML(){
     return this.element;
-
   }
 
 
@@ -250,9 +249,9 @@ class Node {
       console.log(`Click with ${ev.button} on object ${ev.target.dataset.objectid} and update display of ???`);
       let node = CRAZYBIOGAME.graph.getNodeById (parseInt(ev.target.dataset.objectid) );
       // Trigger Action depending of Event in common.js
-      if (node===undefined){ // In the case of a video to catch the end of it
-        let node_id=this.id;
-        node = CRAZYBIOGAME.graph.nodeList.filter(node => node.id===node_id)[0];
+      if (node === undefined){ // In the case of a video to catch the end of it
+        let node_id = this.id;
+        node = CRAZYBIOGAME.graph.nodeList.filter(node => node.id === node_id)[0];
         console.log(node);
       }
       triggerAction(ev,node);
@@ -343,6 +342,9 @@ class Node {
   hasChildren() {
     let flag = false;
     flag = (this.childrenID === undefined) ? flag : true;
+    return flag;
+
+    /// TODO HACK Obsolete?
     if (this.actions !== undefined) {
       // TODO Object.keys(this.actions).some( (event) => this.actions[event].new_nodes !== undefined );
       flag = Object.keys(this.actions).reduce( (flag,event) => (this.actions[event].new_nodes !== undefined) ? true : flag,false);

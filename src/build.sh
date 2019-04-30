@@ -1,9 +1,11 @@
 #!/bin/bash
 
-cat ./core/node.js \
+cat ./core/drawTools.js \
+./core/node.js \
 ./core/composite.js  \
 ./core/sprite.js  \
 ./core/machine.js  \
+./core/machineConnector.js  \
 ./core/form.js  \
 ./core/lock.js  \
 ./core/item.js  \
@@ -14,6 +16,7 @@ cat ./core/node.js \
 ./core/game.js \
 ./core/events.js \
 ./core/common.js \
+./core/assetLoader.js \
 ./core/gameBuilder.js \
 ./core/gameManager.js > ../docs/javascripts/crazybiogames.js
 
