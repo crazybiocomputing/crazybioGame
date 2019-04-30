@@ -70,11 +70,18 @@ const triggerAction = (event,node) => {
         updateNodes('onclick',node);
       }
       break;
+    case 'onexit':
+      updateNodes('onexit',node);
+      break;
+    case 'onfailure':
+      updateNodes('onfailure',node);
+      break;
     case 'onsuccess':
       updateNodes('onsuccess',node);
       break;
     case 'onended':
       updateNodes('onended',node);
+      break;
     }
   });
 }
