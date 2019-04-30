@@ -26,17 +26,63 @@
 'use strict';
 
 class AssetLoader {
-  constructor(items) {
-    this.items = items;
+  /**
+   * @constructor
+   *
+   */
+  constructor(storyboard) {
+
+    // Get Assets from the storyboard
+    this.assets = this.getAssets(storyboard);
   }
+
+  /**
+   * Get all the assets contained in the storyboard except the `deferred`
+   *
+   */
+  getAssets(json) {
+
+    // Function to get media types (image,audio, video, and svg)
+    const getTypes = (keys) => {
+        const types = {
+          image: "img",
+          audio: "audio",
+          svg: "svg",
+          video: "video"
+        }
+      let filtered = keys.filter(( keyword) => Object.keys(types).includes(keyword));
+      return types[filtered[0]];
+    }
+
+    // Function to get one asset
+    const getAsset = (accu,obj) => {
+      if (obj.display.media !== undefined) {
+        let asset = {
+          id: obj.id,
+          path: obj.display.media.image ||  obj.display.media.svg || obj.display.media.video || obj.display.media.audio || "none",
+          type: getTypes(Object.keys(obj.display.media)) || "none"
+        }
+        accu.push(asset);
+      }
+      return accu;
+    }
+
+    //////////////: MAIN ://////////////
+
+    let assets = json.reduce(getAsset,[]);
+    console.log(assets);
+    return assets;
+  }
+
+
 
   /**
    * Pre-load all media
    */  
   preload() {
     let all_promises = [];
-    this.items.forEach( (item,index) => {
-      all_promises.push(this.fetch_media(item));
+    this.assets.forEach( (asset,index) => {
+      all_promises.push(this.fetch_media(asset));
     });
     console.log(all_promises);
 

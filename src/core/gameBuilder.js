@@ -224,43 +224,13 @@ class GameBuilder {
    */
   static preprocess(json) {
 
-    // Function to get media types (image,audio, video, and svg)
-    const getTypes = (keys) => {
-        const types = {
-          image: "img",
-          audio: "audio",
-          svg: "svg",
-          video: "video"
-        }
-      let filtered = keys.filter(( keyword) => Object.keys(types).includes(keyword));
-      return types[filtered[0]];
-    }
-
-    // Function to get assets
-    const getAsset = (accu,obj) => {
-      if (obj.display.media !== undefined) {
-        let asset = {
-          id: obj.id,
-          path: obj.display.media.image ||  obj.display.media.svg || obj.display.media.video || obj.display.media.audio || "none",
-          type: getTypes(Object.keys(obj.display.media)) || "none"
-        }
-        accu.push(asset);
-      }
-      return accu;
-    }
-
-    //////////////: MAIN ://////////////
-
-    // Step #1
-    let assets = json.reduce(getAsset,[]);
-    console.log(assets);
-    // Step #2 : Load Assets
+    // Pre-Load Assets
     let div_media=document.createElement("div");
     div_media.id="media";
     div_media.style.display="none";
     document.body.appendChild(div_media);
 
-    let preloader = new AssetLoader(assets);
+    let preloader = new AssetLoader(json);
     return preloader.preload().then( () => json);
 
   }
