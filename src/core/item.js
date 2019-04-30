@@ -45,10 +45,19 @@ class Item extends Composite {
 
     let item = new Item(props.id,props.class,props.description)
       .append('div')
-      .children([1000 + props.id])
       .inventoriable(props.features);
 
+    console.log(item);
     item.childNodes = [];
+    let sprite = Sprite.create({
+      id: 1000+props.id,
+      description: props.description,
+      class:'sprite',
+      display: props.display,
+      action: props.action
+    });
+    item.childNodes.push(sprite);
+    item.element.appendChild(sprite.element);
     console.log('SPRITE ',document.getElementById('node_1011'));
     return item;
   }
@@ -94,40 +103,6 @@ class Item extends Composite {
   }
   
 } // End of class Item
-
-
-
-class ItemCombo extends Composite {
-
-  /**
-   * @constructor
-   */
-  constructor (id,className,description) {
-    super(id,className,description);
-  }
-
-  static create(props) {
-
-    props.class = 'item';
-    let _item = Item.create(props);
-
-    props.class = 'sprite';
-    props.id +=1000;
-    let _sprite = Sprite.create(props);
-
-
-    let itemCombo = new ItemCombo(_item.id,'itemcombo',props.description);
-    itemCombo.children = [_item.id,_sprite.id];
-    _item.setParent(itemCombo);
-    _sprite.setParent(itemCombo);
-    itemCombo.childNodes = [_sprite,_item];
-    itemCombo.element = _sprite.element;
-
-    return itemCombo;
-  }
-
-} // End of class ItemCombo
-
 
 
 const createItem = (props) => {
