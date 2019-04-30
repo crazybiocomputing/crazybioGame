@@ -32,6 +32,7 @@ const creators = {
   "game": createGame,
   "item": createItem,
   "machine": createMachine,
+  "machine.connector": createMachineConnector,
   "machine.download": createMachineDownload,
   "machine.form": createForm,
   "machine.formDragDrop": createFormDragDrop,
@@ -66,7 +67,7 @@ const creators = {
 class GameBuilder {
 
   constructor() {
-    this.graph = new Graph();
+    // this.graph = new Graph();
   }
 
   static create(json) {
@@ -103,7 +104,7 @@ class GameBuilder {
    * Parse storyboard and create various HTML5 Elements
    *
    * @author: Jean-Christophe Taveau
-   */
+
   parse(storyboard) {
 
     const hasItems = () => {
@@ -132,17 +133,12 @@ class GameBuilder {
     const appendHTML = (node) => {
       console.log('appendHTML');
       console.log(node);
-/*      if (node.className === 'item') {
-        document.querySelector('aside ul').appendChild(node.getHTML());
-      }
-      else {
-*/
-        node.ancestor.getHTML().appendChild(node.getHTML());
-//      }
+
+      node.ancestor.getHTML().appendChild(node.getHTML());
 
     }
 
-    /**** M  a  i  n ****/
+    ///// M  a  i  n /////
     console.log('Parse/Build game');
     console.log(storyboard);
     // Step #0- Get Width and Height of game and create `div` game.
@@ -218,14 +214,17 @@ class GameBuilder {
     CRAZYBIOGAME.graph.traverse(scene_root,appendHTML);
 
   }
+   */
+
 
   /**
    * Preload assets
    *
    * @author
    */
-  preprocess(json) {
-    // Step #1 : Get Assets
+  static preprocess(json) {
+
+    // Function to get media types (image,audio, video, and svg)
     const getTypes = (keys) => {
         const types = {
           image: "img",
@@ -236,44 +235,34 @@ class GameBuilder {
       let filtered = keys.filter(( keyword) => Object.keys(types).includes(keyword));
       return types[filtered[0]];
     }
-    let assets = [];
-    const getAssets = (obj) => {
-      if(obj.display.media !== undefined){
+
+    // Function to get assets
+    const getAsset = (accu,obj) => {
+      if (obj.display.media !== undefined) {
         let asset = {
           id: obj.id,
           path: obj.display.media.image ||  obj.display.media.svg || obj.display.media.video || obj.display.media.audio || "none",
           type: getTypes(Object.keys(obj.display.media)) || "none"
         }
-        assets.push(asset);
+        accu.push(asset);
       }
+      return accu;
     }
-    json.filter(getAssets);
+
+    //////////////: MAIN ://////////////
+
+    // Step #1
+    let assets = json.reduce(getAsset,[]);
     console.log(assets);
     // Step #2 : Load Assets
-    const fetch_media=(media)=>{
-      if (media.type==="svg"){
-        fetch(media.path).then(function(response){return response.text()})
-        .then(function(svg){
-          div_media.insertAdjacentHTML("afterbegin",svg);})
-      }
-      else{
-        fetch(media.path).then(function(response){return response.blob();})
-        .then(function(myBlob){
-          var objectURL = URL.createObjectURL(myBlob);
-          let media_html=document.createElement(media.type);
-          media_html.src=objectURL;
-          media_html.id=media.id;
-          media_html.dataset.src=media.path;
-          let div_media=document.getElementById("media");
-          div_media.appendChild(media_html);});
-        }
-    }
     let div_media=document.createElement("div");
     div_media.id="media";
     div_media.style.display="none";
     document.body.appendChild(div_media);
-    assets.filter((obj) => fetch_media(obj));
-    return this;
+
+    let preloader = new AssetLoader(assets);
+    return preloader.preload().then( () => json);
+
   }
 
   /**
@@ -281,19 +270,43 @@ class GameBuilder {
    *
    * @author
    */
-  process(json) {
-      this.graph.root = Game.create(json.filter( (node) => node.class === 'game' && node.id === 0)[0]);
-      this.graph.traverseFrom(this.graph.root,func);
-      return this;
-    }
+  static process(storyboard) {
+    let graph = new Graph(storyboard);
+    graph.build();
+    CRAZYBIOGAME.graph = graph;
+    return new Promise( (resolve,reject) => resolve(storyboard));
+  }
 
   /**
    * ???
    *
    * @author
    */
-  postprocess(json) {
+  static postprocess(storyboard) {
+    const hasItems = () => document.querySelectorAll('#inventory li').length > 0;
 
+    if (hasItems) {
+      // Add events for items targets
+      // Collect all the ids and the items ids
+      let targets = CRAZYBIOGAME.graph.filterNodes(n => n.id !== 0 && !(n instanceof Item) ? n : undefined);
+      let items = CRAZYBIOGAME.graph.filterNodes( n => n.className === 'item' ? n : undefined);
+      items.forEach( item => {
+        let modifier = item.id;
+        for (let sprite of targets) {
+          // Update item props
+          let new_nodeid = sprite.id + modifier;
+          let new_nodes = targets.filter( obj => obj.id === new_nodeid);
+          if (new_nodes.length !== 0) {
+            console.log(`The item ${modifier} interacts with the object ${sprite.id} ${sprite.className}\n`);
+            // When a item is used, trigger the `onuse` action(s)
+            sprite.actions.onuse = {
+              new_nodes: new_nodes.map( node => node.id),
+              modifier: modifier
+            }
+          }
+        }
+      });
+    }
   }
 
 } // End of class GameBuilder
@@ -323,17 +336,15 @@ const newGame = (filename) => {
   };
 
   // Main
-
   return getJSON(filename)
     .then( (data) => {
       // GameBuilder.create(data)
-      let _gb = new GameBuilder();
-      console.log(data);
-      _gb.preprocess(data)
-          .process(data)
-          .postprocess(data);
-
-      return _gb;
-    } );
-
+      return GameBuilder.preprocess(data);
+    })
+    .then( (data) => {
+      return GameBuilder.process(data);
+    })
+    .then( (data) => {
+      return GameBuilder.postprocess(data);
+    });
 };
