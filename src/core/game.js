@@ -33,6 +33,9 @@
  */
 class Game extends Composite {
   
+  /**
+   * @constructor
+   */
   constructor(id,className,description) {
     super(id,className,description);
     this.element = document.getElementById('node_0');
@@ -44,22 +47,43 @@ class Game extends Composite {
       .append('main')
       .children(props.children);
     _game.childNodes = [];
+
     return _game;
   }
   
+ /**
+  * Overload Node::append
+  */
   append(htmlTag) {
     
-    // let main = 
+    // Update max width of game
+    document.getElementById('main').style.maxWidth = `${CRAZYBIOGAME.width}px`;
+
     // Create inventory
-    // Create popup
-    //
+    let inventory = document.createElement('aside');
+    inventory.id = 'inventory';
+    inventory.appendChild(document.createElement('ul'));
+    document.getElementById('main').appendChild(inventory);
+
+    // Create Game
     this.element = document.createElement('div');
-    main.appendChild(this.element); //div.appendChild()
+    this.element.id = `node_${this.id}`;
+    this.element.className = this.className;
+    document.getElementById('main').appendChild(this.element); //div.appendChild()
+
+    // Create popup
+    let popup = document.createElement('div');
+    popup.className = "modal";
+    popup.id='popup';
+    document.getElementById('main').appendChild(popup);
+
+
+    return this
   }
+
 } // End of class Game
 
 
-  
 /**
  * Create a new game
  *

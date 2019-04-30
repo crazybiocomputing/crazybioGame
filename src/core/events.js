@@ -79,7 +79,7 @@ const triggerAction = (event,node) => {
  */
 const showItems = (nodelist) => {
   nodelist.forEach( id => {
-    let node = CRAZYBIOGAME.graph.nodeList.filter( (n) => n.id === id)[0];
+    let node = CRAZYBIOGAME.graph.getNodeById(id);
     console.log(`show node #${id} ${node.element.className}`);
     document.getElementById(`item_${id}`).style.display = 'block';
     if (node.actions !== undefined && node.actions.ondisplay !== undefined) {
@@ -96,7 +96,7 @@ const showItems = (nodelist) => {
  */
 const showNodes = (nodelist) => {
   nodelist.forEach( id => {
-    let node = CRAZYBIOGAME.graph.nodeList.filter( (n) => n.id === id)[0];
+    let node = CRAZYBIOGAME.graph.getNodeById(id);
     console.log(`show node #${id} ${node.element.className}`);
     node.element.style.display = 'block';
     if (node.actions !== undefined && node.actions.ondisplay !== undefined) {
@@ -114,7 +114,7 @@ const showNodes = (nodelist) => {
  */
 const hideNodes = (nodelist) => {
   nodelist.forEach( id => {
-    let node = CRAZYBIOGAME.graph.nodeList.filter( (n) => n.id === id)[0];
+    let node = CRAZYBIOGAME.graph.getNodeById(id);
     node.element.style.display = 'none';
   })
 }

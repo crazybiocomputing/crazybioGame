@@ -33,34 +33,56 @@ class Graph {
   /**
    * @constructor
    */
-  constructor() {
-    this.root;
-    this.nodeList = [];
+  constructor(storyboard) {
+    this.storyboard = storyboard;
+    this.root = this._createRoot();
+  }
+
+  /**
+   * Build Scene graph from this storyboard
+   *
+   * @author Jean-Christophe Taveau
+   */
+  build() {
+    this.traverseFrom(this.storyboard.filter( (node) => node.class === 'scene' && node.id === 1)[0],this.root);
   }
 
   /**
    * 
    */
-  traverseFrom(a_node) {
+  traverseFrom(a_node,parent) {
     let children;
     let ancestor;
-    if (a_node.hasChildren()) {
+    let gnode; // Node in the graph
+
+    // Step #1 - Create graph node
+    let func = creators[a_node.class];
+    if (func !== undefined) {
+      gnode = func(a_node);
+      gnode.ancestor = parent;
+      parent.childNodes.push(gnode);
+      // HACK - Exception for `scene`
+      let htmlParent = (gnode.className.includes('scene')) ? this.root : parent;
+      htmlParent.element.appendChild(gnode.element);
+    }
+    // Step #2: Create children and traverse...
+    if (gnode.hasChildren()) {
       // ???
-      if (a_node.className.includes('scene') ) {
-        children = a_node.childrenID;
-        ancestor = this.root;
+      if (gnode.className.includes('scene') ) {
+        children = a_node.childrenID; // ??
+        gnode.ancestor = this.root;
       }
-      if (a_node.childrenID !== undefined) {
-        children = a_node.childrenID;
-        ancestor = a_node;
+      if (gnode.childrenID !== undefined) {
+        children = gnode.childrenID;
+        ancestor = gnode;
       }
       else {
         console.log('Check if new_nodes in ' + a_node.id);
-        Object.keys(a_node.actions).forEach( on_event => {
-          if (a_node.actions[on_event].new_nodes !== undefined) {
-            children = a_node.actions[on_event].new_nodes;
-            ancestor = a_node.ancestor;
-            console.log(`actions.then... id ${a_node.id} ${a_node.ancestor.id}`);
+        Object.keys(gnode.actions).forEach( on_event => {
+          if (gnode.actions[on_event].new_nodes !== undefined) {
+            children = gnode.actions[on_event].new_nodes;
+            ancestor = gnode.ancestor;
+            console.log(`actions.then... id ${gnode.id} ${gnode.ancestor.id}`);
           }
         });
       }
@@ -71,21 +93,108 @@ class Graph {
     console.log(children);
     for (let id of children) {
       console.log(`id ${id} <-- ${ancestor.id}`);
-      let nodeChild = this.nodeList.filter( (node) => node.id === id)[0];
-      ancestor.childNodes.push(nodeChild);
-      nodeChild.ancestor = ancestor;
-      this.traverseFrom(nodeChild);
+      let child = this.storyboard.filter( (node) => node.id === id)[0];
+      this.traverseFrom(child,gnode);
     }
   }
-
 
   traverse(a_node,func) {
-    if (a_node.hasChildNodes()) {
+    let result = func(a_node);
+    if (result === undefined && a_node.hasChildNodes()) {
       for (let nodeChild of a_node.childNodes) {
-        console.log(nodeChild);
-        func(nodeChild);
-        this.traverse(nodeChild,func);
+        result = this.traverse(nodeChild,func);
+        if (result !== undefined) {
+          return result;
+        }
       }
     }
+    return result;
   }
+
+  traverse2(a_node,func) {
+    let array = [];
+    let result = func(a_node);
+    if (result !== undefined) {
+      array.push(result);
+    }
+    if (a_node.hasChildNodes()) {
+      for (let nodeChild of a_node.childNodes) {
+        array = array.concat(this.traverse2(nodeChild,func) );
+      }
+    }
+    return array;
+  }
+
+  /**
+   * Get the node with this id
+   *
+   */
+  getNodeById(id) {
+    return this.traverse(this.root,Graph._getNodeById(id));
+  }
+
+  /**
+   * Get the node with this id
+   *
+   */
+  filterNodes(func) {
+    return this.traverse2(this.root,func);
+  }
+
+  /*
+   * Private
+   */
+  static _createNode(parent) {
+    return function (a_node) {
+      let func = creators[a_node.class];
+      if (func !== undefined) {
+        gnode = func(a_node);
+        gnode.ancestor = a_node.parent;
+        parent.childNodes.push(gnode);
+        parent.element.appendChild(gnode.element);
+      }
+      return gnode;
+    }
+  }
+
+  static _getNodeById(id) {
+    return function(a_node) {
+      return (a_node.id === id) ? a_node : undefined;
+    }
+  }
+
+  /*
+   * Private
+   */
+  _createRoot() {
+    // Check node ID=0
+    let id0 = this.storyboard.filter( (obj) => obj.id === 0);
+    console.log(id0);
+    let props = {id:0,class:'game'};
+    if (id0.length === 0) {
+      props.description = 'Game root';
+    }
+    else {
+      props.description = id0[0].description || 'Game Root';
+      props.misc = id0[0];
+    }
+
+    // Step #2: Get children of game (aka scene, scene.closeup,etc.)
+    let scenes = this.storyboard.filter( (obj) => obj.class.includes('scene'));
+    props.children = scenes.map( (s) => s.id);
+    props.display = {
+      width: scenes[0].display.width,
+      height: scenes[0].display.height,
+    }
+
+    // Step #3 - Update global size
+    CRAZYBIOGAME.width = props.display.width;
+    CRAZYBIOGAME.height = props.display.height;
+    console.log(props);
+
+    // Step #4 - Create Game graph node
+    return Game.create(props);
+  }
+
+
 }

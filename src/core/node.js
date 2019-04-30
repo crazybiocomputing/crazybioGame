@@ -150,13 +150,17 @@ class Node {
 
   displayMedia(propsGraphics) {
     this.displayType = Node.MEDIA;
-    
-    // Append the media
+    console.log(this.id, `#media #asset_${this.id}`);
+    let medialoaded = document.querySelector(`#media #asset_${this.id}`);
+    this.element.appendChild(medialoaded);
+
+/*    // Append the media
     if (propsGraphics.element !== undefined) {
       // WARNING - DOES NOT WORK WITH JSON STORYBOARD!!!
       this.element.appendChild(propsGraphics.element);
     }
     else {
+
       // Check the media type and create the appropriate HTML5 element
       let src = propsGraphics.path || propsGraphics.image;
       let media;
@@ -173,14 +177,13 @@ class Node {
         media.src = propsGraphics.audio;
       }
       else {
+
         alert("Could not find the media source: image, video or audio");
       }
-      
-      media.addEventListener('dragstart', () => false,false); 
-      this.element.appendChild(media); 
-    }
+*/
+      medialoaded.addEventListener('dragstart', () => false,false); 
+ 
 
-    
     // Add focus if any
     this.focus = (propsGraphics.focus !== undefined) ? propsGraphics.focus : ["R",0,0,this.width,this.height];
     // Add style if any
@@ -242,7 +245,7 @@ class Node {
   
     const doIt = (ev) => {
       console.log(`Click with ${ev.button} on object ${ev.target.dataset.objectid} and update display of ???`);
-      let node = CRAZYBIOGAME.graph.nodeList.filter ( node => node.id === parseInt(ev.target.dataset.objectid) )[0];
+      let node = CRAZYBIOGAME.graph.getNodeById (parseInt(ev.target.dataset.objectid) );
       // Trigger Action depending of Event in common.js
       triggerAction(ev,node);
     }
