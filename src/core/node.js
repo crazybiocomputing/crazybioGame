@@ -250,8 +250,7 @@ class Node {
       let node = CRAZYBIOGAME.graph.getNodeById (parseInt(ev.target.dataset.objectid) );
       // Trigger Action depending of Event in common.js
       if (node === undefined){ // In the case of a video to catch the end of it
-        let node_id = this.id;
-        node = CRAZYBIOGAME.graph.nodeList.filter(node => node.id === node_id)[0];
+        node = CRAZYBIOGAME.graph.getNodeById(this.id);
         console.log(node);
       }
       triggerAction(ev,node);
