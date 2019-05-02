@@ -43,8 +43,7 @@ const updateNodes = (eventType,node) => {
     showItems(node.actions[eventType].new_items);
   }
   if (node.actions[eventType].play !== undefined){
-    let figure = document.getElementById(node.actions[eventType].play[0]);
-    let video = figure.children[0];
+    let video = document.getElementById(`asset_${node.actions[eventType].play[0]}`);
     video.play();
   }
   if (node.actions[eventType].popup !== undefined) {
