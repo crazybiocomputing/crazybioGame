@@ -90,8 +90,8 @@ class MachineConnector extends Machine {
 
         // Trigger Action!! ... Reset if it fails.
         let total = this.polyline.points.reduce ( (sum,p) => sum + p.value,0);
-        console.log(`${total} === ${propsFeatures.exit}`);
-        if (propsFeatures.exit === total) {
+        console.log(`${total} === ${propsFeatures.connectable.exit}`);
+        if (propsFeatures.connectable.exit === total) {
           triggerAction('onexit',this);
         }
         else {

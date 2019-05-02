@@ -11,7 +11,7 @@
         "image": "assets/office3DBackground.png"
       }
     },
-    "children": [2,3,11,21,34,41,62],
+    "children": [2,3,11,121,34,41,62],
     "children_": [
       {"comment": "HACK - NOT YET IMPLEMENTED"},
       {"comment": "id: link_to_nodeID, focus: area_sensitive_to_clicks"},
@@ -130,6 +130,16 @@
     }
   },
   {
+    "id": 121,
+    "class": "switch",
+    "description": "Cabinet locked/unlocked",
+    "display": {
+      "node": [21]
+    },
+    "children": [21,22]
+  },
+
+  {
     "id": 21,
     "class": "sprite",
     "description": "The exit door...",
@@ -191,7 +201,7 @@
     "display": {
       "node": [35]
     },
-    "children": [35,46]
+    "children": [35,46,47]
   },
   {
     "id": 35,
@@ -323,7 +333,7 @@
     "display": {
       "node": [67]
     },
-    "children": [67,83,92]
+    "children": [67,83]
   },
   {
     "id": 67,
@@ -369,7 +379,7 @@
         "circle": [512,350,33,0,9]
       }
     },
-    "children": [92],
+    "children": [85,92],
     
     "action": {
       "comment": "Just for debug",
@@ -391,23 +401,27 @@
     "class": "machine.connector",
     "description": "Grid with connectable wire...",
     "display": {
-      "width": 58,
-      "height": 98,
-      "position": [24,196],
+      "width": 512,
+      "height": 468,
+      "position": [24,30],
       "media": {
         "svg": "assets/gridConnectors_simple.svg"
       }
     },
     "action": {
       "comment": "Just for debug",
-      "onsuccess": {
-        "del_nodes": [42,83]
+      "onexit": {
+        "del_nodes": [83,85],
+        "new_nodes": [92],
+        "change_node": [42,48]
       }
     },
     "features": {
       "connectable": {
-        "values": [-1,1,2,3,4,5,6],
-        "numVertices": 2
+        "values": [-1,1,2,4,8,16,32],
+        "numVertices": 2,
+        "exit": 18
+
       }
     }
   },
@@ -416,13 +430,15 @@
     "class": "sprite",
     "description": "Grid with Electricity ON...",
     "display": {
-      "width": 400,
+      "width": 512,
       "height": 468,
       "position": [24,30],
       "media": {
-        "image": "assets/gridConnectors_simple.svg"
-      }
-
+        "svg": "assets/gridConnectors_simple.svg",
+        "style":{
+          "display":"none"
+        }
+    }
     }
   }
 ]
