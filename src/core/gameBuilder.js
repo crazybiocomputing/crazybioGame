@@ -252,6 +252,16 @@ class GameBuilder {
   static postprocess(storyboard) {
     const hasItems = () => document.querySelectorAll('#inventory li').length > 0;
 
+
+    //Create Inventory in div 'game'
+    let inventory = document.createElement('aside');
+    inventory.id = 'inventory';
+    inventory.appendChild(document.createElement('ul'));
+    document.getElementById('node_0').appendChild(inventory);
+
+    //Max width of the game
+    document.getElementById("node_0").style.maxWidth = `${CRAZYBIOGAME.width}px`;
+
     if (hasItems) {
       // Add events for items targets
       // Collect all the ids and the items ids
