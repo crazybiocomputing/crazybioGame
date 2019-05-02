@@ -57,7 +57,7 @@ class Game extends Composite {
   append(htmlTag) {
     
     // Update max width of game
-    document.getElementById('main').style.maxWidth = `${CRAZYBIOGAME.width}px`;
+    // document.getElementById('main').style.maxWidth = `${CRAZYBIOGAME.width}px`;
 
     // Create inventory
     let inventory = document.createElement('aside');
