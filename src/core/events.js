@@ -43,13 +43,32 @@ const updateNodes = (eventType,node) => {
     showItems(node.actions[eventType].new_items);
   }
   if (node.actions[eventType].play !== undefined){
-    let figure = document.getElementById(node.actions[eventType].play[0]);
-    let video = figure.children[0];
+    let video = document.getElementById(`asset_${node.actions[eventType].play[0]}`);
     video.play();
   }
   if (node.actions[eventType].popup !== undefined) {
     displayPopup(node.actions[eventType].popup);
   }
+
+  if (node.actions[eventType].change_node !== undefined) {
+    changeNodes(node.actions[eventType].change_node);
+  }
+
+}
+
+/**
+ * Change new_nodes on  on_click events
+ *
+ * @param {array} nodelist - List of Objects
+ * @author Marina Boudin Vincent Casamayou Domitille Coq--Etechgaray Coralie Muller
+ */
+const changeNodes = (nodelist) => {
+  console.log(nodelist[0]);
+  console.log(nodelist[1]);
+  let node_to_change = CRAZYBIOGAME.graph.getNodeById(nodelist[0]); 
+  node_to_change.actions.onclick = {"new_nodes":[nodelist[1]]};
+  updateNodes('onclick',node_to_change);
+  console.log(node_to_change);
 }
 
 /**
