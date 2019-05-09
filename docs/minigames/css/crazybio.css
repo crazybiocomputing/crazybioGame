@@ -3,13 +3,16 @@ html {
   padding: 0;
 }
 
+main {
+  margin: 0px auto 0px auto;
+}
+
 .hover_group:hover {
   opacity: 1;
 }
 
 #game {
   position: relative;
-  margin: 0px auto 0px auto;
   padding: 0;
   height: auto;
 }
@@ -127,7 +130,7 @@ section .close {
 
 /* Modal */
 #popup,.modal {
-  position: absolute;
+  position: relative;
   color: black;
   top: 70px;
   width: 100%;
@@ -223,18 +226,17 @@ section .close {
   color: white;
 }
 
-
 aside
 {
-    position: relative;
-    left: 101%;
-    width: 100px;
-    height: 466px;
-    /*border: solid 2px black;*/
-    padding: 0;
-    color: white;
-    font-size: 0.9em;
-    
+  float:left;
+  position: relative;
+  left: 101%;
+  width: 100px;
+  height: 466px;
+  /*border: solid 2px black;*/
+  padding: 0;
+  color: white;
+  font-size: 0.9em;
 }
 
 aside ul {
@@ -308,3 +310,8 @@ aside .checked > img {
   }
 }
 
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
