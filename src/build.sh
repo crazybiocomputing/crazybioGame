@@ -8,6 +8,7 @@ cat ./core/drawTools.js \
 ./core/machineConnector.js  \
 ./core/form.js  \
 ./core/lock.js  \
+./core/dialog.js \
 ./core/item.js  \
 ./core/deferred.js  \
 ./core/scene.js  \
