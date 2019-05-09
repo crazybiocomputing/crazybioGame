@@ -108,10 +108,11 @@ class Node {
    * @param {string} className - Object type
    * @param {string} description - Description
    */
-  constructor(id,className,description) {
+  constructor(id,className,description,parent) {
     this.id = id;
     this.className = className;
     this.description = description;
+    this.parent = parent;
     this.element; // HTML5
     this.displayType = Node.NONE;
   }
@@ -139,8 +140,8 @@ class Node {
   /**
    * Create a new node
    */
-  static create(id,className,description) {
-    return new Node(id,className,description);
+  static create(id,className,description,parent) {
+    return new Node(id,className,description,parent);
   }
 
   /**
@@ -188,14 +189,33 @@ class Node {
       alert(`The object #${this.id} must have a 'display' property`);
       return this;
     }
-    this.width = displayProps.width || 0;
-    this.height = displayProps.height || 0;
-    this.topleft = displayProps.position || [0,0];
+    // Special case: "display": "inherit"
+    if (displayProps === 'inherit') {
+      console.log('DISPLAY PARENT ',this.parent);
+      this.width =  this.parent.width;
+      this.height =  this.parent.height;
+      this.topleft =  this.parent.topleft;
+      this.element.style.left = this.parent.element.style.left;
+      this.element.style.top = this.parent.element.style.top;
+      this.element.style.width = this.parent.element.style.width;
+      this.element.style.height = this.parent.element.style.height;
+      this.displayType = this.parent.displayType;
+      // TODO HACK - Only `target`
+      this.target = this.parent.target;
+      // let src = document.querySelector(`#node_${this.parent.id} svg`);
+      // this.element.appendChild(src.cloneNode(true));
+      return this;
+    }
+    else {
+      this.width = displayProps.width || 0;
+      this.height = displayProps.height || 0;
+      this.topleft = displayProps.position || [0,0];
 
-    this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
-    this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
-    this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
-    this.element.style.height = (displayProps.target === undefined) ? 'auto' : `${this.height / CRAZYBIOGAME.height * 100}%`;
+      this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
+      this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
+      this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
+      this.element.style.height = (displayProps.target === undefined) ? 'auto' : `${this.height / CRAZYBIOGAME.height * 100}%`;
+    }
 
     // Media: Image, video, audio?, etc.
     let dprops = displayProps.graphics || displayProps.media;
@@ -222,6 +242,7 @@ class Node {
     this.displayType = Node.MEDIA;
     console.log(this.id, `#media #asset_${this.id}`);
     let medialoaded = document.querySelector(`#media #asset_${this.id}`);
+    console.log(`Size: ${medialoaded.width}x ${medialoaded.height}`)
     this.element.appendChild(medialoaded);
 
 /*    // Append the media
@@ -479,12 +500,12 @@ class Node {
  */
 class Composite extends Node {
 
-  constructor(id,className,description) {
-    super(id,className,description);
+  constructor(id,className,description,parent) {
+    super(id,className,description,parent);
   };
   
   static create(props) {
-    return new Composite(props.id,props.class,props.description)
+    return new Composite(props.id,props.class,props.description,props.parent)
       .append('article')
       .display(props.display)
       .children(props.childNodes) // Pre-calculated in `preprocess` of game.js
@@ -586,8 +607,8 @@ const createTarget = (node) => {
  */
 class Sprite extends Node {
 
-  constructor (id,className,description) {
-    super(id,className,description);
+  constructor (id,className,description,parent) {
+    super(id,className,description,parent);
   }
 
   static create(props) {
@@ -1990,12 +2011,12 @@ const createScene = (props) => {
  */
 class Switch extends Composite {
   
-  constructor(id,className,description) {
-    super(id,className,description);
+  constructor(id,className,description,parent) {
+    super(id,className,description,parent);
   };
   
   static create(props) {
-    return new Switch(props.id,props.class,props.description)
+    return new Switch(props.id,props.class,props.description,props.parent)
       .append('div')
       .display(props.display)
       .children(props.children); 
@@ -2004,7 +2025,7 @@ class Switch extends Composite {
   display(displayProps) {
     // Get information from node to display...
     // TODO
-    return this;
+    return super.display(displayProps);
   }
 }
 
@@ -2082,6 +2103,7 @@ class Graph {
     // Step #1 - Create graph node
     let func = creators[a_node.class];
     if (func !== undefined) {
+      a_node.parent = parent;
       gnode = func(a_node);
       gnode.ancestor = parent;
       parent.childNodes.push(gnode);
@@ -2100,28 +2122,16 @@ class Graph {
         children = gnode.childrenID;
         ancestor = gnode;
       }
-/*
-      else {
-        console.log('Check if new_nodes in ' + a_node.id);
-        Object.keys(gnode.actions).forEach( on_event => {
-          if (gnode.actions[on_event].new_nodes !== undefined) {
-            children = gnode.actions[on_event].new_nodes;
-            ancestor = gnode.ancestor;
-            console.log(`actions.then... id ${gnode.id} ${gnode.ancestor.id}`);
-          }
-        });
+
+      console.log(children);
+      for (let id of children) {
+        console.log(`id ${id} <-- ${ancestor.id}`);
+        let child = this.storyboard.filter( (node) => node.id === id)[0];
+        this.traverseFrom(child,gnode);
       }
-*/
+
     }
-    else {
-      return;
-    }
-    console.log(children);
-    for (let id of children) {
-      console.log(`id ${id} <-- ${ancestor.id}`);
-      let child = this.storyboard.filter( (node) => node.id === id)[0];
-      this.traverseFrom(child,gnode);
-    }
+    return;
   }
 
   traverse(a_node,func) {

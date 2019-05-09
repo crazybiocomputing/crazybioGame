@@ -1,428 +1,604 @@
- [
+[
   {
     "id": 1,
-    "class": "scene",
-    "description": "A locked office ...",
-    "help": ["Hint #1","Hint #2","Hint #3"],
+    "class": "scene", 
+    "description": "A locked office ...", 
     "display": {
       "width": 725,
-      "height": 426,
+      "height": 426, 
       "media": {
         "image": "assets/office3DBackground.png"
       }
-    },
-    "children": [2,3,11,21,34,41,62],
+    }, 
+    "help": [
+      "Hint #1", 
+      "Hint #2", 
+      "Hint #3"
+    ], 
+    "children": [
+      2, 
+      3, 
+      11, 
+      20, 
+      34, 
+      41, 
+      62
+    ], 
     "children_": [
-      {"comment": "HACK - NOT YET IMPLEMENTED"},
-      {"comment": "id: link_to_nodeID, focus: area_sensitive_to_clicks"},
-      {"id": 10, "focus": ["P","M 110 33,147 33,157 47,120 47Z"]},
-      {"id": 21, "focus": ["C",356,94,33]},
-      {"id": 35, "focus": ["C",200,350,33,42]},
-      {"id": 42, "focus": ["C",356,350,33,67]},
+      {"comment": "HACK - NOT YET IMPLEMENTED"}, 
+      {"comment": "id: link_to_nodeID, focus: area_sensitive_to_clicks"}, 
+      {"id": 2}, 
+      {"id": 3,"focus": ["E", 390, 126, 40, 46] }, 
+      {"id": 21,"focus": ["C", 356, 94, 33] }, 
+      {"id": 35, "focus": ["C", 200, 350, 33, 42] }, 
+      {"id": 42, "focus": ["C", 356, 350, 33, 67] }, 
       {"id": 67}
     ]
-  },
+  }, 
   {
     "id": 2,
-    "class": "sprite",
-    "description": "Frame...",
+    "class": "sprite", 
+    "description": "Frame...", 
     "display": {
-      "width":82,
-      "height":134,
-      "position":[350,73],
+      "height": 134, 
       "media": {
         "image": "assets/ellipse_frame.png"
-      }
-    }
-  },
-  {
-    "id": 3,
-    "class": "sprite",
-    "description": "Portrait...",
-    "display": {
-      "width":80,
-      "height":134,
-      "position":[350,80],
-      "media": {
-        "comment": "layers could be useful",
-        "layers": [
-          {
-            "image": "assets/ellipse_frame.png"
-          },
-          {
-            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Joseph_Fourier.jpg/220px-Joseph_Fourier.jpg",
-            "style": {
-              "clip-path":"ellipse(35px 46px at 40px 46px)"
-            }
-          }
-        ],
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Joseph_Fourier.jpg/220px-Joseph_Fourier.jpg",
-        "style": {
-          "clip-path":"ellipse(35px 46px at 40px 46px)"
-        }
-      }
-    },
-    "action": {
-      "onclick": {
-        "popup": {
-          "header": "A Portrait...of Joseph Fourier",
-          "body": ["<center>Hmmm ... a French Mathematician....<br> Maybe I have to checked in <strong>Wikipedia</strong> for more information</center><br>"],
-          "footer": "Yes, Joseph Fourier ...&nbsp;"
-        }
-      }
-    }
-  },
-  {
-    "id": 11,
-    "class": "item",
-    "description": "Key...",
-    "display": {
-      "width":58,
-      "height":65,
-      "position":[226,140],
-      "target": {
-        "data": ["R",0,0,58,65]
-      }
-    },
-    "action": {
-      "onclick": {
-        "new_items": [11],
-        "popup": {
-          "header": "A key...",
-          "body": ["<center><img src=\"assets/officeKey.png\" width=200></center><br>"],
-          "footer": "I take it. That could be useful ...&nbsp;"
-        }
-      }
-    },
-    "features": {
-      "comment_1": "Create a 150x150 image for inventory",
-      "image": "./assets/officeKey.png",
-      "comment_2": "Create a 32x32 thumbnail of media",
-      "thumbnail": "assets/officeKey_cursor.png"
-    }
-  },
-  {
-    "id": 16,
-    "class": "item",
-    "description": "A Wire...",
-    "display": {
-      "width":100,
-      "height":100,
-      "position":[355,200],
-      "target": {
-        "data": ["P","M 58 0,111 20,58 41,0 13Z"]
-      }
-    },
-    "action": {
-      "onclick": {
-        "del_nodes":[16],
-        "new_items": [16],
-        "popup": {
-          "header": "An Electrical Wire...",
-          "body": ["<center><img src=\"assets/officeWire.png\" width=200></center><br>"],
-          "footer": "I take it. That could be useful ...&nbsp;"
-        }
-      }
-    },
-    "features": {
-      "image": "./assets/officeWire.png",
-      "thumbnail": "./assets/officeWire_cursor.png"
-    }
-  },
-  {
-    "id": 21,
-    "class": "sprite",
-    "description": "The exit door...",
-    "display": {
-      "width": 58,
-      "height": 219,
-      "position": [96,124],
-      "target": {
-        "data": ["P","M 0 24,56 0,58 180,3 219Z"]
-      }
-    },
-    "action": {
-      "onclick": {
-        "new_nodes": [22],
-        "popup": {
-          "header": "The exit door... ",
-          "body": ["It is locked.<br>"],
-          "footer": "U n f o r t u n a t e l y ...&nbsp;"
-        }
-      }
-    }
-  },
-  {
-    "id": 22,
-    "class": "scene.closeup",
-    "description": "The exit door...",
-    "display": {
-      "width": 700,
-      "height": 467,
-      "media": {
-        "image": "assets/officeDoor.png",
-        "style": {
-          "display":"none"
-        }
-      }
-    },
-    "children": [27]
-  },
-  {
-    "id": 27, 
-    "class": "machine.lockText", 
-    "description": "A lock symbol", 
-    "display": {
-      "position": [470,202],
-      "width": 73,
-      "height": 76,
-      "target" : {
-        "data": ["P", "M 0 0,73 0,73 76,0 76Z"]
-      }
-    },
-    "features": {
-      "exit": "9372"
+      }, 
+      "position": [
+        350, 
+        73
+      ], 
+      "width": 82
     }
   }, 
   {
-    "id": 34,
-    "class": "switch",
-    "description": "Cabinet locked/unlocked",
+    "id": 3,
+    "class": "sprite", 
+    "description": "Portrait...", 
     "display": {
-      "node": [35]
-    },
-    "children": [35,46]
-  },
-  {
-    "id": 35,
-    "class": "sprite",
-    "description": "Locked Cabinet...",
-    "display": {
-      "width": 247,
-      "height": 93,
-      "position": [295,230],
+      "height": 134, 
       "media": {
-        "image": "assets/office3DCabinet.png",
-        "focus": ["P","M 2 27,31 0,197 0, 220 26,201 92,12 92Z"]
-      }
+        "comment": "layers could be useful", 
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Joseph_Fourier.jpg/220px-Joseph_Fourier.jpg", 
+        "layers": [
+          {
+            "image": "assets/ellipse_frame.png"
+          }, 
+          {
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Joseph_Fourier.jpg/220px-Joseph_Fourier.jpg", 
+            "style": {
+              "clip-path": "ellipse(35px 46px at 40px 46px)"
+            }
+          }
+        ], 
+        "style": {
+          "clip-path": "ellipse(35px 46px at 40px 46px)"
+        }
+      }, 
+      "position": [
+        350, 
+        80
+      ], 
+      "width": 80
     },
     "action": {
       "onclick": {
         "popup": {
-          "header": "A locked Cabinet...",
-          "body": ["<center><img src=\"assets/officeCabinet.png\" width=400></center><br>"]
+          "body": [
+            "<center>Hmmm ... a French Mathematician....<br> Maybe I have to checked in <strong>Wikipedia</strong> for more information</center><br>"
+          ], 
+          "footer": "Yes, Joseph Fourier ...&nbsp;", 
+          "header": "A Portrait...of Joseph Fourier"
         }
       }
     }
-  },
+  }, 
   {
-    "id": 41,
-    "class": "switch",
-    "description": "TV on/off",
-    "display": {
-      "node": [42]
-    },
-    "children": [42,48]
-  },
-  {
-    "id": 42,
-    "class": "sprite",
-    "description": "TV screen off...",
-    "display": {
-      "width": 103,
-      "height": 148,
-      "position": [572,134],
-      "target": {
-        "data": ["P","M 0 0,103 37,103 148,0 100Z"]
-      }
-    },
     "action": {
       "onclick": {
+        "new_items": [
+          11
+        ], 
         "popup": {
-          "header": "A TV screen... There is no electricity.",
-          "body": ["<center><img src=\"assets/officeTV.png\" width=400></center><br>"]
+          "body": [
+            "<center><img src=\"assets/officeKey.png\" width=200></center><br>"
+          ], 
+          "footer": "I take it. That could be useful ...&nbsp;", 
+          "header": "A key..."
         }
-      }
-    }
-  },
-  {
-    "id": 46,
-    "class": "sprite",
-    "description": "Unlocked Cabinet...",
-    "display": {
-      "width": 261,
-      "height": 120,
-      "position": [280,230],
-      "media": {
-        "image": "assets/office3DCabinetOpen.png",
-        "focus": ["P","M 0 120,22 84,17 28,45 0,208 0,233 27,221 84,238 118Z"],
-        "style": {
-          "display":"none"
-        }
-      }
-    },
-    "action": {
-      "onclick": {
-        "del_nodes": [11,35],
-        "new_nodes": [47]
-      }
-    }
-  },
-  {
-    "id": 47,
-    "class": "scene.closeup",
-    "description": "Unlocked Cabinet... Closeup",
-    "display": {
-      "width": 700,
-      "height": 467,
-      "media": {
-        "image": "assets/officeCabinetOpen.png",
-        "style": {
-          "display":"none"
-        }
-      }
-    },
-    "children": [16]
-  },
-  {
-    "id": 48,
-    "class": "scene.closeup",
-    "description": "TV screen on...",
-    "display": {
-      "width": 710,
-      "height": 467,
-      "media": {
-        "image": "assets/screen.gif",
-        "style": {
-          "display":"none"
-        }
-      }
-    },
-    "children": [53]
-  },
-  {
-    "id": 53,
-    "class": "machine.download",
-    "description": "Download Machine",
-    "display": {
-      "position": [287,120],
-      "width": 140,
-      "height": 140,
-      "target": {
-        "data": ["C", 70, 70, 65]
       }
     }, 
-    "features": {
-      "download": "assets/secret.tif"
-    }
-  },
-  {
-    "id": 62,
-    "class": "switch",
-    "description": "Electrical Grid",
+    "class": "item", 
+    "description": "Key...", 
     "display": {
-      "node": [67]
-    },
-    "children": [67,83,92]
-  },
+      "height": 65, 
+      "position": [
+        226, 
+        140
+      ], 
+      "target": {
+        "data": [
+          "R", 
+          0, 
+          0, 
+          58, 
+          65
+        ]
+      }, 
+      "width": 58
+    }, 
+    "features": {
+      "comment_1": "Create a 150x150 image for inventory", 
+      "comment_2": "Create a 32x32 thumbnail of media", 
+      "image": "./assets/officeKey.png", 
+      "thumbnail": "assets/officeKey_cursor.png"
+    }, 
+    "id": 11
+  }, 
   {
-    "id": 67,
-    "class": "sprite",
-    "description": "Grid with pins...",
+    "action": {
+      "onclick": {
+        "del_nodes": [
+          16
+        ], 
+        "new_items": [
+          16
+        ], 
+        "popup": {
+          "body": [
+            "<center><img src=\"assets/officeWire.png\" width=200></center><br>"
+          ], 
+          "footer": "I take it. That could be useful ...&nbsp;", 
+          "header": "An Electrical Wire..."
+        }
+      }
+    }, 
+    "class": "item", 
+    "description": "A Wire...", 
+    "display": {
+      "height": 100, 
+      "position": [
+        355, 
+        200
+      ], 
+      "target": {
+        "data": [
+          "P", 
+          "M 58 0,111 20,58 41,0 13Z"
+        ]
+      }, 
+      "width": 100
+    }, 
+    "features": {
+      "image": "./assets/officeWire.png", 
+      "thumbnail": "./assets/officeWire_cursor.png"
+    }, 
+    "id": 16
+  }, 
+  {
+    "id": 20,
+    "class": "switch", 
+    "description": "Exit door...", 
     "display": {
       "width": 58,
-      "height": 98,
-      "position": [24,196],
+      "height": 219, 
+      "node": [21], 
+      "position": [ 96,124], 
       "target": {
-        "data": ["P","M 0 20,52 0,58 74,6 98Z"]
+        "data": [
+          "P", 
+          "M 0 24,56 0,58 180,3 219Z"
+        ]
+      }
+    },
+    "children": [22, 21,26]
+  }, 
+  {
+    "id": 21,
+    "class": "sprite", 
+    "description": "The exit door...", 
+    "display": "inherit",
+    "action": {
+      "onclick": {
+        "popup": {
+          "body": [
+            "It is locked.<br>"
+          ], 
+          "footer": "U n f o r t u n a t e l y ...&nbsp;", 
+          "header": "The exit door... "
+        }
+      }
+    }
+  }, 
+  {
+    "id": 22,
+    "class": "sprite", 
+    "description": "The exit door...", 
+    "display": {
+      "width": 58,
+      "height": 219,
+      "position": [ 96,124],  
+       "target": {
+        "data": ["P", "M 0 24,56 0,58 180,3 219Z"]
+       },
+      "style": {
+        "display": "none"
       }
     },
     "action": {
       "onclick": {
-        "popup": {
-          "header": "A Grid with pins...",
-          "body": ["<center><img src=\"assets/officeGrid.png\" width=400></center><br>"]
-        }
+        "new_nodes": [26]
       }
     }
-  },
+  }, 
   {
-    "id": 83,
-    "class": "scene.closeup",
-    "description": "Machine ready - Grid with pins + wire...",
+    "id": 26,
+    "class": "scene.closeup", 
+    "description": "The exit door...", 
     "display": {
-      "width": 710,
-      "height": 467,
+      "width": 700,
+      "height": 467, 
       "media": {
-        "image": "assets/officeGridBackground.png",
+        "image": "assets/officeDoor.png", 
         "style": {
           "display": "none"
         }
-      },
-      "shapeset": {
-        "comment": "cx,cy,radius,link to nodeID,modifier",
-        "circle": [200,94,33,0,1],
-        "circle": [356,94,33,0,3],
-        "circle": [512,94,33,0,5],
-        "circle": [200,350,33,0,4],
-        "circle": [356,350,33,0,6],
-        "circle": [512,350,33,0,9]
       }
-    },
-    "children": [92],
-    
-    "action": {
-      "comment": "Just for debug",
-      "onclick": {
-        "new_nodes": [48],
-        "del_nodes": [42,83]
-      },
-      "onsuccess": {
-        "new_nodes": [48],
-        "del_nodes": [42,83]
-      }
-    },
-    "features": {
-      "clickable": 2
-    }
-  },
+    }, 
+    "children": [27]
+  }, 
   {
-    "id": 85,
-    "class": "machine.connector",
-    "description": "Grid with connectable wire...",
+    "class": "machine.lockText", 
+    "description": "A lock symbol", 
     "display": {
-      "width": 58,
-      "height": 98,
-      "position": [24,196],
+      "height": 76, 
+      "position": [
+        485, 
+        185
+      ], 
+      "target": {
+        "data": [
+          "P", 
+          "M 0 0,73 0,73 76,0 76Z"
+        ]
+      }, 
+      "width": 73
+    }, 
+    "features": {
+      "exit": "9372"
+    }, 
+    "id": 27
+  }, 
+  {
+    "children": [
+      35, 
+      46, 
+      47
+    ], 
+    "class": "switch", 
+    "description": "Cabinet locked/unlocked", 
+    "display": {
+      "node": [
+        35
+      ]
+    }, 
+    "id": 34
+  }, 
+  {
+    "action": {
+      "onclick": {
+        "popup": {
+          "body": [
+            "<center><img src=\"assets/officeCabinet.png\" width=400></center><br>"
+          ], 
+          "header": "A locked Cabinet..."
+        }
+      }
+    }, 
+    "class": "sprite", 
+    "description": "Locked Cabinet...", 
+    "display": {
+      "height": 93, 
+      "media": {
+        "focus": [
+          "P", 
+          "M 2 27,31 0,197 0, 220 26,201 92,12 92Z"
+        ], 
+        "image": "assets/office3DCabinet.png"
+      }, 
+      "position": [
+        295, 
+        230
+      ], 
+      "width": 247
+    }, 
+    "id": 35
+  }, 
+  { 
+    "id": 41,
+    "class": "switch", 
+    "description": "TV on/off", 
+    "display": {
+      "node": [44]
+    },
+    "children": [43, 44, 48]
+  }, 
+  {
+    "id": 44,
+    "class": "sprite", 
+    "description": "TV screen off...", 
+    "display": {
+      "width": 103,
+      "height": 148, 
+      "position": [572, 134], 
+      "target": {
+        "data": [
+          "P", 
+          "M 0 0,103 37,103 148,0 100Z"
+        ]
+      }
+    },
+    "action": {
+      "onclick": {
+        "popup": {
+          "body": [
+            "<center><img src=\"assets/officeTV.png\" width=400></center><br>"
+          ], 
+          "header": "A TV screen... There is no electricity."
+        }
+      }
+    }
+  }, 
+  {
+    "id": 43,
+    "class": "sprite", 
+    "description": "TV screen on...", 
+    "display": {
+      "height": 148, 
+      "position": [
+        572, 
+        134
+      ], 
+      "target": {
+        "data": [
+          "P", 
+          "M 0 0,103 37,103 148,0 100Z"
+        ]
+      }, 
+      "width": 103
+    },
+    "action": {
+      "onclick": {
+        "new_nodes": [48]
+      }
+    }
+  }, 
+  {
+    "id": 46, 
+    "class": "sprite", 
+    "description": "Unlocked Cabinet...", 
+    "display": {
+      "height": 120, 
+      "media": {
+        "image": "assets/office3DCabinetOpen.png", 
+        "focus": [
+          "P", 
+          "M 0 120,22 84,17 28,45 0,208 0,233 27,221 84,238 118Z"
+        ], 
+        "style": {
+          "display": "none"
+        }
+      }, 
+      "position": [
+        280, 
+        230
+      ], 
+      "width": 261
+    }, 
+    "action": {
+      "onclick": {
+        "del_nodes": [11, 35], 
+        "new_nodes": [47]
+      }
+    }
+  }, 
+  {
+    "id": 47,
+    "class": "scene.closeup", 
+    "description": "Unlocked Cabinet... Closeup", 
+    "display": {
+      "height": 467, 
+      "media": {
+        "image": "assets/officeCabinetOpen.png", 
+        "style": {
+          "display": "none"
+        }
+      }, 
+      "width": 700
+    }, 
+    "children": [16]
+  }, 
+  {
+    "id": 48,
+    "class": "scene.closeup", 
+    "description": "TV screen on...", 
+    "display": {
+      "width": 710,
+      "height": 467, 
+      "media": {
+        "image": "assets/screen.gif", 
+        "style": {
+          "display": "none"
+        }
+      }
+    }, 
+    "children": [53]
+  }, 
+  {
+    "class": "machine.download", 
+    "description": "Download Machine", 
+    "display": {
+      "height": 140, 
+      "position": [
+        287, 
+        120
+      ], 
+      "target": {
+        "data": [
+          "C", 
+          70, 
+          70, 
+          65
+        ]
+      }, 
+      "width": 140
+    }, 
+    "features": {
+      "download": "assets/crystal.tif"
+    }, 
+    "id": 53
+  }, 
+  {
+    "id": 62,
+    "class": "switch", 
+    "description": "Electrical Grid", 
+    "display": {
+      "node": [67]
+    },
+    "children": [
+      67, 
+      83, 
+      68
+    ]
+  }, 
+  {
+    "action": {
+      "onclick": {
+        "popup": {
+          "body": [
+            "<center><img src=\"assets/officeGrid.png\" width=400></center><br>"
+          ], 
+          "header": "A Grid with pins..."
+        }
+      }
+    }, 
+    "class": "sprite", 
+    "description": "Grid with pins...", 
+    "display": {
+      "height": 98, 
+      "position": [
+        24, 
+        196
+      ], 
+      "target": {
+        "data": [
+          "P", 
+          "M 0 20,52 0,58 74,6 98Z"
+        ]
+      }, 
+      "width": 58
+    }, 
+    "id": 67
+  }, 
+  {
+    "action": {
+      "onclick": {
+        "popup": {
+          "body": [
+            "<center><img src=\"assets/officeGridActive.png\" width=400></center><br>"
+          ], 
+          "header": "Electricity is ON..."
+        }
+      }
+    }, 
+    "class": "sprite", 
+    "description": "Grid with pins + electricity back...", 
+    "display": {
+      "height": 98, 
+      "position": [
+        24, 
+        196
+      ], 
+      "target": {
+        "data": [
+          "P", 
+          "M 0 20,52 0,58 74,6 98Z"
+        ], 
+        "style": {
+          "display": "none"
+        }
+      }, 
+      "width": 58
+    }, 
+    "id": 68
+  }, 
+  {
+    "id": 83,
+    "class": "scene.closeup", 
+    "description": "Machine ready - Grid with pins + wire...", 
+    "display": {
+      "width": 710,
+      "height": 467, 
+      "media": {
+        "image": "assets/officeGridBackground.png", 
+        "style": {
+          "display": "none"
+        }
+      }
+    }, 
+    "children": [85, 92]
+  }, 
+  {
+    "id": 85, 
+    "class": "machine.connector", 
+    "description": "Grid with connectable wire...", 
+    "display": {
+      "height": 411, 
       "media": {
         "svg": "assets/gridConnectors_simple.svg"
-      }
+      }, 
+      "position": [50, 20], 
+      "width": 450
     },
     "action": {
-      "comment": "Just for debug",
-      "onsuccess": {
-        "del_nodes": [42,83]
+      "onexit": {
+        "del_nodes": [44, 67, 85, 21], 
+        "new_nodes": [92, 43, 68, 22]
       }
     },
     "features": {
       "connectable": {
-        "values": [-1,1,2,3,4,5,6],
-        "numVertices": 2
-      }
+        "numVertices": 2, 
+        "values": [
+          -1, 
+          1, 
+          2, 
+          4, 
+          8, 
+          16, 
+          32
+        ]
+      }, 
+      "exit": 18
     }
-  },
+  }, 
   {
-    "id": 92,
-    "class": "sprite",
-    "description": "Grid with Electricity ON...",
+    "class": "sprite", 
+    "description": "Electricity is back...", 
     "display": {
-      "width": 400,
-      "height": 468,
-      "position": [24,30],
+      "height": 411, 
       "media": {
-        "image": "assets/gridConnectors_simple.svg"
-      }
-
-    }
+        "image": "assets/officeGridActive.png", 
+        "style": {
+          "display": "none"
+        }
+      }, 
+      "position": [
+        50, 
+        20
+      ], 
+      "width": 450
+    }, 
+    "id": 92
   }
 ]
