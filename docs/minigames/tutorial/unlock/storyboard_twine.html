@@ -1,0 +1,95 @@
+<tw-storydata name="storyboard" startnode="1" creator="Twine" creator-version="2.3.1" zoom="1" format="SugarCube" format-version="2.28.2" options="" hidden>
+<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style>
+<script role="script" id="twine-user-script" type="text/twine-javascript"></script>
+
+
+  <tw-passagedata pid="1" name="node_1"  tags="scene" position="700,285.5" size="100,100">
+    <ul>
+    <li> "class": "scene", 
+    <li> "description": "A locked office ...", 
+    <li> "display": {
+      "width": 725,
+      "height": 426, 
+      "media": {
+        "image": [img["assets/office3DBackground.png"]]
+      }
+    }, 
+    <li> "children": [
+      [[node_2]], 
+      [[node_3]],  
+      [[node_11]],  
+      [[node_20]],  
+      [[node_34]],  
+      [[node_41]],  
+      [[node_62]]
+    ], 
+    <li> "children_": [
+      {"comment": "HACK - NOT YET IMPLEMENTED"}, 
+      {"comment": "id: link_to_nodeID, focus: area_sensitive_to_clicks"}, 
+      {"id": 2}, 
+      {"id": 3,"focus": ["E", 390, 126, 40, 46] }, 
+      {"id": 21,"focus": ["C", 356, 94, 33] }, 
+      {"id": 35, "focus": ["C", 200, 350, 33, 42] }, 
+      {"id": 42, "focus": ["C", 356, 350, 33, 67] }, 
+      {"id": 67}
+    ]
+    </ul>
+  </tw-passagedata>
+  <tw-passagedata pid="2" name="node_2"  tags="sprite" position="700,285.5" size="100,100">
+    "class": "sprite", 
+    "description": "Frame...", 
+    "display": {
+      "height": 134, 
+      "media": {
+        "image": "assets/ellipse_frame.png"
+      }, 
+      "position": [
+        350, 
+        73
+      ], 
+      "width": 82
+    }
+  </tw-passagedata>
+  <tw-passagedata pid="3"  name="node_3"  tags="sprite" position="700,285.5" size="100,100">
+    "class": "sprite", 
+    "description": "Portrait...", 
+    "display": {
+      "height": 134, 
+      "media": {
+        "comment": "layers could be useful", 
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Joseph_Fourier.jpg/220px-Joseph_Fourier.jpg", 
+        "layers": [
+          {
+            "image": "assets/ellipse_frame.png"
+          }, 
+          {
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Joseph_Fourier.jpg/220px-Joseph_Fourier.jpg", 
+            "style": {
+              "clip-path": "ellipse(35px 46px at 40px 46px)"
+            }
+          }
+        ], 
+        "style": {
+          "clip-path": "ellipse(35px 46px at 40px 46px)"
+        }
+      }, 
+      "position": [
+        350, 
+        80
+      ], 
+      "width": 80
+    },
+    "action": {
+      "onclick": {
+        "popup": {
+          "body": [
+            "<center>Hmmm ... a French Mathematician....<br> Maybe I have to checked in <strong>Wikipedia</strong> for more information</center><br>"
+          ], 
+          "footer": "Yes, Joseph Fourier ...&nbsp;", 
+          "header": "A Portrait...of Joseph Fourier"
+        }
+      }
+    }
+  </tw-passagedata> 
+</tw-storydata>
+
