@@ -39,10 +39,11 @@ class Node {
    * @param {string} className - Object type
    * @param {string} description - Description
    */
-  constructor(id,className,description) {
+  constructor(id,className,description,parent) {
     this.id = id;
     this.className = className;
     this.description = description;
+    this.parent = parent;
     this.element; // HTML5
     this.displayType = Node.NONE;
   }
@@ -70,8 +71,8 @@ class Node {
   /**
    * Create a new node
    */
-  static create(id,className,description) {
-    return new Node(id,className,description);
+  static create(id,className,description,parent) {
+    return new Node(id,className,description,parent);
   }
 
   /**
@@ -119,14 +120,33 @@ class Node {
       alert(`The object #${this.id} must have a 'display' property`);
       return this;
     }
-    this.width = displayProps.width || 0;
-    this.height = displayProps.height || 0;
-    this.topleft = displayProps.position || [0,0];
+    // Special case: "display": "inherit"
+    if (displayProps === 'inherit') {
+      console.log('DISPLAY PARENT ',this.parent);
+      this.width =  this.parent.width;
+      this.height =  this.parent.height;
+      this.topleft =  this.parent.topleft;
+      this.element.style.left = this.parent.element.style.left;
+      this.element.style.top = this.parent.element.style.top;
+      this.element.style.width = this.parent.element.style.width;
+      this.element.style.height = this.parent.element.style.height;
+      this.displayType = this.parent.displayType;
+      // TODO HACK - Only `target`
+      this.target = this.parent.target;
+      // let src = document.querySelector(`#node_${this.parent.id} svg`);
+      // this.element.appendChild(src.cloneNode(true));
+      return this;
+    }
+    else {
+      this.width = displayProps.width || 0;
+      this.height = displayProps.height || 0;
+      this.topleft = displayProps.position || [0,0];
 
-    this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
-    this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
-    this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
-    this.element.style.height = (displayProps.target === undefined) ? 'auto' : `${this.height / CRAZYBIOGAME.height * 100}%`;
+      this.element.style.left = `${this.topleft[0] / CRAZYBIOGAME.width * 100}%`;
+      this.element.style.top = `${this.topleft[1] / CRAZYBIOGAME.height * 100}%`;
+      this.element.style.width = `${this.width / CRAZYBIOGAME.width * 100}%`;
+      this.element.style.height = (displayProps.target === undefined) ? 'auto' : `${this.height / CRAZYBIOGAME.height * 100}%`;
+    }
 
     // Media: Image, video, audio?, etc.
     let dprops = displayProps.graphics || displayProps.media;
@@ -153,6 +173,7 @@ class Node {
     this.displayType = Node.MEDIA;
     console.log(this.id, `#media #asset_${this.id}`);
     let medialoaded = document.querySelector(`#media #asset_${this.id}`);
+    console.log(`Size: ${medialoaded.width}x ${medialoaded.height}`)
     this.element.appendChild(medialoaded);
 
 /*    // Append the media
