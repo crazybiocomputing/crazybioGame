@@ -586,18 +586,18 @@
     "class": "sprite", 
     "description": "Electricity is back...", 
     "display": {
+      "width": 450,
       "height": 411, 
+      "position": [
+        50, 
+        20
+      ],
       "media": {
         "image": "assets/officeGridActive.png", 
         "style": {
           "display": "none"
         }
-      }, 
-      "position": [
-        50, 
-        20
-      ], 
-      "width": 450
-    }, 
-
+      }
+    }
+  }
 ]
