@@ -14,6 +14,18 @@
 <link rel="stylesheet" href="../../css/crazybio.css" />
 <link rel="stylesheet" href="../../css/style_crazy.css" />
 
+<style>
+.bubble {
+    float: left;
+    width: 600px;
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+}
+</style>
+
 </head>
 <body>
   <header id="banner">
@@ -21,13 +33,25 @@
     <br>
   <main id="main">
   <!-- Here is the game -->
+    <div id="node_0" class="game" style="max-width:1000px">
+      <section id="node_1" class="scene" style="left: 0%; top: 0%; width: 100%; height: auto;">
+        <article id="node_1" class="dialog">
+          <div id="Q" class="bubble">
+          <p>In a tooth, what is the major protein constituent in enamel containing high concentrations of Pro, Gln, Leu, and His?</p>
+          </div>
+          <img src = "../../assets/biologist_closeview.png" width=200>
+          <div id="A" class="bubble">
+            <input type="radio" name="answers" value="Chymotrypsin">Chymotrypsin<br>
+            <input type="radio" name="answers" value="Amelogenin">Amelogenin<br>
+            <input type="radio" name="answers" value="Nicotine">Nicotine<br>
+          </div>
+        </article>
+      </section>
+      </div><div class="modal" id="popup">
+    </div>
   </main>
   <footer> 
   </footer>
-  <script type="text/javascript"> 
-    createHeader();
-    newGame('./storyboard.json'); 
-  </script>
 </body>
 </html>
 
