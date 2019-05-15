@@ -1,0 +1,91 @@
+[
+    {
+        "id": 1,
+        "class": "scene",
+        "description": "A little discussion",
+        "display": {
+            "width": 600,
+            "height": 400,
+            "media": {
+                "image": "assets/background_transparent.png"
+            }
+        },
+        "children": [2]
+    },
+    {
+        "id": 2,
+        "class": "switch",
+        "description": "Questions",
+        "display": {},
+        "children": [3,4,5]
+    },
+    {
+        "id": 3,
+        "class": "machine.dialog",
+        "description": "Question 1",
+        "display": {
+            "position": [100,200],
+            "width": 400,
+            "height": 400,
+            "media": {
+                "image": "assets/lena.png"
+            }
+        },
+        "actions": {
+            "onsuccess":{
+                "new_nodes": [4],
+                "del_nodes": [3]
+            }
+        },
+        "features": {
+            "question": "Compute the size of this image",
+            "answer": "1. 492 ko 2. 256 ko 3. 256 Mo 4. 492 Mo",
+            "exit": "2",
+            "nbquestion": "1"
+        }
+    },
+
+    {
+        "id": 4,
+        "class": "machine.dialog",
+        "description": "Question 2",
+        "display": {
+            "position": [100,200],
+            "width": 300,
+            "height": 300,
+            "media": {
+                "image": "assets/Sinogram.png"
+            }
+        },
+        "actions": {
+            "onsuccess":{
+                "new_nodes": [5],
+                "del_nodes": [4]
+            }
+        },
+        "features": {
+            "question": "What is the name of this image",
+            "answer": "1. Sinogram 2. Fourier Transform 3. Noise ",
+            "exit": "1",
+            "nbquestion": "2"
+        }
+    },
+    {
+        "id": 5,
+        "class": "machine.dialog",
+        "description": "Question 3",
+        "display": {
+            "position": [100,200],
+            "width": 300,
+            "media": {
+                "image": "assets/question.png"
+            }
+        },
+        "features": {
+            "question": "What is the name of the blast, which convert translated nucleotide in protein",
+            "answer": "1. blatsn 2. blastp 3. blasxt 4. tblastn ",
+            "exit": "3",
+            "nbquestion": "last"
+        }
+    }
+]

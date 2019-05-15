@@ -50,6 +50,7 @@ const creators = {
   "machine.lockDigit[9]": createLockDigit(9),
   "machine.lockText": createLockText,
   "machine.lockNumerical":  createLockNumerical,
+  "machine.dialog": createMachineDialog,
   "scene": createScene,
   "scene.closeup": createScene,
   "sprite": createSprite,
